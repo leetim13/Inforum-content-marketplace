@@ -1,5 +1,4 @@
-People at COMPANY NAME
+People at Really Boring Co.
 ---
 
-- [Jane Doe, Engineering](./jane_doe.md)
-- ...
+- [Wilson Hsu, Computer Science](./wilson_hsu.md)
