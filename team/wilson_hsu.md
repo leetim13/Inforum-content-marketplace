@@ -1,6 +1,6 @@
 # Wilson Hsu
 
-<img src="./wilson_hsu.JPG" width="500">
+<img src="./wilson_hsu.JPG" width="300">
 
 - Full-Stack Developer
 - wilsonhsu0102@gmail.com
