@@ -1,6 +1,6 @@
 # Samuel Huang
 
-![Samuel Huang Profile](./samuel_huang.jpg)
+<img src="./samuel_huang.jpg" width="300">
 
 - Business and Product
 - Computer Science Specialist, Minor Statistics
