@@ -9,7 +9,7 @@
 ## Links
 
 - [GitHub](https://github.com/shuang55)
-- [LinkedIn]([#](https://www.linkedin.com/in/samuelhuang55/))
+- [LinkedIn](https://www.linkedin.com/in/samuelhuang55/)
 - [Resume](https://drive.google.com/file/d/1a8DXqBUtzT34hz9W0CFPbzWYc6hCn4qv/view?usp=sharing)
 
 ## About Samuel
