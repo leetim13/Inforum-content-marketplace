@@ -1,6 +1,6 @@
 # Siwon Park
 
-![Siwon Park Profile](./siwon_park.jpg)
+<img src="./siwon_park.jpg" width="300">
 
 - Business and Product
 - Computer Science Specialist

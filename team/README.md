@@ -4,3 +4,4 @@ People at Really Boring Co.
 - [Wilson Hsu, Computer Science](./wilson_hsu.md)
 - [Timothy Lee, Computer Science & Statistics](./timothy_lee.md)
 - [Samuel Huang, Business](./samuel_huang.md)
+- [Siwon Park, Business](./siwon_park.md)
