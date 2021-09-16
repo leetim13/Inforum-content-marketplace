@@ -9,6 +9,8 @@ Table of Contents
 ---
 
 - [People](./team/)
+    - [Leader Selection](./team/leader_selection.md)
+    - [Team Principles](./team/team_principles.md)
 - [Diversity](./team/diversity.md)
 - [Product & Research](./product_research/)
     - [Market](./product_research/market.md)
