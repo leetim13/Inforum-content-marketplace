@@ -22,7 +22,9 @@ Team Principles
 - Github issues will be used extensively for discussions and revisions.
 - Each team member is expected to provide an ETA for their individual tasks and is responsible to complete their tasks on time. Any potential delays should be communicated as soon as possible.
 - Keep all Issue, Pull Request, Branch name and description clean and concise. 
-	- Branch naming convention: {action}-{feature}. action: `fix`, `add`, `remove` etc.; feature: name of the feature or `issue-0000` to represent a Github issue.
+	- Branch naming convention: {action}-{feature}. 
+		- action: `fix`, `add`, `remove` etc.
+		- feature: name of the feature or `issue-0000` to represent a Github issue.
  
 #### **Other potential issues**:
 
