@@ -1,14 +1,9 @@
-# Team Repo Template
+# Really Boring Co.
 
-This Repository includes a template for your Team's Repository. https://github.com/dcsil/klutch is a good example of an implementation of this!
+<img src="./logo.png" alt="Company logo"/>
 
-**README template starts below this line 👇👇👇 Delete above this line :)**
-
-# COMPANY NAME
-
-![Team Logo](./logo.png)
-
-COMPANY NAME is a company founded in the THEME industry. COMPANY NAME aims to VISION STATEMENT.
+## About Us
+Inspired by Elon Musk’s clever marketing wordplay with his company “The Boring Company” and this year’s sponsor, Royal Bank of Canada (RBC), **Really Boring Co**. aims to transform boring and old-fashioned marketing campaigns by approaching marketing in a more innovative yet scientific way.
 
 Table of Contents
 ---
