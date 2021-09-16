@@ -3,7 +3,7 @@
 <img src="./logo.png" alt="Company logo"/>
 
 ## About Us
-Inspired by Elon Musk’s clever marketing wordplay with his company “The Boring Company” and this year’s sponsor, Royal Bank of Canada (RBC), **Really Boring Co**. aims to transform boring and old-fashioned marketing campaigns by approaching marketing in a more innovative yet scientific way.
+Inspired by Elon Musk’s clever marketing wordplay with his company “The Boring Company” and this year’s sponsor, Royal Bank of Canada (RBC), **Really Boring Co**. aims to transform boring and old-fashioned marketing campaigns by approaching marketing in a more innovative and scientific way.
 
 Table of Contents
 ---
