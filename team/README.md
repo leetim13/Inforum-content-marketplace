@@ -1,4 +1,4 @@
-People at Really Boring Co.
+People at inforum
 ---
 
 - [Wilson Hsu, Computer Science](./wilson_hsu.md)

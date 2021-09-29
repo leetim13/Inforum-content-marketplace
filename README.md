@@ -1,9 +1,11 @@
-# Really Boring Co.
+# inforum
 
 <img src="./logo.png" alt="Company logo"/>
 
 ## About Us
-Inspired by Elon Musk’s clever marketing wordplay with his company “The Boring Company” and this year’s sponsor, Royal Bank of Canada (RBC), **Really Boring Co**. aims to transform boring and old-fashioned marketing campaigns by approaching marketing in a more innovative and scientific way.
+> *Enabling a dialogue between financial institutions and the generation of tomorrow*
+
+Inforum is a web-based finance directed forum, where all the answers will be provided by industry professionals from our partner banks. Inforum will act as a bridge for banks to connect with younger generations and give our partner banks an opportunity to introduce their relevant products and offerings while facilitating a relationship of trust and value between customers and banks. 
 
 Table of Contents
 ---
