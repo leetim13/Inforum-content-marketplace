@@ -1,4 +1,4 @@
-# inform
+# inforum
 
 <img src="./logo.png" alt="Company logo"/>
 
