@@ -39,8 +39,11 @@ Javascript, SQL
 **Data Storage:** \
 [PostgreSQL](https://www.postgresql.org/) (ORM: Sequelize), [Redis](https://redis.io/) 
 
-**Testing/Exceptions Logging/Monitoring:** \
-[Jest](https://jestjs.io/), [Sentry](https://sentry.io/welcome/) 
+**Testing:** \
+[Jest](https://jestjs.io/), 
+
+**Exceptions Logging:** \
+[Sentry](https://sentry.io/welcome/) 
 
 **Deployment/CI:** \
 [Heroku](https://www.heroku.com/), [Github Actions](https://github.com/features/actions) 
@@ -53,11 +56,11 @@ Javascript, SQL
 From a design perspective, we have decided to prototype our entire UI and high-level architecture using `Figma`, which is intuitive to use and requires not much technical background. Figma also has group sharing functionalities and will thus allow our CSC454 colleagues to  participate in the whole design process.
 
 **React, Redux, Express, Node, ESLint, Jest:** \
-We have decided to use this popular stack in web development, because it helps us build a web application from front-end to back-end only using just `Javascript`. 
-We also chose to use `Jest`, because both `Jest` and `React` are developeda and supported by Facebook and will have better compatibility with one another.
+We have decided to use this popular stack in web development, because it helps us build a web application from front-end to back-end only using `Javascript`. 
+We also chose to use `Jest`, because both `Jest` and `React` are developed and supported by Facebook and will have better compatibility with one another.
 
 **Data Storage (PostgreSQL/Redis):** \
-We initially thought of using the popular `MERN` stack but eventually realized that a relational database (`postgreSQL`) would be more appropriate for our use case compared to a NoSQL database (`MongoDB`). This is mainly due to our business model as we will need to track the number of interactions (likes/comments/click-through rate) of each unique post by a given user. A relational schema would help us better organize this information, where we could have a “users” table and also a “posts” table, where each unique user can have multiple posts and each post will have a different number of interactions. 
+We initially thought of using the popular `MERN` stack but eventually realized that a relational database (`postgreSQL`) would be more appropriate for our use case compared to a NoSQL database (`MongoDB`). As our application requires many different tables (`user`, `mission`, `post`, etc.), relational database will help us enforce data integrity and join tables more easily. 
 
 We have also decided to add `Redis` to our tech stack as an in-memory key-value store for caching purposes, so we can retrieve data such as user-related data in a timely manner.
 
@@ -82,8 +85,12 @@ We decided to use `Heroku` as our container-based cloud platform to deploy and m
 - Marketing teams from the banks will use our website to post marketing campaigns in the form of a “mission” for promoters to accept and complete. The missions could be in the form of  sharing a new product or limited offers/deals, or simply posts/videos the banks want the users to share. The banks can set requirements on the missions and we will validate the user's post against the requirements stated. 
 - Machine Learning teams or Marketing teams from the banks can download (in csv.) or view key statistics of each mission to have a better understanding of their marketing strategies and make further improvements. The banks will also have access to each individual promoter’s posts in case they want to see it in detail.
 - Each promoter will use our website to view and accept new missions based on their preferences and the missions can also be queried via specific tags/categories. After making a post on social media, the promoters will then paste the post url (that will contain the unique post id) back on our website, so we (or the banks) can validate it against requirements. This validation may include counting the number of interactions (likes/comments/views) for each post using Facebook’s Graph API.
+- Admin users will have the ability to manage, view, edit, add, delete new missions and will have access to user accounts and other key statistics of the website. Admins will also have permissions to ban a user permanently if received a complaint/report from the banks or if the user exhibits malicious behaviours (using of bots, not following the rules/terms of services, exploiting the reward system, etc). 
+<!-- 
 - Each promoter can come on our website and redeem their points for rewards (i.e. Amazon Gift card) in our Reward Center. In terms of gift cards, they will receive a claim code on our website.
 - Admin users will have the ability to manage, view, edit, add, delete new missions and will have access to user accounts and other key statistics of the website. Admins will also have permissions to ban a user permanently if received a complaint/report from the banks or if the user exhibits malicious behaviours (using of bots, not following the rules/terms of services, exploiting the reward system, etc). 
+-->
+
 ### Example UI
 ![example_UI](https://user-images.githubusercontent.com/20623399/136848384-ca91fee9-b8e6-4e59-9dea-0b0a1e2cce79.png)
 
