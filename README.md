@@ -19,6 +19,7 @@ Table of Contents
     - [Roadmap](./product_research/roadmap.md)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
+- [Decision Logs](#Decision-Logs)
 - [Example Use Cases](#Example-Use-Cases)
     - [Example UI](#Example-UI)
 
