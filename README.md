@@ -19,13 +19,13 @@ Table of Contents
     - [Roadmap](./product_research/roadmap.md)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
-- [Uses Cases](#Use-Cases)
+- [Example Use Cases](#Example-Use-Cases)
     - [Example UI](#Example-UI)
 
 ## Architecture Diagram
 ![](https://user-images.githubusercontent.com/20623399/136843855-15ab6741-4249-4ea4-9e51-1ee43dfa7472.png)
 
-## Tech Stack (PERN Stack)
+## Tech Stack 
 **Languages:** \
 Javascript, SQL 
 
