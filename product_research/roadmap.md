@@ -1,22 +1,25 @@
 # Roadmap
 
-This describes our plans...
-
-- Setup a roadmap for at least the duration of this course. You may go longer to indicate long term goals. The roadmap can include as much detail as you want with the following conditions:
-    - Must include your immediate next steps
-    - Must include plans to perform user research
-    - Must include low-fidelity plans for a launch date
-    - You fill in the gaps. Be careful not to go too detailed as we have limited knowledge still.
+In order to complete a working MVP by the end of the term, we will be focusing on implementing the primary functionalities decribed in our four use cases (Banks Marketing Team, Banks ML & Data Scientist, Promoters, Admins).
 
 ## Short Term
 
-**Duration:** Q3 2019
+**Duration:** By the end of October, 2021
 
-We intend to ship X, Y, Z - list tracking issues that encompass all details.
+1. [Set up initial hello-world app](https://github.com/dcsil/Inforum/issues/25)
+2. [Set up CI pipeline and Heroku](https://github.com/dcsil/Inforum/issues/26)
+3. [Set up a basic testing module that runs on CI pipeline](https://github.com/dcsil/Inforum/issues/27)
+4. [Add in External APIs](https://github.com/dcsil/Inforum/issues/28)
+5. [Configure PostgresSQL](https://github.com/dcsil/Inforum/issues/29)
+6. [Design and Implement Database Architecture](https://github.com/dcsil/Inforum/issues/30)
+7. [Set Up Authorization, User Permission Modules.](https://github.com/dcsil/Inforum/issues/31)
+8. [Conduct User Research on App Functionalities](https://github.com/dcsil/Inforum/issues/32)
+9. [Create User Sign Up Functionality](https://github.com/dcsil/Inforum/issues/33)
+
 
 ## Medium Term
 
-**Duration:** Q4 2019
+**Duration:** By the end of November, 2021
 
 We intend to... medium-level of detail plans.
 
