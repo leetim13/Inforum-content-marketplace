@@ -5,6 +5,6 @@ This folder contains content and research about our product, including market re
 
 Table of Contents
 ---
-
+- [Use Cases](./use_cases.md)
 - [Market](./market.md)
 - [Roadmap](./roadmap.md)

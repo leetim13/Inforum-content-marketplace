@@ -10,3 +10,4 @@ About our team
 ---
 - [Team Principles](./team_principles.md)
 - [Leader Selection](./leader_selection.md)
+- [Diversity](./diversity.md)
