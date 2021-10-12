@@ -22,12 +22,12 @@ In order to complete a working MVP by the end of the term, we will be focusing o
 
 1. [Conduct User Research on UI/UX Designs](https://github.com/dcsil/Inforum/issues/34)
 2. [Create User Sign Up Functionality](https://github.com/dcsil/Inforum/issues/33)
-3. [User Profile Functionality (User Info, Social Media Account Linking)](https://github.com/dcsil/Inforum/issues/39)
+3. [Implement User Profile Functionality (User Info, Social Media Account Linking)](https://github.com/dcsil/Inforum/issues/39)
 4. [Implement Bank Side (Marketing) Mission Functionality (Create draft/Modify draft/Post draft)](https://github.com/dcsil/Inforum/issues/35)
 5. [Implement Promoter Side Mission (Dashboard, Validation, Completion Confirmation)](https://github.com/dcsil/Inforum/issues/36)
 6. [Implement Bank Side (ML & Data Scientist) Mission Functionality (Show Statistics/User Posts)](https://github.com/dcsil/Inforum/issues/37)
 7. [Implement Admin Dashboard Functionality](https://github.com/dcsil/Inforum/issues/38)
-8. [Test Modules](https://github.com/dcsil/Inforum/issues/40)
+8. [Update Test Modules](https://github.com/dcsil/Inforum/issues/40)
 
 We plan to launch a barebones alpha version in the medium term.
 
