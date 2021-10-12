@@ -1,2 +1,0 @@
-Machine Learning teams or data scientist from the banks can download (in csv.) or view key statistics of each mission to have a better understanding of their marketing strategies and make further improvements. The banks will also have access to each post under their own mission in case they want to see it in detail.
-<img src="./banks_data.jpg" alt="banks data user page"/>
