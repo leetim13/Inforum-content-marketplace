@@ -1,0 +1,2 @@
+Admin users can view all the user profiles and will use the website to ban a user if received a complaint/report from the banks or if the user exhibits malicious behaviours (using bots, not following the rules/terms of services, exploiting the reward system, etc). 
+<img src="./admin.jpg" alt="admin page"/>

@@ -1,0 +1,2 @@
+Marketing teams from the banks will use our website to post marketing campaigns in the form of a “mission”. The missions could be in the form of sharing a new product or limited offers/deals, or simply posts/videos the banks want to advertise. The banks can set requirements on the missions that need to be met to be counted as complete. 
+<img src="./banks_marketing.jpg" alt="banks marketer page"/>

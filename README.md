@@ -15,13 +15,17 @@ Table of Contents
     - [Team Principles](./team/team_principles.md)
 - [Diversity](./team/diversity.md)
 - [Product & Research](./product_research/)
+	- [Use Cases](./product_research/use_cases/)
+		- [Admin](./product_research/use_cases/admin.md)
+		- [Banks Data User](./product_research/use_cases/banks_data.md)
+		- [Banks Marketing User](./product_research/use_cases/banks_marketing.md)
+		- [Promoter](./product_research/use_cases/promoter.md)
     - [Market](./product_research/market.md)
     - [Roadmap](./product_research/roadmap.md)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
 - [Decision Logs](#Decision-Logs)
-- [Example Use Cases](#Example-Use-Cases)
-    - [Example UI](#Example-UI)
+- [Example UI](#Example-UI)
 
 ## Architecture Diagram
 ![](https://user-images.githubusercontent.com/20623399/136843855-15ab6741-4249-4ea4-9e51-1ee43dfa7472.png)
@@ -79,17 +83,6 @@ We have decided to use `Github` as our version control platform, because everyon
 We have decided to use `Github Actions` to set up our continuous integration workflow, including building, testing and deployment. This is because `GitHub` is arealdy used extensively for the entire application development process (commits, issues, branches, etc.).
 
 We decided to use `Heroku` as our container-based cloud platform to deploy and manage our MVP mainly because it is free of charge and `Heroku` integrates with `Github` very well, so we could leverage that for continuous deployments.
-
-
-## Example Use Cases 
-- Marketing teams from the banks will use our website to post marketing campaigns in the form of a “mission” for promoters to accept and complete. The missions could be in the form of  sharing a new product or limited offers/deals, or simply posts/videos the banks want the users to share. The banks can set requirements on the missions and we will validate the user's post against the requirements stated. 
-- Machine Learning teams or Marketing teams from the banks can download (in csv.) or view key statistics of each mission to have a better understanding of their marketing strategies and make further improvements. The banks will also have access to each individual promoter’s posts in case they want to see it in detail.
-- Each promoter will use our website to view and accept new missions based on their preferences and the missions can also be queried via specific tags/categories. After making a post on social media, the promoters will then paste the post url (that will contain the unique post id) back on our website, so we (or the banks) can validate it against requirements. This validation may include counting the number of interactions (likes/comments/views) for each post using Facebook’s Graph API.
-- Admin users will have the ability to manage, view, edit, add, delete new missions and will have access to user accounts and other key statistics of the website. Admins will also have permissions to ban a user permanently if received a complaint/report from the banks or if the user exhibits malicious behaviours (using of bots, not following the rules/terms of services, exploiting the reward system, etc). 
-<!-- 
-- Each promoter can come on our website and redeem their points for rewards (i.e. Amazon Gift card) in our Reward Center. In terms of gift cards, they will receive a claim code on our website.
-- Admin users will have the ability to manage, view, edit, add, delete new missions and will have access to user accounts and other key statistics of the website. Admins will also have permissions to ban a user permanently if received a complaint/report from the banks or if the user exhibits malicious behaviours (using of bots, not following the rules/terms of services, exploiting the reward system, etc). 
--->
 
 ### Example UI
 ![example_UI](https://user-images.githubusercontent.com/20623399/136848384-ca91fee9-b8e6-4e59-9dea-0b0a1e2cce79.png)
