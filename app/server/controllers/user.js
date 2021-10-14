@@ -28,7 +28,7 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Tutorial."
+                    err.message || "Some error occurred while creating the User."
             });
         });
 };
@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                    err.message || "Some error occurred while retrieving users."
             });
         });
 };
