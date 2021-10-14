@@ -69,14 +69,14 @@ function App() {
                         <Alert show={responseMessage.type !== ""} variant={responseMessage.type} transition={false}>
                             {responseMessage.message}
                         </Alert>
-                        <Table striped bordered hover style={{ width: "50vw" }}>
+                        <Table striped bordered hover>
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Account Type</th>
                                     <th>Age</th>
-                                    <th>Delete User</th>
+                                    <th>Function</th>
                                 </tr>
                             </thead>
                             <tbody>
