@@ -51,7 +51,7 @@ function App() {
             <td>{user.type}</td>
             <td>{user.age}</td>
             <td>
-                <Button variant="outline-secondary" onClick={() => deleteUser(user.id)}>X</Button>
+                <Button variant="outline-danger" onClick={() => deleteUser(user.id)}>X</Button>
             </td>
         </tr>
     );

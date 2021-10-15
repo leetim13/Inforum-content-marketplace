@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     console.log(req.body);
     if (!req.body.name) {
         res.status(400).send({
-            message: "Name can not be empty!"
+            message: "Name cannot be empty!"
         });
         return;
     }
