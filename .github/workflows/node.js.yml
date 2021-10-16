@@ -42,6 +42,3 @@ jobs:
     - name: Server side unit tests
       working-directory: ./server
       run: npm test
-
-    - name: Build
-      run: npm run build --if-present
