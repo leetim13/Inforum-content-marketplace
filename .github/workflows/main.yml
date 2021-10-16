@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install client dependencies
+      working-directory: ./client
+      run: npm install
+      
+    - name: Client side unit tests
+      working-directory: ./client
+      run: npm test
+
+    - name: Install server dependencies
+      working-directory: ./server
+      run: npm install
+      
+    - name: Server side unit tests
+      working-directory: ./server
+      run: npm test
+
+  server-build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "inforum-app" #Must be unique in Heroku
+          heroku_email: "wilsonhsu0102@gmail.com"
+          appdir: "server" # <- This will point to the server folder in your project
+
+  client-build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "inforum-client" #Must be unique in Heroku
+          heroku_email: "wilsonhsu0102@gmail.com"
+          appdir: "client" # <- This will point to the client folder in your project
