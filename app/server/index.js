@@ -13,7 +13,7 @@ const db = require("./models");
 db.sequelize.sync();
 
 // User routes
-require("./routes/user")(app);
+require("./routes/user.routes")(app);
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
