@@ -9,11 +9,6 @@
     "testAsync": "jest --detectOpenHandles",
     "coverage": "jest --collectCoverage --"
   },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/jest/setEnvVars.js"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

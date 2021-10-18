@@ -1,27 +1,14 @@
 const dbConfig = require("../configs/db.config.js");
 
 const Sequelize = require("sequelize");
-let db_url;
-let isLocal = false;
-switch(process.env.SERVER_ENV) {
-    case "production":
-        process.env.DATABASE_URL;
-        console.log("what1");
-        break;
-    case "test":
-        if (process.env.HEROKU_TEST_DB_URL !== undefined) {
-            db_url = process.env.HEROKU_TEST_DB_URL;
-            break;
-        }
-    default:
-        isLocal = true;
-  }
+let isLocal = process.env.SERVER_ENV === undefined;
+
 console.log("---------------");
-console.log(db_url);
+console.log(process.env.DATABASE_URL);
 console.log("---------------");
 
 const sequelize = !isLocal ? 
-    new Sequelize(db_url, {
+    new Sequelize(process.env.DATABASE_URL, {
         pool: {
             max: dbConfig.pool.max,
             min: dbConfig.pool.min,

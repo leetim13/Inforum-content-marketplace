@@ -1,1 +1,0 @@
-process.env.SERVER_ENV = "test";

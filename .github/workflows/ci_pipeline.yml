@@ -43,3 +43,6 @@ jobs:
     - name: Server side unit tests
       working-directory: 'app/server'
       run: npm test
+      env:
+          SERVER_ENV: 'ci'
+          DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}

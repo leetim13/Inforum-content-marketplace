@@ -16,10 +16,6 @@ afterAll(async () => {
     await db.sequelize.close()
 });
 
-test("Check test environment", () => {
-    expect(process.env.SERVER_ENV).toBe("test")
-  })
-
 test("No entry in user table", async () => {
     let num_entry = await User.count({ where: {} });
     expect(num_entry).toBe(0);
