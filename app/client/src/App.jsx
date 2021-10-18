@@ -3,8 +3,8 @@ import { Table, Button, Alert, Row, Col } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
-console.log(process.env);
+const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
+
 function App() {
     
     const [data, setData] = React.useState(null);
@@ -15,19 +15,19 @@ function App() {
     const [responseMessage, setResponse] = React.useState({ type: "", message: ""});
 
     React.useEffect(() => {
-        axios.get(`${server_url}/api`)
+        axios.get(`${server_url}`)
             .then((res) => setData(res.data.message))
             .catch((err) => console.log(err));
     }, []);
 
     React.useEffect(() => {
-        axios.get(`${server_url}/api/users`)
+        axios.get(`${server_url}/users`)
             .then((res) => setUsers(res.data))
             .catch((err) => console.log(err));
     }, []);
 
     function deleteUser(id) {
-        axios.delete(`${server_url}/api/users/${id}`)
+        axios.delete(`${server_url}/users/${id}`)
             .then(_ => 
                 {   
                     setResponse({type: "success", message: "Successful deleted user."})
@@ -38,7 +38,7 @@ function App() {
 
     function addUser() {
         // No type checking right now.
-        axios.post(`${server_url}/api/users`, { name: userName, type: userType, age: parseInt(userAge) })
+        axios.post(`${server_url}/users`, { name: userName, type: userType, age: parseInt(userAge) })
             .then(res => { 
                 setResponse({type: "success", message: "Successful added user."})
                 setUsers([...users, res.data]); 
