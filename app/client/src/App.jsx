@@ -3,9 +3,10 @@ import { Table, Button, Alert, Row, Col } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-
+const server_url = process.env.SERVER_URL || 'http://localhost:3001';
+console.log(server_url);
 function App() {
-    const server_url = process.env.SERVER_URL || 'localhost:3000';
+    
     const [data, setData] = React.useState(null);
     const [users, setUsers] = React.useState([]);
     const [userName, setUserName] = React.useState("");
@@ -14,15 +15,15 @@ function App() {
     const [responseMessage, setResponse] = React.useState({ type: "", message: ""});
 
     React.useEffect(() => {
-        fetch(server_url + "/api")
-            .then((res) => res.json())
-            .then((data) => setData(data.message));
+        axios.get(`${server_url}/api`)
+            .then((res) => setData(res.data.message))
+            .catch((err) => console.log(err));
     }, []);
 
     React.useEffect(() => {
-        fetch(`${server_url}/api/users`)
-            .then((res) => res.json())
-            .then((users) => setUsers(users));
+        axios.get(`${server_url}/api/users`)
+            .then((res) => setUsers(res.data))
+            .catch((err) => console.log(err));
     }, []);
 
     function deleteUser(id) {
