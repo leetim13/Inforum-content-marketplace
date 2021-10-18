@@ -3,10 +3,6 @@ const dbConfig = require("../configs/db.config.js");
 const Sequelize = require("sequelize");
 let isLocal = process.env.SERVER_ENV === undefined;
 
-console.log("---------------");
-console.log(process.env.DATABASE_URL);
-console.log("---------------");
-
 const sequelize = !isLocal ? 
     new Sequelize(process.env.DATABASE_URL, {
         pool: {
