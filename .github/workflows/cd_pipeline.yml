@@ -1,7 +1,9 @@
 name: CD-pipeline
 
 on:
-  on: workflow_dispatch
+  workflow_dispatch:
+    branches:
+      - master
   push:
     branches:
       - master

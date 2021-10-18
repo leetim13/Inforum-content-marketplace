@@ -1,7 +1,9 @@
 name: CI-pipeline
 
 on:
-  on: workflow_dispatch
+  workflow_dispatch:
+    branches:
+      - master
   pull_request:
     branches:
       - master
