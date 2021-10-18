@@ -13,8 +13,8 @@ beforeAll(async () => {
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
+    await db.sequelize.sync()
     await clearUserTable();
-    
 });
 
 afterAll(async () => {
@@ -22,29 +22,24 @@ afterAll(async () => {
     await db.sequelize.close()
 });
 
-test("No entry in user table", done => {
-    User.count({ where: {} })
-    .then(data => {
-        expect(data).toBe(0)
-        done();
-    });
+test("No entry in user table", async () => {
+    let data = await User.count({ where: {} });
+    expect(data).toBe(0);
   })
 
 
-test("Add 1 entry in user table", done => {
+test("Add 1 entry in user table", async () => {
     const user = {
         name: "John doe",
         type: "Admin",
         age: 29
     };
-    User.count({ where: {} })
-    .then(data => expect(data).toBe(0))
-    .then(_ => User.create(user))
-    .then(data => expect(data).toEqual(expect.objectContaining(user)))
-    .then(_ => User.count({ where: {} }))
-    .then(data => {
-            expect(data).toBe(1);
-            done();
-        });
+    let data = null;
+    data = await User.count({ where: {} });
+    expect(data).toBe(0);
+    data = await User.create(user);
+    expect(data).toEqual(expect.objectContaining(user));
+    data = await User.count({ where: {} });
+    expect(data).toBe(1);
   })
 
