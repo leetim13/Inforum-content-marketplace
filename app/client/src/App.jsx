@@ -5,6 +5,7 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
+    const server_url = process.env.SERVER_URL || 'localhost:3000';
     const [data, setData] = React.useState(null);
     const [users, setUsers] = React.useState([]);
     const [userName, setUserName] = React.useState("");
@@ -13,19 +14,19 @@ function App() {
     const [responseMessage, setResponse] = React.useState({ type: "", message: ""});
 
     React.useEffect(() => {
-        fetch("https://inforum-server.herokuapp.com/api")
+        fetch(server_url + "/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
     }, []);
 
     React.useEffect(() => {
-        fetch("https://inforum-server.herokuapp.com/api/users")
+        fetch(`${server_url}/api/users`)
             .then((res) => res.json())
             .then((users) => setUsers(users));
     }, []);
 
     function deleteUser(id) {
-        axios.delete(`https://inforum-server.herokuapp.com/api/users/${id}`)
+        axios.delete(`${server_url}/api/users/${id}`)
             .then(_ => 
                 {   
                     setResponse({type: "success", message: "Successful deleted user."})
@@ -36,7 +37,7 @@ function App() {
 
     function addUser() {
         // No type checking right now.
-        axios.post(`https://inforum-server.herokuapp.com/api/users`, { name: userName, type: userType, age: parseInt(userAge) })
+        axios.post(`${server_url}/api/users`, { name: userName, type: userType, age: parseInt(userAge) })
             .then(res => { 
                 setResponse({type: "success", message: "Successful added user."})
                 setUsers([...users, res.data]); 
