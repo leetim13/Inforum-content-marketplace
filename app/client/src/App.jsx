@@ -13,19 +13,19 @@ function App() {
     const [responseMessage, setResponse] = React.useState({ type: "", message: ""});
 
     React.useEffect(() => {
-        fetch("/api")
+        fetch("https://inforum-server.herokuapp.com/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
     }, []);
 
     React.useEffect(() => {
-        fetch("/api/users")
+        fetch("https://inforum-server.herokuapp.com/api/users")
             .then((res) => res.json())
             .then((users) => setUsers(users));
     }, []);
 
     function deleteUser(id) {
-        axios.delete(`/api/users/${id}`)
+        axios.delete(`https://inforum-server.herokuapp.com/api/users/${id}`)
             .then(_ => 
                 {   
                     setResponse({type: "success", message: "Successful deleted user."})
@@ -36,7 +36,7 @@ function App() {
 
     function addUser() {
         // No type checking right now.
-        axios.post(`/api/users`, { name: userName, type: userType, age: parseInt(userAge) })
+        axios.post(`https://inforum-server.herokuapp.com/api/users`, { name: userName, type: userType, age: parseInt(userAge) })
             .then(res => { 
                 setResponse({type: "success", message: "Successful added user."})
                 setUsers([...users, res.data]); 
