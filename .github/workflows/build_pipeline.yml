@@ -30,7 +30,7 @@ jobs:
       # working-directory: 'client'
       # run: npm install
       run: |
-        cd ./client
+        pwd
         npm install
 
     - name: Client side unit tests
