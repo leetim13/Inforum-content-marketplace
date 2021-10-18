@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 const server_url = process.env.SERVER_URL || 'http://localhost:3001';
-console.log(server_url);
+console.log(process.env);
 function App() {
     
     const [data, setData] = React.useState(null);
