@@ -9,6 +9,9 @@ const sequelize = process.env.SERVER_ENV === "production" ?
             min: dbConfig.pool.min,
             acquire: dbConfig.pool.acquire,
             idle: dbConfig.pool.idle
+        },
+        dialectOptions: {
+            ssl: true
         }
     }) : 
     new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
