@@ -23,24 +23,23 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        # cache: 'npm'
-        # cache-dependency-path: '| server/package-lock.json client/package-lock.json'
+        cache: 'npm'
+        cache-dependency-path: | 
+          app/server/package-lock.json 
+          app/client/package-lock.json
 
     - name: Install client dependencies
-      # working-directory: 'client'
-      # run: npm install
-      run: |
-        pwd
-        npm install
+      working-directory: 'app/client'
+      run: npm install
 
     - name: Client side unit tests
-      working-directory: 'client'
+      working-directory: 'app/client'
       run: npm test
 
     - name: Install server dependencies
-      working-directory: 'server'
+      working-directory: 'app/server'
       run: npm install
       
     - name: Server side unit tests
-      working-directory: 'server'
+      working-directory: 'app/server'
       run: npm test

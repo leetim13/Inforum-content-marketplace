@@ -14,8 +14,8 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "inforum-server" #Must be unique in Heroku
-          heroku_email: "wilsonhsu0102@gmail.com"
-          appdir: "server" # <- This will point to the server folder in your project
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "app/server" # <- This will point to the server folder in your project
 
   client-build-deploy:
     runs-on: ubuntu-latest
@@ -25,6 +25,6 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "inforum-client" #Must be unique in Heroku
-          heroku_email: "wilsonhsu0102@gmail.com"
-          appdir: "client" # <- This will point to the client folder in your project
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "app/client" # <- This will point to the client folder in your project
         
