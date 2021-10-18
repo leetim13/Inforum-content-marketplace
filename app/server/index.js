@@ -3,7 +3,6 @@ var cors = require('cors')
 const bodyParser = require("body-parser");
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 const PORT = process.env.PORT || 3001;
-console.log(process.env);
 const app = express();
 app.use(cors({ origin: CLIENT_URL }));
 
