@@ -1,6 +1,9 @@
 name: CI-pipeline
 
 on:
+  push: # test purpose
+    branches:
+      - master
   pull_request:
     branches:
       - master
