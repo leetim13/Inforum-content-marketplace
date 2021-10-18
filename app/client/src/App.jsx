@@ -3,7 +3,7 @@ import { Table, Button, Alert, Row, Col } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-const server_url = process.env.SERVER_URL || 'http://localhost:3001';
+const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
 console.log(process.env);
 function App() {
     
