@@ -27,17 +27,17 @@ jobs:
         cache-dependency-path: '**/package-lock.json'
 
     - name: Install client dependencies
-      working-directory: ./client
+      working-directory: 'client'
       run: npm install
       
     - name: Client side unit tests
-      working-directory: ./client
+      working-directory: 'client'
       run: npm test
 
     - name: Install server dependencies
-      working-directory: ./server
+      working-directory: 'server'
       run: npm install
       
     - name: Server side unit tests
-      working-directory: ./server
+      working-directory: 'server'
       run: npm test
