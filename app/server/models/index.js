@@ -16,6 +16,9 @@ switch(process.env.SERVER_ENV) {
     default:
         isLocal = true;
   }
+console.log("---------------");
+console.log(db_url);
+console.log("---------------");
 
 const sequelize = !isLocal ? 
     new Sequelize(db_url, {
