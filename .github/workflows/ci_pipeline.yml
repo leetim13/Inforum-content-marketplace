@@ -39,10 +39,14 @@ jobs:
     - name: Install server dependencies
       working-directory: 'app/server'
       run: npm install
-      
+    
+    # - name: Run migration
+    #   working-directory: 'app/server'
+    #   run: npx sequelize db:migrate:all
+
     - name: Server side unit tests
       working-directory: 'app/server'
       run: npm test
       env:
-          SERVER_ENV: 'ci'
+          SERVER_ENV: 'test'
           DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}
