@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.users;
+const User = db['User'];
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
@@ -12,14 +12,14 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a Tutorial
+    // Create a User
     const user = {
         name: req.body.name,
         type: req.body.type,
         age: req.body.age
     };
 
-    // Save Tutorial in the database
+    // Save User in the database
     User.create(user)
         .then(data => {
             res.send(data);
@@ -49,7 +49,7 @@ exports.findAll = (req, res) => {
         });
 };
 
-// Find a single Tutorial with an id
+// Find a single User with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
@@ -70,7 +70,7 @@ exports.findOne = (req, res) => {
         });
 };
 
-// Update a Tutorial by the id in the request
+// Update a User by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
 
@@ -93,7 +93,7 @@ exports.update = (req, res) => {
         });
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a User with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
 
@@ -116,7 +116,7 @@ exports.delete = (req, res) => {
         });
 };
 
-// Delete all Tutorials from the database.
+// Delete all User from the database.
 exports.deleteAll = (req, res) => {
     User.destroy({where: {}, truncate: false})
         .then(nums => {
