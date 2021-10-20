@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "sequelize db:migrate && node ./index.js",
+    "start": "npx sequelize db:migrate && node ./index.js",
     "test": "jest --",
     "testAsync": "jest --detectOpenHandles",
     "coverage": "jest --collectCoverage --"

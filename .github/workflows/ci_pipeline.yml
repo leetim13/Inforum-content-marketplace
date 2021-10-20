@@ -40,9 +40,9 @@ jobs:
       working-directory: 'app/server'
       run: npm install
     
-    # - name: Run migration
-    #   working-directory: 'app/server'
-    #   run: npx sequelize db:migrate:all
+    - name: Run migration
+      working-directory: 'app/server'
+      run: npx sequelize db:migrate
 
     - name: Server side unit tests
       working-directory: 'app/server'
