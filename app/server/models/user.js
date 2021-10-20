@@ -14,9 +14,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
+    },
     type: DataTypes.STRING,
-    age: DataTypes.INTEGER
+    age: DataTypes.INTEGER,
+    rewardPoint: {
+      type:  DataTypes.INTEGER,
+      min: 0
+    }
   }, {
     sequelize,
     modelName: 'User',
