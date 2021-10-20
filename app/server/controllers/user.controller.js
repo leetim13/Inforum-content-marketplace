@@ -16,7 +16,8 @@ exports.create = (req, res) => {
     const user = {
         name: req.body.name,
         type: req.body.type,
-        age: req.body.age
+        age: req.body.age,
+        rewardPoint: 0
     };
 
     // Save User in the database
