@@ -7,9 +7,6 @@ on:
   pull_request:
     branches:
       - master
-  push:
-    branches:
-      -master
 
 jobs:
   test:
@@ -29,15 +26,6 @@ jobs:
         cache: 'npm'
         cache-dependency-path: | 
           app/server/package-lock.json 
-          app/client/package-lock.json
-
-    # - name: Install client dependencies
-    #   working-directory: 'app/client'
-    #   run: npm install
-
-    # - name: Client side unit tests
-    #   working-directory: 'app/client'
-    #   run: npm test
 
     - name: Install server dependencies
       working-directory: 'app/server'
