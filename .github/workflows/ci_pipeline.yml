@@ -42,7 +42,7 @@ jobs:
     
     - name: Run migration
       working-directory: 'app/server'
-      run: npx sequelize db:migrate --env test --config ./config/config.json
+      run: npx sequelize db:migrate --env test --config ./config/config.json --url ${{ secrets.HEROKU_TEST_DB_URL }}
 
     - name: Server side unit tests
       working-directory: 'app/server'
