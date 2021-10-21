@@ -11,7 +11,7 @@ test("add reward point function", async () => {
   })
 
 test("deduct reward point function - success", async () => {
-    expect(userBl.deductRewardPoint(mockUser, 3)).toBe(7);
+    expect(userBl.deductRewardPoint(mockUser, 3)).toBe(6);
   })
 
 test("deduct reward point function - error", async () => {
