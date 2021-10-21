@@ -32,10 +32,10 @@ Table of Contents
 Javascript, SQL 
 
 **Front End:** \
-[React.js](https://reactjs.org/), [Redux](https://redux.js.org/) (State management) 
+[React.js](https://reactjs.org/), [Redux](https://redux.js.org/) (State management), [Facebook Graph API](https://developers.facebook.com/docs/graph-api/)
 
 **Back End:**  \
-[Express.js](https://expressjs.com/), [Node.js](https://nodejs.org/en/), [Facebook Graph API](https://developers.facebook.com/docs/graph-api/)
+[Express.js](https://expressjs.com/), [Node.js](https://nodejs.org/en/)
 
 **Data Storage:** \
 [PostgreSQL](https://www.postgresql.org/) (ORM: Sequelize), [Redis](https://redis.io/) 
