@@ -15,6 +15,8 @@ In order to complete a working MVP by the end of the term, we will be focusing o
 7. [Design and Implement Database Architecture](https://github.com/dcsil/Inforum/issues/30)
 8. [Set Up Authorization, User Permission Modules.](https://github.com/dcsil/Inforum/issues/31)
 9. [Configure Logging (Sentry.js)](https://github.com/dcsil/Inforum/issues/41)
+10. [Conduct Follow Up UX Research](https://github.com/dcsil/Inforum/issues/62)
+11. [Explore ways to make the hidden menu stand out in UI](https://github.com/dcsil/Inforum/issues/60)
 
 ## Medium Term
 
