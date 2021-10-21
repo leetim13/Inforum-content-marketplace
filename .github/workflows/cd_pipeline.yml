@@ -35,7 +35,7 @@ jobs:
           target_url: https://inforum-server.herokuapp.com/
           state: "failure"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-  
+
   client-build-deploy:
     runs-on: ubuntu-latest
     steps:
