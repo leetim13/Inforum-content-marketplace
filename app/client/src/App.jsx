@@ -64,7 +64,7 @@ function App() {
                 <Row>
                     <Col md="4">
                         <img src={logo} className="App-logo" alt="logo" />
-                        <p>{!data ? "Server disconnected..." : data}</p>
+                        <p>{!data ? "Server disconnected test..." : data}</p>
                     </Col>
                     <Col md="1"> </Col>
                     <Col md="7">
