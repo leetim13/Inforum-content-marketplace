@@ -19,7 +19,7 @@ After going over the scenarios we will engage the user in a casual conversation.
 - Any feature that they think would be helpful and we should add.
 
 ### Summarized notes from Anonymous User_1 (Female , Age 21):
-- [raw notes](raw_notes_user1.txt)
+- [raw notes](./raw_notes_user1.txt)
 - Presented scenarios: 1 to 7
 - Features they like:
   - “intuitive design” [Scenario 3, 4]
@@ -30,5 +30,19 @@ After going over the scenarios we will engage the user in a casual conversation.
 - Features they would want to have:
   - a "settings" page where they will be able to change their email address (for notifications), update their names/phone numbers/credit card information, etc.
   - functional "notifications" that alert users when rewards are distributed. This would happen once the offer has expired and we have verified the validity of the post.
-
+ 
+### Summarized notes from Julian:
+- [raw notes](./raw_notes_Julian.txt)
+- Presented scenarios: 1 to 7
+- Features they like:
+  - "UI is straightforward and easy to use"
+- Features they found confusing:
+  - Meaning of “ongoing posts” [scenario 6,7]
+  - The instructions page has too much information and takes too long to read. Avoid the use of excessive exclamation marks [scenario 2]
+  - Choose icons that are intuitive for users (for ‘my rewards’ and ‘settings’. (e.g. the paste icon when pasting the post URL link) [scenario 5]
+- Features they would want to have:  
+  - Recommend offers filtered/based on user profiles/demographics 
+  - Create a prototype page for user insights (from the bank's perspective)
+- Recommendations:
+  - Side bar could be merged into the header
 
