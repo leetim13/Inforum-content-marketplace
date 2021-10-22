@@ -1,0 +1,31 @@
+Interviewer: Hi, thanks for taking the time to do this user research with us and we will now ask you to perform a series of tasks. Please note that we will try not to answer any questions so please complete the tasks to the best of your ability. Some of the buttons/hyperlinks are not implemented yet so please ignore those as well.
+
+Interviewer: "Please find the login page and attempt to log in. Assume you have created a username and password already.”
+User: No problem *Clicks Log In on top bar*
+
+Interviewer: "Please find the instructions page and briefly read through it. Do you think the instructions are clear enough for you to complete your task as a ‘promoter’”?
+User: “Instruction has too many words, a lot of words, too many exclamation marks.”
+
+Interviewer: “Can you explain, using a few sentences, how you are able to gain reward points?”
+User: “Browse different offers, share to social media with the referral link and get money based on that referral link.”
+
+Interviewer: “Please browse for all available offers and choose one you are most interested in sharing.”
+User: No problem finding the page with offers
+
+Interviewer: “Please now share this offer and follow the instructional prompts along the way”.
+User: *Click on copy button, go to facebook share, paste back in the link, click verify.*
+User: “Link icon for copy is clear but the paste icon is not obvious”
+
+Interviewer: “Please tell me how many reward points you have at the moment”
+User: *Clicks on the profile pic, go to sidebar*
+User: “1250 points, I don’t know what does that mean”
+
+Interviewer: “Please tell me how many of your posts are still active” *on the reward page*
+User: “On going post, I’m assuming that means active, so 3?”
+Interviewer: “I am going to give you a hint, it is not actually on this page.” 
+User: “Have no idea what on-going means.”
+User: *Finds the dashboard later.*
+
+Interviewer: Thank you so much for your time and we can now discuss some of the feedback/questions/comments you have.
+*discussions are not logged as they are pretty casual and conversational. Instead, they are summarized in the “summarized notes” section*
+Total time taken: 6 minutes

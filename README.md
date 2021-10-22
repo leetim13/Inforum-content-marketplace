@@ -3,7 +3,7 @@
 <img src="./logo.png" alt="Company logo"/>
 
 ## About Us
-> *Enabling a dialogue between corporations and the generation of tomorrow*
+> *Connecting financial institutions to the generation of tomorrow*
 
 Inforum is a web-based, Marketplace-like application, where users can share marketing campaigns posted by our corporate partners on their social media platforms. Based on the number of interactions (in the forms of likes/comments), the users will receive a certain number of reward points. Inforum will act as a bridge for corporations to connect with younger generations on the social media platform and provide an opportunity for corporations to introduce their relevant products and offerings in a more effective manner.
 
@@ -15,9 +15,11 @@ Table of Contents
     - [Team Principles](./team/team_principles.md)
 - [Diversity](./team/diversity.md)
 - [Product & Research](./product_research/)
-	- [Use Cases](./product_research/use_cases.md)
+    - [Use Cases](./product_research/use_cases.md)
     - [Market](./product_research/market.md)
     - [Roadmap](./product_research/roadmap.md)
+    - [Prototype](./product_research/prototype)
+    - [User Research](./product_research/user_research)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
 - [Decision Logs](#Decision-Logs)
@@ -32,10 +34,10 @@ Table of Contents
 Javascript, SQL 
 
 **Front End:** \
-[React.js](https://reactjs.org/), [Redux](https://redux.js.org/) (State management) 
+[React.js](https://reactjs.org/), [Redux](https://redux.js.org/) (State management), [Facebook Graph API](https://developers.facebook.com/docs/graph-api/)
 
 **Back End:**  \
-[Express.js](https://expressjs.com/), [Node.js](https://nodejs.org/en/), [Facebook Graph API](https://developers.facebook.com/docs/graph-api/)
+[Express.js](https://expressjs.com/), [Node.js](https://nodejs.org/en/)
 
 **Data Storage:** \
 [PostgreSQL](https://www.postgresql.org/) (ORM: Sequelize), [Redis](https://redis.io/) 
