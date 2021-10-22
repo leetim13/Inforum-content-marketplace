@@ -35,7 +35,24 @@ jobs:
           target_url: https://inforum-server.herokuapp.com/
           state: "failure"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      # - name: Update server deployment status (success)
+      #   if: success()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-server.herokuapp.com/
+      #     state: "success"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
+      # - name: Update server deployment status (failure)
+      #   if: failure()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-server.herokuapp.com/
+      #     state: "failure"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      
   client-build-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -54,12 +71,20 @@ jobs:
           target_url: https://inforum-client.herokuapp.com/
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      # - name: Update client deployment status (success)
+      #   if: success()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-client.herokuapp.com/
+      #     state: "success"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
-      - name: Update client deployment status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://inforum-client.herokuapp.com/
-          state: "failure"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      # - name: Update client deployment status (failure)
+      #   if: failure()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-client.herokuapp.com/
+      #     state: "failure"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
