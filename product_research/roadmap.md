@@ -17,6 +17,9 @@ In order to complete a working MVP by the end of the term, we will be focusing o
 9. [Configure Logging (Sentry.js)](https://github.com/dcsil/Inforum/issues/41)
 10. [Conduct Follow Up UX Research](https://github.com/dcsil/Inforum/issues/62)
 11. [Explore ways to make the hidden menu stand out in UI](https://github.com/dcsil/Inforum/issues/60)
+12. [Modify "instructions" page](https://github.com/dcsil/Inforum/issues/65) and [Clarify the term "ongoing posts" ](https://github.com/dcsil/Inforum/issues/68)
+13. [Create a prototype page for user insights (from the bank's perspective)](https://github.com/dcsil/Inforum/issues/67)
+
 
 ## Medium Term
 
@@ -30,6 +33,11 @@ In order to complete a working MVP by the end of the term, we will be focusing o
 6. [Implement Bank Side (ML & Data Scientist) Mission Functionality (Show Statistics/User Posts)](https://github.com/dcsil/Inforum/issues/37)
 7. [Implement Admin Dashboard Functionality](https://github.com/dcsil/Inforum/issues/38)
 8. [Update Test Modules](https://github.com/dcsil/Inforum/issues/40)
+9. [Recommend offers filtered/based on user profiles/demographics](https://github.com/dcsil/Inforum/issues/66)
+10. [Implement a notification feature when rewards are generated](https://github.com/dcsil/Inforum/issues/63)
+11. [Implement a "settings" page](https://github.com/dcsil/Inforum/issues/64)
+
+
 
 We plan to launch a barebones alpha version in the medium term.
 
@@ -40,7 +48,7 @@ We plan to launch a barebones alpha version in the medium term.
 In late 2022, we intend to implement a Reward Centre for users to redeem their points for rewards such as Amazon or Starbucks gift card. We will also expand our supported platform and post formats to text based social medias like Twitter, LinkedIn and image/video based social medias like Instagram or Tiktok. Lastly, to better guard against malicious behaviours, we will integrate bot detection and CAPTCHA to minimize the possibility of exploits on our website.
 
 ## User Research
-As mentioned in our [diversity](https://github.com/dcsil/Inforum/blob/add-tech-stack/team/diversity.md) statement, we acknowledge the fact that our current team does not have people across different genders and ethnicities, which might introduce some unintended biases in our product design and development. However, we believe that these biases could be mitigated if we conduct extensive user research periodically and systematically during each stage of our development process. In order to avoid sampling biases, we aim to conduct user research in a stratified manner so that each group in our target population (Millenials/Gen-Z) would be equally represented. User research could be in the form of one-on-one interviews, feedback surveys, or monitored user usability tests depending on the current stage of the development process. We will also consult periodically with our instructors, industry partners, and subject matter experts when making product and business decisions. We take users’ constructive feedback very seriously as we believe it is core to a product’s long-term success.
+As mentioned in our [diversity](https://github.com/dcsil/Inforum/blob/master/team/diversity.md) statement, we acknowledge the fact that our current team does not have people across different genders and ethnicities, which might introduce some unintended biases in our product design and development. However, we believe that these biases could be mitigated if we conduct extensive user research periodically and systematically during each stage of our development process. In order to avoid sampling biases, we aim to conduct user research in a stratified manner so that each group in our target population (Millenials/Gen-Z) would be equally represented. User research could be in the form of one-on-one interviews, feedback surveys, or monitored user usability tests depending on the current stage of the development process. We will also consult periodically with our instructors, industry partners, and subject matter experts when making product and business decisions. We take users’ constructive feedback very seriously as we believe it is core to a product’s long-term success.
 
 ## Launch Date
 We aim to launch our final product in late 2022. This is because our vision is to be able to support multiple media platforms such as Twitter, LinkedIn and other image/video based social medias like Instagram or Tiktok. We will also need to implement a rewards system that supports gift card redemptions (Amazon, Starbucks) and other more robust mechanisms to detect malicious behaviours, including bot detection and the use of CAPTCHA, which might require other 3rd party services outside the scope of our current MVP. 
