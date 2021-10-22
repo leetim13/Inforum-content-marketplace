@@ -1,0 +1,47 @@
+Interviewer: Hi, thanks for taking the time to do this user research with us and we will now ask you to perform a series of tasks. Please note that we will try not to answer any questions so please complete the tasks to the best of your ability. Some of the buttons/hyperlinks are not implemented yet so please ignore those as well.
+
+Interviewer: "Please find the login page and attempt to log in. Assume you have created a username and password already.”
+User: *finds the login icon in 3 seconds and clicks on the login*.
+
+Interviewer: "Please find the instructions page and briefly read through it. Do you think the instructions are clear enough for you to complete your task as a ‘promoter’”?
+User: *finds the instructions icon in 2 seconds and clicks on it*.
+User: *skims through the instructions in 15 seconds*
+User: Yes, I think I have a good idea on what the product is. 
+
+Interviewer:“Can you explain, using a few sentences, how you are able to gain reward points?”
+User: “Well, I believe I just have to share an offer that is available on your marketplace and post it on my social media account to get the rewards. But I am not sure on the specifics of the whole process.”
+
+Interviewer: “Please browse for all available offers and choose one you are most interested in sharing.”
+User: *clicks on “browse offers” page in 2 seconds*
+User: *clicks on the first offer (TD Bank Credit Card)”.
+
+Interviewer: “You have changed your mind. You now wanted to share an offer that contains video content. Please choose such an offer.”
+User: *takes 5 seconds to find the RBC video content offer and clicks on it”
+
+Interviewer: “Please now share this offer and follow the instructional prompts along the way”.
+User: *clicks on “share this offer” in 1 second*
+User: *attempts to click on the copy/paste to clipboard icons and took 5 seconds* (but these icons are still not implemented in Figma” 
+User: *clicks on “verify post”*
+User: *reads the instructions for 5 seconds and clicks on the “Browse Offer” button on the banner after realizing hyperlinks are not implemented yet*
+
+Interviewer: “Please tell me how many reward points you have at the moment”.
+User: *clicks on the profile icon but realizes it’s not implemented”
+User: *took 15 seconds but still can’t find the hidden menu with 3 dots”
+Interviewer: “I will now provide a hint. Please look at the header icons again carefully”
+User: *finds the hidden menu icon in 5 seconds and click on “My Rewards”.
+User: “What do you want me to find again?”
+Interviewer: “Please tell me how many reward points you have at the moment”.
+User: “I have made 20 posts, earned 1250 reward points, and have 3 ongoing posts”
+User: “What does ongoing posts mean?”
+Interviewer: “What do you think it means?”
+User: “The number of posts I made today?”
+
+Interviewer: “Please tell me how many of your posts are still active”
+User: *found and clicks on the hidden menu in 1 second”
+User: *reads the table for 5 seconds”
+User: “I have 2 active posts at the moment, which is the RBC promotion and the BMO video”
+
+Interviewer: Thank you so much for your time and we can now discuss some of the feedback/questions/comments you have.
+
+*follow-up discussions are not logged as they are pretty casual and conversational. Instead, they are summarized in the “summarized notes” section*
+Total time taken: 15:35 minutes
