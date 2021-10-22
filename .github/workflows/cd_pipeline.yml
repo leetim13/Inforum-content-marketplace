@@ -19,7 +19,40 @@ jobs:
           heroku_app_name: "inforum-server" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "app/server" # <- This will point to the server folder in your project
+      - name: Update server deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://inforum-server.herokuapp.com/
+          state: "success"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      - name: Update server deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://inforum-server.herokuapp.com/
+          state: "failure"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      # - name: Update server deployment status (success)
+      #   if: success()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-server.herokuapp.com/
+      #     state: "success"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
+      # - name: Update server deployment status (failure)
+      #   if: failure()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-server.herokuapp.com/
+      #     state: "failure"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      
   client-build-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -30,4 +63,28 @@ jobs:
           heroku_app_name: "inforum-client" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "app/client" # <- This will point to the client folder in your project
-        
+      - name: Update client deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://inforum-client.herokuapp.com/
+          state: "success"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      # - name: Update client deployment status (success)
+      #   if: success()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-client.herokuapp.com/
+      #     state: "success"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+      # - name: Update client deployment status (failure)
+      #   if: failure()
+      #   uses: chrnorm/deployment-status@releases/v1
+      #   with:
+      #     token: "${{ github.token }}"
+      #     target_url: https://inforum-client.herokuapp.com/
+      #     state: "failure"
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
