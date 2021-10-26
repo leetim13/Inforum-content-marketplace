@@ -16,8 +16,10 @@ else
     echo "${GREEN}==> Done installing nodejs..."
 fi
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
+tput sgr0
+echo -n "node version: "
 npm -v
+echo -n "npm version: "
 node -v
 
 # Install client dependencies
