@@ -1,0 +1,35 @@
+#!/bin/sh
+DIR=$PWD
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+
+# Install nodejs
+echo "${YELLOW}==> Installing nodejs..."
+command -v node > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+  echo "${GREEN}==> node already installed"
+else
+    sudo apt update
+    sudo apt install nodejs
+    echo "${GREEN}==> Done installing nodejs..."
+fi
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+npm -v
+node -v
+
+# Install client dependencies
+echo "${YELLOW}==> Installing client dependencies..."
+cd ./client
+pwd
+npm install
+echo "${GREEN}==> Done installing client dependencies..."
+
+# Install server dependencies
+echo "${YELLOW}==> Installing server dependencies..."
+cd ../server
+pwd
+npm install
+echo "${GREEN}==> Done installing server dependencies..."

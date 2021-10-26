@@ -1,0 +1,24 @@
+tools:
+  client-exceptions: https://sentry.io/organizations/inforum-server/issues/?project=6034741
+  client-logging: https://...
+  server-exceptions: https://...
+  server-logging: https://...
+  test-database: https://data.heroku.com/datastores/351f1ee0-2b11-4607-8e92-58073ca5881b
+  prod-database: https://data.heroku.com/datastores/03408426-288d-471d-a239-d9cd39818fbe
+  ci: https://github.com/dcsil/Inforum/actions/workflows/ci_pipeline.yml
+
+services:
+  client-production: https://inforum-client.herokuapp.com/
+  server-production: https://inforum-server.herokuapp.com/api
+
+docs:
+  getting_started: ./README.md
+      
+commands:
+  bootstrap: script/bootstrap
+  database:
+    migrate: cd server; npx sequelize-cli db:migrate
+    seed: cd server; npx sequelize-cli db:seed:all
+  test: cd server; npm test
+  client: cd client; npm start
+  server: cd server; npm start
