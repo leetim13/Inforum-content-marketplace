@@ -69,9 +69,9 @@ Exceptions are tracked using Sentry. Paste your Sentry dsn inside `./server/inde
 
 ### Continuous Deployment 
 
-Using Github actions we have a CD script [here](https://github.com/dcsil/Inforum/blob/set-up-bootstrap-service-yml/.github/workflows/cd_pipeline.yml) that automatically deploys to Heroku.
+Using Github Actions we have a CD script [here](https://github.com/dcsil/Inforum/blob/set-up-bootstrap-service-yml/.github/workflows/cd_pipeline.yml) that automatically deploys to Heroku.
 
-Set up Github secrets for these 2 variables to link to your Heroku account: `HEROKU_API_KEY` ,`HEROKU_EMAIL`.
+Set up Github Secrets for these 2 variables to link to your Heroku account: `HEROKU_API_KEY` ,`HEROKU_EMAIL`.
 
 [Github Secrets Guide](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 
