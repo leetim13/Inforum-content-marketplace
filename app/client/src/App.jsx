@@ -10,7 +10,7 @@ function App() {
     const [data, setData] = React.useState(null);
     const [users, setUsers] = React.useState([]);
     const [userName, setUserName] = React.useState("");
-    const [userType, setUserType] = React.useState("promoter");
+    const [userRole, setUserRole] = React.useState("User");
     const [userAge, setUserAge] = React.useState(18);
     const [responseMessage, setResponse] = React.useState({ type: "", message: ""});
 
@@ -38,7 +38,7 @@ function App() {
 
     function addUser() {
         // No type checking right now.
-        axios.post(`${server_url}/users`, { name: userName, type: userType, age: parseInt(userAge) })
+        axios.post(`${server_url}/users`, { name: userName, role: userRole, age: parseInt(userAge) })
             .then(res => { 
                 setResponse({type: "success", message: "Successful added user."})
                 setUsers([...users, res.data]); 
@@ -50,7 +50,7 @@ function App() {
         <tr key={`user table ${user.id}`}>
             <td>{user.id}</td>
             <td>{user.name}</td>
-            <td>{user.type}</td>
+            <td>{user.role}</td>
             <td>{user.age}</td>
             <td>
                 <Button variant="outline-danger" onClick={() => deleteUser(user.id)}>X</Button>
@@ -87,10 +87,10 @@ function App() {
                                     <td>#</td>
                                     <td><input type="text" name="name" onChange={ e => setUserName(e.target.value) } /></td>
                                     <td>
-                                        <select defaultValue="promoter" onChange={e => setUserType(e.target.value)}>
-                                            <option value="admin">Admin</option>
-                                            <option value="bank">Bank</option>
-                                            <option value="promoter">Promoter</option>
+                                        <select defaultValue="promoter" onChange={e => setUserRole(e.target.value)}>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Bank">Bank</option>
+                                            <option value="User">User</option>
                                         </select>
                                     </td>
                                     <td><input type="number" defaultValue="18" name="age" min="0" max="150" onChange={e => setUserAge(e.target.value)}/></td>
