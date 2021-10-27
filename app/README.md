@@ -60,7 +60,7 @@ to run tests, run ``` npm test ```
 ## Deployment
 ### Continuous Integration 
 
-Using Github actions we have a CI script [here](https://github.com/dcsil/Inforum/blob/set-up-bootstrap-service-yml/.github/workflows/ci_pipeline.yml).
+Using Github Actions we have a CI script [here](https://github.com/dcsil/Inforum/blob/set-up-bootstrap-service-yml/.github/workflows/ci_pipeline.yml).
 
 ### Logging and exceptions 
 Logging is set-up using Heroku add-ons for LogDNA.
