@@ -9,7 +9,7 @@ Inforum is a web-based, Marketplace-like application, where users can share mark
 
 Table of Contents
 ---
-
+- [inforum App](./app/)
 - [People](./team/)
     - [Leader Selection](./team/leader_selection.md)
     - [Team Principles](./team/team_principles.md)
