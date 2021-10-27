@@ -18,7 +18,7 @@ Table of Contents
     - [Use Cases](./product_research/use_cases.md)
     - [Market](./product_research/market.md)
     - [Roadmap](./product_research/roadmap.md)
-    - [Prototype](./product_research/prototype)
+    - [Prototype (UI)](./product_research/prototype)
     - [User Research](./product_research/user_research)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
@@ -84,7 +84,9 @@ We have decided to use `Github Actions` to set up our continuous integration wor
 We decided to use `Heroku` as our container-based cloud platform to deploy and manage our MVP mainly because it is free of charge and `Heroku` integrates with `Github` very well, so we could leverage that for continuous deployments.
 
 ### Example UI
-![example_UI](https://user-images.githubusercontent.com/20623399/136848384-ca91fee9-b8e6-4e59-9dea-0b0a1e2cce79.png)
+![image](https://user-images.githubusercontent.com/20623399/138982298-4bc32111-ffca-4b97-b632-7f34f1d0bffb.png)
+<img src="https://user-images.githubusercontent.com/20623399/138982259-48e7c785-7f14-45ab-b4a7-d16ce85d8251.png width="200" />
+
 
 
 
