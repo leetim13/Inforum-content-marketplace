@@ -19,7 +19,11 @@ In order to complete a working MVP by the end of the term, we will be focusing o
 11. [Explore ways to make the hidden menu stand out in UI](https://github.com/dcsil/Inforum/issues/60)
 12. [Modify "instructions" page](https://github.com/dcsil/Inforum/issues/65) and [Clarify the term "ongoing posts" ](https://github.com/dcsil/Inforum/issues/68)
 13. [Create a prototype page for user insights (from the bank's perspective)](https://github.com/dcsil/Inforum/issues/67)
+14. [Setup Exception tracking via Sentry and Logging (logDNA)](https://github.com/dcsil/Inforum/issues/71)
+15. [Set up Boostrap script](https://github.com/dcsil/Inforum/issues/72)
+16. [Create documentation for apps](https://github.com/dcsil/Inforum/issues/73)
 
+_All **Short Term** goals completed as of October 26, 2021._
 
 ## Medium Term
 
