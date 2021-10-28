@@ -3,7 +3,18 @@ const userBl = require("../../business-logic/user.bl");
 let mockUser;
 
 beforeEach(() => {
-    mockUser = { name: "TimBot", type: "Admin", age: 23, rewardPoint: 10 };
+    mockUser = {
+        username: "Johnusername",
+        password: "Johnpassword",
+        firstName: "",
+        lastName: "Doe",
+        age: 20,
+        gender: 'Male',
+        country: 'Canada',
+        rewardPoint: 10,
+        role: "Admin",
+        email: 'john@gmail.com'
+    };
 });
 
 test("add reward point function.", async () => {
