@@ -23,7 +23,7 @@ In order to complete a working MVP by the end of the term, we will be focusing o
 15. [Set up Boostrap script](https://github.com/dcsil/Inforum/issues/72)
 16. [Create documentation for apps](https://github.com/dcsil/Inforum/issues/73)
 
-_All **Short Term** goals completed as of October 26, 2021._
+_All **Short Term** goals completed as of October 28, 2021._
 
 ## Medium Term
 
