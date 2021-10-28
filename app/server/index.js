@@ -34,6 +34,7 @@ app.use(Sentry.Handlers.requestHandler());
 // TracingHandler creates a trace for every incoming request
 app.use(Sentry.Handlers.tracingHandler());
 
+// set up cors
 app.use(cors({ origin: CLIENT_URL }));
 
 // parse requests of content-type - application/json
