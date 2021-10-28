@@ -1,6 +1,14 @@
 const db = require("../models");
 const User = db['User'];
 const Op = db.Sequelize.Op;
+const userService = require('../auth/auth_services');
+
+exports.authenticate = (req, res, next) => {
+    console.log(req.body);
+    userService.authenticate(req.body)
+        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
+        .catch(err => next(err));
+}
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -15,7 +23,9 @@ exports.create = (req, res) => {
     // Create a User
     const user = {
         name: req.body.name,
-        type: req.body.type,
+        username: req.body.name + "username",
+        password: req.body.name + "password",
+        role: req.body.role,
         age: req.body.age,
         rewardPoint: 0
     };

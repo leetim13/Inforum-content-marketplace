@@ -1,10 +1,15 @@
+const authorize = require('../auth/authorize')
+const Role = require('../auth/role');
+
 module.exports = app => {
 	const users = require("../controllers/user.controller.js");
 
 	var router = require("express").Router();
 
+	router.post('/authenticate', users.authenticate); 
+
 	// Create a new User
-	router.post("/", users.create);
+	router.post("/", authorize([Role.Admin]), users.create);
 
 	// Retrieve all User
 	router.get("/", users.findAll);

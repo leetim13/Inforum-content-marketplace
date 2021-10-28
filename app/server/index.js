@@ -5,9 +5,9 @@ const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 // or use es6 import statements
 // import * as Tracing from '@sentry/tracing';
+const authErrorHandler = require('./auth/errorHandler');
 const express = require("express");
 var cors = require('cors')
-const bodyParser = require("body-parser");
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 const PORT = process.env.PORT || 3001;
 
@@ -38,10 +38,7 @@ app.use(Sentry.Handlers.tracingHandler());
 app.use(cors({ origin: CLIENT_URL }));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
-
-const db = require("./models");
-db.sequelize.sync();
+app.use(express.json());
 
 // User routes
 require("./routes/user.routes")(app);
@@ -56,6 +53,9 @@ app.get("/sentry", function mainHandler(req, res) {
 
 // The error handler must be before any other error middleware and after all controllers
 app.use(Sentry.Handlers.errorHandler());
+
+// auth error handler
+app.use(authErrorHandler);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {

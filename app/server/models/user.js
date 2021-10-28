@@ -14,14 +14,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
+        notEmpty: true
       }
     },
-    type: DataTypes.STRING,
+    role: {
+      type: DataTypes.ENUM(
+        "Admin",
+        "Bank",
+        "User"
+      ),
+      allowNull: false,
+    },
     age: DataTypes.INTEGER,
     rewardPoint: {
       type:  DataTypes.INTEGER,

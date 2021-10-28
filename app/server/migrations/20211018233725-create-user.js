@@ -8,14 +8,40 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notEmpty: true
+        }
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
       },
-      type: {
-        type: Sequelize.STRING
+      role: {
+        type: Sequelize.ENUM(
+          "Admin",
+          "Bank",
+          "User"
+        ),
+        allowNull: false,
       },
-      age: {
-        type: Sequelize.INTEGER
+      age: Sequelize.INTEGER,
+      rewardPoint: {
+        type:  Sequelize.INTEGER,
+        min: 0
       },
       createdAt: {
         allowNull: false,

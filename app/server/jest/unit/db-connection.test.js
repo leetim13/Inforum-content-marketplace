@@ -35,7 +35,9 @@ test("No entry in user table", async () => {
 test("Add 1 entry in user table", async () => {
     const user = {
         name: "John doe",
-        type: "Admin",
+        username: "Johnusername",
+        password: "Johnpassword",
+        role: "Admin",
         age: 29
     };
     let data = null;
@@ -58,7 +60,7 @@ test("Add user with null name", async () => {
     expect(data).toBe(0);
     await expect(User.create(user))
     .rejects
-    .toThrow(new ValidationError("notNull Violation: User.name cannot be null"));
+    .toThrow(ValidationError);
     data = await User.count({ where: {} });
     expect(data).toBe(0);
   })
@@ -74,7 +76,7 @@ test("Add user with empty string name", async () => {
     expect(data).toBe(0);
     await expect(User.create(user))
     .rejects
-    .toThrow(new ValidationError("Validation error: Validation notEmpty on name failed"));
+    .toThrow(ValidationError);
     data = await User.count({ where: {} });
     expect(data).toBe(0);
   })
