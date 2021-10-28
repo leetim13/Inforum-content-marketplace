@@ -3,6 +3,7 @@ import { Table, Button, Alert, Row, Col } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+
 const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                     <Col md="4">
                         <img src={logo} className="App-logo" alt="logo" />
                         <p>{!data ? "Server disconnected test..." : data}</p>
+                        <button onClick={() => { throw new Error("Sentry test") }}>Sentry Test</button>
                     </Col>
                     <Col md="1"> </Col>
                     <Col md="7">
