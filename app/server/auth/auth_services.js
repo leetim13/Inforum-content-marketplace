@@ -12,7 +12,7 @@ async function authenticate({ username, password }) {
     const user = await users.findOne({ where: { username : username, password : password}});
     if (user) {
         const token = jwt.sign({ sub: user.id, role: user.role }, secret);
-        const { password, ...userWithoutPassword } = user;
+        const { password, ...userWithoutPassword } = user.dataValues;
         return {
             ...userWithoutPassword,
             token

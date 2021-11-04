@@ -1,113 +1,69 @@
 import React from "react";
-import { Table, Button, Alert, Row, Col } from 'react-bootstrap';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
+import { Col, Container, Jumbotron } from 'react-bootstrap';
 import './App.css';
-import axios from 'axios';
+import * as Sentry from '@sentry/react';
 
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
+import { connect } from 'react-redux';
 
-function App() {
-    
-    const [data, setData] = React.useState(null);
-    const [users, setUsers] = React.useState([]);
-    const [userName, setUserName] = React.useState("");
-    const [userRole, setUserRole] = React.useState("User");
-    const [userAge, setUserAge] = React.useState(18);
-    const [responseMessage, setResponse] = React.useState({ type: "", message: ""});
+import { history } from './_helpers';
+import { alertActions } from './_actions';
+import { PrivateRoute } from './_components';
+import { Router } from 'react-router-dom';
+import { HomePage } from './pages/HomePage';
+import { LoginPage } from './pages/LoginPage';
 
-    React.useEffect(() => {
-        axios.get(`${server_url}`)
-            .then((res) => setData(res.data.message))
-            .catch((err) => console.log(err));
-    }, []);
+// const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
-    React.useEffect(() => {
-        axios.get(`${server_url}/users`)
-            .then((res) => setUsers(res.data))
-            .catch((err) => console.log(err));
-    }, []);
-
-    function deleteUser(id) {
-        axios.delete(`${server_url}/users/${id}`)
-            .then(_ => 
-                {   
-                    setResponse({type: "success", message: "Successful deleted user."})
-                    setUsers(users.filter((user, _) => user.id !== id))
-                })
-                .catch(err => setResponse({type: "danger", message: err.response.data.message}));
-    };
-
-    function addUser() {
-        // No type checking right now.
-        axios.post(`${server_url}/users`, { name: userName, role: userRole, age: parseInt(userAge) })
-            .then(res => { 
-                setResponse({type: "success", message: "Successful added user."})
-                setUsers([...users, res.data]); 
-            })
-            .catch(err => setResponse({type: "danger", message: err.response.data.message}));
-    };
-
-    const userRows = users.map(user =>
-        <tr key={`user table ${user.id}`}>
-            <td>{user.id}</td>
-            <td>{user.name}</td>
-            <td>{user.role}</td>
-            <td>{user.age}</td>
-            <td>
-                <Button variant="outline-danger" onClick={() => deleteUser(user.id)}>X</Button>
-            </td>
-        </tr>
-    );
-
+function FallbackComponent() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <Row>
-                    <Col md="4">
-                        <img src={logo} className="App-logo" alt="logo" />
-                        <p>{!data ? "Server disconnected test..." : data}</p>
-                        <button onClick={() => { throw new Error("Sentry test") }}>Sentry Test</button>
-                    </Col>
-                    <Col md="1"> </Col>
-                    <Col md="7">
-                        <Alert show={responseMessage.type !== ""} variant={responseMessage.type} transition={false}>
-                            {responseMessage.message}
-                        </Alert>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Account Type</th>
-                                    <th>Age</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {userRows}
-                                <tr>
-                                    <td>#</td>
-                                    <td><input type="text" name="name" onChange={ e => setUserName(e.target.value) } /></td>
-                                    <td>
-                                        <select defaultValue="promoter" onChange={e => setUserRole(e.target.value)}>
-                                            <option value="Admin">Admin</option>
-                                            <option value="Bank">Bank</option>
-                                            <option value="User">User</option>
-                                        </select>
-                                    </td>
-                                    <td><input type="number" defaultValue="18" name="age" min="0" max="150" onChange={e => setUserAge(e.target.value)}/></td>
-                                    <td>
-                                        <Button variant="outline-secondary" onClick={() => addUser()}>Add User</Button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
-            </header>
+      <div>An error has occured</div>
+    )
+  }
 
-        </div>
-    );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
+    }
+
+    render() {
+        const { alert } = this.props;
+        return (
+            <Router history={history}>
+                <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
+                    <Jumbotron>
+                        <Container>
+                            <Col sm={{span: 8, offset: 2}}>
+                                {alert.message &&
+                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                }
+                                <Switch>
+                                    <Route path="/login" component={LoginPage} />
+                                    <PrivateRoute exact path="/" component={HomePage} />
+                                </Switch>
+                            </Col>
+                        </Container>
+                    </Jumbotron>
+                </Sentry.ErrorBoundary>
+            </Router>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
+
+const connectedApp = Sentry.withProfiler(connect(mapStateToProps)(App));
+
+// export default App;
+export { connectedApp as App };

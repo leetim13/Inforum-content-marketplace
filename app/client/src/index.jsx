@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './index.css';
-import App from './App.jsx';
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import { App } from './App.jsx';
+import { store } from './_helpers';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import { history } from './_helpers';
+// import { Router } from 'react-router-dom';
 
 Sentry.init({
   dsn: "https://7dc304ef696c469589d0bb299f785b3f@o358880.ingest.sentry.io/6036649",
@@ -18,7 +22,9 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />    
+    </Provider>  
   </React.StrictMode>,
   document.getElementById('root')
 );
