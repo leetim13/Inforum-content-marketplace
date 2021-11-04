@@ -11,6 +11,7 @@ on:
 jobs:
   server-build-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20 
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -39,6 +40,7 @@ jobs:
       
   client-build-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20 
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
