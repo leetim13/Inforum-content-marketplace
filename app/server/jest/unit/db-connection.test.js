@@ -34,11 +34,16 @@ test("No entry in user table", async () => {
 
 test("Add 1 entry in user table", async () => {
     const user = {
-        name: "John doe",
         username: "Johnusername",
         password: "Johnpassword",
+        firstName: "John",
+        lastName: "Doe",
+        age: 20,
+        gender: 'Male',
+        country: 'Canada',
+        rewardPoint: 10,
         role: "Admin",
-        age: 29
+        email: 'john@gmail.com'
     };
     let data = null;
     data = await User.count({ where: {} });
@@ -49,11 +54,18 @@ test("Add 1 entry in user table", async () => {
     expect(data).toBe(1);
   })
 
-test("Add user with null name", async () => {
+test("Add user with null first name", async () => {
     const user = {
-        name: null,
-        type: "Admin",
-        age: 29
+        username: "Johnusername",
+        password: "Johnpassword",
+        firstName: null,
+        lastName: "Doe",
+        age: 20,
+        gender: 'Male',
+        country: 'Canada',
+        rewardPoint: 10,
+        role: "Admin",
+        email: 'john@gmail.com'
     };
     let data = null;
     data = await User.count({ where: {} });
@@ -65,11 +77,18 @@ test("Add user with null name", async () => {
     expect(data).toBe(0);
   })
 
-test("Add user with empty string name", async () => {
-    const user = {
-        name: "",
-        type: "Admin",
-        age: 29
+test("Add user with empty string firstName", async () => {
+    const  user = {
+        username: "Johnusername",
+        password: "Johnpassword",
+        firstName: "",
+        lastName: "Doe",
+        age: 20,
+        gender: 'Male',
+        country: 'Canada',
+        rewardPoint: 10,
+        role: "Admin",
+        email: 'john@gmail.com'
     };
     let data = null;
     data = await User.count({ where: {} });

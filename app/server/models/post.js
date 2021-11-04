@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Post extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,8 +13,22 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  User.init({
-    username: {
+  Post.init({
+    userId: {
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      type: DataTypes.INTEGER
+    },
+    campaignId: {
+      references: {
+        model: 'Campaigns',
+        key: 'id'
+      },
+      type: DataTypes.INTEGER
+    },
+    postUrl: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -22,72 +36,52 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    age: {
+    numClicks: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
-      }
+      },
+      defaultValue: 0
     },
-    gender: {
-      type: DataTypes.ENUM(
-        "Male",
-        "Female",
-        "Other"
-      ),
+    numLikes: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        notEmpty: true
+      },
+      defaultValue: 0
     },
-    country: {
+    numComments: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      },
+      defaultValue: 0
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      },
+      defaultValue: false
+    },
+    socialMedia: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
-    rewardPoint: {
-      type:  DataTypes.INTEGER,
-      defaultValue: 0,
-      min: 0
-    },
-    role: {
-      type: DataTypes.ENUM(
-        "Admin",
-        "Bank",
-        "User"
-      ),
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+    deletedAt: {
+      allowNull: true,
+      type: DataTypes.DATE
     }
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Post',
   });
-  return User;
+  return Post;
 };

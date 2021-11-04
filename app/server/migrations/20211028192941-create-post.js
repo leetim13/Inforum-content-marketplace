@@ -1,14 +1,29 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      userId: {
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        type: Sequelize.INTEGER
+      },
+      campaignId: {
+        references: {
+          model: 'Campaigns',
+          key: 'id'
+        },
+        type: Sequelize.INTEGER
+      },
+      postUrl: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
@@ -16,63 +31,39 @@ module.exports = {
           notEmpty: true
         }
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      age: {
+      numClicks: {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true
-        }
+        },
+        defaultValue: 0
       },
-      gender: {
-        type: Sequelize.ENUM(
-          "Male",
-          "Female",
-          "Other"
-        ),
-        allowNull: false,
-      },
-      country: {
-        type: Sequelize.STRING,
+      numLikes: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true
-        }
+        },
+        defaultValue: 0
       },
-      rewardPoint: {
-        type:  Sequelize.INTEGER,
-        defaultValue: 0,
-        min: 0
-      },
-      role: {
-        type: Sequelize.ENUM(
-          "Admin",
-          "Bank",
-          "User"
-        ),
+      numComments: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: true
+        },
+        defaultValue: 0
       },
-      email: {
+      isVerified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        },
+        defaultValue: false
+      },
+      socialMedia: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -86,10 +77,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
       }
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Posts');
   }
 };
