@@ -6,7 +6,8 @@ import { history } from '../_helpers';
 export const userActions = {
     login,
     logout,
-    getAll
+    getAll,
+    updateUsers
 };
 
 function login(username, password) {
@@ -53,4 +54,12 @@ function getAll() {
     function request() { return { type: userConstants.GETALL_REQUEST } }
     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+function updateUsers(users) {
+    return dispatch => {
+        dispatch(update(users));
+    };
+
+    function update(users) { return { type: userConstants.UPDATE_USERS, users } }
 }

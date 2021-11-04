@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // import { history } from '../_helpers';
 import axios from 'axios';
 import { authHeader } from '../_helpers'
-import { userActions } from '../_actions';
+import { userActions, alertActions } from '../_actions';
 const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
 class HomePage extends React.Component {
@@ -17,10 +17,10 @@ class HomePage extends React.Component {
             userName : "",
             userRole : "User",
             userAge : 18,
-            responseMessage : { type: "", message: "" },
             un : "",
             pass : ""
         }        
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -31,31 +31,29 @@ class HomePage extends React.Component {
             .catch((err) => console.log(err));
     }
 
-    // React.useEffect(() => {
-    //     axios.get(`${server_url}/users`)
-    //         .then((res) => setUsers(res.data))
-    //         .catch((err) => console.log(err));
-    // }, []);
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
 
     deleteUser = (id) => {
         axios.delete(`${server_url}/users/${id}`)
             .then(_ => 
                 {   
-                    this.setState({ responseMessage: {type: "success", message: "Successful deleted user."}})
-                    this.setState({ users: this.state.users.filter((user, _) => user.id !== id)})
+                    this.props.dispatch(userActions.updateUsers(this.props.users.filter((user, _) => user.id !== id)))
+                    this.props.dispatch(alertActions.success("Successful deleted user."))
                 })
-                .catch(err => this.setState({ responseMessage: {type: "danger", message: err.response.data.message}}))
+                .catch(err => this.props.dispatch(alertActions.error(err.response.data.message)))
     };
 
     addUser = () => {
         // No type checking right now.
         axios.post(`${server_url}/users`, { name: this.state.userName, role: this.state.userRole, age: parseInt(this.state.userAge) })
             .then(res => { 
-                this.setState({users: [...this.state.users, res.data], responseMessage: {type: "success", message: "Successful added user."}})
+                this.props.dispatch(userActions.updateUsers([...this.props.users, res.data]))
+                this.props.dispatch(alertActions.success("Successful added user."))
             })
-            .catch(err => 
-                this.setState({ responseMessage: {type: "danger", message: err.response.data.message}})
-            )
+            .catch(err => this.props.dispatch(alertActions.error(err.response.data.message)))
     };
 
     render() {
@@ -81,9 +79,6 @@ class HomePage extends React.Component {
             </Col>
             <Col md="1"> </Col>
             <Col md="7">
-                <Alert show={this.state.responseMessage.type !== ""} variant={this.state.responseMessage.type} transition={false}>
-                    {this.state.responseMessage.message}
-                </Alert>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -98,15 +93,15 @@ class HomePage extends React.Component {
                         {userRows}
                         <tr>
                             <td>#</td>
-                            <td><input type="text" name="name" onChange={ e => this.setState({ userName: e.target.value})} /></td>
+                            <td><input type="text" name="userName" onChange={this.handleChange} /></td>
                             <td>
-                                <select defaultValue="promoter" onChange={e => this.setState({ userRole: e.target.value})}>
+                                <select name="userRole" defaultValue="User" onChange={e => {this.setState({ userRole: e.target.options[e.target.selectedIndex].value})}}>
                                     <option value="Admin">Admin</option>
                                     <option value="Bank">Bank</option>
                                     <option value="User">User</option>
                                 </select>
                             </td>
-                            <td><input type="number" defaultValue="18" name="age" min="0" max="150" onChange={e => this.setState({ userAge: e.target.value})}/></td>
+                            <td><input type="number" defaultValue="18" name="userAge" min="0" max="150" onChange={this.handleChange}/></td>
                             <td>
                                 <Button variant="outline-secondary" onClick={() => this.addUser()}>Add User</Button>
                             </td>

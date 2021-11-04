@@ -7,7 +7,9 @@ export function users(state = [], action) {
     case userConstants.GETALL_SUCCESS:
         return action.users;
     case userConstants.GETALL_FAILURE:
-        return [];
+        return state;
+    case userConstants.UPDATE_USERS:
+        return action.users;
     default:
         return state
     }

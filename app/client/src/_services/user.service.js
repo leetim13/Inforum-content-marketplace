@@ -10,12 +10,6 @@ export const userService = {
 };
 
 async function login(username, password) {
-    // const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ username, password })
-    // };
-
     return await axios.post(`${server_url}/users/authenticate`, { 
         username, password 
     })
@@ -26,14 +20,6 @@ async function login(username, password) {
         return res.data;
     })
     .catch(handleError);
-    // return fetch(`${server_url}/users/authenticate`, requestOptions)
-    //     .then(handleResponse)
-    //     .then(user => {
-    //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //         localStorage.setItem('user', JSON.stringify(user));
-    //         axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
-    //         return user;
-    //     });
 }
 
 function logout() {
@@ -42,15 +28,9 @@ function logout() {
 }
 
 async function getAll() {
-    // const requestOptions = {
-    //     method: 'GET',
-    //     headers: authHeader()
-    // };
-
     return await axios.get(`${server_url}/users`)
     .then(res => res.data)
     .catch(handleError);
-    // return fetch(`${server_url}/users`, requestOptions).then(handleResponse);
 }
 
 function handleError(err) {
