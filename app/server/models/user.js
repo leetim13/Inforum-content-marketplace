@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -23,35 +23,35 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     firstName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     lastName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     age: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     gender: {
-      type: Sequelize.ENUM(
+      type: DataTypes.ENUM(
         "Male",
         "Female",
         "Other"
@@ -59,19 +59,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     country: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     rewardPoint: {
-      type:  Sequelize.INTEGER,
+      type:  DataTypes.INTEGER,
       defaultValue: 0,
       min: 0
     },
     role: {
-      type: Sequelize.ENUM(
+      type: DataTypes.ENUM(
         "Admin",
         "Bank",
         "User"
@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true

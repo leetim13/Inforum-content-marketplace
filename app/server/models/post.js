@@ -19,17 +19,17 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users',
         key: 'id'
       },
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     campaignId: {
       references: {
         model: 'Campaigns',
         key: 'id'
       },
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     postUrl: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     numClicks: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     },
     numLikes: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     },
     numComments: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     },
     isVerified: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     socialMedia: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     deletedAt: {
       allowNull: true,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   }, {
     sequelize,
