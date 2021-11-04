@@ -39,11 +39,11 @@ function logout() {
 function getAll() {
     return dispatch => {
         dispatch(request());
-
         userService.getAll()
             .then(
                 users => dispatch(success(users)),
                 error => { 
+                    console.log(error);
                     dispatch(failure(error));
                     dispatch(alertActions.error(error))
                 }

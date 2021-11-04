@@ -1,27 +1,39 @@
-import { authHeader } from '../_helpers';
+import axios from 'axios';
+
 const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 export const userService = {
     login,
     logout,
     getAll
 };
 
-function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
+async function login(username, password) {
+    // const requestOptions = {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ username, password })
+    // };
 
-    return fetch(`${server_url}/users/authenticate`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
-
-            return user;
-        });
+    return await axios.post(`${server_url}/users/authenticate`, { 
+        username, password 
+    })
+    .then(res => {
+        console.log(res.data)
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(res.data));
+        return res.data;
+    })
+    .catch(handleError);
+    // return fetch(`${server_url}/users/authenticate`, requestOptions)
+    //     .then(handleResponse)
+    //     .then(user => {
+    //         // store user details and jwt token in local storage to keep user logged in between page refreshes
+    //         localStorage.setItem('user', JSON.stringify(user));
+    //         axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
+    //         return user;
+    //     });
 }
 
 function logout() {
@@ -29,29 +41,23 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+async function getAll() {
+    // const requestOptions = {
+    //     method: 'GET',
+    //     headers: authHeader()
+    // };
 
-    return fetch(`${server_url}/users`, requestOptions).then(handleResponse);
+    return await axios.get(`${server_url}/users`)
+    .then(res => res.data)
+    .catch(handleError);
+    // return fetch(`${server_url}/users`, requestOptions).then(handleResponse);
 }
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                window.location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
+function handleError(err) {
+    if (err.response.status === 401) {
+        // auto logout if 401 response returned from api
+        logout();
+        window.location.reload(true);
+    }
+    return Promise.reject(err.response.data.message)
 }
