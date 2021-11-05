@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   class Campaign extends Model {
     /**
      * Helper method for defining associations.
@@ -14,33 +14,66 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Campaign.init({
-    bank: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+    bankId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Banks',
+        key: 'id'
+      },
+      allowNull: false
     },
     offerType: {
-      type: DataTypes.STRING,
+      type: Sequelize.ENUM(
+        "Charity",
+        "Article",
+        "Product",
+        "Other"
+      ),
+      allowNull: false,
+    },
+    url: {
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        isUrl: true
       }
     },
-    expirationDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+    description: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    image: {
+      type: Sequelize.BLOB("long"),
+      allowNull: true
     },
     startDate: {
-      type: DataTypes.DATE,
+      type: Sequelize.DATE,
       allowNull: false,
       validate: {
         notEmpty: true
       }
+    },
+    endDate: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    allocatedCash: {
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0
+      },
+      defaultValue: 0
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
     }
   }, {
     sequelize,

@@ -14,6 +14,7 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       campaignId: {
@@ -21,46 +22,35 @@ module.exports = {
           model: 'Campaigns',
           key: 'id'
         },
+        allowNull: false,
         type: Sequelize.INTEGER
       },
-      postUrl: {
+      url: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
         validate: {
-          notEmpty: true
+          isUrl: true
         }
       },
       numClicks: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true
-        },
         defaultValue: 0
       },
       numLikes: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true
-        },
         defaultValue: 0
       },
       numComments: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true
-        },
         defaultValue: 0
       },
       isVerified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        validate: {
-          notEmpty: true
-        },
         defaultValue: false
       },
       socialMedia: {
@@ -76,10 +66,6 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      deletedAt: {
-        allowNull: true,
         type: Sequelize.DATE
       }
     });

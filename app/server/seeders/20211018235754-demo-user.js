@@ -7,11 +7,12 @@ module.exports = {
       password: "Johnpassword",
       firstName: "John",
       lastName: "Doe",
+      profilePicture: null,
       age: 20,
       gender: 'Male',
-      country: 'Canada',
       rewardPoint: 10,
       role: "Admin",
+      connectionDemographic: {},
       email: 'john@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date()

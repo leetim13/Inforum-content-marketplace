@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   class User extends Model {
     /**
      * Helper method for defining associations.
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     username: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -23,66 +23,63 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
+    profilePicture: {
+      type: Sequelize.BLOB('long'),
+      allowNull: true
+    },
     firstName: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     lastName: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     age: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      type: Sequelize.INTEGER,
+      allowNull: false
     },
     gender: {
-      type: DataTypes.ENUM(
+      type: Sequelize.ENUM(
         "Male",
         "Female",
         "Other"
       ),
       allowNull: false,
     },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+    connectionDemographic: {
+      type: Sequelize.JSON,
+      allowNull: false
     },
     rewardPoint: {
-      type:  DataTypes.INTEGER,
+      type:  Sequelize.INTEGER,
       defaultValue: 0,
       min: 0
     },
     role: {
-      type: DataTypes.ENUM(
+      type: Sequelize.ENUM(
         "Admin",
-        "Bank",
         "User"
       ),
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        isEmail: true
       }
     }
   }, {

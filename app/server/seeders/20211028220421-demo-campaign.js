@@ -3,10 +3,14 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Campaigns', [{
-      bank: "RBC",
-      offerType: "credit card",
-      expirationDate: new Date(),
+      bankId: 1,
+      offerType: "Product",
+      url: "https://www.facebook.com/ho.ho.hotwheels/posts/3522352571114933",
+      description: "Inviting you to play with me.",
+      image: null,
       startDate: new Date(),
+      endDate: new Date(),
+      allocatedCash: 100,
       createdAt: new Date(),
       updatedAt: new Date()
   }]);
