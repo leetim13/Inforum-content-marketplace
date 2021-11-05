@@ -38,11 +38,12 @@ test("Add 1 entry in user table", async () => {
         password: "Johnpassword",
         firstName: "John",
         lastName: "Doe",
+        profilePicture: null,
         age: 20,
         gender: 'Male',
-        country: 'Canada',
         rewardPoint: 10,
         role: "Admin",
+        connectionDemographic: {},
         email: 'john@gmail.com'
     };
     let data = null;
