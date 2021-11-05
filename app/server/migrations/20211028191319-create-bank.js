@@ -2,29 +2,23 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Campaigns', {
+    await queryInterface.createTable('Banks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bankId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Banks',
-          key: 'id'
-        },
+      logo: {
+        type: Sequelize.BLOB("long"),
         allowNull: false
       },
-      offerType: {
-        type: Sequelize.ENUM(
-          "Charity",
-          "Article",
-          "Product",
-          "Other"
-        ),
+      name: {
+        type: Sequelize.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: true
+        }
       },
       url: {
         type: Sequelize.STRING,
@@ -33,23 +27,13 @@ module.exports = {
           isUrl: true
         }
       },
-      description: {
+      username: {
         type: Sequelize.STRING,
-        allowNull: true
-      },
-      image: {
-        type: Sequelize.BLOB("long"),
-        allowNull: true
-      },
-      startDate: {
-        type: Sequelize.DATE,
         allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        unique: true
       },
-      endDate: {
-        type: Sequelize.DATE,
+      password: {
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notEmpty: true

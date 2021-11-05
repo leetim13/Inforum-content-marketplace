@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   class Post extends Model {
     /**
      * Helper method for defining associations.
@@ -19,65 +19,51 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users',
         key: 'id'
       },
-      type: DataTypes.INTEGER
+      allowNull: false,
+      type: Sequelize.INTEGER
     },
     campaignId: {
       references: {
         model: 'Campaigns',
         key: 'id'
       },
-      type: DataTypes.INTEGER
+      allowNull: false,
+      type: Sequelize.INTEGER
     },
-    postUrl: {
-      type: DataTypes.STRING,
+    url: {
+      type: Sequelize.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        notEmpty: true
+        isUrl: true
       }
     },
     numClicks: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      },
       defaultValue: 0
     },
     numLikes: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      },
       defaultValue: 0
     },
     numComments: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      },
       defaultValue: 0
     },
     isVerified: {
-      type: DataTypes.BOOLEAN,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      },
       defaultValue: false
     },
     socialMedia: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
-    },
-    deletedAt: {
-      allowNull: true,
-      type: DataTypes.DATE
     }
   }, {
     sequelize,

@@ -23,6 +23,10 @@ module.exports = {
           notEmpty: true
         }
       },
+      profilePicture: {
+        type: Sequelize.BLOB('long'),
+        allowNull: true
+      },
       firstName: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -39,10 +43,7 @@ module.exports = {
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       gender: {
         type: Sequelize.ENUM(
@@ -52,12 +53,9 @@ module.exports = {
         ),
         allowNull: false,
       },
-      country: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+      connectionDemographic: {
+        type: Sequelize.JSON,
+        allowNull: false
       },
       rewardPoint: {
         type:  Sequelize.INTEGER,
@@ -67,7 +65,6 @@ module.exports = {
       role: {
         type: Sequelize.ENUM(
           "Admin",
-          "Bank",
           "User"
         ),
         allowNull: false,
@@ -76,7 +73,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
+          isEmail: true
         }
       },
       createdAt: {
