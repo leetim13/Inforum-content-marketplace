@@ -14,6 +14,7 @@ import { Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { InstructionsPage } from './pages/InstructionsPage';
+import { LandingPage } from './pages/LandingPage';
 
 import NavBarComp from "./_components/NavBarComp";
 
@@ -53,6 +54,7 @@ class App extends React.Component {
                                     <Switch>
                                         <Route path="/login" component={LoginPage} />
                                         <Route path="/instructions" component={InstructionsPage} />
+                                        <Route path="/landing" component={LandingPage} />
                                         <PrivateRoute exact path="/" component={HomePage} />
                                     </Switch>
                                 </Col>

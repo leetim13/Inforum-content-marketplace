@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 import { Navbar, NavDropdown, Dropdown, FormControl, Button, Nav, Container } from 'react-bootstrap'
-import { Router } from 'react-router-dom';
-import { Route, Switch,Link } from 'react-router-dom';
-
-import { PrivateRoute } from '../_components';
-import { HomePage } from '../pages/HomePage';
-import { LoginPage } from '../pages/LoginPage';
 
 export default class NavBarComp extends Component {
     render() {
         return (
-          // <Router>
             <Navbar bg="white" variant="light">
                 <Navbar.Brand href="/">
                   <img
@@ -22,7 +15,7 @@ export default class NavBarComp extends Component {
                   />
                 </Navbar.Brand>
               <Nav className="me-auto">
-                  <Nav.Link href="/">Browse Offers</Nav.Link>
+                  <Nav.Link href="/landing">Browse Offers</Nav.Link>
                   <Nav.Link href="/instructions">Instructions</Nav.Link>
               </Nav>
 
@@ -41,25 +34,12 @@ export default class NavBarComp extends Component {
                 } 
                 id="profile-dropdown">
                 <Dropdown.Item href="/myRewards">My Rewards</Dropdown.Item>
-                <Dropdown.Item divider />
                 <Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
-                <Dropdown.Item divider />
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
-                <Dropdown.Item divider />
                 <Dropdown.Item href="/insights">Insights</Dropdown.Item>
               </NavDropdown>
               </Nav>
-
-
-
             </Navbar>
-
-          //   <Switch>
-          //     <Route path="/login" component={LoginPage} />
-          //     <PrivateRoute exact path="/" component={HomePage} />
-          //  </Switch>
-
-          // </Router>
         )
     }
 }
