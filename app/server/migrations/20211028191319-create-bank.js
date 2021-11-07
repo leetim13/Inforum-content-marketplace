@@ -11,21 +11,15 @@ module.exports = {
       },
       logo: {
         type: Sequelize.BLOB("long"),
-        allowNull: false
+        allowNull: true
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       url: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          isUrl: true
-        }
+        allowNull: false
       },
       username: {
         type: Sequelize.STRING,
@@ -34,26 +28,11 @@ module.exports = {
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
-      allocatedCash: {
-        type: Sequelize.INTEGER,
-        validate: {
-          min: 0
-        },
-        defaultValue: 0
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      cash: Sequelize.INTEGER,
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

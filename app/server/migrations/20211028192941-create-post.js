@@ -28,10 +28,7 @@ module.exports = {
       url: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-          isUrl: true
-        }
+        unique: true
       },
       numClicks: {
         type: Sequelize.INTEGER,
@@ -55,19 +52,10 @@ module.exports = {
       },
       socialMedia: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

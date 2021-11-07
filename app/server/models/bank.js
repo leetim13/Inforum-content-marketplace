@@ -14,49 +14,43 @@ module.exports = (sequelize, Sequelize) => {
     }
   };
   Bank.init({
-    id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      logo: {
-        type: Sequelize.BLOB("long"),
-        allowNull: false
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      url: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          isUrl: true
-        }
-      },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      allocatedCash: {
-        type: Sequelize.INTEGER,
-        validate: {
-          min: 0
-        },
-        defaultValue: 0
+    logo: {
+      type: Sequelize.BLOB("long"),
+      allowNull: true
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
       }
+    },
+    url: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    username: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    cash: {
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0
+      },
+      defaultValue: 0
+    }
   }, {
     sequelize,
     modelName: 'Bank',

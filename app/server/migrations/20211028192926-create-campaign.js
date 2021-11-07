@@ -17,7 +17,7 @@ module.exports = {
         },
         allowNull: false
       },
-      offerType: {
+      type: {
         type: Sequelize.ENUM(
           "Charity",
           "Article",
@@ -28,14 +28,11 @@ module.exports = {
       },
       url: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          isUrl: true
-        }
+        allowNull: false
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
       },
       image: {
         type: Sequelize.BLOB("long"),
@@ -43,33 +40,15 @@ module.exports = {
       },
       startDate: {
         type: Sequelize.DATE,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       endDate: {
         type: Sequelize.DATE,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
-      allocatedCash: {
-        type: Sequelize.INTEGER,
-        validate: {
-          min: 0
-        },
-        defaultValue: 0
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      allocatedCash: Sequelize.INTEGER,
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -33,25 +33,31 @@ module.exports = (sequelize, Sequelize) => {
     url: {
       type: Sequelize.STRING,
       allowNull: false,
-      unique: true,
-      validate: {
-        isUrl: true
-      }
+      unique: true
     },
     numClicks: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        min: 0
+      }
     },
     numLikes: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        min: 0
+      }
     },
     numComments: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        min: 0
+      }
     },
     isVerified: {
       type: Sequelize.BOOLEAN,

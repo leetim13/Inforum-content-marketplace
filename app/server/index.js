@@ -10,6 +10,9 @@ const express = require("express");
 var cors = require('cors')
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 const PORT = process.env.PORT || 3001;
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerOptions = require('./swagger/swagger');
 
 const app = express();
 
@@ -43,6 +46,15 @@ app.use(express.json());
 // User routes
 require("./routes/user.routes")(app);
 
+// Bank routes
+require("./routes/bank.routes")(app);
+
+// Campaign routes
+require("./routes/campaign.routes")(app);
+
+// Post routes
+require("./routes/post.routes")(app);
+
 app.get("/api", (req, res) => {
     res.json({ message: `Hello from ${process.env.SERVER_ENV || 'development'} server!` });
 });
@@ -65,6 +77,9 @@ app.use(function onError(err, req, res, next) {
     res.end(res.sentry + "\n");
 });
 
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs, {explorer: true}));
+  
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
