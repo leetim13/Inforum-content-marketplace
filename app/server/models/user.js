@@ -49,7 +49,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     age: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        min: 0
+      }
     },
     gender: {
       type: Sequelize.ENUM(
@@ -61,12 +64,15 @@ module.exports = (sequelize, Sequelize) => {
     },
     connectionDemographic: {
       type: Sequelize.JSON,
-      allowNull: false
+      allowNull: false,
+      defaultValue: {}
     },
     rewardPoint: {
       type:  Sequelize.INTEGER,
       defaultValue: 0,
-      min: 0
+      validate: {
+        min: 0
+      }
     },
     role: {
       type: Sequelize.ENUM(

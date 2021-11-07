@@ -22,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       allowNull: false
     },
-    offerType: {
+    type: {
       type: Sequelize.ENUM(
         "Charity",
         "Article",
@@ -33,14 +33,11 @@ module.exports = (sequelize, Sequelize) => {
     },
     url: {
       type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        isUrl: true
-      }
+      allowNull: false
     },
     description: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: false
     },
     image: {
       type: Sequelize.BLOB("long"),
@@ -48,17 +45,11 @@ module.exports = (sequelize, Sequelize) => {
     },
     startDate: {
       type: Sequelize.DATE,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: false
     },
     endDate: {
       type: Sequelize.DATE,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: false
     },
     allocatedCash: {
       type: Sequelize.INTEGER,
@@ -66,14 +57,6 @@ module.exports = (sequelize, Sequelize) => {
         min: 0
       },
       defaultValue: 0
-    },
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE
     }
   }, {
     sequelize,

@@ -11,17 +11,11 @@ module.exports = {
       username: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-          notEmpty: true
-        }
+        unique: true
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       profilePicture: {
         type: Sequelize.BLOB('long'),
@@ -29,17 +23,11 @@ module.exports = {
       },
       firstName: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       lastName: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       age: {
         type: Sequelize.INTEGER,
@@ -57,11 +45,7 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: false
       },
-      rewardPoint: {
-        type:  Sequelize.INTEGER,
-        defaultValue: 0,
-        min: 0
-      },
+      rewardPoint: Sequelize.INTEGER,
       role: {
         type: Sequelize.ENUM(
           "Admin",
@@ -71,19 +55,10 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          isEmail: true
-        }
+        allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {
