@@ -7,6 +7,7 @@ const Bank = db['Bank'];
 
 /**
  * @class CampaignController
+ * @extends {BaseController}
  */
 class CampaignController extends BaseController{
     constructor(){

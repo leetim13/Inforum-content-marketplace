@@ -6,6 +6,7 @@ const Bank = db['Bank'];
 
 /**
  * @class BankController
+ * @extends {BaseController}
  */
 class BankController extends BaseController{
     constructor(){
