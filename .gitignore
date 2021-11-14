@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Custom gitignores
-app/server/config/localConfig.json
+**/config/localConfig.json
 
 # User-specific files
 *.rsuser
