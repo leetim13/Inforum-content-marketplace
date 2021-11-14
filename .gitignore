@@ -365,3 +365,5 @@ FodyWeavers.xsd
 
 # undo this by: git update-index --no-assume-unchanged app/server/config/localConfig.json
 app/server/config/localConfig.json
+
+*.rdb
