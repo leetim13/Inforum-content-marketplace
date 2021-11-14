@@ -1,11 +1,26 @@
 const authorize = require('../auth/authorize')
 const Role = require('../auth/role');
 const PostController =  require("../controllers/post.controller");
+const BaseWebScrapper = require('../web-scraper/base.webscraper');
 const FacebookWebScrapper = require('../web-scraper/facebook.webscraper');
+
+// Choose the relevant platform
+const getPost = (req, res) => {
+	let webScraper;
+	switch(req.query.platform) {
+		case "facebook":
+			webScraper = new FacebookWebScrapper();
+			break;
+		default:
+			// Should not end up here.
+			webScraper = new BaseWebScrapper("base");
+	}
+	webScraper.getPost(req, res);
+}
 
 module.exports = app => {
 	const posts = new PostController();
-	const webScraper = new FacebookWebScrapper();
+	// const webScraper = new FacebookWebScrapper();
 	
 	var router = require("express").Router();
 
@@ -16,7 +31,7 @@ module.exports = app => {
 	// Retrieve all User
 	router.get("/", posts.findAll);
 
-	router.get("/verify", webScraper.getPost)
+	router.get("/verify", (req, res) => getPost(req, res))
 
 	// Retrieve a single User with id
 	router.get("/:id", posts.findOne);
@@ -78,6 +93,11 @@ module.exports = app => {
 	 *         schema:
 	 *           type: string
 	 *           format: uri
+	 *           required: true
+	 *       - in: query
+	 *         name: platform
+	 *         schema:
+	 *           type: string
 	 *           required: true
 	 *       - in: query
 	 *         name: text
