@@ -15,6 +15,13 @@ import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { InstructionsPage } from './pages/InstructionsPage';
 import { LandingPage } from './pages/LandingPage';
+import { OfferPage } from './pages/OfferPage';
+import { ShareOfferPage } from './pages/ShareOfferPage';
+import { VerifyOfferPage } from './pages/VerifyOfferPage';
+import { MyRewardsPage } from './pages/MyRewardsPage';
+import { MyPostsPage } from './pages/MyPostsPage';
+import { InsightsPage } from './pages/InsightsPage';
+
 
 import NavBarComp from "./_components/NavBarComp";
 
@@ -41,10 +48,10 @@ class App extends React.Component {
     render() {
         const { alert } = this.props;
         return (
-            <div className="App">
-                <NavBarComp/>
+            <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
+                    <NavBarComp/>
                         <Jumbotron>
                             <Container>
                                 <Col sm={{span: 8, offset: 2}}>
@@ -55,6 +62,12 @@ class App extends React.Component {
                                         <Route path="/login" component={LoginPage} />
                                         <Route path="/instructions" component={InstructionsPage} />
                                         <Route path="/landing" component={LandingPage} />
+                                        <Route path="/offer" component={OfferPage} />
+                                        <Route path="/share" component={ShareOfferPage} />
+                                        <Route path="/verify" component={VerifyOfferPage} />
+                                        <Route path="/myRewards" component={MyRewardsPage} />
+                                        <Route path="/myPosts" component={MyPostsPage} />
+                                        <Route path="/insights" component={InsightsPage} />
                                         <PrivateRoute exact path="/" component={HomePage} />
                                     </Switch>
                                 </Col>

@@ -5,41 +5,45 @@ export default class NavBarComp extends Component {
     render() {
         return (
             <Navbar bg="white" variant="light">
+            <Container>
                 <Navbar.Brand href="/">
                   <img
-                    src="logo_cropped.png"
+                    src="../assets/logo_cropped.png"
                     width="45%"
                     height="80%"
-                    className="d-inline-block align-top"
                     alt="React Bootstrap logo"
                   />
                 </Navbar.Brand>
+
               <Nav className="me-auto">
                   <Nav.Link href="/landing">Browse Offers</Nav.Link>
                   <Nav.Link href="/instructions">Instructions</Nav.Link>
               </Nav>
 
-
-              <Nav pullRight>
+              <Nav >
               <NavDropdown 
-                title={
-                    <div className="pull-left">
-                        <img className="thumbnail-image" 
-                            src="logo192.png"
-                            width="20%"
-                            height="20%"
-                            alt="user pic"
-                        />
-                    </div>
-                } 
-                id="profile-dropdown">
-                <Dropdown.Item href="/myRewards">My Rewards</Dropdown.Item>
+                // BUG: profile images not aligned with dropdown menu, using just text for now
+                // title={
+                //     // <div className="dropdown-menu dropdown-menu-end">
+                //         <img className="thumbnail-image" 
+                //             src="../assets/profile_logo.svg"
+                //             width="10%"
+                //             height="10%"
+                //             alt="user pic"
+                //         />
+                //     // </div>
+                // } 
+                title='My Account'>
+                <Dropdown.Item href="/myRewards" >My Rewards</Dropdown.Item>
                 <Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
+                <Dropdown.Divider />
                 <Dropdown.Item href="/insights">Insights</Dropdown.Item>
               </NavDropdown>
-              </Nav>
+            </Nav>
+            </Container>
             </Navbar>
         )
     }
 }
+
