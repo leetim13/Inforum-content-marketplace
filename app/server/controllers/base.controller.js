@@ -2,10 +2,11 @@ const helpers = require('../business-logic/helper');
 
 /**
  * @class BaseController
+ * @abstract
  */
 class BaseController{
     constructor(model){
-        if (this.constructor == BaseController) {
+        if (this.constructor === BaseController) {
             throw new Error("Abstract classes can't be instantiated.");
         }
         this.model = model;

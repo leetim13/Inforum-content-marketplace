@@ -8,6 +8,7 @@ const Post = db['Post'];
 
 /**
  * @class PostController
+ * @extends {BaseController}
  */
 class PostController extends BaseController{
     constructor(){
