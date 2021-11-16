@@ -9,42 +9,46 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bank: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+      bankId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Banks',
+          key: 'id'
+        },
+        allowNull: false
       },
-      offerType: {
-        type: Sequelize.STRING,
+      type: {
+        type: Sequelize.ENUM(
+          "Charity",
+          "Article",
+          "Product",
+          "Other"
+        ),
         allowNull: false,
-        validate: {
-          notEmpty: true
-        }
       },
-      expirationDate: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      image: {
+        type: Sequelize.BLOB("long"),
+        allowNull: true
       },
       startDate: {
         type: Sequelize.DATE,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: false
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      allocatedCash: Sequelize.INTEGER,
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

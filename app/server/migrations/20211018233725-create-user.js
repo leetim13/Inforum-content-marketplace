@@ -11,38 +11,27 @@ module.exports = {
       username: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-          notEmpty: true
-        }
+        unique: true
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
+      },
+      profilePicture: {
+        type: Sequelize.BLOB('long'),
+        allowNull: true
       },
       firstName: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       lastName: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       gender: {
         type: Sequelize.ENUM(
@@ -52,41 +41,24 @@ module.exports = {
         ),
         allowNull: false,
       },
-      country: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+      connectionDemographic: {
+        type: Sequelize.JSON,
+        allowNull: false
       },
-      rewardPoint: {
-        type:  Sequelize.INTEGER,
-        defaultValue: 0,
-        min: 0
-      },
+      rewardPoint: Sequelize.INTEGER,
       role: {
         type: Sequelize.ENUM(
           "Admin",
-          "Bank",
           "User"
         ),
         allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

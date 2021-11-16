@@ -2,17 +2,16 @@ const BaseController = require("./base.controller");
 const db = require('../models');
 const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
-const User = db['User'];
+const Campaign = db['Campaign'];
 const Bank = db['Bank'];
 
 /**
- * @class UserController
+ * @class CampaignController
  * @extends {BaseController}
  */
-class UserController extends BaseController{
+class CampaignController extends BaseController{
     constructor(){
-        super(User);
-        this.authenticate = this.authenticate.bind(this);
+        super(Campaign);
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
@@ -21,36 +20,30 @@ class UserController extends BaseController{
         this.deleteAll = this.deleteAll.bind(this);
     }
 
-    authenticate(req, res, next) {
-        userService.authenticate(req.body)
-            .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
-            .catch(err => next(err));
-    }
-
     // Create and Save a new User
     async create(req, res) {
-        const bankUser = await Bank.findOne({ where: { username : req.body.username }});
-        if (bankUser){
+        const bank = await Bank.findOne({ where: { id : req.body.bankId }});
+        if (!bank){
             res.status(400).send({
-                message: "Please choose another username."
+                message: "Bank does not exist."
             })
             return;
         }
-        // Create a User
-        const user = {
+        // Create a Campaign
+        const campaign = {
             ...req.body,
-            rewardPoint: 0,
-            connectionDemographic: {}
+            cash: 0
         };
 
-        super.create(req, res, user);
+        super.create(req, res, campaign);
     };
 
     // Retrieve all User from the database.
     findAll(req, res) {
-        const firstName = req.query.firstName || "";
-        const lastName = req.query.lastName || "";
-        let condition = { firstName: { [Op.iLike]: `%${firstName}%` }, lastName: { [Op.iLike]: `%${lastName}%`} };
+        const type = req.query.type;
+        const bankId = req.query.bankId;
+        let condition = type ? { type: { [Op.eq]: type } } : {};
+        condition = bankId ? { ...condition, bankId: { [Op.eq]: bankId }} : condition;
 
         super.findAll(req, res, condition);
     };
@@ -76,4 +69,4 @@ class UserController extends BaseController{
     };
 }
 
-module.exports = UserController;
+module.exports = CampaignController;
