@@ -51,9 +51,9 @@ class App extends React.Component {
             <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
-                    <NavBarComp/>
                         <Jumbotron>
                             <Container>
+                                <NavBarComp/>
                                 <Col sm={{span: 8, offset: 2}}>
                                     {alert.message &&
                                         <div className={`alert ${alert.type}`}>{alert.message}</div>
