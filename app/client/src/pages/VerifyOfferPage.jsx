@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import {InputGroup, Button, FormControl } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 
 class VerifyOfferPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <div>
@@ -20,5 +24,13 @@ class VerifyOfferPage extends React.Component {
         );
     }
 }
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
 
-export { VerifyOfferPage as VerifyOfferPage }; 
+const connectedVerifyOfferPage = connect(mapStateToProps)(VerifyOfferPage);
+export { connectedVerifyOfferPage as VerifyOfferPage }; 

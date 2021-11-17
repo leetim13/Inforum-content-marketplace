@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Table from 'react-bootstrap/Table'
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
@@ -6,6 +7,9 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
 class InstructionsPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <Container>
@@ -60,7 +64,6 @@ class InstructionsPage extends React.Component {
                 </Col> 
             </Row>
             <div>
-                 <h4>Reward Points = 10 + # of clicks + 0.5*(# of likes/comments/shares) </h4>
                  <p><i><u>Terms and Conditions apply.</u></i></p>
             </div>
             </Container>
@@ -70,4 +73,13 @@ class InstructionsPage extends React.Component {
     }
 }
 
-export { InstructionsPage as InstructionsPage }; 
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedInstructionsPage = connect(mapStateToProps)(InstructionsPage);
+export { connectedInstructionsPage as InstructionsPage }; 

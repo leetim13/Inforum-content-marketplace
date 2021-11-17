@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import { history } from './_helpers';
 import { alertActions } from './_actions';
-import { PrivateRoute } from './_components';
+import { ProtectedRoute, AdminRoute, BankRoute, PromoterRoute } from './_components';
 import { Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
@@ -21,7 +21,7 @@ import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
 import { InsightsPage } from './pages/InsightsPage';
-
+import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
 import NavBarComp from "./_components/NavBarComp";
 
@@ -68,7 +68,8 @@ class App extends React.Component {
                                         <Route path="/myRewards" component={MyRewardsPage} />
                                         <Route path="/myPosts" component={MyPostsPage} />
                                         <Route path="/insights" component={InsightsPage} />
-                                        <PrivateRoute exact path="/" component={HomePage} />
+                                        <Route path="/createCampaign" component={CreateCampaignPage} />
+                                        <ProtectedRoute exact path="/" component={HomePage}/>
                                     </Switch>
                                 </Col>
                             </Container>

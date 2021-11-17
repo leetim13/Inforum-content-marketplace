@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import { Col, Row, Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 
 class LandingPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <Container>
@@ -45,5 +49,13 @@ class LandingPage extends React.Component {
         );
     }
 }
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
 
-export { LandingPage as LandingPage }; 
+const connectedLandingPage = connect(mapStateToProps)(LandingPage);
+export { connectedLandingPage as LandingPage }; 

@@ -1,9 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Image, Row, Col, Container, Card, Button} from 'react-bootstrap'
 import OfferComp from '../_components/OfferComp';
-import './OfferPage.css';
+import '../css/OfferPage.css';
 
 class OfferPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <Container>
@@ -44,4 +48,13 @@ class OfferPage extends React.Component {
     }
 }
 
-export { OfferPage as OfferPage }; 
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedOfferPage = connect(mapStateToProps)(OfferPage);
+export { connectedOfferPage as OfferPage }; 
