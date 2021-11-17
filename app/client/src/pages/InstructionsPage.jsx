@@ -60,7 +60,6 @@ class InstructionsPage extends React.Component {
                 </Col> 
             </Row>
             <div>
-                 <h4>Reward Points = 10 + # of clicks + 0.5*(# of likes/comments/shares) </h4>
                  <p><i><u>Terms and Conditions apply.</u></i></p>
             </div>
             </Container>
