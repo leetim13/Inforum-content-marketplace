@@ -21,7 +21,7 @@ import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
 import { InsightsPage } from './pages/InsightsPage';
-
+import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
 import NavBarComp from "./_components/NavBarComp";
 
@@ -68,6 +68,7 @@ class App extends React.Component {
                                         <Route path="/myRewards" component={MyRewardsPage} />
                                         <Route path="/myPosts" component={MyPostsPage} />
                                         <Route path="/insights" component={InsightsPage} />
+                                        <Route path="/createCampaign" component={CreateCampaignPage} />
                                         <PrivateRoute exact path="/" component={HomePage} />
                                     </Switch>
                                 </Col>

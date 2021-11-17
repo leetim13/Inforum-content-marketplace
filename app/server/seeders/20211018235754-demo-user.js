@@ -1,5 +1,7 @@
 'use strict';
 
+const { sequelize } = require("../models");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{
@@ -16,7 +18,7 @@ module.exports = {
       email: 'john@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date()
-  }]);
+  }], {}, { connectionDemographic: { type: new Sequelize.JSON() } });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Users', null, {});

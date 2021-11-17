@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Campaigns', [{
       bankId: 1,
-      offerType: "Product",
+      type: "Product",
       url: "https://www.facebook.com/ho.ho.hotwheels/posts/3522352571114933",
       description: "Inviting you to play with me.",
       image: null,

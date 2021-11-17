@@ -38,6 +38,7 @@ export default class NavBarComp extends Component {
                 <Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
                 <Dropdown.Divider />
+                <Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
                 <Dropdown.Item href="/insights">Insights</Dropdown.Item>
               </NavDropdown>
             </Nav>
