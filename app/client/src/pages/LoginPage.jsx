@@ -262,9 +262,6 @@ function mapStateToProps(state) {
     return {
         loggingIn
     };
-
-
-      
 }
 
 const connectedLoginPage = connect(mapStateToProps)(LoginPage);

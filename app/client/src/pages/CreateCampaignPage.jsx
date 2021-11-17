@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Image, Container, InputGroup, Modal} from 'react-bootstrap';
+import { connect } from 'react-redux';
 import OfferComp from '../_components/OfferComp';
 import ChartistGraph from "react-chartist";
 
@@ -114,7 +115,9 @@ function CampaignForm() {
   
 
 class CreateCampaignPage extends React.Component {
-
+	constructor(props){
+		super(props);
+	}
     render() {
         return (
             <div>
@@ -130,5 +133,13 @@ class CreateCampaignPage extends React.Component {
         );
     }
 }
+function mapStateToProps(state) {
+  const { authentication } = state;
+  const { user } = authentication;
+  return {
+      user
+  };
+}
 
-export { CreateCampaignPage as CreateCampaignPage }; 
+const connectedCreateCampaignPage = connect(mapStateToProps)(CreateCampaignPage);
+export { connectedCreateCampaignPage as CreateCampaignPage }; 

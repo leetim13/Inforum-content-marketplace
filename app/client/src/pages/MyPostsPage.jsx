@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
@@ -6,6 +7,9 @@ import ChartistGraph from "react-chartist";
 
 
 class MyPostsPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
@@ -55,4 +59,13 @@ class MyPostsPage extends React.Component {
     }
 }
 
-export { MyPostsPage as MyPostsPage }; 
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedMyPostsPage = connect(mapStateToProps)(MyPostsPage);
+export { connectedMyPostsPage as MyPostsPage }; 

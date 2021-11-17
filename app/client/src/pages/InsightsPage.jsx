@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import {Row, Col, FormControl, Card } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
+import { connect } from 'react-redux';
 import ChartistGraph from "react-chartist";
-import './Dashboard.css';
+import '../css/Dashboard.css';
 
 // Data for Line Chart
 var dataPie = {
@@ -73,6 +74,9 @@ var responsiveBar = [
 ];
 
 class InsightsPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
@@ -108,4 +112,13 @@ class InsightsPage extends React.Component {
     }
 }
 
-export { InsightsPage as InsightsPage }; 
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedInsightsPage = connect(mapStateToProps)(InsightsPage);
+export { connectedInsightsPage as InsightsPage }; 

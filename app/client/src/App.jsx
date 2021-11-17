@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import { history } from './_helpers';
 import { alertActions } from './_actions';
-import { PrivateRoute } from './_components';
+import { ProtectedRoute, AdminRoute, BankRoute, PromoterRoute } from './_components';
 import { Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
@@ -69,7 +69,7 @@ class App extends React.Component {
                                         <Route path="/myPosts" component={MyPostsPage} />
                                         <Route path="/insights" component={InsightsPage} />
                                         <Route path="/createCampaign" component={CreateCampaignPage} />
-                                        <PrivateRoute exact path="/" component={HomePage} />
+                                        <ProtectedRoute exact path="/" component={HomePage}/>
                                     </Switch>
                                 </Col>
                             </Container>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import {Row, Col, FormControl, Card } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import ChartistGraph from "react-chartist";
-import './Dashboard.css';
+import '../css/Dashboard.css';
 // Data for Line Chart
 var dataSales = {
     labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
@@ -40,6 +41,9 @@ var responsiveSales = [
 ];
 
 class MyRewardsPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
@@ -123,4 +127,13 @@ class MyRewardsPage extends React.Component {
     }
 }
 
-export { MyRewardsPage as MyRewardsPage }; 
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedMyRewardsPage = connect(mapStateToProps)(MyRewardsPage);
+export { connectedMyRewardsPage as MyRewardsPage }; 

@@ -24,7 +24,7 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader()
+        axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
         this.props.dispatch(userActions.getAll());
         axios.get(`${server_url}`)
             .then((res) => this.setState({ data: res.data.message }))

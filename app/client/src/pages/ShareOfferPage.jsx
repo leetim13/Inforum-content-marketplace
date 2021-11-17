@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import {InputGroup, Button, FormControl } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 
 class ShareOfferPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <div>
@@ -41,4 +45,13 @@ class ShareOfferPage extends React.Component {
     }
 }
 
-export { ShareOfferPage as ShareOfferPage }; 
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedShareOfferPage = connect(mapStateToProps)(ShareOfferPage);
+export { connectedShareOfferPage as ShareOfferPage }; 
