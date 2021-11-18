@@ -31,7 +31,7 @@ module.exports = app => {
 	// Retrieve all User
 	router.get("/", posts.findAll);
 
-	router.get("/verify", (req, res) => getPost(req, res))
+	router.get("/retrieve", (req, res) => getPost(req, res))
 
 	// Retrieve a single User with id
 	router.get("/:id", posts.findOne);
@@ -84,7 +84,7 @@ module.exports = app => {
 	 *     tags: 
      *       - Posts
 	 * 
-	 * /posts/verify:
+	 * /posts/retrieve:
 	 *   get:
 	 *     description: Web scrape a post
 	 *     parameters:
@@ -96,11 +96,6 @@ module.exports = app => {
 	 *           required: true
 	 *       - in: query
 	 *         name: platform
-	 *         schema:
-	 *           type: string
-	 *           required: true
-	 *       - in: query
-	 *         name: text
 	 *         schema:
 	 *           type: string
 	 *           required: true
