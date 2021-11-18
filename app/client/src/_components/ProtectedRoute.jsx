@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { UnauthorizedPage } from '../pages/Unauthorized';
+import { connect } from 'react-redux';
 
-export class ProtectedRoute extends React.Component {
+class ProtectedRoute extends React.Component {
     constructor(props) {
         super(props);
         this.authRoles = props.roles;
-        console.log(this.authRoles);
     }
 
     render() {
         const { component: Component, ...rest } = this.props;
-        const user = JSON.parse(localStorage.getItem('user'));
         return (
             <Route {...rest} render={props => (
-                user ? (this.authRoles.includes(user.role) ? <Component {...props} /> : <UnauthorizedPage/>)
+                this.props.user ? (this.authRoles.includes(this.props.user.role) ? <Component {...props} /> : <UnauthorizedPage/>)
                     : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
             )} />
         )
     }
 }
+
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedProtectedRoute = connect(mapStateToProps)(ProtectedRoute);
+export { connectedProtectedRoute as ProtectedRoute };

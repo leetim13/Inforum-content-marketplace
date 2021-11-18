@@ -23,7 +23,7 @@ import { MyPostsPage } from './pages/MyPostsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
-import NavBarComp from "./_components/NavBarComp";
+import { NavBarComp } from "./_components/NavBarComp";
 
 
 // const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
