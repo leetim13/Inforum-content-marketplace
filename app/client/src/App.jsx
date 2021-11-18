@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import { history } from './_helpers';
 import { alertActions } from './_actions';
-import { ProtectedRoute, AdminRoute, BankRoute, PromoterRoute } from './_components';
+import { ProtectedRoute} from './_components';
 import { Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
