@@ -16,7 +16,7 @@ class LandingPage extends React.Component {
                 <h4><i>yes, it’s that simple :)</i></h4>
 
                 <div class="offer-buttons" style={{padding: '5px'}}>
-                <ToggleButtonGroup name="options" defaultValue={1} type="radio">
+                <ToggleButtonGroup name="options" defaultValue={1} type="checkbox">
                     <ToggleButton value={1} variant="outline-primary">All Offers</ToggleButton>
                     <ToggleButton value={2} variant="outline-primary">Credit Cards</ToggleButton>
                     <ToggleButton value={3} variant="outline-primary">Bank Accounts</ToggleButton>
@@ -26,7 +26,7 @@ class LandingPage extends React.Component {
                 </div>
 
                 <div class="bank-buttons" style={{padding: '10px'}}>
-                <ToggleButtonGroup name="options" defaultValue={1}>
+                <ToggleButtonGroup name="options" defaultValue={1} type="checkbox">
                     <ToggleButton id="bank-1" value={1} variant="outline-secondary">All Banks</ToggleButton>
                     <ToggleButton id="bank-2" value={2} variant="outline-secondary">RBC</ToggleButton>
                     <ToggleButton id="bank-3" value={3} variant="outline-secondary">CIBC</ToggleButton>

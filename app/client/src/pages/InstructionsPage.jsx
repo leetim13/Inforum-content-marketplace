@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-
+import { PersonCircle, Search, ShareFill, CashCoin} from 'react-bootstrap-icons';
 class InstructionsPage extends React.Component {
     constructor(props){
         super(props);
@@ -13,11 +13,11 @@ class InstructionsPage extends React.Component {
     render() {
         return (
             <Container>
-            <Row md={2} style={{padding: '30px'}}> 
-                <Col xs={2} style={{padding: '30px'}} >
+            <Row md={2} > 
+                <Col xs={2} style={{ paddingTop:"30px"}}>
                 <Card style={{ textAlign: "left"}} >
                     <Card.Body>
-                    <Card.Title> 1. Sign up for FREE today</Card.Title>
+                    <Card.Title> <PersonCircle />  Sign up for FREE today </Card.Title>
                     <Card.Text>
                         Everyone can sign up - you DON’T have to be an influencer! 
                         Inforum believes that everyone can leverage their own social network to earn rewards.
@@ -26,10 +26,10 @@ class InstructionsPage extends React.Component {
                 </Card>
                 </Col>
 
-                <Col xs={2} style={{ padding:"30px"}} >
+                <Col xs={2} style={{ paddingTop:"30px"}}>
                 <Card style={{ width:"100%", textAlign: "left"}} >
                     <Card.Body>
-                    <Card.Title> 2.  Browse all available Campaigns</Card.Title>
+                    <Card.Title> <Search/>  Browse all available Campaigns </Card.Title>
                     <Card.Text>                
                         Campaigns can range from credit cards, 
                         news articles, or even a YouTube video! Simply choose the offers that you believe your 
@@ -38,11 +38,11 @@ class InstructionsPage extends React.Component {
                     </Card.Body>
                 </Card>
                 </Col>
-
-                <Col xs={2} style={{ padding:"30px"}} >
-                <Card style={{ width:"100%", textAlign: "left"}} >
+                
+                <Col xs={2} style={{ paddingTop:"30px"}}>
+                <Card style={{textAlign: "left"}} >
                     <Card.Body>
-                    <Card.Title> 3. Share it on social media</Card.Title>
+                    <Card.Title> <ShareFill /> Share it on social media</Card.Title>
                     <Card.Text>                   
                         Once you have chosen on a campaign, simply hit the Share button and follow the instructions.
                         We will then verify the post for you.
@@ -50,10 +50,10 @@ class InstructionsPage extends React.Component {
                     </Card.Body>
                 </Card>
                 </Col>
-                <Col xs={2} style={{ padding:"30px"}} >
-                <Card style={{ width:"100%", textAlign: "left"}}>
+                <Col xs={2} style={{ paddingTop:"30px"}} >
+                <Card style={{textAlign: "left"}}>
                     <Card.Body>
-                    <Card.Title> 4. Redeem your Rewards!</Card.Title>
+                    <Card.Title> <CashCoin /> Redeem your Rewards!</Card.Title>
                     <Card.Text>
                         Check My Posts to see how much attention your post has gained. Reward 
                         points will be calculated by the formula below.
@@ -63,6 +63,10 @@ class InstructionsPage extends React.Component {
                 </Card>
                 </Col> 
             </Row>
+            
+
+
+            <br></br>
             <div>
                  <p><i><u>Terms and Conditions apply.</u></i></p>
             </div>
