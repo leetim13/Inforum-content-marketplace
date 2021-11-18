@@ -61,7 +61,7 @@ class HomePage extends React.Component {
         const userRows = users.map(user =>
             <tr key={`user table ${user.id}`}>
                 <td>{user.id}</td>
-                <td>{user.name}</td>
+                <td>{user.firstName + user.lastName}</td>
                 <td>{user.role}</td>
                 <td>{user.age}</td>
                 <td>
@@ -74,7 +74,7 @@ class HomePage extends React.Component {
             <Col md="4">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>{!this.state.data ? "Server disconnected test..." : this.state.data}</p>
-                <p> {user ? `Currently logged in as ${user.name}` : "This should not happen, NOT AUTHENTICATED!"} </p>
+                <p> {user ? `Currently logged in as ${user.role === 'Bank' ? user.name : user.firstName} with role ${user.role}` : "This should not happen, NOT AUTHENTICATED!"} </p>
                 <Link to="/login" >Log out</Link>
             </Col>
             <Col md="1"> </Col>

@@ -62,14 +62,14 @@ class App extends React.Component {
                                         <Route path="/login" component={LoginPage} />
                                         <Route path="/instructions" component={InstructionsPage} />
                                         <Route path="/landing" component={LandingPage} />
-                                        <Route path="/offer" component={OfferPage} />
-                                        <Route path="/share" component={ShareOfferPage} />
-                                        <Route path="/verify" component={VerifyOfferPage} />
-                                        <Route path="/myRewards" component={MyRewardsPage} />
-                                        <Route path="/myPosts" component={MyPostsPage} />
-                                        <Route path="/insights" component={InsightsPage} />
-                                        <Route path="/createCampaign" component={CreateCampaignPage} />
-                                        <ProtectedRoute exact path="/" component={HomePage}/>
+                                        <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
+                                        <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
+                                        <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
+                                        <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
+                                        <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
+                                        <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
+                                        <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
+                                        <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
                                     </Switch>
                                 </Col>
                             </Container>
