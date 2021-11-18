@@ -24,7 +24,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
     }
 
     async getBrowser(headless=true) {
-        const browser = await puppeteer.launch({ headless, timeout: this.timeout, devtools: true });
+        const browser = await puppeteer.launch({ headless, timeout: this.timeout, devtools: true, args: ['--no-sandbox','--disable-setuid-sandbox'] });
         const context = browser.defaultBrowserContext();
         context.overridePermissions('https://www.facebook.com', []);
         return browser;
@@ -74,14 +74,15 @@ class FacebookWebScrapper extends BaseWebScrapper{
         await page.type('#email', this.username);
         await page.type('#pass', this.password);
         await page.click('#loginbutton');
-        await page.waitForNavigation({waitUntil: 'networkidle0'});
+        // await page.waitForNavigation({waitUntil: 'networkidle0'});
     }
 
     async loginWithCookies(page, url, cookies) {
         console.log("Log in via cookies");
         const jsonCookies = JSON.parse(cookies);
         await page.setCookie(...jsonCookies);
-        await page.goto(url, { waitUntil: 'networkidle0' });
+        // await page.goto(url, { waitUntil: 'networkidle0' });
+        await page.goto(url);
         // If login button is found, meaning not logged in. (Cookies expired, etc)
         if (await page.$('#loginbutton') !== null) {
             await this.loginWithCredentials(page, url);
@@ -90,12 +91,12 @@ class FacebookWebScrapper extends BaseWebScrapper{
 
     async getPost(req, res) {
         const url = req.query.url;
-        const text = req.query.text;
         const browser = await this.getBrowser();
         const page = await this.getPage(browser);
 
         const cookies = await getAsync(`${this.platform}_cookies`);
         let postMessageDiv = 'div.kvgmc6g5.cxmmr5t8.oygrvhab.hcukyx3x.c1et5uql.ii04i59q';
+        let likesDiv = 'span.gpro0wi8.pcp91wgn'
         if (!cookies) {
             await this.loginWithCredentials(page, url);
         } else {
@@ -117,15 +118,15 @@ class FacebookWebScrapper extends BaseWebScrapper{
             return;
         }
         // Gets the post text
-        const content = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
-        if (content.some((element) => element.includes(text))){
-            res.status(200).send(content);
-        } else {
+        const message = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
+        const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
+        if (likes.length !== 1 || parseInt(likes[0]) === NaN) {
             res.status(400).send({
-                message: "Post verification failed. Link not found."
+                message: "Something went wrong with scraping."
             })
+        } else {
+            res.status(200).send({ message, likes: parseInt(likes[0]) });
         }
-        await browser.close();
     }
 }
 
