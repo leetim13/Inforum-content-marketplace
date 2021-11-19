@@ -67,6 +67,13 @@ module.exports = app => {
 	 *         description: Success
 	 *     tags:
 	 *       - Posts
+	 *   delete:
+	 *     description: Delete all post
+	 *     responses:
+	 *       200:
+	 *         description: Success
+	 *     tags: 
+     *       - Posts
 	 * 
 	 * /posts/{id}:
 	 *   get:

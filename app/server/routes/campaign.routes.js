@@ -48,6 +48,13 @@ module.exports = app => {
 	 *         description: Success
 	 *     tags: 
      *       - Campaigns
+	 *   delete:
+	 *     description: Delete all campaigns
+	 *     responses:
+	 *       200:
+	 *         description: Success
+	 *     tags: 
+     *       - Campaigns
      * 
 	 * /campaigns/{id}:
 	 *   get:

@@ -101,15 +101,15 @@ class PostController extends BaseController{
     };
 
     update(req, res) {
-        super.findOne(req, res);
+        super.update(req, res);
     };
 
     delete(req, res) {
-        super.findOne(req, res);
+        super.delete(req, res);
     };
 
     deleteAll(req, res) {
-        super.findOne(req, res);
+        super.deleteAll(req, res);
     };
 }
 

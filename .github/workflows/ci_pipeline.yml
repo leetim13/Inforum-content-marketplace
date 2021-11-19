@@ -39,6 +39,20 @@ jobs:
           SERVER_ENV: 'test'
           DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}
 
+    - name: Clear db
+      working-directory: 'app/server'
+      run: npx sequelize db:seed:undo:all --env=test
+      env:
+          SERVER_ENV: 'test'
+          DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}
+
+    - name: Seed db
+      working-directory: 'app/server'
+      run: npx sequelize db:seed:all --env=test
+      env:
+          SERVER_ENV: 'test'
+          DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}
+
     - name: Server side unit tests
       working-directory: 'app/server'
       run: npm test

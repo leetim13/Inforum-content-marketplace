@@ -48,6 +48,13 @@ module.exports = app => {
 	 *         description: Success
 	 *     tags: 
      *       - Banks
+	 *   delete:
+	 *     description: Delete all banks
+	 *     responses:
+	 *       200:
+	 *         description: Success
+	 *     tags: 
+     *       - Banks
      * 
 	 * /banks/{id}:
 	 *   get:
