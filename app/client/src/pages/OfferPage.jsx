@@ -33,7 +33,7 @@ class OfferPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    </Row>
+                </Row>
                     
 
                     <Row xs={3} md={3} lg={3}> 
@@ -42,7 +42,6 @@ class OfferPage extends React.Component {
                         <Col style={{paddingLeft: '20px', paddingRight: '20px'}}><OfferComp/></Col>
                     </Row>
 
-                
                 </Container>
         );
     }

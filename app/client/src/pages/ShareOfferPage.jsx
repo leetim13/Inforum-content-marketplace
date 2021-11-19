@@ -6,13 +6,14 @@ import OfferComp from '../_components/OfferComp';
 import axios from 'axios';
 import { authHeader } from '../_helpers'
 import { postActions, alertActions } from '../_actions';
+import { history } from '../_helpers';
 
 const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
 class ShareOfferPage extends React.Component {
     constructor(props){
         super(props);
-        this.campaign = props.campaign;
+        this.campaign = { id: 1 };
         this.state = {
             postUrl: ""
         }
@@ -50,6 +51,7 @@ class ShareOfferPage extends React.Component {
         axios.post(`${server_url}/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.campaign.id, userId: this.props.user.id })
             .then(res => { 
                 this.props.dispatch(postActions.updatePosts([...this.props.posts, res.data]));
+                history.push('/verify');
             })
             .catch(err => this.props.dispatch(alertActions.error(err.response.data.message)))
     }

@@ -1,6 +1,6 @@
 import { campaignConstants } from '../_constants';
 
-export function users(state = [], action) {
+export function campaigns(state = [], action) {
     switch (action.type) {
         case campaignConstants.GETALL_REQUEST:
             return [];
