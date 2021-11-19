@@ -51,29 +51,27 @@ class App extends React.Component {
             <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
-                        <Jumbotron>
-                            <Container>
-                                <NavBarComp/>
-                                <Col sm={{span: 8, offset: 2}}>
-                                    {alert.message &&
-                                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-                                    }
-                                    <Switch>
-                                        <Route path="/login" component={LoginPage} />
-                                        <Route path="/instructions" component={InstructionsPage} />
-                                        <Route path="/landing" component={LandingPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
-                                        <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
-                                        <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
-                                        <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
-                                    </Switch>
-                                </Col>
-                            </Container>
-                        </Jumbotron>
+                        <Container>
+                            <NavBarComp/>
+                            <Col sm={{span: 8, offset: 2}}>
+                                {alert.message &&
+                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                }
+                                <Switch>
+                                    <Route path="/login" component={LoginPage} />
+                                    <Route path="/instructions" component={InstructionsPage} />
+                                    <Route path="/landing" component={LandingPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
+                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
+                                </Switch>
+                            </Col>
+                        </Container>
                     </Sentry.ErrorBoundary>
                 </Router>
             </div>

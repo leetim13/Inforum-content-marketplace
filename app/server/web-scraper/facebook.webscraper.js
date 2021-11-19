@@ -120,12 +120,13 @@ class FacebookWebScrapper extends BaseWebScrapper{
         // Gets the post text
         const message = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
-        if (likes.length !== 1 || parseInt(likes[0]) === NaN) {
+        if (parseInt(likes[0]) === NaN) {
+            console.log(likes);
             res.status(400).send({
                 message: "Something went wrong with scraping."
             })
         } else {
-            res.status(200).send({ message, likes: parseInt(likes[0]) });
+            res.status(200).send({ message: message[0], likes: parseInt(likes[0]) });
         }
     }
 }
