@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
-import { Col, Container, Jumbotron } from 'react-bootstrap';
+import { Alert, Col, Container, Jumbotron } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Sentry from '@sentry/react';
@@ -47,6 +47,25 @@ class App extends React.Component {
 
     render() {
         const { alert } = this.props;
+        let alertElement;
+        if (alert.message && typeof alert.message === 'string') {
+            alertElement = (<Alert variant={alert.type}>
+                {alert.message}
+            </Alert>);
+        } else if (alert.message && typeof alert.message === 'object') {
+            const messages = [];
+            let i = 1;
+            for (const key in alert.message) {
+                messages.push(i + ". " + alert.message[key])
+                i += 1;
+            }
+            alertElement = 
+            (<Alert variant={alert.type} style={{ textAlign: "left" }}>
+                <Alert.Heading>{alert.type === 'success' ? "Success messages" : "Error messages"}</Alert.Heading>
+                {messages}
+            </Alert>);
+            console.log(messages);
+        }
         return (
             <div className="App">               
                 <Router history={history}>
@@ -54,9 +73,7 @@ class App extends React.Component {
                         <Container>
                             <NavBarComp/>
                             <Col sm={{span: 8, offset: 2}}>
-                                {alert.message &&
-                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
-                                }
+                                {alertElement}
                                 <Switch>
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/instructions" component={InstructionsPage} />

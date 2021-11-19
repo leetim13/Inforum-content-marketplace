@@ -41,7 +41,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
             const { requestId, request } = event;
             const cookieStrings = request.headers.Cookie.split('; ');
             if (cookieStrings.length === 0) {
-                throw new Error("Facebook cookies not found");
+                throw new Error("Facebook cookies not found.");
             }
             const FacebookCookies = [];
             cookieStrings.forEach(cookie => {
@@ -89,8 +89,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
         }
     }
 
-    async getPost(req, res) {
-        const url = req.query.url;
+    async getPost(url) {
         const browser = await this.getBrowser();
         const page = await this.getPage(browser);
 
@@ -105,29 +104,17 @@ class FacebookWebScrapper extends BaseWebScrapper{
         
         // Waits for the comment bar to show up,
         // Use to indicate that the post has been loaded.
-        let elementNotFound = false;
         await page.waitForSelector(postMessageDiv)
-        .catch(async _=> {
-            res.status(400).send({
-                message: "Post verification failed. Post not visible."
-            })
-            elementNotFound = true;
+        .catch(_=> {
+            throw new Error("Post verification failed. Post not visible.");
         })
-        if (elementNotFound) {
-            await browser.close();
-            return;
-        }
         // Gets the post text
         const message = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
         if (parseInt(likes[0]) === NaN) {
-            console.log(likes);
-            res.status(400).send({
-                message: "Something went wrong with scraping."
-            })
-        } else {
-            res.status(200).send({ message: message[0], likes: parseInt(likes[0]) });
-        }
+            throw new Error("Something went wrong with scraping.");
+        } 
+        return { message: message[0], likes: parseInt(likes[0]) };
     }
 }
 

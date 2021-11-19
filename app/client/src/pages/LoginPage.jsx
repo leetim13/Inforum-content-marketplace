@@ -127,11 +127,7 @@ function SignUpForm() {
             </Form.Control.Feedback>
           </Form.Group>
         </Row>
-
-       
-
-       
-
+        
         <Form.Group controlId="formFileSm" className="mb-3">
             <Form.Label>Upload Profile Image (optional)</Form.Label>
             <br></br>

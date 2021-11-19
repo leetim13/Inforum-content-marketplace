@@ -31,5 +31,5 @@ function updatePosts(posts) {
         dispatch(update(posts));
     };
 
-    function update(posts) { return { type: postConstants.UPDATE_CAMPAIGNS, posts } }
+    function update(posts) { return { type: postConstants.UPDATE_POSTS, posts } }
 }

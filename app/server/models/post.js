@@ -64,7 +64,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: false
     },
-    socialMedia: {
+    socialMedia: { // Change this to enum later
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
