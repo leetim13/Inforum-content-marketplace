@@ -11,7 +11,7 @@ class LandingPage extends React.Component {
     render() {
         return (
             <Container>
-            <div class="Landing Page">
+
                 <h1><i>Browse. Share. Earn Rewards.</i></h1>
                 <h4><i>yes, it’s that simple :)</i></h4>
 
@@ -34,7 +34,8 @@ class LandingPage extends React.Component {
                     <ToggleButton id="bank-5" value={5} variant="outline-dark">TD</ToggleButton>
                 </ToggleButtonGroup>
                 </div>
-
+                
+                <div>
                     <Row xs={3} md={3} lg={3} >
                         <Col style={{padding: '10px'}}><OfferComp/></Col>
                         <Col style={{padding: '10px'}}><OfferComp/></Col>
@@ -43,7 +44,12 @@ class LandingPage extends React.Component {
                         <Col style={{padding: '10px'}}><OfferComp/></Col>
                         <Col style={{padding: '10px'}}><OfferComp/></Col>
                     </Row>
-            </div>
+                </div>
+                <br></br>
+                <br></br>
+                <br></br>
+ 
+
             
             </Container>
         );

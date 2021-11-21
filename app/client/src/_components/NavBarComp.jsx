@@ -3,9 +3,8 @@ import { Navbar, NavDropdown, Dropdown, FormControl, Button, Nav, Container } fr
 
 export default class NavBarComp extends Component {
     render() {
-        return (
-            <Navbar bg="white" variant="light"  sticky="top">
-            <Container>
+        return (  
+            <Navbar bg="white" variant="light" sticky="top">
                 <Navbar.Brand href="/">
                   <img
                     src="../assets/logo_cropped.png"
@@ -20,18 +19,17 @@ export default class NavBarComp extends Component {
                   <Nav.Link href="/instructions">Instructions</Nav.Link>
               </Nav>
 
-              <Nav >
-              <NavDropdown 
-                title='My Account'>
-                <Dropdown.Item href="/myRewards" >My Rewards</Dropdown.Item>
-                <Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
-                <Dropdown.Item href="/login">Login</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
-                <Dropdown.Item href="/insights">Insights</Dropdown.Item>
-              </NavDropdown>
-            </Nav>
-            </Container>
+              <Nav>
+                <NavDropdown title='My Account' align="end">
+                  <Dropdown.Item href="/myRewards" >My Rewards</Dropdown.Item>
+                  <Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
+                  <Dropdown.Item href="/login">Login</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
+                  <Dropdown.Item href="/insights">Insights</Dropdown.Item>
+                </NavDropdown>
+              </Nav>
+            
             </Navbar>
         )
     }
