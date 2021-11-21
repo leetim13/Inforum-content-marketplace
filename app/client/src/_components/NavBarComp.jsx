@@ -4,7 +4,7 @@ import { Navbar, NavDropdown, Dropdown, FormControl, Button, Nav, Container } fr
 export default class NavBarComp extends Component {
     render() {
         return (
-            <Navbar bg="white" variant="light">
+            <Navbar bg="white" variant="light"  sticky="top">
             <Container>
                 <Navbar.Brand href="/">
                   <img
@@ -22,17 +22,6 @@ export default class NavBarComp extends Component {
 
               <Nav >
               <NavDropdown 
-                // BUG: profile images not aligned with dropdown menu, using just text for now
-                // title={
-                //     // <div className="dropdown-menu dropdown-menu-end">
-                //         <img className="thumbnail-image" 
-                //             src="../assets/profile_logo.svg"
-                //             width="10%"
-                //             height="10%"
-                //             alt="user pic"
-                //         />
-                //     // </div>
-                // } 
                 title='My Account'>
                 <Dropdown.Item href="/myRewards" >My Rewards</Dropdown.Item>
                 <Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>

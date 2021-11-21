@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
-import { Col, Container, Jumbotron } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Sentry from '@sentry/react';
@@ -24,6 +24,7 @@ import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
 import NavBarComp from "./_components/NavBarComp";
+import NavBarFooterComp from "./_components/NavBarFooterComp"
 
 
 // const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
@@ -51,7 +52,7 @@ class App extends React.Component {
             <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
-                        <Jumbotron>
+                        {/* <Jumbotron> */}
                             <Container>
                                 <NavBarComp/>
                                 <Col sm={{span: 8, offset: 2}}>
@@ -72,8 +73,9 @@ class App extends React.Component {
                                         <ProtectedRoute exact path="/" component={HomePage}/>
                                     </Switch>
                                 </Col>
+                                <NavBarFooterComp/>
                             </Container>
-                        </Jumbotron>
+                        {/* </Jumbotron> */}
                     </Sentry.ErrorBoundary>
                 </Router>
             </div>
