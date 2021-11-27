@@ -1,6 +1,9 @@
 import { campaignConstants } from '../_constants';
 
-export function campaigns(state = [], action) {
+let c = JSON.parse(localStorage.getItem('campaigns'));
+const initialState = Array.isArray(c) ? c : [];
+
+export function campaigns(state = initialState, action) {
     switch (action.type) {
         case campaignConstants.GETALL_REQUEST:
             return [];

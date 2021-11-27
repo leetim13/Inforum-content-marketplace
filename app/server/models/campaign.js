@@ -22,6 +22,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       allowNull: false
     },
+    title: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: 'No title.'
+    },
     type: {
       type: Sequelize.ENUM(
         "Charity",

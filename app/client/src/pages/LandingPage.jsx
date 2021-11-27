@@ -3,19 +3,31 @@ import { connect } from 'react-redux';
 import { Col, Row, Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
+import { authHeader } from '../_helpers'
+import { campaignActions, alertActions } from '../_actions';
+import axios from 'axios';
 
 class LandingPage extends React.Component {
     constructor(props){
         super(props);
     }
+
+    componentDidMount() {
+        axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
+        this.props.dispatch(campaignActions.getAll());
+    }
+
     render() {
+        const campaignCards = this.props.campaigns.slice(0, 6).map((c, i) => 
+            <Col key={i} style={{padding: '10px'}}><OfferComp data={c}/></Col>
+        );
         return (
             <Container className="page">
 
                 <h1><i>Browse. Share. Earn Rewards.</i></h1>
                 <h4><i>yes, it’s that simple :)</i></h4>
 
-                <div class="offer-buttons" style={{padding: '5px'}}>
+                <div className="offer-buttons" style={{padding: '5px'}}>
                 <ToggleButtonGroup name="options" defaultValue={1} type="checkbox">
                     <ToggleButton id="offer-1" value={1} variant="outline-secondary">All Offers</ToggleButton>
                     <ToggleButton id="offer-2" value={2} variant="outline-secondary">Credit Cards</ToggleButton>
@@ -25,7 +37,7 @@ class LandingPage extends React.Component {
                 </ToggleButtonGroup>
                 </div>
 
-                <div class="bank-buttons" style={{padding: '10px'}}>
+                <div className="bank-buttons" style={{padding: '10px'}}>
                 <ToggleButtonGroup name="options" defaultValue={1} type="checkbox">
                     <ToggleButton id="bank-1" value={1} variant="outline-dark">All Banks</ToggleButton>
                     <ToggleButton id="bank-2" value={2} variant="outline-dark">RBC</ToggleButton>
@@ -37,12 +49,7 @@ class LandingPage extends React.Component {
                 
                 <div>
                     <Row xs={3} md={3} lg={3} >
-                        <Col style={{padding: '10px'}}><OfferComp/></Col>
-                        <Col style={{padding: '10px'}}><OfferComp/></Col>
-                        <Col style={{padding: '10px'}}><OfferComp/></Col>
-                        <Col style={{padding: '10px'}}><OfferComp/></Col>
-                        <Col style={{padding: '10px'}}><OfferComp/></Col>
-                        <Col style={{padding: '10px'}}><OfferComp/></Col>
+                        {campaignCards}
                     </Row>
                 </div>
                 <br></br>
@@ -56,10 +63,11 @@ class LandingPage extends React.Component {
     }
 }
 function mapStateToProps(state) {
-    const { authentication } = state;
+    const { authentication, campaigns } = state;
     const { user } = authentication;
     return {
-        user
+        user,
+        campaigns
     };
 }
 

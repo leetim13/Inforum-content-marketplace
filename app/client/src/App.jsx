@@ -78,9 +78,9 @@ class App extends React.Component {
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/instructions" component={InstructionsPage} />
                                     <Route path="/landing" component={LandingPage} />
-                                    <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
-                                    <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
-                                    <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/offer/:id" component={OfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/share/:id" component={ShareOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/verify/:id" component={VerifyOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />

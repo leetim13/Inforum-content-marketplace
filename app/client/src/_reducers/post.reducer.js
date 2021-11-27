@@ -1,6 +1,9 @@
 import { postConstants } from '../_constants';
 
-export function posts(state = [], action) {
+let p = JSON.parse(localStorage.getItem('posts'));
+const initialState = Array.isArray(p) ? p : [];
+
+export function posts(state = initialState, action) {
     switch (action.type) {
         case postConstants.GETALL_REQUEST:
             return [];

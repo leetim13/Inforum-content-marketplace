@@ -1,6 +1,9 @@
 import { bankConstants } from '../_constants';
 
-export function banks(state = [], action) {
+let b = JSON.parse(localStorage.getItem('banks'));
+const initialState = Array.isArray(b) ? b : [];
+
+export function banks(state = initialState, action) {
     switch (action.type) {
         case bankConstants.GETALL_REQUEST:
             return [];

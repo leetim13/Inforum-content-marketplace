@@ -11,6 +11,10 @@ module.exports = {
             type: "integer",
             description: "bank associated with this campaign"
           },
+          title: {
+            type: "string",
+            description: "campaign title"
+          },
           type: {
             type: "string",
             description: "campaign Type",

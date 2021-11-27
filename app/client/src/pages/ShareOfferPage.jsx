@@ -13,8 +13,8 @@ const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/ap
 class ShareOfferPage extends React.Component {
     constructor(props){
         super(props);
-        this.campaign = { id: 1 };
         this.state = {
+            id: -1,
             postUrl: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +22,15 @@ class ShareOfferPage extends React.Component {
 
     componentDidMount() {
         axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
+        const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+        if (!Array.isArray(result) || result.length === 0) {
+            // Could reload redux campaign object to check for updates
+            this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`));
+        } else {
+            this.setState({
+                ...result[0]
+            });
+        }
     }
 
     formFieldValidation() {
@@ -48,7 +57,7 @@ class ShareOfferPage extends React.Component {
             this.props.dispatch(alertActions.error(fieldErrors))
             return;
         } 
-        axios.post(`${server_url}/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.campaign.id, userId: this.props.user.id })
+        axios.post(`${server_url}/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.state.id, userId: this.props.user.id })
             .then(res => { 
                 this.props.dispatch(postActions.updatePosts([...this.props.posts, res.data]));
                 history.push('/verify');
@@ -69,9 +78,9 @@ class ShareOfferPage extends React.Component {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm">Offer URL</InputGroup.Text>
                             {/* <FormControl placeholder={this.campaignUrl} readOnly /> */}
-                            <Form.Control readOnly defaultValue={this.campaignUrl} />
+                            <Form.Control readOnly defaultValue={this.state.url} />
                             <Button variant="outline-secondary" id="button-addon2" 
-                            onClick={() => navigator.clipboard.writeText(this.campaignUrl)}>
+                            onClick={() => navigator.clipboard.writeText(this.state.url)}>
                                 Copy
                             </Button>
                         </InputGroup>
@@ -109,11 +118,12 @@ class ShareOfferPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { authentication, posts } = state;
+    const { authentication, posts, campaigns } = state;
     const { user } = authentication;
     return {
         user,
-        posts
+        posts,
+        campaigns
     };
 }
 
