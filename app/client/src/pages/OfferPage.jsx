@@ -10,7 +10,7 @@ class OfferPage extends React.Component {
     }
     render() {
         return (
-            <Container>
+            <Container className="page">
                 <Row>
                     <Col xs={6} md={4} style={{padding: '40px'}}>
                     </Col>

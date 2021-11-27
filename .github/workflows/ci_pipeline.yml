@@ -59,3 +59,12 @@ jobs:
       env:
           SERVER_ENV: 'test'
           DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}
+
+#     - name: Client Test & publish code coverage 
+#       working-directory: 'app/client'
+#       uses: paambaati/codeclimate-action@v3.0.0
+#       env:
+#         CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
+#       with:
+#         coverageCommand: npm test -- --coverage
+#         debug: true

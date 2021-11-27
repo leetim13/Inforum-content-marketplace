@@ -210,7 +210,7 @@ class LoginPage extends React.Component {
         const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
         return (
-            <Container>
+            <Container className="page">
                 <h1><i>Browse. Share. Earn Rewards.</i></h1>
                 <h4><i>yes, it’s that simple :)</i></h4>
                 <Col  md={{span: 6, offset: 3}}>

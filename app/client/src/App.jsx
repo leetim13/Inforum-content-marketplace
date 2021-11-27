@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
-import { Alert, Col, Container, Jumbotron } from 'react-bootstrap';
+import { Alert, Col, Container } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Sentry from '@sentry/react';
@@ -20,11 +20,12 @@ import { ShareOfferPage } from './pages/ShareOfferPage';
 import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
+import { CampaignsPage } from './pages/CampaignsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
 import { NavBarComp } from "./_components/NavBarComp";
-
+import NavBarFooterComp from "./_components/NavBarFooterComp"
 
 // const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
@@ -64,14 +65,13 @@ class App extends React.Component {
                 <Alert.Heading>{alert.type === 'success' ? "Success messages" : "Error messages"}</Alert.Heading>
                 {messages}
             </Alert>);
-            console.log(messages);
         }
         return (
             <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
+                        <NavBarComp/>
                         <Container>
-                            <NavBarComp/>
                             <Col sm={{span: 8, offset: 2}}>
                                 {alertElement}
                                 <Switch>
@@ -89,6 +89,7 @@ class App extends React.Component {
                                 </Switch>
                             </Col>
                         </Container>
+                        <NavBarFooterComp/>
                     </Sentry.ErrorBoundary>
                 </Router>
             </div>

@@ -70,7 +70,7 @@ class HomePage extends React.Component {
             </tr>
         );
         return (
-        <Row>
+        <Row className="page">
             <Col md="4">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>{!this.state.data ? "Server disconnected test..." : this.state.data}</p>

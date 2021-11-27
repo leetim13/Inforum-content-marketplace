@@ -3,111 +3,118 @@ import {Row, Col, FormControl, Card } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
-import ChartistGraph from "react-chartist";
-import '../css/Dashboard.css';
 
-// Data for Line Chart
-var dataPie = {
-    labels: ['62%','32%','6%'],
-    series: [62, 32, 6]
-};
+import Chart from 'chart.js/auto'
+import { Pie, Line, Doughnut } from 'react-chartjs-2';
+import faker from 'faker';
 
-// Data for Line Chart
-var dataSales = {
-    labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-    series: [
-        [287, 385, 490, 492, 554, 586, 698, 695],
-        [67, 152, 143, 240, 287, 335, 435, 437],
-        [23, 113, 67, 108, 190, 239, 307, 308]
-    ]
-};
-var optionsSales = {
-    low: 0,
-    high: 800,
-    showArea: false,
-    height: "245px",
-    axisX: {
-        showGrid: false,
+// // pie chart for gender
+export const genderData = {
+    labels: ['Male', 'Female', 'Other'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [40, 58, 2],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+export const ageData = {
+  labels: ['0-18', '18-28', '28-38', '38-48', '48-58', '58+'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [10, 30, 35, 20, 4, 1],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
     },
-    lineSmooth: true,
-    showLine: true,
-    showPoint: true,
-    fullWidth: true,
-    chartPadding: {
-        right: 50
-    }
+  ],
 };
-var responsiveSales = [
-    ['screen and (max-width: 640px)', {
-        axisX: {
-            labelInterpolationFnc: function (value) {
-                return value[0];
-            }
-        }
-    }]
-];
 
-// Data for Bar Chart
-var dataBar = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    series: [
-        [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-        [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-    ]
-};
-var optionsBar = {
-    seriesBarDistance: 10,
-    axisX: {
-        showGrid: false
+//line chart for total clicks per day
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
     },
-    height: "245px"
+  },
 };
-var responsiveBar = [
-    ['screen and (max-width: 640px)', {
-        seriesBarDistance: 5,
-        axisX: {
-            labelInterpolationFnc: function (value) {
-                return value[0];
-            }
-        }
-    }]
-];
+
+const labels = ['Nov 11', 'Nov 12', 'Nov 13', 'Nov 14', 'Nov 15', 'Nov 16', 'Nov 17'];
+
+export const clicksData = {
+  labels,
+  datasets: [
+    {
+      label: '# of clicks',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+  ],
+};
 
 class InsightsPage extends React.Component {
     constructor(props){
         super(props);
     }
 
+
+
     render() {
         return (
-            <div>
-                <div className="row">
-                    <div className="col" style={{maxHeight:"320px"}}>
-                        <ChartistGraph data={dataPie} type="Pie"/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col" style={{maxHeight:"320px"}}>
-                        <ChartistGraph
-                            data={dataSales}
-                            type="Line"
-                            options={optionsSales}
-                            responsiveOptions={responsiveSales}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col" style={{maxHeight:"320px"}}>
-                        <ChartistGraph
-                            data={dataBar}
-                            type="Bar"
-                            options={optionsBar}
-                            responsiveOptions={responsiveBar}
-                        />
-                    </div>
-                </div>
-            </div>
+          <Container className="page">
+            <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: RBC-credit-card-0123</h1>            
+            <Row xs={2} md={2} lg={2}>
+              <Card>
+                <h5>Total Clicks by Gender</h5>
+                  <Card.Body>
+                      <Pie data={genderData}/>
+                  </Card.Body>
+              </Card>
+              <Card>
+              <h5>Total Clicks by Age Group</h5>
+                  <Card.Body>
+                      <Doughnut data={ageData} />
+                  </Card.Body>
+              </Card>
 
-
+            </Row>
+            <Card>
+              <h5>Total Clicks in last 7 days</h5>
+                  <Card.Body>
+                      <Line data={clicksData} />
+                  </Card.Body>
+              </Card>
+            <br/><br/><br/>
+            </Container>
         );
     }
 }

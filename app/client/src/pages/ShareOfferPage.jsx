@@ -58,7 +58,7 @@ class ShareOfferPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >One last step, you are almost there!</h1>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formCampaignUrl">

@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 class NavBarComp extends Component {
     render() {
-      	const dropDown = this.props.user ? (<Nav >
-			<NavDropdown 
+      	const dropDown = this.props.user 
+		? (<Nav >
+			<NavDropdown align="end"
 			// BUG: profile images not aligned with dropdown menu, using just text for now
 			// title={
 			//     // <div className="dropdown-menu dropdown-menu-end">
@@ -18,41 +19,40 @@ class NavBarComp extends Component {
 			//     // </div>
 			// } 
 			title='My Account'>
-			{ this.props.user.role === 'User' || this.props.user.role === 'Admin' 
-			? (<div>
-				<Dropdown.Item href="/myRewards" >My Rewards</Dropdown.Item>
-				<Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
+				{ this.props.user.role === 'User' || this.props.user.role === 'Admin' 
+				? (<div>
+					<Dropdown.Item href="/myRewards" >My Rewards</Dropdown.Item>
+					<Dropdown.Item href="/myPosts">My Posts</Dropdown.Item>
 				</div>) 
-			: null }
-			{ this.props.user.role === 'Admin' ? <Dropdown.Divider/> : null}
-			{ this.props.user.role === 'Bank' || this.props.user.role === 'Admin' 
-			? (<div>
-			<Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
-			<Dropdown.Item href="/insights">Insights</Dropdown.Item>
-			</div>) 
-			: null }
-			<Dropdown.Item href="/login">Logout</Dropdown.Item>
+				: null }
+				{ this.props.user.role === 'Admin' ? <Dropdown.Divider/> : null}
+				{ this.props.user.role === 'Bank' || this.props.user.role === 'Admin' 
+				? (<div>
+					<Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
+					<Dropdown.Item href="/insights">Insights</Dropdown.Item>
+				</div>) 
+				: null }
+				<Dropdown.Item href="/login">Logout</Dropdown.Item>
 			</NavDropdown>
-		</Nav>) : null
+		</Nav>)
+		: null
         return (
-            <Navbar bg="white" variant="light">
-            <Container>
-                <Navbar.Brand href="/">
-                  <img
-                    src="../assets/logo_cropped.png"
-                    width="45%"
-                    height="80%"
-                    alt="React Bootstrap logo"
-                  />
-                </Navbar.Brand>
+		<Navbar bg="white" variant="light" sticky="top">
+			<Navbar.Brand href="/">
+				<img
+					src="../assets/logo_cropped.png"
+					width="45%"
+					height="80%"
+					alt="React Bootstrap logo"
+				/>
+			</Navbar.Brand>
 
-              <Nav className="me-auto">
-                  <Nav.Link href="/landing">Browse Offers</Nav.Link>
-                  <Nav.Link href="/instructions">Instructions</Nav.Link>
-              </Nav>
-              { dropDown }
-            </Container>
-            </Navbar>
+			<Nav className="me-auto">
+				<Nav.Link href="/landing">Browse Offers</Nav.Link>
+				<Nav.Link href="/instructions">Instructions</Nav.Link>
+			</Nav>
+			{ dropDown }
+		</Navbar>
         )
     }
 }
