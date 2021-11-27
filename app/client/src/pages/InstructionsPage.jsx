@@ -55,7 +55,7 @@ class InstructionsPage extends React.Component {
                     <Card.Body>
                     <Card.Title> <CashCoin /> Redeem your Rewards!</Card.Title>
                     <Card.Text>
-                        Check My Posts to see how much attention your post has gained. 
+                        Check My Rewards to see how much attention your post has gained. 
                         Use these points to redeem gift cards of your choice!
                     </Card.Text>
                     </Card.Body>

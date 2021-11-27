@@ -20,6 +20,7 @@ import { ShareOfferPage } from './pages/ShareOfferPage';
 import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
+import { CampaignsPage } from './pages/CampaignsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
@@ -69,6 +70,7 @@ class App extends React.Component {
                                         <Route path="/myRewards" component={MyRewardsPage} />
                                         <Route path="/myPosts" component={MyPostsPage} />
                                         <Route path="/insights" component={InsightsPage} />
+                                        <Route path="/campaigns" component={CampaignsPage} />
                                         <Route path="/createCampaign" component={CreateCampaignPage} />
                                         <ProtectedRoute exact path="/" component={HomePage}/>
                                     </Switch>

@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 
 
-class MyPostsPage extends React.Component {
+class CampaignsPage extends React.Component {
     constructor(props){
         super(props);
     }
@@ -13,7 +13,7 @@ class MyPostsPage extends React.Component {
     render() {
         return (
             <div>
-                <h1 align="left" style={{padding: '10px'}} >Welcome to My Posts, User123!</h1>
+                <h1 align="left" style={{padding: '10px'}} >Welcome to My Campaigns, RBC!</h1>
                 <Container>
                     <Table striped bordered hover>
                         <thead>
@@ -24,7 +24,7 @@ class MyPostsPage extends React.Component {
                             <th>Posted On</th>
                             <th>Expires On</th>
                             <th>Status</th>
-                            <th>Link to post</th>
+                            <th>Link to Campaign Insights</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,18 +35,9 @@ class MyPostsPage extends React.Component {
                             <td>11/02/2021</td>
                             <td>12/10/2021</td>
                             <td style={{ color: 'green' }}>Active</td>
-                            <td><u>Link</u></td>
+                            <td><a href="/insights">Link</a></td>
                             </tr>
 
-                            <tr>
-                            <td>RBC-article-34213</td>
-                            <td>Article</td>
-                            <td>RBC</td>
-                            <td>11/02/2021</td>
-                            <td>11/12/2021</td>
-                            <td style={{ color: 'red' }}>Expired</td>
-                            <td><u>Link</u></td>
-                            </tr>
                            
                         </tbody>
                         </Table>
@@ -66,5 +57,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedMyPostsPage = connect(mapStateToProps)(MyPostsPage);
-export { connectedMyPostsPage as MyPostsPage }; 
+const connectedCampaignsPage = connect(mapStateToProps)(CampaignsPage);
+export { connectedCampaignsPage as CampaignsPage }; 
