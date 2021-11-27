@@ -5,7 +5,7 @@ import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
 
 import Chart from 'chart.js/auto'
-import { Pie, Line } from 'react-chartjs-2';
+import { Pie, Line, Doughnut } from 'react-chartjs-2';
 import faker from 'faker';
 
 // // pie chart for gender
@@ -102,7 +102,7 @@ class InsightsPage extends React.Component {
               <Card>
               <h5>Total Clicks by Age Group</h5>
                   <Card.Body>
-                      <Pie data={ageData} />
+                      <Doughnut data={ageData} />
                   </Card.Body>
               </Card>
 
