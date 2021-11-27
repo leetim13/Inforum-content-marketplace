@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import { history } from './_helpers';
 import { alertActions } from './_actions';
-import { ProtectedRoute, AdminRoute, BankRoute, PromoterRoute } from './_components';
+import { ProtectedRoute} from './_components';
 import { Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
@@ -24,9 +24,8 @@ import { CampaignsPage } from './pages/CampaignsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
-import NavBarComp from "./_components/NavBarComp";
+import { NavBarComp } from "./_components/NavBarComp";
 import NavBarFooterComp from "./_components/NavBarFooterComp"
-
 
 // const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
@@ -54,29 +53,28 @@ class App extends React.Component {
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
                         <NavBarComp/>
-                            <Container>
-                                <Col sm={{span: 8, offset: 2}}>
-                                    {alert.message &&
-                                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-                                    }
-                                    <Switch>
-                                        <Route path="/login" component={LoginPage} />
-                                        <Route path="/instructions" component={InstructionsPage} />
-                                        <Route path="/landing" component={LandingPage} />
-                                        <Route path="/offer" component={OfferPage} />
-                                        <Route path="/share" component={ShareOfferPage} />
-                                        <Route path="/verify" component={VerifyOfferPage} />
-                                        <Route path="/myRewards" component={MyRewardsPage} />
-                                        <Route path="/myPosts" component={MyPostsPage} />
-                                        <Route path="/insights" component={InsightsPage} />
-                                        <Route path="/campaigns" component={CampaignsPage} />
-                                        <Route path="/createCampaign" component={CreateCampaignPage} />
-                                        <ProtectedRoute exact path="/" component={HomePage}/>
-                                    </Switch>
-                                </Col>
-                                
-                            </Container>
-                            <NavBarFooterComp/>
+                        <Container>
+                            <Col sm={{span: 8, offset: 2}}>
+                                {alert.message &&
+                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                }
+                                <Switch>
+                                    <Route path="/login" component={LoginPage} />
+                                    <Route path="/instructions" component={InstructionsPage} />
+                                    <Route path="/landing" component={LandingPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
+                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
+                                </Switch>
+                            </Col>
+                            
+                        </Container>
+                        <NavBarFooterComp/>
                     </Sentry.ErrorBoundary>
                 </Router>
             </div>

@@ -13,16 +13,21 @@ async function authenticate({ username, password }) {
     let user = await users.findOne({ where: { username : username, password : password}});
     let token;
     // search if user is a bank user.
-    if (!user) {
-        user = await banks.findOne({ where: { username : username, password : password}})
-        token = jwt.sign({ sub: user.id, role: Role.Bank }, secret);
-    } else {
-        token = jwt.sign({ sub: user.id, role: user.role }, secret);
-    }
     if (user) {
+        token = jwt.sign({ sub: user.id, role: user.role }, secret);
         const { password, ...userWithoutPassword } = user.dataValues;
         return {
             ...userWithoutPassword,
+            token
+        };
+    }
+    user = await banks.findOne({ where: { username : username, password : password}})
+    if (user) {
+        token = jwt.sign({ sub: user.id, role: Role.Bank }, secret);
+        const { password, ...userWithoutPassword } = user.dataValues;
+        return {
+            ...userWithoutPassword,
+            role: Role.Bank,
             token
         };
     }
