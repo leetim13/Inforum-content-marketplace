@@ -128,7 +128,7 @@ class CreateCampaignPage extends React.Component {
 	}
     render() {
         return (
-            <div>
+            <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >Create a Campaign</h1>
                 <Container>
                     <div align="left">

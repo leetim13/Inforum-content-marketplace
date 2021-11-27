@@ -12,7 +12,7 @@ class InstructionsPage extends React.Component {
     }
     render() {
         return (
-            <Container>
+            <Container className="page">
             <Row md={2} > 
                 <Col xs={2} style={{ paddingTop:"30px"}}>
                 <Card style={{ textAlign: "left"}} >

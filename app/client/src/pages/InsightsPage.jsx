@@ -90,7 +90,7 @@ class InsightsPage extends React.Component {
 
     render() {
         return (
-          <Container>
+          <Container className="page">
             <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: RBC-credit-card-0123</h1>            
             <Row xs={2} md={2} lg={2}>
               <Card>

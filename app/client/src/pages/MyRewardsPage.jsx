@@ -39,7 +39,7 @@ class MyRewardsPage extends React.Component {
 
     render() {
         return (
-            <Container>
+            <Container className="page">
                 <h1 align="left" style={{padding: '10px'}} >Welcome to My Rewards, User123!</h1> 
                     <Row xs={3} md={3} lg={3}>
                         <Card border="light" >

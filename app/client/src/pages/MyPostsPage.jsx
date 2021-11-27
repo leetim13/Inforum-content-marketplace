@@ -12,7 +12,7 @@ class MyPostsPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >Welcome to My Posts, User123!</h1>
                 <Container>
                     <Table striped bordered hover>

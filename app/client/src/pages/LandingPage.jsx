@@ -10,7 +10,7 @@ class LandingPage extends React.Component {
     }
     render() {
         return (
-            <Container>
+            <Container className="page">
 
                 <h1><i>Browse. Share. Earn Rewards.</i></h1>
                 <h4><i>yes, it’s that simple :)</i></h4>

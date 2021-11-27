@@ -10,7 +10,7 @@ class VerifyOfferPage extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >Congratulations, your post has been verified!</h1>
                 <h5 align="left" style={{padding: '10px'}}>Please feel free to browse other offers or monitor your 
                 Rewards page to see how much points you have accumulated for each post!</h5>

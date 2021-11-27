@@ -53,9 +53,8 @@ class App extends React.Component {
             <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
-                        {/* <Jumbotron> */}
+                        <NavBarComp/>
                             <Container>
-                                <NavBarComp/>
                                 <Col sm={{span: 8, offset: 2}}>
                                     {alert.message &&
                                         <div className={`alert ${alert.type}`}>{alert.message}</div>
@@ -75,9 +74,9 @@ class App extends React.Component {
                                         <ProtectedRoute exact path="/" component={HomePage}/>
                                     </Switch>
                                 </Col>
-                                <NavBarFooterComp/>
+                                
                             </Container>
-                        {/* </Jumbotron> */}
+                            <NavBarFooterComp/>
                     </Sentry.ErrorBoundary>
                 </Router>
             </div>
