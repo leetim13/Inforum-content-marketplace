@@ -10,7 +10,7 @@ class ShareOfferPage extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >One last step, you are almost there!</h1>
                 <h5 align="left" style={{padding: '10px'}}>Copy this auto-generated link from our partner below and make sure to include
                  this link in your social media post. </h5>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Image, Container, InputGroup, Modal} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import OfferComp from '../_components/OfferComp';
-import ChartistGraph from "react-chartist";
 
 function CampaignForm() {
     const [validated, setValidated] = useState(false);
@@ -106,10 +105,19 @@ function CampaignForm() {
             <Form.Control.Feedback type="invalid">
               Please provide a valid Campaign Budget (in $CAD).
             </Form.Control.Feedback>
+            <i>*Maximum Campaign Budget refers to the maximum budget allocated for this specific campaign.
+              If the # of clicks (converted to $) surpassed this budget, we will close this campaign for you automatically!
+            </i>
         </Form.Group>
+        
 
         <Button type="submit" variant="secondary">Create Campaign</Button>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </Form>
+
     );
   }
   
@@ -120,7 +128,7 @@ class CreateCampaignPage extends React.Component {
 	}
     render() {
         return (
-            <div>
+            <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >Create a Campaign</h1>
                 <Container>
                     <div align="left">

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
-import { Col, Container, Jumbotron } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Sentry from '@sentry/react';
@@ -20,11 +20,12 @@ import { ShareOfferPage } from './pages/ShareOfferPage';
 import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
+import { CampaignsPage } from './pages/CampaignsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
 import { NavBarComp } from "./_components/NavBarComp";
-
+import NavBarFooterComp from "./_components/NavBarFooterComp"
 
 // const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
@@ -51,29 +52,29 @@ class App extends React.Component {
             <div className="App">               
                 <Router history={history}>
                     <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
-                        <Jumbotron>
-                            <Container>
-                                <NavBarComp/>
-                                <Col sm={{span: 8, offset: 2}}>
-                                    {alert.message &&
-                                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-                                    }
-                                    <Switch>
-                                        <Route path="/login" component={LoginPage} />
-                                        <Route path="/instructions" component={InstructionsPage} />
-                                        <Route path="/landing" component={LandingPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
-                                        <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
-                                        <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
-                                        <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
-                                        <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
-                                    </Switch>
-                                </Col>
-                            </Container>
-                        </Jumbotron>
+                        <NavBarComp/>
+                        <Container>
+                            <Col sm={{span: 8, offset: 2}}>
+                                {alert.message &&
+                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                }
+                                <Switch>
+                                    <Route path="/login" component={LoginPage} />
+                                    <Route path="/instructions" component={InstructionsPage} />
+                                    <Route path="/landing" component={LandingPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/offer" component={OfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/share" component={ShareOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/verify" component={VerifyOfferPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
+                                    <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
+                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
+                                </Switch>
+                            </Col>
+                            
+                        </Container>
+                        <NavBarFooterComp/>
                     </Sentry.ErrorBoundary>
                 </Router>
             </div>
