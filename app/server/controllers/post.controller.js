@@ -31,11 +31,19 @@ class PostController extends BaseController{
             })
             return;
         }
-
         const campaign = await Campaign.findByPk(req.body.campaignId);
         if (!campaign){
             res.status(400).send({
                 message: "Campaign does not exist"
+            })
+            return;
+        }
+        const postExist = await Post.findAll({ where: 
+            { campaignId: { [Op.eq]: req.body.campaignId }, userId: { [Op.eq]: req.body.userId }}
+        });
+        if (postExist.length > 0) {
+            res.status(400).send({
+                message: "User already posted for this campaign"
             })
             return;
         }
@@ -50,11 +58,15 @@ class PostController extends BaseController{
                 webScraper = new FacebookWebScrapper();
                 break;
             default:
+                postUrlRegex = new RegExp('a^'); // Match nothing
                 // Should not end up here.
                 webScraper = new BaseWebScrapper("base");
         }
         if ( !postUrlRegex.test(req.body.url) ) {
-            res.status(400).send("Url does not match the format.");
+            res.status(400).send({ 
+                message: "Url does not match the format." 
+            });
+            return;
         }
         let postData;
         try {
@@ -62,13 +74,13 @@ class PostController extends BaseController{
             
         } catch (err) {
             if (err.message === "Facebook cookies not found." || err.message === "Something went wrong with scraping.") {
-                res.status(500).send(err.message);
+                res.status(500).send(err);
             } else {
-                res.status(400).send(err.message);
+                res.status(400).send(err);
             }
             return;
         }
-
+        console.log(postData);
         
         if ( postData && postData.message.includes(campaign.url)) {
             const post = {
@@ -81,7 +93,7 @@ class PostController extends BaseController{
 
             super.create(req, res, post);
         } else {
-            res.status(400).send("Campaign url not found.")
+            res.status(400).send({ message: "Campaign url not found." });
         }
     };
 

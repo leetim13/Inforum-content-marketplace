@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import { Form, FormGroup, InputGroup, Button, FormControl } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
-import axios from 'axios';
-import { authHeader } from '../_helpers'
+import { Http } from '../_helpers'
 import { postActions, alertActions } from '../_actions';
 import { history } from '../_helpers';
-
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
 class ShareOfferPage extends React.Component {
     constructor(props){
@@ -21,7 +18,6 @@ class ShareOfferPage extends React.Component {
     }
 
     componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
         const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
         if (!Array.isArray(result) || result.length === 0) {
             // Could reload redux campaign object to check for updates
@@ -57,10 +53,10 @@ class ShareOfferPage extends React.Component {
             this.props.dispatch(alertActions.error(fieldErrors))
             return;
         } 
-        axios.post(`${server_url}/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.state.id, userId: this.props.user.id })
+        Http.post(`/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.state.id, userId: this.props.user.id })
             .then(res => { 
                 this.props.dispatch(postActions.updatePosts([...this.props.posts, res.data]));
-                history.push('/verify');
+                history.push(`/verify/${res.data.id}`);
             })
             .catch(err => this.props.dispatch(alertActions.error(err.response.data.message)))
     }

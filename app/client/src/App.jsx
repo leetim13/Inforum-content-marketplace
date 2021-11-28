@@ -49,23 +49,29 @@ class App extends React.Component {
     render() {
         const { alert } = this.props;
         let alertElement;
-        if (alert.message && typeof alert.message === 'string') {
-            alertElement = (<Alert variant={alert.type}>
-                {alert.message}
-            </Alert>);
-        } else if (alert.message && typeof alert.message === 'object') {
-            const messages = [];
-            let i = 1;
-            for (const key in alert.message) {
-                messages.push(i + ". " + alert.message[key])
-                i += 1;
+        if (alert.message) {
+            if (typeof alert.message === 'string') {
+                alertElement = (<Alert variant={alert.type}>
+                    {alert.message}
+                </Alert>);
+            } else if (typeof alert.message === 'object') {
+                const messages = [];
+                let i = 1;
+                for (const key in alert.message) {
+                    messages.push(<li>{alert.message[key]}</li>)
+                    i += 1;
+                }
+                alertElement = 
+                (<Alert variant={alert.type} style={{ textAlign: "left" }}>
+                    <Alert.Heading>{alert.type === 'success' ? "Success messages" : "Error messages"}</Alert.Heading>
+                    <ol>
+                        {messages}
+                    </ol>
+                </Alert>);
             }
-            alertElement = 
-            (<Alert variant={alert.type} style={{ textAlign: "left" }}>
-                <Alert.Heading>{alert.type === 'success' ? "Success messages" : "Error messages"}</Alert.Heading>
-                {messages}
-            </Alert>);
+            window.scrollTo(0, 0);
         }
+        
         return (
             <div className="App">               
                 <Router history={history}>

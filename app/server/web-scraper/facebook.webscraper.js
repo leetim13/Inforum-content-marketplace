@@ -24,7 +24,13 @@ class FacebookWebScrapper extends BaseWebScrapper{
     }
 
     async getBrowser(headless=true) {
-        const browser = await puppeteer.launch({ headless, timeout: this.timeout, devtools: true, args: ['--no-sandbox','--disable-setuid-sandbox'] });
+        let args;
+        if (headless) {
+            args = ['--no-sandbox','--disable-setuid-sandbox'];
+        } else {
+            args = [];
+        }
+        const browser = await puppeteer.launch({ headless, timeout: this.timeout, devtools: true, args});
         const context = browser.defaultBrowserContext();
         context.overridePermissions('https://www.facebook.com', []);
         return browser;
@@ -86,6 +92,9 @@ class FacebookWebScrapper extends BaseWebScrapper{
         // If login button is found, meaning not logged in. (Cookies expired, etc)
         if (await page.$('#loginbutton') !== null) {
             await this.loginWithCredentials(page, url);
+            if (await page.$('#loginbutton') !== null) {
+                throw new Error("Log in failed.");
+            }
         }
     }
 
@@ -101,6 +110,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
         } else {
             await this.loginWithCookies(page, url, cookies);
         }
+        console.log("logged in.");
         
         // Waits for the comment bar to show up,
         // Use to indicate that the post has been loaded.

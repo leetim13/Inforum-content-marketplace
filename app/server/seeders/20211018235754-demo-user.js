@@ -5,7 +5,7 @@ const { sequelize } = require("../models");
 const userObject = (id, role) => {
   const tmp = role.toLowerCase() + id;
   return {
-    id,
+    id: id + 1000000000,
     username: tmp,
     password: tmp,
     firstName: tmp,

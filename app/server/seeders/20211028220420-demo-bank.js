@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Banks', [{
-      id: 1,
+      id: 1000000001,
       logo: null,
       name: "RBC",
       url: "https://www.rbcroyalbank.com/personal.html",
@@ -13,7 +13,7 @@ module.exports = {
       updatedAt: new Date()
   },
   {
-    id: 2,
+    id: 1000000002,
     logo: null,
     name: "TD",
     url: "https://www.td.com/ca/en/personal-banking/",
@@ -23,7 +23,7 @@ module.exports = {
     updatedAt: new Date()
   },
   {
-    id: 3,
+    id: 1000000003,
     logo: null,
     name: "Scotia Bank",
     url: "https://www.scotiabank.com/ca/en/personal.html",

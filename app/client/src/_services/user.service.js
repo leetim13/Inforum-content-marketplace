@@ -1,10 +1,8 @@
-import axios from 'axios';
-import { authHeader } from '../_helpers';
+import { Http } from '../_helpers';
 import { history } from '../_helpers';
 
 const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
-axios.defaults.headers.common['Content-Type'] = 'application/json';
 export const userService = {
     login,
     logout,
@@ -12,7 +10,7 @@ export const userService = {
 };
 
 async function login(username, password) {
-    return await axios.post(`${server_url}/users/authenticate`, { 
+    return await Http.post(`${server_url}/users/authenticate`, { 
         username, password 
     })
     .then(res => {
@@ -31,8 +29,7 @@ function logout() {
 }
 
 async function getAll() {
-    axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
-    return await axios.get(`${server_url}/users`)
+    return await Http.get(`${server_url}/users`)
     .then(res => {
         localStorage.setItem('users', JSON.stringify(res.data));
         return res.data;

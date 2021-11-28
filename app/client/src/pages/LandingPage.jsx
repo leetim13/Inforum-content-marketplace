@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Col, Row, Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
-import { authHeader } from '../_helpers'
 import { campaignActions, alertActions } from '../_actions';
-import axios from 'axios';
 
 class LandingPage extends React.Component {
     constructor(props){
@@ -13,7 +11,6 @@ class LandingPage extends React.Component {
     }
 
     componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
         this.props.dispatch(campaignActions.getAll());
     }
 

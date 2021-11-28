@@ -3,11 +3,8 @@ import { Table, Button, Alert, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import { connect } from 'react-redux';
-// import { history } from '../_helpers';
-import axios from 'axios';
-import { authHeader } from '../_helpers'
+import { Http } from '../_helpers'
 import { userActions, alertActions } from '../_actions';
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
 
 class HomePage extends React.Component {
     constructor(props){
@@ -24,9 +21,8 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
         this.props.dispatch(userActions.getAll());
-        axios.get(`${server_url}`)
+        Http.get(`/`)
             .then((res) => this.setState({ data: res.data.message }))
             .catch((err) => console.log(err));
     }
@@ -37,7 +33,7 @@ class HomePage extends React.Component {
     }
 
     deleteUser = (id) => {
-        axios.delete(`${server_url}/users/${id}`)
+        Http.delete(`/users/${id}`)
             .then(_ => 
                 {   
                     this.props.dispatch(userActions.updateUsers(this.props.users.filter((user, _) => user.id !== id)))
@@ -48,7 +44,7 @@ class HomePage extends React.Component {
 
     addUser = () => {
         // No type checking right now.
-        axios.post(`${server_url}/users`, { name: this.state.userName, role: this.state.userRole, age: parseInt(this.state.userAge) })
+        Http.post(`/users`, { name: this.state.userName, role: this.state.userRole, age: parseInt(this.state.userAge) })
             .then(res => { 
                 this.props.dispatch(userActions.updateUsers([...this.props.users, res.data]))
                 this.props.dispatch(alertActions.success("Successful added user."))

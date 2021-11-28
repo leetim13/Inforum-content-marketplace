@@ -31,8 +31,7 @@ class CampaignController extends BaseController{
         }
         // Create a Campaign
         const campaign = {
-            ...req.body,
-            cash: 0
+            ...req.body
         };
 
         super.create(req, res, campaign);
