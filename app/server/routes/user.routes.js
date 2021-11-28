@@ -19,6 +19,9 @@ module.exports = app => {
 	// Retrieve a single User with id
 	router.get("/:id", users.findOne);
 
+	// Retrieve all post made by user with id
+	router.get("/:id/posts", users.findAllPosts);
+
 	// Update a User with id
 	router.put("/:id", users.update);
 

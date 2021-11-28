@@ -2,54 +2,49 @@ import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
-import OfferComp from '../_components/OfferComp';
-
+import { postActions, alertActions } from '../_actions';
 
 class MyPostsPage extends React.Component {
-    constructor(props){
-        super(props);
+    componentDidMount() {
+        this.props.dispatch(postActions.getAll(this.props.user));
     }
 
-    render() {
+    render() { // TODO: More status logic
+        const posts = this.props.posts.map((p, i) => 
+            <tr>
+                <td>{p.Campaign.title}</td>
+                <td>{p.Campaign.type}</td>
+                <td>{p.Campaign.Bank.name}</td>
+                <td>
+                    {new Date(p.createdAt).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </td>
+                <td>
+                    {new Date(p.Campaign.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </td>
+                <td style={{ color: 'green' }}>{new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed" }</td> 
+                <td><u>{p.url}</u></td>
+            </tr>
+        )
         return (
             <div className="page">
-                <h1 align="left" style={{padding: '10px'}} >Welcome to My Posts, User123!</h1>
+                <h1 align="left" style={{padding: '10px'}} >Welcome to My Posts, {this.props.user.firstName}!</h1>
                 <Container>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                            <th>Post ID </th>
-                            <th>Offer Type</th>
-                            <th>Bank</th>
-                            <th>Posted On</th>
-                            <th>Expires On</th>
-                            <th>Status</th>
-                            <th>Link to post</th>
+                                <th>Post ID </th>
+                                <th>Offer Type</th>
+                                <th>Bank</th>
+                                <th>Posted On</th>
+                                <th>Expires On</th>
+                                <th>Status</th>
+                                <th>Link to post</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>RBC-credit-card-347162</td>
-                            <td>Promotion</td>
-                            <td>RBC</td>
-                            <td>11/02/2021</td>
-                            <td>12/10/2021</td>
-                            <td style={{ color: 'green' }}>Active</td>
-                            <td><u>Link</u></td>
-                            </tr>
-
-                            <tr>
-                            <td>RBC-article-34213</td>
-                            <td>Article</td>
-                            <td>RBC</td>
-                            <td>11/02/2021</td>
-                            <td>11/12/2021</td>
-                            <td style={{ color: 'red' }}>Expired</td>
-                            <td><u>Link</u></td>
-                            </tr>
-                           
+                            {posts.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: posts}
                         </tbody>
-                        </Table>
+                    </Table>
                 </Container>
                 
             </div>
@@ -59,10 +54,11 @@ class MyPostsPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { authentication } = state;
+    const { authentication, posts } = state;
     const { user } = authentication;
     return {
-        user
+        user,
+        posts
     };
 }
 

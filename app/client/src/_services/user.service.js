@@ -1,8 +1,6 @@
 import { Http } from '../_helpers';
 import { history } from '../_helpers';
 
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
-
 export const userService = {
     login,
     logout,
@@ -10,7 +8,7 @@ export const userService = {
 };
 
 async function login(username, password) {
-    return await Http.post(`${server_url}/users/authenticate`, { 
+    return await Http.post(`/users/authenticate`, { 
         username, password 
     })
     .then(res => {
@@ -29,7 +27,7 @@ function logout() {
 }
 
 async function getAll() {
-    return await Http.get(`${server_url}/users`)
+    return await Http.get(`/users`)
     .then(res => {
         localStorage.setItem('users', JSON.stringify(res.data));
         return res.data;

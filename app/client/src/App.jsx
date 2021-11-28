@@ -27,8 +27,6 @@ import { CreateCampaignPage } from './pages/CreateCampaignPage';
 import { NavBarComp } from "./_components/NavBarComp";
 import NavBarFooterComp from "./_components/NavBarFooterComp"
 
-// const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
-
 function FallbackComponent() {
     return (
       <div>An error has occured</div>

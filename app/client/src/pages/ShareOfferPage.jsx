@@ -54,7 +54,7 @@ class ShareOfferPage extends React.Component {
             return;
         } 
         Http.post(`/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.state.id, userId: this.props.user.id })
-            .then(res => { 
+            .then(res => {
                 this.props.dispatch(postActions.updatePosts([...this.props.posts, res.data]));
                 history.push(`/verify/${res.data.id}`);
             })

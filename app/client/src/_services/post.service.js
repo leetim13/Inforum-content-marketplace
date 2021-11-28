@@ -1,8 +1,6 @@
 import { Http } from '../_helpers';
 import { history } from '../_helpers';
 
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
-
 export const postService = {
     getAll
 };
@@ -13,8 +11,8 @@ function logout() {
     localStorage.clear();
 }
 
-async function getAll() {
-    return await Http.get(`${server_url}/posts`)
+async function getAll(userId) {
+    return await Http.get(`/users/${userId}/posts`)
     .then(res => {
         localStorage.setItem('posts', JSON.stringify(res.data));
         return res.data;

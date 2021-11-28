@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
      */
     static associate(models) {
       // define association here
+      Bank.hasMany(models['Campaign']);
     }
   };
   Bank.init({

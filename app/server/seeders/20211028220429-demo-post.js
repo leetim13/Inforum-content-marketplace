@@ -1,9 +1,9 @@
 'use strict';
 
-const postObject = (id, userId, campaignId) => {
+const postObject = (id, UserId, CampaignId) => {
   return {
-    userId,
-    campaignId,
+    UserId,
+    CampaignId,
     url: "https://www.facebook.com/rbc/posts/688775238456992" + id,
     socialMedia: "facebook",
     createdAt: new Date(),

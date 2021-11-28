@@ -1,9 +1,9 @@
 'use strict';
 
-const campaignObject = (id, title, bankId, type) => {
+const campaignObject = (id, title, BankId, type) => {
   return {
     id: id + 1000000000,
-    bankId,
+    BankId,
     type,
     title,
     url: "https://discover.rbcroyalbank.com/smallbusinessredefined-roundup-6-common-themes-of-resilient-businesses/",

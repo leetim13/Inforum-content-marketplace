@@ -9,13 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bankId: {
+      BankId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Banks',
           key: 'id'
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
         allowNull: false
+      },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false, 
+        defaultValue: 'No title.'
       },
       type: {
         type: Sequelize.ENUM(

@@ -1,8 +1,6 @@
 import { Http } from '../_helpers';
 import { history } from '../_helpers';
 
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
-
 export const campaignService = {
     getAll
 };
@@ -14,7 +12,7 @@ function logout() {
 }
 
 async function getAll() {
-    return await Http.get(`${server_url}/campaigns`)
+    return await Http.get(`/campaigns`)
     .then(res => {
         localStorage.setItem('campaigns', JSON.stringify(res.data));
         return res.data;
