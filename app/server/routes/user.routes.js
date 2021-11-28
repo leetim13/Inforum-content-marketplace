@@ -19,6 +19,9 @@ module.exports = app => {
 	// Retrieve a single User with id
 	router.get("/:id", users.findOne);
 
+	// Retrieve all post made by user with id
+	router.get("/:id/posts", users.findAllPosts);
+
 	// Update a User with id
 	router.put("/:id", users.update);
 
@@ -70,6 +73,13 @@ module.exports = app => {
 	 *           schema:
 	 *             required: true
 	 *             $ref: '#/components/schemas/User'
+	 *     responses:
+	 *       200:
+	 *         description: Success
+	 *     tags: 
+     *       - Users
+	 *   delete:
+	 *     description: Delete all user
 	 *     responses:
 	 *       200:
 	 *         description: Success

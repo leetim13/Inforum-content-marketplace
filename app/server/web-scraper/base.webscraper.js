@@ -29,7 +29,7 @@ class BaseWebScrapper{
         throw new Error("loginWithCookies function Not implemented.");
     }
 
-    async getPost(req, res) {
+    async getPost(url) {
         throw new Error("getPost function Not implemented.");
     }
 }

@@ -9,19 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      UserId: {
         references: {
           model: 'Users',
           key: 'id'
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      campaignId: {
+      CampaignId: {
         references: {
           model: 'Campaigns',
           key: 'id'
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
         allowNull: false,
         type: Sequelize.INTEGER
       },

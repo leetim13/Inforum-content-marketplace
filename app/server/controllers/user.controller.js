@@ -4,6 +4,8 @@ const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
 const User = db['User'];
 const Bank = db['Bank'];
+const Post = db['Post'];
+const Campaign = db['Campaign'];
 
 /**
  * @class UserController
@@ -15,6 +17,7 @@ class UserController extends BaseController{
         this.authenticate = this.authenticate.bind(this);
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
+        this.findAllPosts = this.findAllPosts.bind(this);
         this.findOne = this.findOne.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
@@ -55,6 +58,25 @@ class UserController extends BaseController{
         super.findAll(req, res, condition);
     };
 
+    // Retrieve all posts made by current user.
+    async findAllPosts(req, res) {
+        const id = req.params.id;
+        const posts = await Post.findAll({ 
+            where: { UserId: {[Op.eq]: id }}, 
+            include: { model: Campaign, include: [ Bank ] } });
+        // const results = []
+        // for (let i = 0; i < posts.length; i++) {
+        //     const campaign = await Campaign.findByPk(posts[i].campaignId);
+        //     const bank = await Bank.findByPk(campaign.bankId);
+        //     campaign.bank = bank;
+        //     posts[i].campaign = campaign;
+        //     results.push(posts[i]);
+        // }
+        // console.log(results);
+        console.log(posts);
+        res.send(posts);
+    }
+
     // Find a single User with an id
     findOne(req, res) {
         super.findOne(req, res);
@@ -62,17 +84,17 @@ class UserController extends BaseController{
 
     // Update a User by the id in the request
     update(req, res) {
-        super.findOne(req, res);
+        super.update(req, res);
     };
 
     // Delete a User with the specified id in the request
     delete(req, res) {
-        super.findOne(req, res);
+        super.delete(req, res);
     };
 
     // Delete all User from the database.
     deleteAll(req, res) {
-        super.findOne(req, res);
+        super.deleteAll(req, res);
     };
 }
 

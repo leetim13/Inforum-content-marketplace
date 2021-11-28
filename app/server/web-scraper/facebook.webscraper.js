@@ -24,7 +24,13 @@ class FacebookWebScrapper extends BaseWebScrapper{
     }
 
     async getBrowser(headless=true) {
-        const browser = await puppeteer.launch({ headless, timeout: this.timeout, devtools: true, args: ['--no-sandbox','--disable-setuid-sandbox'] });
+        let args;
+        if (headless) {
+            args = ['--no-sandbox','--disable-setuid-sandbox'];
+        } else {
+            args = [];
+        }
+        const browser = await puppeteer.launch({ headless, timeout: this.timeout, devtools: true, args});
         const context = browser.defaultBrowserContext();
         context.overridePermissions('https://www.facebook.com', []);
         return browser;
@@ -41,7 +47,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
             const { requestId, request } = event;
             const cookieStrings = request.headers.Cookie.split('; ');
             if (cookieStrings.length === 0) {
-                throw new Error("Facebook cookies not found");
+                throw new Error("Facebook cookies not found.");
             }
             const FacebookCookies = [];
             cookieStrings.forEach(cookie => {
@@ -86,11 +92,13 @@ class FacebookWebScrapper extends BaseWebScrapper{
         // If login button is found, meaning not logged in. (Cookies expired, etc)
         if (await page.$('#loginbutton') !== null) {
             await this.loginWithCredentials(page, url);
+            if (await page.$('#loginbutton') !== null) {
+                throw new Error("Log in failed.");
+            }
         }
     }
 
-    async getPost(req, res) {
-        const url = req.query.url;
+    async getPost(url) {
         const browser = await this.getBrowser();
         const page = await this.getPage(browser);
 
@@ -102,31 +110,21 @@ class FacebookWebScrapper extends BaseWebScrapper{
         } else {
             await this.loginWithCookies(page, url, cookies);
         }
+        console.log("logged in.");
         
         // Waits for the comment bar to show up,
         // Use to indicate that the post has been loaded.
-        let elementNotFound = false;
         await page.waitForSelector(postMessageDiv)
-        .catch(async _=> {
-            res.status(400).send({
-                message: "Post verification failed. Post not visible."
-            })
-            elementNotFound = true;
+        .catch(_=> {
+            throw new Error("Post verification failed. Post not visible.");
         })
-        if (elementNotFound) {
-            await browser.close();
-            return;
-        }
         // Gets the post text
         const message = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
-        if (likes.length !== 1 || parseInt(likes[0]) === NaN) {
-            res.status(400).send({
-                message: "Something went wrong with scraping."
-            })
-        } else {
-            res.status(200).send({ message, likes: parseInt(likes[0]) });
-        }
+        if (parseInt(likes[0]) === NaN) {
+            throw new Error("Something went wrong with scraping.");
+        } 
+        return { message: message[0], likes: parseInt(likes[0]) };
     }
 }
 

@@ -5,6 +5,8 @@ const Op = db.Sequelize.Op;
 const User = db['User'];
 const Campaign = db['Campaign'];
 const Post = db['Post'];
+const BaseWebScrapper = require('../web-scraper/base.webscraper');
+const FacebookWebScrapper = require('../web-scraper/facebook.webscraper');
 
 /**
  * @class PostController
@@ -22,28 +24,77 @@ class PostController extends BaseController{
     }
 
     async create(req, res) {
-        const user = await User.findOne({ where: { id : req.body.userId }});
+        const user = await User.findByPk(req.body.userId);
         if (!user){
             res.status(400).send({
                 message: "User does not exist"
             })
             return;
         }
-
-        const campaign = await Campaign.findOne({ where: { id: req.body.campaignId }});
+        const campaign = await Campaign.findByPk(req.body.campaignId);
         if (!campaign){
             res.status(400).send({
                 message: "Campaign does not exist"
             })
             return;
         }
+        const postExist = await Post.findAll({ where: 
+            { campaignId: { [Op.eq]: req.body.campaignId }, userId: { [Op.eq]: req.body.userId }}
+        });
+        if (postExist.length > 0) {
+            res.status(400).send({
+                message: "User already posted for this campaign"
+            })
+            return;
+        }
 
-        // Create a Post
-        const post = {
-            ...req.body
-        };
+        let webScraper;
+        let postUrlRegex;
+        switch(req.body.platform) {
+            case "facebook":
+                postUrlRegex = new RegExp(
+                    '^https:\/\/www.facebook.com\/.*\/posts\/[0-9]+$'
+                 );
+                webScraper = new FacebookWebScrapper();
+                break;
+            default:
+                postUrlRegex = new RegExp('a^'); // Match nothing
+                // Should not end up here.
+                webScraper = new BaseWebScrapper("base");
+        }
+        if ( !postUrlRegex.test(req.body.url) ) {
+            res.status(400).send({ 
+                message: "Url does not match the format." 
+            });
+            return;
+        }
+        let postData;
+        try {
+            postData = await webScraper.getPost(req.body.url);
+            
+        } catch (err) {
+            if (err.message === "Facebook cookies not found." || err.message === "Something went wrong with scraping.") {
+                res.status(500).send(err);
+            } else {
+                res.status(400).send(err);
+            }
+            return;
+        }
+        console.log(postData);
+        
+        if ( postData && postData.message.includes(campaign.url)) {
+            const post = {
+                userId: user.id,
+                campaignId: campaign.id,
+                url: req.body.url,
+                isVerified: true,
+                socialMedia: req.body.platform
+            };
 
-        super.create(req, res, post);
+            super.create(req, res, post);
+        } else {
+            res.status(400).send({ message: "Campaign url not found." });
+        }
     };
 
     findAll(req, res) {
@@ -62,15 +113,15 @@ class PostController extends BaseController{
     };
 
     update(req, res) {
-        super.findOne(req, res);
+        super.update(req, res);
     };
 
     delete(req, res) {
-        super.findOne(req, res);
+        super.delete(req, res);
     };
 
     deleteAll(req, res) {
-        super.findOne(req, res);
+        super.deleteAll(req, res);
     };
 }
 

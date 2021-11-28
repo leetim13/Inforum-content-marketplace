@@ -41,7 +41,7 @@ app.use(Sentry.Handlers.tracingHandler());
 app.use(cors({ origin: CLIENT_URL }));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(express.json({limit: '25mb'}));
 
 // User routes
 require("./routes/user.routes")(app);

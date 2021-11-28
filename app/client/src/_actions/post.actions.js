@@ -7,10 +7,10 @@ export const postActions = {
     updatePosts
 };
 
-function getAll() {
+function getAll(user) {
     return dispatch => {
         dispatch(request());
-        postService.getAll()
+        postService.getAll(user.id)
             .then(
                 posts => dispatch(success(posts)),
                 error => { 
@@ -31,5 +31,5 @@ function updatePosts(posts) {
         dispatch(update(posts));
     };
 
-    function update(posts) { return { type: postConstants.UPDATE_CAMPAIGNS, posts } }
+    function update(posts) { return { type: postConstants.UPDATE_POSTS, posts } }
 }

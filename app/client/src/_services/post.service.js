@@ -1,22 +1,22 @@
-import axios from 'axios';
-import { authHeader } from '../_helpers';
+import { Http } from '../_helpers';
+import { history } from '../_helpers';
 
-const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001/api';
-
-axios.defaults.headers.common['Content-Type'] = 'application/json';
 export const postService = {
     getAll
 };
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
+    localStorage.clear();
 }
 
-async function getAll() {
-    axios.defaults.headers.common['Authorization'] = "Bearer " + authHeader();
-    return await axios.get(`${server_url}/posts`)
-    .then(res => res.data)
+async function getAll(userId) {
+    return await Http.get(`/users/${userId}/posts`)
+    .then(res => {
+        localStorage.setItem('posts', JSON.stringify(res.data));
+        return res.data;
+    })
     .catch(handleError);
 }
 
@@ -24,7 +24,7 @@ function handleError(err) {
     if (err.response.status === 401) {
         // auto logout if 401 response returned from api
         logout();
-        window.location.reload(true);
+        history.go(0);
     }
     return Promise.reject(err.response.data.message)
 }

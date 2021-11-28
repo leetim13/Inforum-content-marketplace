@@ -11,25 +11,11 @@ module.exports = (sequelize, Sequelize) => {
      */
     static associate(models) {
       // define association here
+      Post.belongsTo(models['User']);
+      Post.belongsTo(models['Campaign']);
     }
   };
   Post.init({
-    userId: {
-      references: {
-        model: 'Users',
-        key: 'id'
-      },
-      allowNull: false,
-      type: Sequelize.INTEGER
-    },
-    campaignId: {
-      references: {
-        model: 'Campaigns',
-        key: 'id'
-      },
-      allowNull: false,
-      type: Sequelize.INTEGER
-    },
     url: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -64,7 +50,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: false
     },
-    socialMedia: {
+    socialMedia: { // Change this to enum later
       type: Sequelize.STRING,
       allowNull: false,
       validate: {

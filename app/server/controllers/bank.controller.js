@@ -52,17 +52,17 @@ class BankController extends BaseController{
 
     // Update a User by the id in the request
     update(req, res) {
-        super.findOne(req, res);
+        super.update(req, res);
     };
 
     // Delete a User with the specified id in the request
     delete(req, res) {
-        super.findOne(req, res);
+        super.delete(req, res);
     };
 
     // Delete all User from the database.
     deleteAll(req, res) {
-        super.findOne(req, res);
+        super.deleteAll(req, res);
     };
 }
 

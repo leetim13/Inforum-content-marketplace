@@ -11,16 +11,15 @@ module.exports = (sequelize, Sequelize) => {
      */
     static associate(models) {
       // define association here
+      Campaign.belongsTo(models['Bank']);
+      Campaign.hasMany(models['Post']);
     }
   };
   Campaign.init({
-    bankId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Banks',
-        key: 'id'
-      },
-      allowNull: false
+    title: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: 'No title.'
     },
     type: {
       type: Sequelize.ENUM(

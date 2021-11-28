@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class NavBarComp extends Component {
     render() {
       	const dropDown = this.props.user 
-		? (<Nav >
+		? (<Nav style={{ paddingRight: "4em" }}>
 			<NavDropdown align="end"
 			// BUG: profile images not aligned with dropdown menu, using just text for now
 			// title={
@@ -51,6 +51,7 @@ class NavBarComp extends Component {
 				<Nav.Link href="/landing">Browse Offers</Nav.Link>
 				<Nav.Link href="/instructions">Instructions</Nav.Link>
 			</Nav>
+			
 			{ dropDown }
 		</Navbar>
         )
