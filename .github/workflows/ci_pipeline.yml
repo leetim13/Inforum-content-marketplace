@@ -50,12 +50,15 @@ jobs:
       working-directory: 'app/client'
       run: npm install
 
-    - name: Run jest tests for client
-      working-directory: 'app/client'
-      run: npm test -- --coverage --watchAll=false
+    # - name: Run jest tests for client
+    #   working-directory: 'app/client'
+    #   run: npm test -- --coverage --watchAll=false
     
     - name: Upload coverage to Code Climate
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
+      with:
+        workingDirectory: 'app/client'
+        coverageCommand: npm test -- --coverage --watchAll=false
 
