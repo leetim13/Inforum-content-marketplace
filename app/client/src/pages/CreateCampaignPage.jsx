@@ -151,3 +151,4 @@ function mapStateToProps(state) {
 
 const connectedCreateCampaignPage = connect(mapStateToProps)(CreateCampaignPage);
 export { connectedCreateCampaignPage as CreateCampaignPage }; 
+export { CreateCampaignPage as CreateCampaignPagePlain }; 

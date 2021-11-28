@@ -55,3 +55,4 @@ function mapStateToProps(state) {
 
 const connectedShareOfferPage = connect(mapStateToProps)(ShareOfferPage);
 export { connectedShareOfferPage as ShareOfferPage }; 
+export { ShareOfferPage as ShareOfferPagePlain }; 

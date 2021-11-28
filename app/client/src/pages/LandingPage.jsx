@@ -65,3 +65,4 @@ function mapStateToProps(state) {
 
 const connectedLandingPage = connect(mapStateToProps)(LandingPage);
 export { connectedLandingPage as LandingPage }; 
+export { LandingPage as LandingPagePlain }; 
