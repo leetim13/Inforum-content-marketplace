@@ -55,7 +55,7 @@ jobs:
       run: npm test -- --coverage --watchAll=false
     
     - name: Upload coverage to Code Climate
-      uses: paambaati/codeclimate-action@v3.0.0
+      uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
 
