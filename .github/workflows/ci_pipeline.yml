@@ -63,12 +63,11 @@ jobs:
     #     coverageCommand: npm test -- --coverage --watchAll=false
   
     - name: "Upload to CodeClimate"
-      working-directory: 'app/client'
       env:
         CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
       run: |
           export GIT_BRANCH="${GITHUB_REF##*/}" 
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage -t lcov 
+          ./cc-test-reporter format-coverage -t lcov --prefix ./app/client
           ./cc-test-reporter upload-coverage --id $CC_TEST_REPORTER_ID
