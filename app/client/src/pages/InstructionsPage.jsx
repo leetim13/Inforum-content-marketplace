@@ -86,3 +86,4 @@ function mapStateToProps(state) {
 
 const connectedInstructionsPage = connect(mapStateToProps)(InstructionsPage);
 export { connectedInstructionsPage as InstructionsPage }; 
+export { InstructionsPage as InstructionsPagePlain }; 

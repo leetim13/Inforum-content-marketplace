@@ -64,3 +64,4 @@ function mapStateToProps(state) {
 
 const connectedMyPostsPage = connect(mapStateToProps)(MyPostsPage);
 export { connectedMyPostsPage as MyPostsPage }; 
+export { MyPostsPage as MyPostsPagePlain }; 
