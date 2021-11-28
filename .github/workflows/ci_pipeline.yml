@@ -77,7 +77,7 @@ jobs:
           export GIT_BRANCH="${GITHUB_REF##*/}" 
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage --debug -t lcov -o coverage/codeclimate.frontend.json --prefix /app/client client/coverage/lcov.info
-          ./cc-test-reporter format-coverage --debug -t lcov -o coverage/codeclimate.backend.json --prefix /app/server server/coverage/lcov.info
+          ./cc-test-reporter format-coverage --debug -t lcov -o coverage/codeclimate.frontend.json --add-prefix /app/client client/coverage/lcov.info
+          ./cc-test-reporter format-coverage --debug -t lcov -o coverage/codeclimate.backend.json --add-prefix /app/server server/coverage/lcov.info
           ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 
           ./cc-test-reporter upload-coverage --debug --id $CC_TEST_REPORTER_ID
