@@ -69,15 +69,33 @@ jobs:
     #     workingDirectory: 'app/client'
     #     coverageCommand: npm test -- --coverage --watchAll=false
   
-    - name: "Upload to CodeClimate"
-      working-directory: 'app'
+    - name: "Format Client Coverage CodeClimate"
+      working-directory: 'app/client'
       env:
         CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
       run: |
           export GIT_BRANCH="${GITHUB_REF##*/}" 
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage --debug -t lcov -o coverage/codeclimate.frontend.json --add-prefix /app/client client/coverage/lcov.info
-          ./cc-test-reporter format-coverage --debug -t lcov -o coverage/codeclimate.backend.json --add-prefix /app/server server/coverage/lcov.info
+          ./cc-test-reporter format-coverage --debug -t lcov -o ../coverage/codeclimate.frontend.json 
+
+    - name: "Format Server Coverage CodeClimate"
+      working-directory: 'app/server'
+      env:
+        CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
+      run: |
+          export GIT_BRANCH="${GITHUB_REF##*/}" 
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter    
+          ./cc-test-reporter format-coverage --debug -t lcov -o ../coverage/codeclimate.backend.json 
+
+    - name: "Sum and Upload Coverage CodeClimate"
+      working-directory: 'app'
+      env:
+        CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
+      run: |
+          export GIT_BRANCH="${GITHUB_REF##*/}" 
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter    
           ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 
           ./cc-test-reporter upload-coverage --debug --id $CC_TEST_REPORTER_ID
