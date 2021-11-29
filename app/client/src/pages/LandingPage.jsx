@@ -52,9 +52,6 @@ class LandingPage extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
- 
-
-            
             </Container>
         );
     }

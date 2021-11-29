@@ -2,6 +2,7 @@
 
 const postObject = (id, UserId, CampaignId) => {
   return {
+    id: id + 1000000000,
     UserId,
     CampaignId,
     url: "https://www.facebook.com/rbc/posts/688775238456992" + id,
@@ -13,7 +14,10 @@ const postObject = (id, UserId, CampaignId) => {
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Posts', [postObject(1, 1000000001, 1000000001), postObject(2, 1000000002, 1000000001), postObject(3, 1000000002, 1000000002)]);
+    return queryInterface.bulkInsert('Posts',
+     [postObject(1, 1000000001, 1000000001), 
+      postObject(2, 1000000002, 1000000001), 
+      postObject(3, 1000000002, 1000000002)]);
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Posts', null, {});
