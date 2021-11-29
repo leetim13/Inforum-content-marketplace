@@ -5,6 +5,7 @@ import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
 import { alertActions } from '../_actions';
 import { history } from '../_helpers';
+import { campaignService } from '../_services';
 
 class OfferPage extends React.Component {
     constructor(props){
@@ -15,17 +16,20 @@ class OfferPage extends React.Component {
 			title: "",
 			description: "",
             endDate: "",
+            image: null
 		} // Change this after verifying redux campaigns are set up.
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
         if (!Array.isArray(result) || result.length === 0) {
             // Could reload redux campaign object to check for updates
             this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`));
         } else {
+            const image = await campaignService.getCampaignImage(result[0].id).catch(err => this.props.dispatch(alertActions.error(`get Campaign image failed: ${err}`)));
             this.setState({
-                ...result[0]
+                ...result[0],
+                image
             });
         }
     }
@@ -56,14 +60,15 @@ class OfferPage extends React.Component {
                                 <a alt="" href="" className="offer-bg">
                                 <Image src="../assets/offer_bg.png"  />
                                 <Image src="../assets/TD-credit-card.jpg" className="offer-image"/>
+                                <Image className="offer-image" src={this.state.image} alt={""} />
                                 </a>
                             </div>
                             <div className="card-body"  style={{ paddingLeft: "50px", paddingBottom: "200px"}}>
                                 <h4 className="card-title" align="left">{this.state.title}</h4>
-                                <p className="card-text"  align="left">{this.state.description}</p>
+                                <p className="card-text"  align="left" style={{ wordBreak:'break-all' }}>{this.state.description}</p>
                                 <div align="left">
                                     <p className="card-text"  align="left"><i>Offer ends {endDate}. Conditions apply.</i></p>
-                                    <Button className="share-button" variant="light" onClick={() => this.goToShareOffer()}>Share this offer!</Button>
+                                    {this.props.user.role !== 'Bank' ? <Button className="share-button" variant="light" onClick={() => this.goToShareOffer()}>Share this offer!</Button> : null}
                                 </div>
                             </div>
                         </div>

@@ -22,7 +22,7 @@ class CreateCampaignPage extends React.Component {
 	}
 
 	componentDidMount(){
-		this.setState({ bankId: this.props.user.id });
+		this.setState({ BankId: this.props.user.id });
 	}
 
 	formFieldValidation() {

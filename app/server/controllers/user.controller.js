@@ -17,6 +17,7 @@ class UserController extends BaseController{
         this.authenticate = this.authenticate.bind(this);
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
+        this.getImage = this.getImage.bind(this);
         this.findAllPosts = this.findAllPosts.bind(this);
         this.findOne = this.findOne.bind(this);
         this.update = this.update.bind(this);
@@ -61,18 +62,11 @@ class UserController extends BaseController{
     // Retrieve all posts made by current user.
     async findAllPosts(req, res) {
         const id = req.params.id;
+         // exclude campaign image, because localStorage on front end can't store it.
         const posts = await Post.findAll({ 
             where: { UserId: {[Op.eq]: id }}, 
-            include: { model: Campaign, include: [ Bank ] } });
-        // const results = []
-        // for (let i = 0; i < posts.length; i++) {
-        //     const campaign = await Campaign.findByPk(posts[i].campaignId);
-        //     const bank = await Bank.findByPk(campaign.bankId);
-        //     campaign.bank = bank;
-        //     posts[i].campaign = campaign;
-        //     results.push(posts[i]);
-        // }
-        // console.log(results);
+            include: { model: Campaign, include: [ Bank ], attributes: {exclude: [ 'image' ]}} });
+            
         console.log(posts);
         res.send(posts);
     }
@@ -81,6 +75,20 @@ class UserController extends BaseController{
     findOne(req, res) {
         super.findOne(req, res);
     };
+
+    // Get User profile picture
+    async getImage(req, res) {
+        const id = req.params.id;
+        const user = await User.findByPk(id);
+        if (user === null) {
+            res.status(404).send({
+                message: "User not found"
+            })
+        } else {
+            console.log(user);
+            res.send(user.profilePicture);
+        }
+    }
 
     // Update a User by the id in the request
     update(req, res) {

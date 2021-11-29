@@ -53,7 +53,7 @@ class ShareOfferPage extends React.Component {
             this.props.dispatch(alertActions.error(fieldErrors))
             return;
         } 
-        Http.post(`/posts`, { url: this.state.postUrl, platform: "facebook", campaignId: this.state.id, userId: this.props.user.id })
+        Http.post(`/posts`, { url: this.state.postUrl, platform: "facebook", CampaignId: this.state.id, UserId: this.props.user.id })
             .then(res => {
                 this.props.dispatch(postActions.updatePosts([...this.props.posts, res.data]));
                 history.push(`/verify/${res.data.id}`);

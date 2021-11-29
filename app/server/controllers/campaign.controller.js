@@ -15,6 +15,7 @@ class CampaignController extends BaseController{
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
+        this.getImage = this.getImage.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteAll = this.deleteAll.bind(this);
@@ -22,7 +23,7 @@ class CampaignController extends BaseController{
 
     // Create and Save a new User
     async create(req, res) {
-        const bank = await Bank.findOne({ where: { id : req.body.bankId }});
+        const bank = await Bank.findOne({ where: { id : req.body.BankId }});
         if (!bank){
             res.status(400).send({
                 message: "Bank does not exist."
@@ -40,9 +41,9 @@ class CampaignController extends BaseController{
     // Retrieve all User from the database.
     findAll(req, res) {
         const type = req.query.type;
-        const bankId = req.query.bankId;
+        const bankId = req.query.BankId;
         let condition = type ? { type: { [Op.eq]: type } } : {};
-        condition = bankId ? { ...condition, bankId: { [Op.eq]: bankId }} : condition;
+        condition = bankId ? { ...condition, BankId: { [Op.eq]: bankId }} : condition;
 
         super.findAll(req, res, condition);
     };
@@ -51,6 +52,20 @@ class CampaignController extends BaseController{
     findOne(req, res) {
         super.findOne(req, res);
     };
+
+    // Get Campaign image
+    async getImage(req, res) {
+        const id = req.params.id;
+        const campaign = await Campaign.findByPk(id);
+        if (campaign === null) {
+            res.status(404).send({
+                message: "Campaign not found"
+            })
+        } else {
+            console.log(campaign);
+            res.send(campaign.image);
+        }
+    }
 
     // Update a User by the id in the request
     update(req, res) {

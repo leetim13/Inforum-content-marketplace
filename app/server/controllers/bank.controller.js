@@ -3,7 +3,8 @@ const db = require('../models');
 const Op = db.Sequelize.Op;
 const User = db['User'];
 const Bank = db['Bank'];
-
+const Campaign = db['Campaign'];
+const Post = db['Post'];
 /**
  * @class BankController
  * @extends {BaseController}
@@ -14,6 +15,8 @@ class BankController extends BaseController{
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
+        this.getImage = this.getImage.bind(this);
+        this.findAllCampaigns = this.findAllCampaigns.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteAll = this.deleteAll.bind(this);
@@ -45,10 +48,37 @@ class BankController extends BaseController{
         super.findAll(req, res, condition);
     };
 
+    // Retrieve all campaigns under this bank id.
+    async findAllCampaigns(req, res) {
+        const id = req.params.id;
+        // exclude campaign image, because localStorage on front end can't store it.
+        const campaigns = await Campaign.findAll({ 
+            attributes: { exclude: ['image'] },
+            where: { BankId: {[Op.eq]: id }}, 
+            include: [{ model: Post }, { model: Bank }] });
+
+        console.log(campaigns);
+        res.send(campaigns);
+    };
+
     // Find a single User with an id
     findOne(req, res) {
         super.findOne(req, res);
     };
+
+    // Get Bank logo
+    async getImage(req, res) {
+        const id = req.params.id;
+        const bank = await Bank.findByPk(id);
+        if (bank === null) {
+            res.status(404).send({
+                message: "Bank not found"
+            })
+        } else {
+            console.log(bank);
+            res.send(bank.logo);
+        }
+    }
 
     // Update a User by the id in the request
     update(req, res) {

@@ -19,6 +19,9 @@ module.exports = app => {
 	// Retrieve a single User with id
 	router.get("/:id", users.findOne);
 
+	// Get user's profile picture
+	router.get("/:id/image", users.getImage);
+
 	// Retrieve all post made by user with id
 	router.get("/:id/posts", users.findAllPosts);
 
