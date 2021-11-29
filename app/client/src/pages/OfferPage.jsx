@@ -63,7 +63,7 @@ class OfferPage extends React.Component {
                                 <p className="card-text"  align="left">{this.state.description}</p>
                                 <div align="left">
                                     <p className="card-text"  align="left"><i>Offer ends {endDate}. Conditions apply.</i></p>
-                                    <Button className="share-button" variant="light" onClick={() => this.goToShareOffer()}>Share this offer!</Button>
+                                    {this.props.user.role !== 'Bank' ? <Button className="share-button" variant="light" onClick={() => this.goToShareOffer()}>Share this offer!</Button> : null}
                                 </div>
                             </div>
                         </div>

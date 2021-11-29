@@ -2,7 +2,8 @@ import { Http } from '../_helpers';
 import { history } from '../_helpers';
 
 export const campaignService = {
-    getAll
+    getAll,
+    getAllByBank
 };
 
 function logout() {
@@ -13,6 +14,15 @@ function logout() {
 
 async function getAll() {
     return await Http.get(`/campaigns`)
+    .then(res => {
+        localStorage.setItem('campaigns', JSON.stringify(res.data));
+        return res.data;
+    })
+    .catch(handleError);
+}
+
+async function getAllByBank(bankId) {
+    return await Http.get(`banks/${bankId}/campaigns`)
     .then(res => {
         localStorage.setItem('campaigns', JSON.stringify(res.data));
         return res.data;

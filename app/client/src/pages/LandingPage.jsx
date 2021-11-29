@@ -6,10 +6,6 @@ import OfferComp from '../_components/OfferComp';
 import { campaignActions, alertActions } from '../_actions';
 
 class LandingPage extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
     componentDidMount() {
         this.props.dispatch(campaignActions.getAll());
     }

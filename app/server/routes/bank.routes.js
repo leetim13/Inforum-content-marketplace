@@ -16,6 +16,9 @@ module.exports = app => {
 	// Retrieve a single User with id
 	router.get("/:id", banks.findOne);
 
+	// Retrieve all post made by user with id
+	router.get("/:id/campaigns", banks.findAllCampaigns);
+
 	// Update a User with id
 	router.put("/:id", banks.update);
 

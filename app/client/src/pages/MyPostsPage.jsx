@@ -11,8 +11,8 @@ class MyPostsPage extends React.Component {
 
     render() { // TODO: More status logic
         const posts = this.props.posts.map((p, i) => 
-            <tr>
-                <td>{p.Campaign.title}</td>
+            <tr key={i}>
+                <td><a href={"/offer/" + p.Campaign.id}>{p.Campaign.title}</a></td>
                 <td>{p.Campaign.type}</td>
                 <td>{p.Campaign.Bank.name}</td>
                 <td>
@@ -22,7 +22,7 @@ class MyPostsPage extends React.Component {
                     {new Date(p.Campaign.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                 </td>
                 <td style={{ color: 'green' }}>{new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed" }</td> 
-                <td><u>{p.url}</u></td>
+                <td><a href={p.url}>Link</a></td>
             </tr>
         )
         return (
@@ -32,7 +32,7 @@ class MyPostsPage extends React.Component {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Post ID </th>
+                                <th>Offer</th>
                                 <th>Offer Type</th>
                                 <th>Bank</th>
                                 <th>Posted On</th>

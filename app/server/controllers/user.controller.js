@@ -61,9 +61,11 @@ class UserController extends BaseController{
     // Retrieve all posts made by current user.
     async findAllPosts(req, res) {
         const id = req.params.id;
+         // exclude campaign image, because localStorage on front end can't store it.
         const posts = await Post.findAll({ 
             where: { UserId: {[Op.eq]: id }}, 
-            include: { model: Campaign, include: [ Bank ] } });
+            include: { model: Campaign, include: [ Bank ], attributes: {exclude: [ 'image' ]}} });
+            
         // const results = []
         // for (let i = 0; i < posts.length; i++) {
         //     const campaign = await Campaign.findByPk(posts[i].campaignId);

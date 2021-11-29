@@ -24,14 +24,14 @@ class PostController extends BaseController{
     }
 
     async create(req, res) {
-        const user = await User.findByPk(req.body.userId);
+        const user = await User.findByPk(req.body.UserId);
         if (!user){
             res.status(400).send({
                 message: "User does not exist"
             })
             return;
         }
-        const campaign = await Campaign.findByPk(req.body.campaignId);
+        const campaign = await Campaign.findByPk(req.body.CampaignId);
         if (!campaign){
             res.status(400).send({
                 message: "Campaign does not exist"
@@ -39,7 +39,7 @@ class PostController extends BaseController{
             return;
         }
         const postExist = await Post.findAll({ where: 
-            { campaignId: { [Op.eq]: req.body.campaignId }, userId: { [Op.eq]: req.body.userId }}
+            { CampaignId: { [Op.eq]: req.body.CampaignId }, UserId: { [Op.eq]: req.body.UserId }}
         });
         if (postExist.length > 0) {
             res.status(400).send({
@@ -84,8 +84,8 @@ class PostController extends BaseController{
         
         if ( postData && postData.message.includes(campaign.url)) {
             const post = {
-                userId: user.id,
-                campaignId: campaign.id,
+                UserId: user.id,
+                CampaignId: campaign.id,
                 url: req.body.url,
                 isVerified: true,
                 socialMedia: req.body.platform
@@ -100,7 +100,7 @@ class PostController extends BaseController{
     findAll(req, res) {
         const socialMedia = req.query.socialMedia || "";
         const isVerified = req.query.isVerified || null;
-        const campaignId = req.query.userId || null;
+        const campaignId = req.query.UserId || null;
         let condition = socialMedia ? { socialMedia: { [Op.iLike]: `%${socialMedia}%` } } : {};
         condition = isVerified ? { ...condition, isVerified: { [Op.eq]: isVerified }} : condition;
         condition = campaignId ? { ...condition, campaignId: { [Op.eq]: campaignId }} : condition;

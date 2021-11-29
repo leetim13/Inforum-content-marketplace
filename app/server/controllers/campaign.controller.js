@@ -22,7 +22,7 @@ class CampaignController extends BaseController{
 
     // Create and Save a new User
     async create(req, res) {
-        const bank = await Bank.findOne({ where: { id : req.body.bankId }});
+        const bank = await Bank.findOne({ where: { id : req.body.BankId }});
         if (!bank){
             res.status(400).send({
                 message: "Bank does not exist."
@@ -40,9 +40,9 @@ class CampaignController extends BaseController{
     // Retrieve all User from the database.
     findAll(req, res) {
         const type = req.query.type;
-        const bankId = req.query.bankId;
+        const bankId = req.query.BankId;
         let condition = type ? { type: { [Op.eq]: type } } : {};
-        condition = bankId ? { ...condition, bankId: { [Op.eq]: bankId }} : condition;
+        condition = bankId ? { ...condition, BankId: { [Op.eq]: bankId }} : condition;
 
         super.findAll(req, res, condition);
     };
