@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/38f42a6c21c4f32ca630/maintainability)](https://codeclimate.com/repos/6151f14d94e8e401b6005fc7/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/38f42a6c21c4f32ca630/test_coverage)](https://codeclimate.com/repos/6151f14d94e8e401b6005fc7/test_coverage)
 # inforum
 
 <img src="./logo.png" alt="Company logo"/>

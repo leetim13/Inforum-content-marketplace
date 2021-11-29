@@ -64,9 +64,16 @@ jobs:
       working-directory: 'app/client'
       run: npm install
 
-    - name: Run jest tests for client
+    - name: Run coverage for client
       working-directory: 'app/client'
       run: npm test -- --coverage --watchAll=false
+    
+    - name: Run coverage for server
+      working-directory: 'app/server'
+      run: npm run coverage
+      env:
+          SERVER_ENV: 'test'
+          DATABASE_URL: ${{ secrets.HEROKU_TEST_DB_URL }}
     
     # - name: Upload coverage to Code Climate
     #   uses: paambaati/codeclimate-action@v2.7.5
@@ -76,7 +83,7 @@ jobs:
     #     workingDirectory: 'app/client'
     #     coverageCommand: npm test -- --coverage --watchAll=false
   
-    - name: "Upload to CodeClimate"
+    - name: "Format Client Coverage CodeClimate"
       working-directory: 'app/client'
       env:
         CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
@@ -84,5 +91,25 @@ jobs:
           export GIT_BRANCH="${GITHUB_REF##*/}" 
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage -t lcov 
-          ./cc-test-reporter upload-coverage --id $CC_TEST_REPORTER_ID
+          ./cc-test-reporter format-coverage --debug -t lcov -o ../coverage/codeclimate.frontend.json 
+
+    - name: "Format Server Coverage CodeClimate"
+      working-directory: 'app/server'
+      env:
+        CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
+      run: |
+          export GIT_BRANCH="${GITHUB_REF##*/}" 
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter    
+          ./cc-test-reporter format-coverage --debug -t lcov -o ../coverage/codeclimate.backend.json 
+
+    - name: "Sum and Upload Coverage CodeClimate"
+      working-directory: 'app'
+      env:
+        CC_TEST_REPORTER_ID: 7f3833bca12b7ae136f3e60b370197a730d94f6a2ed2daa6c7eefef3ed506b38
+      run: |
+          export GIT_BRANCH="${GITHUB_REF##*/}" 
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter    
+          ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 
+          ./cc-test-reporter upload-coverage --debug --id $CC_TEST_REPORTER_ID
