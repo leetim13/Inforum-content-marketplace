@@ -65,7 +65,7 @@ class OfferPage extends React.Component {
                             </div>
                             <div className="card-body"  style={{ paddingLeft: "50px", paddingBottom: "200px"}}>
                                 <h4 className="card-title" align="left">{this.state.title}</h4>
-                                <p className="card-text"  align="left">{this.state.description}</p>
+                                <p className="card-text"  align="left" style={{ wordBreak:'break-all' }}>{this.state.description}</p>
                                 <div align="left">
                                     <p className="card-text"  align="left"><i>Offer ends {endDate}. Conditions apply.</i></p>
                                     {this.props.user.role !== 'Bank' ? <Button className="share-button" variant="light" onClick={() => this.goToShareOffer()}>Share this offer!</Button> : null}
