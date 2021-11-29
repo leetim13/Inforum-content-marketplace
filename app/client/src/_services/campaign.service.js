@@ -2,6 +2,7 @@ import { Http } from '../_helpers';
 import { history } from '../_helpers';
 
 export const campaignService = {
+    getCampaignImage,
     getAll,
     getAllByBank
 };
@@ -10,6 +11,14 @@ function logout() {
     // remove user from local storage to log user out
     // localStorage.removeItem('user');
     localStorage.clear();
+}
+
+async function getCampaignImage(id) {
+    return await Http.get(`/campaigns/${id}/image`)
+    .then(res => {
+        return res.data;
+    })
+    .catch(handleError);
 }
 
 async function getAll() {

@@ -4,23 +4,24 @@
     display: inline-flex;
   }
   
-  .offer-image {
-    position: absolute;
-    padding: 100px 0;
-    right: 10px;    
-  }
+.offer-image {
+  position: absolute;
+  padding: 100px 0;
+  right: 10px;
+  width: 250px;  
+}
 
-  .card-horizontal {
-    display: flex;
-    flex: 1 1 auto;
-    border: none;
-  }
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+  border: none;
+}
 
-  .share-button {
-    position: absolute;
-    /* right: 250px; */
-    background-color:darkgrey;
-    color: white;
-  }
+.share-button {
+  position: absolute;
+  /* right: 250px; */
+  background-color:darkgrey;
+  color: white;
+}
 
  

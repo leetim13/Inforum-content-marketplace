@@ -16,6 +16,9 @@ module.exports = app => {
 	// Retrieve a single User with id
 	router.get("/:id", campaigns.findOne);
 
+	// Get campaign's image
+	router.get("/:id/image", campaigns.getImage);
+
 	// Update a User with id
 	router.put("/:id", campaigns.update);
 

@@ -15,6 +15,7 @@ class CampaignController extends BaseController{
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
+        this.getImage = this.getImage.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteAll = this.deleteAll.bind(this);
@@ -51,6 +52,20 @@ class CampaignController extends BaseController{
     findOne(req, res) {
         super.findOne(req, res);
     };
+
+    // Get Campaign image
+    async getImage(req, res) {
+        const id = req.params.id;
+        const campaign = await Campaign.findByPk(id);
+        if (campaign === null) {
+            res.status(404).send({
+                message: "Campaign not found"
+            })
+        } else {
+            console.log(campaign);
+            res.send(campaign.image);
+        }
+    }
 
     // Update a User by the id in the request
     update(req, res) {
