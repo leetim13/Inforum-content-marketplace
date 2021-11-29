@@ -40,6 +40,7 @@ async function getAllByBank(bankId) {
 }
 
 function handleError(err) {
+    console.log(err);
     if (err.response.status === 401) {
         // auto logout if 401 response returned from api
         logout();

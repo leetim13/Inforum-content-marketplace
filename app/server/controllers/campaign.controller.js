@@ -45,7 +45,16 @@ class CampaignController extends BaseController{
         let condition = type ? { type: { [Op.eq]: type } } : {};
         condition = bankId ? { ...condition, BankId: { [Op.eq]: bankId }} : condition;
 
-        super.findAll(req, res, condition);
+        Campaign.findAll({ attributes: { exclude: ["image"] }, where: condition })
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        helpers.sequelizeErrorMessageHandler(err) || `Some error occurred while retrieving ${this.model.name}s.`
+                });
+            });
     };
 
     // Find a single User with an id

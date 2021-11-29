@@ -49,7 +49,7 @@ class NavBarComp extends Component {
 			</Navbar.Brand>
 
 			<Nav className="me-auto">
-				<Nav.Link href="/landing">Browse Offers</Nav.Link>
+				<Nav.Link href="/">Browse Offers</Nav.Link>
 				<Nav.Link href="/instructions">Instructions</Nav.Link>
 			</Nav>
 			

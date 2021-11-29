@@ -36,7 +36,7 @@ class UserController extends BaseController{
         const bankUser = await Bank.findOne({ where: { username : req.body.username }});
         if (bankUser){
             res.status(400).send({
-                message: "Please choose another username."
+                message: "Please choose another username. This one is reserved for bank user."
             })
             return;
         }

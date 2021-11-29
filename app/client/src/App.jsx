@@ -11,7 +11,6 @@ import { history } from './_helpers';
 import { alertActions } from './_actions';
 import { ProtectedRoute} from './_components';
 import { Router } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { InstructionsPage } from './pages/InstructionsPage';
 import { LandingPage } from './pages/LandingPage';
@@ -23,6 +22,8 @@ import { MyPostsPage } from './pages/MyPostsPage';
 import { MyCampaignsPage } from './pages/MyCampaigns';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
+import { SignUpPage } from './pages/SignUpPage';
+import { LinkRedirectPage } from './pages/LinkRedirectPage';
 
 import { NavBarComp } from "./_components/NavBarComp";
 import NavBarFooterComp from "./_components/NavBarFooterComp"
@@ -81,7 +82,8 @@ class App extends React.Component {
                                 <Switch>
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/instructions" component={InstructionsPage} />
-                                    <Route path="/landing" component={LandingPage} />
+                                    <Route path="/signup" component={SignUpPage} />
+                                    <Route path="/linkRedirect/:userId/:campaignId" component={LinkRedirectPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/share/:id" component={ShareOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/verify/:id" component={VerifyOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
@@ -90,7 +92,7 @@ class App extends React.Component {
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/myCampaigns" component={MyCampaignsPage} />
                                     <ProtectedRoute roles={['User', 'Bank', 'Admin']} path="/offer/:id" component={OfferPage} />
-                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
+                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={LandingPage}/>
                                 </Switch>
                             </Col>
                         </Container>
