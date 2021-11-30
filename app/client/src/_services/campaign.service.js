@@ -16,6 +16,7 @@ function logout() {
 async function getCampaignImage(id) {
     return await Http.get(`/campaigns/${id}/image`)
     .then(res => {
+        console.log(res);
         return res.data;
     })
     .catch(handleError);

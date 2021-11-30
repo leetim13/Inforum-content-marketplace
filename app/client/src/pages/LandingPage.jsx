@@ -4,7 +4,6 @@ import { Col, Row, Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from '
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { campaignActions, alertActions } from '../_actions';
-import { Http } from '../_helpers';
 
 class LandingPage extends React.Component {
     componentDidMount() {
@@ -20,11 +19,6 @@ class LandingPage extends React.Component {
 
     render() {
         const campaignCards = this.props.campaigns.slice(0, 6).map((c, i) => {
-            Http.get(`/campaigns/${c.id}/image`)
-            .then(res => { 
-                c.image = res.data;
-            })
-            .catch(err => this.props.dispatch(alertActions.error(err.message)));
             return <Col key={i} style={{padding: '10px'}}><OfferComp data={c}/></Col>;
         });
         console.log(campaignCards);

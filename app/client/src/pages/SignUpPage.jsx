@@ -47,7 +47,7 @@ class SignUpPage extends React.Component {
 			return;
 		}
 		
-		fileParser(e, (e) => this.setState({ profilePicture: e.target.result }));
+		fileParser(e, (e) => this.setState({ profilePicture: btoa(e.target.result) }));
 	}
 
     handleSubmit(e) {

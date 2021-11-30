@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Image, Container, Link, InputGroup} from 'react-bootstrap';
-import { Http, fileParser } from '../_helpers';
+import { Http } from '../_helpers';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 

@@ -71,7 +71,7 @@ class CampaignController extends BaseController{
                 message: "Campaign not found"
             })
         } else {
-            console.log(campaign);
+            console.log(campaign.image);
             res.send(campaign.image);
         }
     }

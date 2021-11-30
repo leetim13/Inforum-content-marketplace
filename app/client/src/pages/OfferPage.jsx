@@ -5,6 +5,8 @@ import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
 import { alertActions } from '../_actions';
 import { history } from '../_helpers';
+import { Http } from '../_helpers';
+
 import { campaignService } from '../_services';
 
 class OfferPage extends React.Component {
@@ -15,22 +17,27 @@ class OfferPage extends React.Component {
             bankId: -1,
 			title: "",
 			description: "",
-            endDate: "",
-            image: null
+            endDate: ""
 		} // Change this after verifying redux campaigns are set up.
     }
 
     async componentDidMount() {
+        console.log(this.props.campaigns);
+        console.log(this.state);
         const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
         if (!Array.isArray(result) || result.length === 0) {
             // Could reload redux campaign object to check for updates
             this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`));
         } else {
-            const image = await campaignService.getCampaignImage(result[0].id).catch(err => this.props.dispatch(alertActions.error(`get Campaign image failed: ${err}`)));
-            this.setState({
-                ...result[0],
-                image
-            });
+            await Http.get(`/campaigns/${result[0].id}/image`)
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    ...result[0],
+                    image: res.data
+                });
+            })
+            .catch(err => this.props.dispatch(alertActions.error(`get Campaign image failed: ${err}`)));
         }
     }
 
@@ -44,11 +51,12 @@ class OfferPage extends React.Component {
         .toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         
         const campaignCards = this.props.campaigns
-        .filter((c, i) => c.bankId === this.state.bankId && c.id !== this.state.id)
+        .filter((c, i) => c.BankId === this.state.BankId && c.id !== this.state.id)
         .slice(0, 3)
         .map((c, i) => 
-        <Col key={i} style={{paddingLeft: '20px', paddingRight: '20px'}}><OfferComp data={c}/></Col>
+            <Col key={i} style={{paddingLeft: '20px', paddingRight: '20px'}}><OfferComp data={c}/></Col>
         );
+        // console.log(campaignCards);
         return (
             <Container className="page">
                 <Row>
@@ -59,8 +67,8 @@ class OfferPage extends React.Component {
                             <div className="img-square-wrapper">
                                 <a alt="" href="" className="offer-bg">
                                 <Image src="../assets/offer_bg.png"  />
-                                <Image src="../assets/TD-credit-card.jpg" className="offer-image"/>
-                                <Image className="offer-image" src={this.state.image} alt={""} />
+                                {/* <Image src="../assets/TD-credit-card.jpg" className="offer-image"/> */}
+                                <Image className="offer-image" src={`data:image/png;base64,${this.state.image}`} alt={""} />
                                 </a>
                             </div>
                             <div className="card-body"  style={{ paddingLeft: "50px", paddingBottom: "200px"}}>
