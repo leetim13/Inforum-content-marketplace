@@ -67,13 +67,19 @@ class OfferPage extends React.Component {
                             <div className="img-square-wrapper">
                                 <a alt="" href="" className="offer-bg">
                                 <Image src="../assets/offer_bg.png"  />
-                                {/* <Image src="../assets/TD-credit-card.jpg" className="offer-image"/> */}
                                 <Image className="offer-image" src={`data:image/png;base64,${this.state.image}`} alt={""} />
                                 </a>
                             </div>
-                            <div className="card-body"  style={{ paddingLeft: "50px", paddingBottom: "200px"}}>
+                            <div className="card-body" >
                                 <h4 className="card-title" align="left">{this.state.title}</h4>
-                                <p className="card-text"  align="left" style={{ wordBreak:'break-all' }}>{this.state.description}</p>
+                                <div align="left">
+                                    <p className="card-text"  align="left" >{this.state.description}
+                                        <br/>
+                                        <a className="card-text"  align="left" href={this.state.url}><u>Learn more.</u></a>
+                                    </p>
+                                </div>
+                                <br/>
+                                <br/>
                                 <div align="left">
                                     <p className="card-text"  align="left"><i>Offer ends {endDate}. Conditions apply.</i></p>
                                     {this.props.user.role !== 'Bank' ? <Button className="share-button" variant="light" onClick={() => this.goToShareOffer()}>Share this offer!</Button> : null}
@@ -82,12 +88,14 @@ class OfferPage extends React.Component {
                         </div>
                     </div>
                 </Row>
-                    
+                <br/>    
+                <br/>    
 
                 <Row xs={3} md={3} lg={3}> 
                     {campaignCards}
                 </Row>
-
+                <br/>    
+                <br/>    
                 </Container>
         );
     }
