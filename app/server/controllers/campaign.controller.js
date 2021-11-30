@@ -4,6 +4,9 @@ const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
 const Campaign = db['Campaign'];
 const Bank = db['Bank'];
+const Post = db['Post'];
+const Insight = db['DailyInsight'];
+const User = db['User'];
 
 /**
  * @class CampaignController
@@ -16,6 +19,7 @@ class CampaignController extends BaseController{
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
         this.getImage = this.getImage.bind(this);
+        this.findAllPosts = this.findAllPosts.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteAll = this.deleteAll.bind(this);
@@ -71,9 +75,21 @@ class CampaignController extends BaseController{
                 message: "Campaign not found"
             })
         } else {
-            console.log(campaign.image);
             res.send(campaign.image);
         }
+    }
+
+    // Find all insights for this campaign's posts
+    async findAllPosts(req, res) {
+        const id = req.params.id;
+        const posts = await Post.findAll({ 
+            where: { CampaignId: {[Op.eq]: id }}, 
+            include: [
+                { model: Insight }, 
+                { model: User, attributes: { exclude: [ 'profilePicture' ] } } 
+            ]
+        });
+        res.send(posts);
     }
 
     // Update a User by the id in the request

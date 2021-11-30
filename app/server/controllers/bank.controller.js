@@ -75,7 +75,6 @@ class BankController extends BaseController{
                 message: "Bank not found"
             })
         } else {
-            console.log(bank);
             res.send(bank.logo);
         }
     }

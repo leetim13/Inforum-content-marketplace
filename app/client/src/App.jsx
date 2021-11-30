@@ -19,7 +19,7 @@ import { ShareOfferPage } from './pages/ShareOfferPage';
 import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
-import { MyCampaignsPage } from './pages/MyCampaigns';
+import { MyCampaignsPage } from './pages/MyCampaignsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 import { SignUpPage } from './pages/SignUpPage';
@@ -88,7 +88,7 @@ class App extends React.Component {
                                     <ProtectedRoute roles={['User', 'Admin']} path="/verify/:id" component={VerifyOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
-                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/insights/:id" component={InsightsPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/myCampaigns" component={MyCampaignsPage} />
                                     <ProtectedRoute roles={['User', 'Bank', 'Admin']} path="/offer/:id" component={OfferPage} />
