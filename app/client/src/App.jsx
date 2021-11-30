@@ -20,7 +20,7 @@ import { ShareOfferPage } from './pages/ShareOfferPage';
 import { VerifyOfferPage } from './pages/VerifyOfferPage';
 import { MyRewardsPage } from './pages/MyRewardsPage';
 import { MyPostsPage } from './pages/MyPostsPage';
-import { CampaignsPage } from './pages/CampaignsPage';
+import { MyCampaignsPage } from './pages/MyCampaigns';
 import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 
@@ -82,13 +82,14 @@ class App extends React.Component {
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/instructions" component={InstructionsPage} />
                                     <Route path="/landing" component={LandingPage} />
-                                    <ProtectedRoute roles={['User', 'Admin']} path="/offer/:id" component={OfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/share/:id" component={ShareOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/verify/:id" component={VerifyOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myPosts" component={MyPostsPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/insights" component={InsightsPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
+                                    <ProtectedRoute roles={['Bank', 'Admin']} path="/myCampaigns" component={MyCampaignsPage} />
+                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} path="/offer/:id" component={OfferPage} />
                                     <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={HomePage}/>
                                 </Switch>
                             </Col>
