@@ -11,7 +11,7 @@ var image = fs.readFileSync('./resources/TD-credit-card.jpeg', {encoding: 'base6
 
 // decode the image as decoded.png for testing (decoding works!)
 // let buff = new Buffer(image, 'base64');
-// fs.writeFileSync('stack-abuse-logo-out.png', buff);
+// fs.writeFileSync('decoded.png', buff);
 // console.log('Base64 image data converted to file: decoded.png');
 
 const campaignObject = (id, title, BankId, type, image) => {

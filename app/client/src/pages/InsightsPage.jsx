@@ -129,4 +129,3 @@ function mapStateToProps(state) {
 
 const connectedInsightsPage = connect(mapStateToProps)(InsightsPage);
 export { connectedInsightsPage as InsightsPage }; 
-export { InsightsPage as InsightsPagePlain }; 

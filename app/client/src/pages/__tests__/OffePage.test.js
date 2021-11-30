@@ -3,21 +3,23 @@ import React from "react";
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from "redux-mock-store";
-import { Provider } from 'react-redux';
+import thunk from 'redux-thunk'
 
-const mockStore = configureMockStore();
-const store = mockStore({});
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
+const store = mockStore({
+    authentication: {user: {}},
+    campaigns: [{}, {}]
+});
 configure({ adapter: new Adapter() });
 
 describe("Test OfferPage", () => {
-    it("should render OfferPage", () => {
+    it("should render Share this offer!", () => {
 
-        const wrapper = shallow(
-            <Provider store={store}>
-                <OfferPage />
-            </Provider>
-        );
-        // console.log(wrapper.debug());
+        // const wrapper = shallow(
+        //     <OfferPage store={store} />
+        // ).dive().dive();
+        // // console.log(wrapper.debug());
         // expect(wrapper.text().includes('Share this offer!')).toBe(true);
     });
 });
