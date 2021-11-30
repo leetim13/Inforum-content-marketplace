@@ -1,24 +1,66 @@
-import { CampaignsPagePlain } from '../MyCampaigns';
-import React from "react";
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import configureMockStore from "redux-mock-store";
-import { Provider } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
+import {Table} from 'react-bootstrap';
+import Container from 'react-bootstrap/Container'
+import { campaignActions, alertActions } from '../_actions';
 
-const mockStore = configureMockStore();
-const store = mockStore({});
-configure({ adapter: new Adapter() });
+class MyCampaignsPage extends React.Component {
+    componentDidMount() {
+        this.props.dispatch(campaignActions.getAllByBank(this.props.user.id));
+    }
 
-
-describe("Test CampaignsPage", () => {
-    it("should render with the text Welcome to My Campaigns", () => {
-
-        const wrapper = shallow(
-            <Provider store={store}>
-                <CampaignsPagePlain />
-            </Provider>
+    render() { // TODO: Status checks, needs to involve current budget status too.
+        const campaigns = this.props.campaigns.map((c, i) => 
+            <tr key={i}>
+                <td><a href={"/offer/" + c.id}>{c.title}</a></td>
+                <td>{c.type}</td>
+                <td>
+                    {new Date(c.startDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </td>
+                <td>
+                    {new Date(c.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </td>
+                <td style={{ color: 'green' }}>{new Date(c.endDate) >= new Date() ? "Ongoing" : "Ended" }</td>
+                <td><a href={"/insights/" + c.id}>Link</a></td>
+            </tr>
+        )
+        // Bank in header is not neccessary.
+        return (
+            <div className="page">
+                <h1 align="left" style={{padding: '10px'}} >Welcome to My Campaigns, RBC!</h1>
+                <Container>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Offer Type</th>
+                                <th>Posted On</th>
+                                <th>Expires On</th>
+                                <th>Status</th>
+                                <th>Link to Campaign Insights</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {campaigns.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: campaigns}
+                        </tbody>
+                        </Table>
+                </Container>
+                
+            </div>
+            
         );
-        // console.log(wrapper.debug());
-        // expect(wrapper.text().includes('Welcome to My Campaigns')).toBe(true);
-    });
-});
+    }
+}
+
+function mapStateToProps(state) {
+    const { authentication, campaigns } = state;
+    const { user } = authentication;
+    return {
+        user,
+        campaigns
+    };
+}
+
+const connectedCampaignsPage = connect(mapStateToProps)(MyCampaignsPage);
+export { connectedCampaignsPage as MyCampaignsPage }; 
+export { MyCampaignsPage as CampaignsPagePlain }; 
