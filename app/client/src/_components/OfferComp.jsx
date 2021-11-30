@@ -12,8 +12,9 @@ export default class OfferComp extends Component {
     render() {
         return (
           <Card style={{ width: '15rem' }} >
+			  {/* src="../assets/TD-credit-card.jpg" */}
             <Card.Img variant="top" src={this.state.image} style={{ width: '80%' }} className="rounded mx-auto d-block"/>
-			<Card.Body>
+            <Card.Body>
 				<Card.Title>{this.state.title}</Card.Title>
 				<Card.Text style={{textAlign: "left"}}>
 					{this.state.description}

@@ -1,4 +1,4 @@
-import {InstructionsPage} from '../InstructionsPage.jsx';
+import {UnauthorizedPage} from '../Unauthorized.jsx';
 import React from "react";
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -9,19 +9,18 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 const store = mockStore({
     authentication: {user: {}},
-    campaigns: [],
+    campaigns: []
 });
 configure({ adapter: new Adapter() });
 
-
-describe("Test InstructionsPagePlain", () => {
-    it("should render with the text Everyone can sign up - you DON’T have to be an influencer!", () => {
+describe("Test Unauthorized Page", () => {
+    it("should render with the text Unauthorized!", () => {
 
         const wrapper = shallow(
-            <InstructionsPage store={store} />
-        ).dive().dive();
+            <UnauthorizedPage />
+        );
         // console.log(wrapper.debug());
-        expect(wrapper.text().includes('Everyone can sign up - you DON’T have to be an influencer!')).toBe(true);
+        expect(wrapper.text().includes('Unauthorized!')).toBe(true);
     });
 });
 

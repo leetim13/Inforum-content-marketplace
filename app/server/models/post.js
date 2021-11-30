@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       // define association here
       Post.belongsTo(models['User']);
       Post.belongsTo(models['Campaign']);
-      Post.hasMany(models['DailyInsight'])
+      Post.hasMany(models['DailyInsight']);
     }
   };
   Post.init({
