@@ -2,6 +2,7 @@ const User = require('./user.schema').User;
 const Bank = require('./bank.schema').Bank;
 const Campaign = require('./campaign.schema').Campaign;
 const Post = require('./post.schema').Post;
+const Insight = require('./insight.schema').Insight;
 
 module.exports = {
     definition: {
@@ -19,7 +20,8 @@ module.exports = {
               User,
               Bank,
               Campaign,
-              Post
+              Post,
+              Insight
             }
         },
         info: {
@@ -59,6 +61,14 @@ module.exports = {
           {
             name: "Campaigns",
             description: "Campaign from bank users"
+          },
+          {
+            name: "Posts",
+            description: "Post made by promoters"
+          },
+          {
+            name: "Insights",
+            description: "Insight for each post"
           }
         ]
     },

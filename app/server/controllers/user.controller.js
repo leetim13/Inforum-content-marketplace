@@ -6,6 +6,7 @@ const User = db['User'];
 const Bank = db['Bank'];
 const Post = db['Post'];
 const Campaign = db['Campaign'];
+const Insight = db['DailyInsight'];
 
 /**
  * @class UserController
@@ -19,6 +20,7 @@ class UserController extends BaseController{
         this.findAll = this.findAll.bind(this);
         this.getImage = this.getImage.bind(this);
         this.findAllPosts = this.findAllPosts.bind(this);
+        this.findAllInsights = this.findAllInsights.bind(this);
         this.findOne = this.findOne.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
@@ -36,7 +38,7 @@ class UserController extends BaseController{
         const bankUser = await Bank.findOne({ where: { username : req.body.username }});
         if (bankUser){
             res.status(400).send({
-                message: "Please choose another username."
+                message: "Please choose another username. This one is reserved for bank user."
             })
             return;
         }
@@ -65,10 +67,29 @@ class UserController extends BaseController{
          // exclude campaign image, because localStorage on front end can't store it.
         const posts = await Post.findAll({ 
             where: { UserId: {[Op.eq]: id }}, 
-            include: { model: Campaign, include: [ Bank ], attributes: {exclude: [ 'image' ]}} });
+            include: { model: Campaign, include: [ { model: Bank, attributes: { exclude: ['logo'] }} ], attributes: {exclude: [ 'image' ]}} 
+        });
             
         console.log(posts);
         res.send(posts);
+    }
+
+    async findAllInsights(req, res) {
+        const id = req.params.id;
+        const posts = await Post.findAll({ 
+            where: { UserId: {[Op.eq]: id }}, 
+            include: { model: Insight, include: [ { model: Post } ]} 
+        });
+        console.log(posts);
+        const insights = [];
+        for (let i = 0; i < posts.length; i++) {
+            const post = posts[i];
+            for (let j = 0; j < post.DailyInsights.length; j++) {
+                insights.push(post.DailyInsights[j]);
+            }
+        }
+        console.log(insights);
+        res.send(insights);
     }
 
     // Find a single User with an id

@@ -8,12 +8,20 @@ import { campaignActions, alertActions } from '../_actions';
 class LandingPage extends React.Component {
     componentDidMount() {
         this.props.dispatch(campaignActions.getAll());
+        
     }
 
+    // Could use this to get image if new campaign does not have one.
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.state.userID !== prevState.userID) {
+    //     console.log('userId changed');
+    //  }
+
     render() {
-        const campaignCards = this.props.campaigns.slice(0, 6).map((c, i) => 
-            <Col key={i} style={{padding: '10px'}}><OfferComp data={c}/></Col>
-        );
+        const campaignCards = this.props.campaigns.slice(0, 6).map((c, i) => {
+            return <Col key={i} style={{padding: '10px'}}><OfferComp data={c}/></Col>;
+        });
+        console.log(campaignCards);
         return (
             <Container className="page">
 
@@ -45,9 +53,6 @@ class LandingPage extends React.Component {
                         {campaignCards}
                     </Row>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
             </Container>
         );
     }

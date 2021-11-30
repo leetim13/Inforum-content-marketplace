@@ -6,8 +6,8 @@ const fs = require('fs');
 //   console.log(data);
 // });
 
-var image = fs.readFileSync('./resources/TD-credit-card.jpeg', {encoding: 'base64'})
-// console.log (text)
+var image = fs.readFileSync('./resources/TD-credit-card.jpeg', 'base64')
+// console.log (image);
 
 // decode the image as decoded.png for testing (decoding works!)
 // let buff = new Buffer(image, 'base64');

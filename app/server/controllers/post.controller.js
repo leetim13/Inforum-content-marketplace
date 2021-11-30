@@ -18,6 +18,7 @@ class PostController extends BaseController{
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
+        this.numClicksPlusOne = this.numClicksPlusOne.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteAll = this.deleteAll.bind(this);
@@ -26,14 +27,14 @@ class PostController extends BaseController{
     async create(req, res) {
         const user = await User.findByPk(req.body.UserId);
         if (!user){
-            res.status(400).send({
+            res.status(404).send({
                 message: "User does not exist"
             })
             return;
         }
         const campaign = await Campaign.findByPk(req.body.CampaignId);
         if (!campaign){
-            res.status(400).send({
+            res.status(404).send({
                 message: "Campaign does not exist"
             })
             return;
@@ -111,6 +112,23 @@ class PostController extends BaseController{
     findOne(req, res) {
         super.findOne(req, res);
     };
+
+    async numClicksPlusOne(req, res) {
+        console.log(req.body);
+        const post = await Post.findOne({ where: { UserId: { [Op.eq]: req.body.userId }, CampaignId: { [Op.eq]: req.body.campaignId }}, include: { model: Campaign } });
+        if (post !== null) {
+            post.numClicks += 1;
+            await post.save();
+        }
+        const campaign = await Campaign.findByPk(req.body.campaignId);
+        if (campaign === null) {
+            res.status(404).send({
+                message: "Campaign not found."
+            })
+            return;
+        }
+        res.send(campaign.url);
+    }
 
     update(req, res) {
         super.update(req, res);

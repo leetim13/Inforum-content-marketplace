@@ -70,8 +70,6 @@ class InstructionsPage extends React.Component {
                  <p><i><u>Terms and Conditions apply.</u></i></p>
             </div>
             </Container>
-
-           
         );
     }
 }

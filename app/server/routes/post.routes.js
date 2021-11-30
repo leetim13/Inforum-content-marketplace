@@ -18,6 +18,9 @@ module.exports = app => {
 	// Retrieve a single User with id
 	router.get("/:id", posts.findOne);
 
+	// Linked clicked on post with this id, increase numClicks by 1, return url.
+	router.patch("/", posts.numClicksPlusOne);
+
 	// Update a User with id
 	router.put("/:id", posts.update);
 

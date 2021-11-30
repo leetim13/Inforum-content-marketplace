@@ -74,9 +74,9 @@ class ShareOfferPage extends React.Component {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm">Offer URL</InputGroup.Text>
                             {/* <FormControl placeholder={this.campaignUrl} readOnly /> */}
-                            <Form.Control readOnly defaultValue={this.state.url} />
+                            <Form.Control readOnly defaultValue={`https://inforum-client.herokuapp.com/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`} />
                             <Button variant="outline-secondary" id="button-addon2" 
-                            onClick={() => navigator.clipboard.writeText(this.state.url)}>
+                            onClick={() => navigator.clipboard.writeText(`https://inforum-client.herokuapp.com/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`)}>
                                 Copy
                             </Button>
                         </InputGroup>

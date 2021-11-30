@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('DailyInsight', {
+    await queryInterface.createTable('DailyInsights', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -22,6 +22,11 @@ module.exports = {
       date: {
         type: Sequelize.DATE,
         allowNull: false
+      },
+      rewardPoints: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
       numClicks: {
         type: Sequelize.INTEGER,
@@ -43,6 +48,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('DailyInsight');
+    await queryInterface.dropTable('DailyInsights');
   }
 };

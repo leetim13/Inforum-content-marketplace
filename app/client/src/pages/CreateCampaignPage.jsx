@@ -55,7 +55,7 @@ class CreateCampaignPage extends React.Component {
 			return;
 		}
 		
-		fileParser(e, (e) => this.setState({ image: e.target.result }));
+		fileParser(e, (e) => this.setState({ image: window.btoa(e.target.result) }));
 	}
 
     handleSubmit(e) {
@@ -160,7 +160,7 @@ class CreateCampaignPage extends React.Component {
 										<div>Image Preview:</div>
 									</Col>
 									<Col sm={10}>
-										<Image style={{ width: '20%' }} src={this.state.image} alt={""} />
+										<Image style={{ width: '20%' }} src={`data:image/png;base64,${this.state.image}`} alt={""} />
 									</Col>
 								</Row>}
 							</Form.Group>
