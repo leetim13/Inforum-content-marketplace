@@ -25,6 +25,9 @@ module.exports = app => {
 	// Retrieve all post made by user with id
 	router.get("/:id/posts", users.findAllPosts);
 
+	// Retrive all insights under a user's posts
+	router.get("/:id/insights", users.findAllInsights);
+
 	// Update a User with id
 	router.put("/:id", users.update);
 

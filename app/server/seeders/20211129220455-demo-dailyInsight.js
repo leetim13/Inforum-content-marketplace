@@ -9,6 +9,7 @@ const dailyInsightObject = (id, PostId, date, numClicks,
     numClicks,
     numLikes,
     numComments,
+    rewardPoints: numClicks,
     createdAt: new Date(),
     updatedAt: new Date()
   }
@@ -19,7 +20,7 @@ const dailyInsightObject = (id, PostId, date, numClicks,
 module.exports = {
 
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('DailyInsight',
+    return queryInterface.bulkInsert('DailyInsights',
     [
     dailyInsightObject(1, 1, new Date(new Date().setDate(new Date().getDate()-4)), 10, 1, 0), 
     dailyInsightObject(2, 1, new Date(new Date().setDate(new Date().getDate()-3)), 15, 2, 0), 
@@ -35,6 +36,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('DailyInsight', null, {});
+    return queryInterface.bulkDelete('DailyInsights', null, {});
   }
 };

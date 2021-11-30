@@ -19,6 +19,14 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DATE,
       allowNull: false
     },
+    rewardPoints: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+      validate: {
+        min: 0
+      }
+    },
     numClicks: {
       type: Sequelize.INTEGER,
       allowNull: false,
