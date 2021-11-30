@@ -8,56 +8,6 @@ import { Http } from '../_helpers';
 
 import Chart from 'chart.js/auto'
 import { Pie, Line, Doughnut } from 'react-chartjs-2';
-import faker from 'faker';
-
-// // pie chart for gender
-export const genderData = {
-    labels: ['Male', 'Female', 'Other'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [40, 58, 2],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-export const ageData = {
-  labels: ['0-18', '18-28', '28-38', '38-48', '48-58', '58+'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [10, 30, 35, 20, 4, 1],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
 //line chart for total clicks per day
 export const options = {
@@ -67,20 +17,6 @@ export const options = {
       position: 'top',
     },
   },
-};
-
-const labels = ['Nov 11', 'Nov 12', 'Nov 13', 'Nov 14', 'Nov 15', 'Nov 16', 'Nov 17'];
-
-export const clicksData = {
-  labels,
-  datasets: [
-    {
-      label: '# of clicks',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-  ],
 };
 
 class InsightsPage extends React.Component {
@@ -110,7 +46,6 @@ class InsightsPage extends React.Component {
             dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })] = 0;
             return date.toLocaleDateString({ month: 'long', day: 'numeric' });
         });
-		console.log(this.state.posts);
         const posts = this.state.posts;
 		for (let i = 0; i < posts.length; i++) {
 			const insights = posts[i].DailyInsights;
