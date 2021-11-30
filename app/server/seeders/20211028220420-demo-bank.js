@@ -25,13 +25,34 @@ module.exports = {
   {
     id: 1000000003,
     logo: null,
+    name: "BMO",
+    url: "https://www.bmo.com/main/personal",
+    username: "bmo",
+    password: "bmo",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: 1000000004,
+    logo: null,
+    name: "CIBC",
+    url: "https://www.cibc.com/en/personal-banking.html",
+    username: "cibc",
+    password: "cibc",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: 1000000005,
+    logo: null,
     name: "Scotia Bank",
     url: "https://www.scotiabank.com/ca/en/personal.html",
     username: "scotia",
     password: "scotia",
     createdAt: new Date(),
     updatedAt: new Date()
-  }]);
+  },
+]);
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Banks', null, {});

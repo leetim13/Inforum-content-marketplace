@@ -7,7 +7,7 @@ export default class NavBarFooterComp extends Component {
           <Container fluid>
               <Navbar bg="light" >
                 <span align="left">
-                <b> &nbsp; About &nbsp; Contact </b> <br />
+                 {/* <b> &nbsp; About &nbsp; Contact </b> <br /> */}
                 &nbsp; Inforum &copy; 2021. Powered by React.
                 </span>
                </Navbar>
