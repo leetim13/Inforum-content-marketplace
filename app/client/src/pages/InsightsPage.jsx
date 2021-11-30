@@ -94,13 +94,13 @@ class InsightsPage extends React.Component {
             <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: RBC-credit-card-0123</h1>            
             <Row xs={2} md={2} lg={2}>
               <Card>
-                <h5>Total Clicks by Gender</h5>
+                <h5>Campaign Shares by Gender</h5>
                   <Card.Body>
                       <Pie data={genderData}/>
                   </Card.Body>
               </Card>
               <Card>
-              <h5>Total Clicks by Age Group</h5>
+              <h5>Campaign Shares by Age Group</h5>
                   <Card.Body>
                       <Doughnut data={ageData} />
                   </Card.Body>
