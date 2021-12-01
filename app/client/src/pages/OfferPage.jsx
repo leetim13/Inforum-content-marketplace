@@ -20,8 +20,6 @@ class OfferPage extends React.Component {
     }
 
     async componentDidMount() {
-        console.log(this.props.campaigns);
-        console.log(this.state);
         const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
         if (!Array.isArray(result) || result.length === 0) {
             // Could reload redux campaign object to check for updates

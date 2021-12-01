@@ -55,6 +55,9 @@ require("./routes/campaign.routes")(app);
 // Post routes
 require("./routes/post.routes")(app);
 
+// Insight routes
+require("./routes/insight.route")(app);
+
 app.get("/api", (req, res) => {
     res.json({ message: `Hello from ${process.env.SERVER_ENV || 'development'} server!` });
 });

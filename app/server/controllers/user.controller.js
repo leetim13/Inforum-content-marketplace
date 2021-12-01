@@ -75,6 +75,7 @@ class UserController extends BaseController{
     }
 
     // Find all insights for this user's posts
+    // Can optimize further by sorting by date and taking only most recent 7 days.
     async findAllInsights(req, res) {
         const id = req.params.id;
         const posts = await Post.findAll({ 

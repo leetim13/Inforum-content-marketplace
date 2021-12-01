@@ -31,7 +31,7 @@ class ShareOfferPage extends React.Component {
 
     formFieldValidation() {
         const postUrlRegex = new RegExp(
-            '^https:\/\/www.facebook.com\/.*\/posts\/[0-9]+$'
+            '^https:\/\/www.facebook.com\/.*$'
          );
         const newErrors = {};
         const postUrl = this.state.postUrl;

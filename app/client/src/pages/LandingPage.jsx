@@ -48,7 +48,6 @@ class LandingPage extends React.Component {
     }
 
     render() {
-        console.log(this.props.campaigns);
         const campaignCards = this.props.campaigns
         .filter(c => (this.state.BankId === -1 || c.BankId === this.state.BankId) && (this.state.type === "All" || c.type === this.state.type))
         .slice(0, 6)

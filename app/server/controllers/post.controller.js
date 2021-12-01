@@ -1,12 +1,11 @@
 const BaseController = require("./base.controller");
+const webScrapperHelper = require("../business-logic/webScrapperHelper");
 const db = require('../models');
 const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
 const User = db['User'];
 const Campaign = db['Campaign'];
 const Post = db['Post'];
-const BaseWebScrapper = require('../web-scraper/base.webscraper');
-const FacebookWebScrapper = require('../web-scraper/facebook.webscraper');
 
 /**
  * @class PostController
@@ -48,32 +47,12 @@ class PostController extends BaseController{
             })
             return;
         }
-
-        let webScraper;
-        let postUrlRegex;
-        switch(req.body.platform) {
-            case "facebook":
-                postUrlRegex = new RegExp(
-                    '^https:\/\/www.facebook.com\/.*\/posts\/[0-9]+$'
-                 );
-                webScraper = new FacebookWebScrapper();
-                break;
-            default:
-                postUrlRegex = new RegExp('a^'); // Match nothing
-                // Should not end up here.
-                webScraper = new BaseWebScrapper("base");
-        }
-        if ( !postUrlRegex.test(req.body.url) ) {
-            res.status(400).send({ 
-                message: "Url does not match the format." 
-            });
-            return;
-        }
         let postData;
         try {
-            postData = await webScraper.getPost(req.body.url);
+            postData = await webScrapperHelper.getPostData(req.body.url, req.body.platform);
             
         } catch (err) {
+            console.log(err);
             if (err.message === "Facebook cookies not found." || err.message === "Something went wrong with scraping.") {
                 res.status(500).send(err);
             } else {
@@ -83,7 +62,7 @@ class PostController extends BaseController{
         }
         console.log(postData);
         
-        if ( postData && postData.message.includes(campaign.url)) {
+        if ( postData ) {
             const post = {
                 UserId: user.id,
                 CampaignId: campaign.id,
@@ -94,7 +73,7 @@ class PostController extends BaseController{
 
             super.create(req, res, post);
         } else {
-            res.status(400).send({ message: "Campaign url not found." });
+            res.status(400).send({ message: "Post not visible." });
         }
     };
 
