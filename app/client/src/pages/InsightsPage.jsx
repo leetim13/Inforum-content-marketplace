@@ -22,12 +22,21 @@ export const options = {
 class InsightsPage extends React.Component {
     constructor(props){
         super(props);
-		this.state = {
-			posts: []
-		}
+        this.state = {
+          posts: [],
+		  campaign: {
+			  title: ""
+		  }
+        }
     }
 
-    async componentDidMount() {
+    async componentDidMount() {		
+		const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+		if (currentCampaign === []) {
+			this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`))
+		} else {
+			this.setState({ campaign: currentCampaign[0] });
+		}
 		await Http.get(`/campaigns/${this.props.match.params.id}/posts`)
 		.then(res => {
             this.setState({
@@ -133,7 +142,7 @@ class InsightsPage extends React.Component {
 		  };
         return (
           <Container className="page">
-            <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: {this.props.campaigns[0].title}</h1>            
+            <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: {this.state.campaign.title}</h1>            
             <Row xs={2} md={2} lg={2}>
               <Card>
                 <h5>Campaign Shares by Gender</h5>
