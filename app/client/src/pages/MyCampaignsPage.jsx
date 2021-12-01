@@ -66,9 +66,7 @@ class MyCampaignsPage extends React.Component {
                             {campaigns.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: campaigns}
                         </tbody>
                     </Table>
-                    {this.props.user.role === "Admin" 
-                    ? <Button variant="secondary" onClick={async () => await this.generateInsights()}>Generate Insights</Button> 
-                    : null}
+                    <Button variant="secondary" onClick={async () => await this.generateInsights()}>Generate Insights</Button>
                 </Container>
                 
             </div>

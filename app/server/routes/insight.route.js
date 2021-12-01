@@ -11,7 +11,7 @@ module.exports = app => {
 	// router.post("/", insights.create);
 
 	// Generate insights if they do not already exist
-	router.post("/generate", authorize([Role.Admin]), insights.generateToday);
+	router.post("/generate", authorize([Role.Admin, Role.Bank]), insights.generateToday);
 
 	// // Retrieve all Insight
 	// router.get("/", insights.findAll);

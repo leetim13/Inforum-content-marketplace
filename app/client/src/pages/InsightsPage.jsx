@@ -52,7 +52,9 @@ class InsightsPage extends React.Component {
         const dateLabels = [-6, -5, -4, -3, -2, -1, 0].map((offset) => {
             const date = new Date();
             date.setDate(today.getDate() + offset);
-            dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })] = 0;
+			dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })] = {};
+            dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numClicks = 0;
+			dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numLikes = 0;
             return date.toLocaleDateString({ month: 'long', day: 'numeric' });
         });
         const posts = this.state.posts;
@@ -61,7 +63,8 @@ class InsightsPage extends React.Component {
 			for (let j = 0; j < insights.length; j++) {
 				const curDate = new Date(insights[j].date).toLocaleDateString({ month: 'long', day: 'numeric' });
 				if (curDate in dateObject) {
-					dateObject[curDate] += insights[j].numClicks;
+					dateObject[curDate].numClicks += insights[j].numClicks;
+					dateObject[curDate].numLikes += insights[j].numLikes;
 				}
 			}
 		}
@@ -71,7 +74,21 @@ class InsightsPage extends React.Component {
                 {
                     label: '# of clicks',
                     data: Object.keys(dateObject).map(function(key) {
-                        return dateObject[key];
+                        return dateObject[key].numClicks;
+                    }),
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                }
+            ]
+        }
+
+		const likesDataset = {
+            labels: dateLabels,
+            datasets: [
+                {
+                    label: '# of likes',
+                    data: Object.keys(dateObject).map(function(key) {
+                        return dateObject[key].numLikes;
                     }),
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -87,7 +104,7 @@ class InsightsPage extends React.Component {
 		let hasData = false;
 		for (let i = 0; i < agePartition.length; i++) {
 			let key = `${agePartition[i]}+`;
-			if (i !== agePartition[i].length - 1) {
+			if (i !== agePartition.length - 1) {
 				key = `${agePartition[i]}-${agePartition[i + 1]}`;
 			}
 			ageLabels.push(key);
@@ -99,7 +116,7 @@ class InsightsPage extends React.Component {
 			genderObject[posts[i].User.gender] += 1;
 			hasData = true;
 			for (let j = 0; j < agePartition.length; j++) {
-				if (agePartition[j] <= age) {
+				if (j === agePartition.length - 1 || (agePartition[j] <= age && agePartition[j + 1] > age)) {
 					ageObject[ageLabels[j]] += 1;
 					break;
 				}
@@ -113,8 +130,22 @@ class InsightsPage extends React.Component {
                     data: Object.keys(ageObject).map(function(key) {
                         return ageObject[key];
                     }),
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)',
+					  ],
+					  borderColor: [
+						'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)',
+					  ],
                 }
             ]
         };
@@ -159,11 +190,17 @@ class InsightsPage extends React.Component {
 
             </Row>
             <Card>
-              <h5>Total Clicks in last 7 days</h5>
-                  <Card.Body>
-                      <Line data={clicksDataset} />
-                  </Card.Body>
-              </Card>
+				<h5>Total Clicks in last 7 days</h5>
+				<Card.Body>
+					<Line data={clicksDataset} />
+				</Card.Body>
+			</Card>
+			<Card>
+				<h5>Total likes in last 7 days</h5>
+				<Card.Body>
+					<Line data={likesDataset} />
+				</Card.Body>
+			</Card>
             <br/><br/><br/>
             </Container>
         );

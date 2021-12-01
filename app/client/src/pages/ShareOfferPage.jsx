@@ -15,6 +15,8 @@ class ShareOfferPage extends React.Component {
             postUrl: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.baseClientUrl = process.env.REACT_APP_SERVER_URL ? "https://inforum-client.herokuapp.com" : "localhost:3000";
     }
 
     componentDidMount() {
@@ -74,9 +76,9 @@ class ShareOfferPage extends React.Component {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm">Offer URL</InputGroup.Text>
                             {/* <FormControl placeholder={this.campaignUrl} readOnly /> */}
-                            <Form.Control readOnly defaultValue={`https://inforum-client.herokuapp.com/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`} />
+                            <Form.Control readOnly defaultValue={`${this.baseClientUrl}/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`} />
                             <Button variant="outline-secondary" id="button-addon2" 
-                            onClick={() => navigator.clipboard.writeText(`https://inforum-client.herokuapp.com/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`)}>
+                            onClick={() => navigator.clipboard.writeText(`${this.baseClientUrl}/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`)}>
                                 Copy
                             </Button>
                         </InputGroup>
