@@ -32,7 +32,7 @@ class InstructionsPage extends React.Component {
                     <Card.Title> <Search/>  Browse all available Campaigns </Card.Title>
                     <Card.Text>                
                         Campaigns can range from credit cards, 
-                        news articles, or even a YouTube video! Simply choose the offers that you believe your 
+                        news articles, or even videos! Simply choose the offers that you believe your 
                         friends may be interested in.
                     </Card.Text>
                     </Card.Body>
