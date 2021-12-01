@@ -7,7 +7,7 @@ exports.getPostData = async (url, platform, testUrl) => {
     switch(platform) {
         case "facebook":
             postUrlRegex = new RegExp(
-                '^https:\/\/www.facebook.com\/.*\/posts\/[0-9]+$'
+                '^https:\/\/www.facebook.com\/.*$'
              );
             webScraper = new FacebookWebScrapper();
             break;
