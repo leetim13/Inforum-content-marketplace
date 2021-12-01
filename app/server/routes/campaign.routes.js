@@ -19,6 +19,9 @@ module.exports = app => {
 	// Get campaign's image
 	router.get("/:id/image", campaigns.getImage);
 
+	// Retrive all posts under this campaign id with insights and users.
+	router.get("/:id/posts", campaigns.findAllPosts);
+
 	// Update a User with id
 	router.put("/:id", campaigns.update);
 

@@ -11,17 +11,14 @@ export default class OfferComp extends Component {
 		}
 	}
 
-	async componentDidMount() {
-		await Http.get(`/campaigns/${this.state.id}/image`)
-		.then(res => { 
-			this.setState({
-				image: res.data
-			})
+	componentWillReceiveProps(props) {
+		this.setState({
+			...props.data
 		})
-		.catch(err => this.props.dispatch(alertActions.error(err.message)));
 	}
 
     render() {
+		
         return (
           <Card style={{ width: '15rem' }} >
 			  {/* src="../assets/TD-credit-card.jpg" */}

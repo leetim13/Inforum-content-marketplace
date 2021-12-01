@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { Image, Row, Col, Container, Card, Button} from 'react-bootstrap'
 import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
-import { alertActions } from '../_actions';
+import { alertActions, campaignActions } from '../_actions';
 import { history } from '../_helpers';
 import { Http } from '../_helpers';
-
-import { campaignService } from '../_services';
 
 class OfferPage extends React.Component {
     constructor(props){
@@ -38,6 +36,18 @@ class OfferPage extends React.Component {
                 });
             })
             .catch(err => this.props.dispatch(alertActions.error(`get Campaign image failed: ${err}`)));
+
+            const promises = [];
+            const tmpCampaigns = [];
+            for (let i = 0; i < this.props.campaigns.length; i++) {
+                promises.push(Http.get(`/campaigns/${this.props.campaigns[i].id}/image`)
+                .then(res => { 
+                    tmpCampaigns.push({ ...this.props.campaigns[i], image: res.data })
+                })
+                .catch(err => this.props.dispatch(alertActions.error(err.message))));
+            }
+            await Promise.all(promises);
+            this.props.dispatch(campaignActions.updateCampaigns(tmpCampaigns));
         }
     }
 
@@ -56,7 +66,6 @@ class OfferPage extends React.Component {
         .map((c, i) => 
             <Col key={i} style={{paddingLeft: '20px', paddingRight: '20px'}}><OfferComp data={c}/></Col>
         );
-        // console.log(campaignCards);
         return (
             <Container className="page">
                 <Row>
@@ -92,7 +101,7 @@ class OfferPage extends React.Component {
                 <br/>    
 
                 <Row xs={3} md={3} lg={3}> 
-                    {campaignCards}
+                    {campaignCards.length === 0 ? <Col>Ran out of campaigns</Col>: campaignCards}
                 </Row>
                 <br/>    
                 <br/>    

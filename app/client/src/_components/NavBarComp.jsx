@@ -30,7 +30,7 @@ class NavBarComp extends Component {
 				? (<div>
 					<Dropdown.Item href="/myCampaigns" >My Campaigns</Dropdown.Item>
 					<Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
-					<Dropdown.Item href="/insights">Insights</Dropdown.Item>
+					{/* <Dropdown.Item href="/insights">Insights</Dropdown.Item> */}
 				</div>) 
 				: null }
 				<Dropdown.Item href="/login">Logout</Dropdown.Item>

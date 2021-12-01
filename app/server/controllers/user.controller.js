@@ -74,13 +74,13 @@ class UserController extends BaseController{
         res.send(posts);
     }
 
+    // Find all insights for this user's posts
     async findAllInsights(req, res) {
         const id = req.params.id;
         const posts = await Post.findAll({ 
             where: { UserId: {[Op.eq]: id }}, 
             include: { model: Insight, include: [ { model: Post } ]} 
         });
-        console.log(posts);
         const insights = [];
         for (let i = 0; i < posts.length; i++) {
             const post = posts[i];
@@ -88,7 +88,6 @@ class UserController extends BaseController{
                 insights.push(post.DailyInsights[j]);
             }
         }
-        console.log(insights);
         res.send(insights);
     }
 
@@ -106,7 +105,6 @@ class UserController extends BaseController{
                 message: "User not found"
             })
         } else {
-            console.log(user);
             res.send(user.profilePicture);
         }
     }
