@@ -1,4 +1,5 @@
 const BaseController = require("./base.controller");
+const webScrapperHelper = require("../business-logic/webScrapperHelper");
 const db = require('../models');
 const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
@@ -19,6 +20,7 @@ class CampaignController extends BaseController{
         this.findAll = this.findAll.bind(this);
         this.findOne = this.findOne.bind(this);
         this.getImage = this.getImage.bind(this);
+        this.closeCampaign = this.closeCampaign.bind(this);
         this.findAllPosts = this.findAllPosts.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
@@ -65,6 +67,36 @@ class CampaignController extends BaseController{
     findOne(req, res) {
         super.findOne(req, res);
     };
+
+    async closeCampaign(req, res) {
+        const id = req.params.id;
+        const campaign = await Campaign.findOne(
+            { where: { id: { [Op.eq]: id}}, 
+            include: [ { model: Post, required: false, where: { isVerified: { [Op.eq]: true }}, include: [ { model: User } ]} ]
+        });
+        console.log(campaign);
+        if (campaign === null) {
+            res.status(404).send({
+                message: "Campaign not found."
+            })
+        } else {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            if (campaign.endDate >= tomorrow) {
+                res.status(400).send({
+                    message: "Campaign hasn't pass its end date yet."
+                })
+                return;
+            }
+            for (let i = 0; i < campaign.Posts.length; i++) {
+                const user = campaign.Posts[i].User;
+                user.rewardPoint += campaign.Posts[i].numClicks * 0.5;
+                // Give 0.5 reward point per click.
+                await user.save();
+            }
+            res.send({ message: "Success" });
+        }
+    }
 
     // Get Campaign image
     async getImage(req, res) {

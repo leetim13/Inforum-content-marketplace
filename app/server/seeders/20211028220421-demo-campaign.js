@@ -1,6 +1,10 @@
 'use strict';
 const fs = require('fs');
+const longBefore = new Date();
+longBefore.setUTCFullYear(longBefore.getUTCFullYear() - 1);
 
+const longLater = new Date();
+longLater.setUTCFullYear(longLater.getUTCFullYear() + 1);
 const campaignObject = (id, title, description, url, BankId, type, image ) => {
   return {
     id: id + 1000000000,
@@ -10,8 +14,8 @@ const campaignObject = (id, title, description, url, BankId, type, image ) => {
     url,
     description,
     image,
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: longBefore,
+    endDate: longLater,
     allocatedCash: 100,
     createdAt: new Date(),
     updatedAt: new Date()

@@ -14,6 +14,8 @@ module.exports = app => {
 	// router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
 	router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
 
+	// Close a campaign and distribute all reward points to user
+	router.patch("/:id/close", authorize([Role.Bank, Role.Admin]), campaigns.closeCampaign);
 
 	// // Retrieve a single Campaign with id
 	// router.get("/:id", campaigns.findOne);
