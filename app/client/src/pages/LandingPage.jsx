@@ -39,11 +39,11 @@ class LandingPage extends React.Component {
     }
 
     handleOfferChange(e){
-=        this.setState({ type: e });
+        this.setState({ type: e });
     }
 
     handleBankChange(e){
-=        this.setState({ BankId: e });
+        this.setState({ BankId: e });
     }
 
     render() {
