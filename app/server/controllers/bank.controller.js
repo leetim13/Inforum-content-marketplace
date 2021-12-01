@@ -57,7 +57,6 @@ class BankController extends BaseController{
             where: { BankId: {[Op.eq]: id }}, 
             include: [{ model: Post }, { model: Bank }] });
 
-        console.log(campaigns);
         res.send(campaigns);
     };
 

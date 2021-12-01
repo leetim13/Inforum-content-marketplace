@@ -8,33 +8,32 @@ module.exports = app => {
 	
 	var router = require("express").Router();
 
-	// Create a new User
-	// router.post("/", authorize([Role.Admin]), posts.create);
-	router.post("/", posts.create);
+	// Create a new Post
+	router.post("/", authorize([Role.User, Role.Admin]), posts.create);
 
-	// Retrieve all User
-	router.get("/", posts.findAll);
+	// Retrieve all Post
+	router.get("/", authorize([Role.User, Role.Admin]), posts.findAll);
 
-	// Retrieve a single User with id
-	router.get("/:id", posts.findOne);
+	// // Retrieve a single Post with id
+	// router.get("/:id", posts.findOne);
 
 	// Linked clicked on post with this id, increase numClicks by 1, return url.
 	router.patch("/", posts.numClicksPlusOne);
 
-	// Update a User with id
-	router.put("/:id", posts.update);
+	// // Update a Post with id
+	// router.put("/:id", posts.update);
 
-	// Delete a User with id
-	router.delete("/:id", posts.delete);
+	// // Delete a Post with id
+	// router.delete("/:id", posts.delete);
 
-	// Delete all Users
-	router.delete("/", posts.deleteAll);
+	// Delete all Posts
+	router.delete("/", authorize([Role.User, Role.Bank, Role.Admin]), posts.deleteAll);
 
 	/**
 	 * @swagger
 	 * /posts:
 	 *   get:
-	 *     description: Get all users
+	 *     description: Get all posts
 	 *     responses:
 	 *       200:
 	 *         description: Success

@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
-import {Table} from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import { postActions, alertActions } from '../_actions';
+import { Http } from '../_helpers';
 
 class MyPostsPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
     componentDidMount() {
         this.props.dispatch(postActions.getAll(this.props.user));
+    }
+
+    async generateInsights() {
+        await Http.post(`/insights/generate`)
+        .then(res => this.props.dispatch(alertActions.success("Generated successfully!")))
+        .catch(err => this.props.dispatch(alertActions.error("Generate failed: " + err.message)));
     }
 
     render() { // TODO: More status logic
@@ -46,7 +57,9 @@ class MyPostsPage extends React.Component {
                         </tbody>
                     </Table>
                 </Container>
-                
+                {this.props.user.role === "Admin" 
+                    ? <Button variant="secondary" onClick={async () => await this.generateInsights()}>Generate Insights</Button> 
+                    : null}
             </div>
             
         );

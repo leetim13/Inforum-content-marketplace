@@ -118,12 +118,15 @@ class FacebookWebScrapper extends BaseWebScrapper{
         .catch(_=> {
             throw new Error("Post verification failed. Post not visible.");
         })
+
+        console.log("Message showed");
         // Gets the post text
         const message = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
         if (parseInt(likes[0]) === NaN) {
             throw new Error("Something went wrong with scraping.");
         } 
+        console.log("no likes");
         return { message: message[0], likes: parseInt(likes[0]) };
     }
 }

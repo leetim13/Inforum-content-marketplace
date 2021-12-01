@@ -7,29 +7,29 @@ module.exports = app => {
 
 	var router = require("express").Router();
 
-	// Create a new User
-	router.post("/", banks.create);
+	// Create a new Bank
+	router.post("/", authorize([Role.Admin]), banks.create);
 
-	// Retrieve all User
-	router.get("/", banks.findAll);
+	// Retrieve all Bank
+	router.get("/", authorize([Role.Admin]), banks.findAll);
 
-	// Retrieve a single User with id
-	router.get("/:id", banks.findOne);
+	// // Retrieve a single Bank with id
+	// router.get("/:id", banks.findOne);
 
 	// Get bank's image
-	router.get("/:id/image", banks.getImage);
+	router.get("/:id/image", authorize([Role.User, Role.Bank, Role.Admin]), banks.getImage);
 
-	// Retrieve all post made by user with id
-	router.get("/:id/campaigns", banks.findAllCampaigns);
+	// Retrieve all campaign under bank id
+	router.get("/:id/campaigns", authorize([Role.Bank, Role.Admin]), banks.findAllCampaigns);
 
-	// Update a User with id
-	router.put("/:id", banks.update);
+	// // Update a Bank with id
+	// router.put("/:id", banks.update);
 
-	// Delete a User with id
-	router.delete("/:id", banks.delete);
+	// // Delete a Bank with id
+	// router.delete("/:id", banks.delete);
 
-	// Delete all Users
-	router.delete("/", banks.deleteAll);
+	// Delete all Banks
+	router.delete("/", authorize([Role.Admin]), banks.deleteAll);
 
 	/**
 	 * @swagger

@@ -24,6 +24,7 @@ import { InsightsPage } from './pages/InsightsPage';
 import { CreateCampaignPage } from './pages/CreateCampaignPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { LinkRedirectPage } from './pages/LinkRedirectPage';
+import { UnauthorizedPage } from "./pages/Unauthorized";
 
 import { NavBarComp } from "./_components/NavBarComp";
 import NavBarFooterComp from "./_components/NavBarFooterComp"
@@ -84,6 +85,7 @@ class App extends React.Component {
                                     <Route path="/instructions" component={InstructionsPage} />
                                     <Route path="/signup" component={SignUpPage} />
                                     <Route path="/linkRedirect/:userId/:campaignId" component={LinkRedirectPage} />
+                                    <Route path="/unauthorized" component={UnauthorizedPage}/>
                                     <ProtectedRoute roles={['User', 'Admin']} path="/share/:id" component={ShareOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/verify/:id" component={VerifyOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />

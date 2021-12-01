@@ -10,32 +10,31 @@ module.exports = app => {
 	router.post('/authenticate', users.authenticate); 
 
 	// Create a new User
-	// router.post("/", authorize([Role.Admin]), users.create);
 	router.post("/", users.create);
 
 	// Retrieve all User
-	router.get("/", users.findAll);
+	router.get("/", authorize([Role.User, Role.Admin]), users.findAll);
 
-	// Retrieve a single User with id
-	router.get("/:id", users.findOne);
+	// // Retrieve a single User with id
+	// router.get("/:id", users.findOne);
 
 	// Get user's profile picture
-	router.get("/:id/image", users.getImage);
+	router.get("/:id/image", authorize([Role.User, Role.Admin]), users.getImage);
 
 	// Retrieve all post made by user with id
-	router.get("/:id/posts", users.findAllPosts);
+	router.get("/:id/posts", authorize([Role.User, Role.Admin]), users.findAllPosts);
 
 	// Retrive all insights under a user's posts
-	router.get("/:id/insights", users.findAllInsights);
+	router.get("/:id/insights", authorize([Role.User, Role.Admin]), users.findAllInsights);
 
-	// Update a User with id
-	router.put("/:id", users.update);
+	// // Update a User with id
+	// router.put("/:id", users.update);
 
-	// Delete a User with id
-	router.delete("/:id", users.delete);
+	// // Delete a User with id
+	// router.delete("/:id", users.delete);
 
 	// Delete all Users
-	router.delete("/", users.deleteAll);
+	router.delete("/", authorize([Role.User, Role.Bank, Role.Admin]), users.deleteAll);
 
 	/**
 	 * @swagger

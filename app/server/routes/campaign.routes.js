@@ -7,29 +7,33 @@ module.exports = app => {
 
 	var router = require("express").Router();
 
-	// Create a new User
-	router.post("/", campaigns.create);
+	// Create a new Campaign
+	router.post("/", authorize([Role.Bank, Role.Admin]), campaigns.create);
 
-	// Retrieve all User
-	router.get("/", campaigns.findAll);
+	// Retrieve all Campaign
+	// router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
+	router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
 
-	// Retrieve a single User with id
-	router.get("/:id", campaigns.findOne);
+	// Close a campaign and distribute all reward points to user
+	router.patch("/:id/close", authorize([Role.Bank, Role.Admin]), campaigns.closeCampaign);
+
+	// // Retrieve a single Campaign with id
+	// router.get("/:id", campaigns.findOne);
 
 	// Get campaign's image
-	router.get("/:id/image", campaigns.getImage);
+	router.get("/:id/image", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.getImage);
 
 	// Retrive all posts under this campaign id with insights and users.
-	router.get("/:id/posts", campaigns.findAllPosts);
+	router.get("/:id/posts", authorize([Role.Bank, Role.Admin]), campaigns.findAllPosts);
 
-	// Update a User with id
-	router.put("/:id", campaigns.update);
+	// // Update a Campaign with id
+	// router.put("/:id", campaigns.update);
 
-	// Delete a User with id
-	router.delete("/:id", campaigns.delete);
+	// // Delete a Campaign with id
+	// router.delete("/:id", campaigns.delete);
 
-	// Delete all Users
-	router.delete("/", campaigns.deleteAll);
+	// Delete all Campaigns
+	router.delete("/", authorize([Role.Bank, Role.Admin]), campaigns.deleteAll);
 
 	/**
 	 * @swagger

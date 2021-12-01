@@ -24,7 +24,6 @@ class MyRewardsPage extends React.Component {
     }
 
     async componentDidMount() {
-        
         await Http.get(`/users/${this.props.user.id}/insights`)
         .then(res => {
             this.setState({
