@@ -99,7 +99,7 @@ class InsightsPage extends React.Component {
 			genderObject[posts[i].User.gender] += 1;
 			hasData = true;
 			for (let j = 0; j < agePartition.length; j++) {
-				if (agePartition[j] <= age) {
+				if (j === agePartition.length - 1 || (agePartition[j] <= age && agePartition[j + 1] > age)) {
 					ageObject[ageLabels[j]] += 1;
 					break;
 				}
