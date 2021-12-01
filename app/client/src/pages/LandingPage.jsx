@@ -25,6 +25,7 @@ class LandingPage extends React.Component {
     }
 
     async componentDidMount() {
+        this.props.dispatch(campaignActions.getAll());
         const promises = [];
         const tmpCampaigns = [];
         for (let i = 0; i < this.props.campaigns.length; i++) {
