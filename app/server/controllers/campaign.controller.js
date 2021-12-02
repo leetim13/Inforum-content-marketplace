@@ -90,8 +90,8 @@ class CampaignController extends BaseController{
             }
             for (let i = 0; i < campaign.Posts.length; i++) {
                 const user = campaign.Posts[i].User;
-                user.rewardPoint += campaign.Posts[i].numClicks * 0.5;
-                // Give 0.5 reward point per click.
+                user.rewardPoint += campaign.Posts[i].numClicks * 10;
+                // 10 reward points per click.
                 await user.save();
             }
             res.send({ message: "Success" });
