@@ -98,12 +98,13 @@ class FacebookWebScrapper extends BaseWebScrapper{
         }
     }
 
+    // TODO: Post with no likes will error can't find like amount.
     async getPost(url) {
         const browser = await this.getBrowser();
         const page = await this.getPage(browser);
 
         const cookies = await getAsync(`${this.platform}_cookies`);
-        let postMessageDiv = 'div.kvgmc6g5.cxmmr5t8.oygrvhab.hcukyx3x.c1et5uql.ii04i59q';
+        let postMessageDiv = 'div.cxmmr5t8.oygrvhab.hcukyx3x.c1et5uql.ii04i59q';
         let likesDiv = 'span.gpro0wi8.pcp91wgn'
         if (!cookies) {
             await this.loginWithCredentials(page, url);
@@ -116,18 +117,16 @@ class FacebookWebScrapper extends BaseWebScrapper{
         // Use to indicate that the post has been loaded.
         await page.waitForSelector(postMessageDiv)
         .catch(_=> {
-            throw new Error("Post verification failed. Post not visible.");
+            throw new Error("Post verification failed. Post not visible or link does not exist.");
         })
 
         console.log("Message showed");
         // Gets the post text
-        const message = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
+        const messages = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
-        if (parseInt(likes[0]) === NaN) {
-            throw new Error("Something went wrong with scraping.");
-        } 
         console.log("no likes");
-        return { message: message[0], likes: parseInt(likes[0]) };
+        const message = messages.join(" ");
+        return { message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) };
     }
 }
 
