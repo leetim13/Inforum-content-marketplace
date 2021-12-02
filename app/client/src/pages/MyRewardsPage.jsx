@@ -67,7 +67,8 @@ class MyRewardsPage extends React.Component {
 
         let numOngoing = 0;
         for (let i = 0; i < this.props.posts.length; i++) {
-            if (new Date() > new Date(this.props.posts[i].Campaign.endDate)){
+            console.log(this.props.posts[i])
+            if (new Date() <= new Date(this.props.posts[i].Campaign.endDate)){
                 numOngoing += 1;
             }
         }

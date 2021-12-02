@@ -70,8 +70,8 @@ class InsightController extends BaseController{
                             date: new Date,
                             numClicks: post.numClicks,
                             numLikes: postData.likes,
-                            rewardPoints: post.numClicks * 0.5 
-                            // Amount of reward points given right now is 0.5 * every clicks received. so it is 1 : 1 to our business model
+                            rewardPoints: post.numClicks * 10
+                            // 10 reward points per click.
                         }
                         await Insight.create(insight);
                     } else {
@@ -82,6 +82,7 @@ class InsightController extends BaseController{
             }
             res.send("Success");
         } catch (e) {
+            console.log(e);
             res.status(400).send(e);
         }
     }
