@@ -30,10 +30,12 @@ class InsightController extends BaseController{
 
     async generateToday(req, res) {
         const start = new Date();
-        start.setUTCHours(0,0,0,0);
+        start.setHours(0,0,0,0);
 
         const end = new Date();
-        end.setUTCHours(23,59,59,999);
+        end.setHours(23,59,59,999);
+        console.log(start)
+        console.log(end);
         const posts = await Post.findAll({
             include: [ 
                 { model: Insight, required: false, where: { date: {[Op.between]: [start, end]} } },
