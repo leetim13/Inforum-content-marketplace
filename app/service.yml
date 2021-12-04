@@ -21,6 +21,8 @@ commands:
   database:
     migrate: cd server; npx sequelize-cli db:migrate
     seed: cd server; npx sequelize-cli db:seed:all
-  test: cd server; npm test
+  test: 
+    server: cd server; npm test
+    client: cd client; npm test -- --coverage --watchAll=false
   client: cd client; npm start
   server: cd server; npm start
