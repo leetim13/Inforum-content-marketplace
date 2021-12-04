@@ -101,8 +101,8 @@ class ShareOfferPage extends React.Component {
 
                     <Form.Group> 
                         <Form.Label>
-                            <h5 align="left" style={{padding: '10px'}}>Feel free to add anything else you would like your friends to know!
-                            Once you are done, paste back your post URL below.</h5>
+                            <h5 align="left" style={{padding: '10px'}}>Once we have verified your post, check back later to see how 
+                            much Rewards you have gained!</h5>
                         </Form.Label>
                         <div style={{ display: "flex" }}>
                             <Button variant="outline-secondary" style={{ marginRight: "auto" }} type="submit">Verify Post!</Button>

@@ -9,8 +9,10 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 const store = mockStore({
     authentication: {user: {}},
-    campaigns: [{id: 1}, {id: 1}]
+    campaigns: [{id: 1}, {id: 1}],
 });
+const match = { params : { baseId : 1 } }
+
 configure({ adapter: new Adapter() });
 
 
@@ -18,11 +20,11 @@ configure({ adapter: new Adapter() });
 describe("Test ShareOfferPage", () => {
     it("should render ShareOfferPage", () => {
 
-        // const wrapper = shallow(
-        //     <ShareOfferPage store={store}/>
-        // ).dive().dive();
-        // // console.log(wrapper.debug());
-        // expect(wrapper.text().includes('Once we have verified your post')).toBe(true);
+        const wrapper = shallow(
+            <ShareOfferPage store={store} match={match}/>
+        ).dive().dive();
+        // console.log(wrapper.debug());
+        expect(wrapper.text().includes('Once we have verified your post')).toBe(true);
     });
 });
 
