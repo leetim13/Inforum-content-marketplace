@@ -21,6 +21,8 @@ class FacebookWebScrapper extends BaseWebScrapper{
     constructor() {
         super("facebook");
         this.getPost = this.getPost.bind(this);
+        this.username = process.env.SERVER_URL || require("../config/localConfig.json")[this.platform].username;
+        this.password = process.env.SERVER_URL || require("../config/localConfig.json")[this.platform].password;
         logger.info("FB Scrapper started.");
     }
 
@@ -104,7 +106,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
     }
 
     async getPost(url) {
-        console.log(url);
+        logger.info(`Scraping ${url}... In progress`);
         const browser = await this.getBrowser(process.env.SERVER_ENV ? true : false);
         const page = await this.getPage(browser);
 
@@ -130,6 +132,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
         const messages = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
         const message = messages.join(" ");
+        logger.info(`Scraping ${url}... Completed`);
         logger.info({ message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) });
         return { message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) };
     }

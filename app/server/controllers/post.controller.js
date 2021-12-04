@@ -15,7 +15,6 @@ class PostController extends BaseController{
     constructor(){
         super(Post);
         this.create = this.create.bind(this);
-        this.findAll = this.findAll.bind(this);
         this.numClicksPlusOne = this.numClicksPlusOne.bind(this);
     }
 
@@ -70,18 +69,6 @@ class PostController extends BaseController{
         } else {
             res.status(400).send({ message: "Post not visible." });
         }
-    };
-
-    findAll(req, res) {
-        const socialMedia = req.query.socialMedia || "";
-        const isVerified = req.query.isVerified || null;
-        const campaignId = req.query.UserId || null;
-        let condition = socialMedia ? { socialMedia: { [Op.iLike]: `%${socialMedia}%` } } : {};
-        condition = isVerified ? { ...condition, isVerified: { [Op.eq]: isVerified }} : condition;
-        condition = campaignId ? { ...condition, campaignId: { [Op.eq]: campaignId }} : condition;
-        logger.info(`Post: findAll`);
-
-        super.findAll(req, res, condition);
     };
 
     async numClicksPlusOne(req, res) {

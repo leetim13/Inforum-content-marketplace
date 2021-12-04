@@ -11,22 +11,12 @@ module.exports = app => {
 	// Create a new Post
 	router.post("/", authorize([Role.User, Role.Admin]), posts.create);
 
-	// Retrieve all Post
-	router.get("/", authorize([Role.User, Role.Admin]), posts.findAll);
-
 	// Linked clicked on post with this id, increase numClicks by 1, return url.
 	router.patch("/", posts.numClicksPlusOne);
 
 	/**
 	 * @swagger
 	 * /posts:
-	 *   get:
-	 *     description: Get all posts
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Posts
 	 *   post:
 	 *     description: Web scrape and create a post and verification
 	 *     requestBody:

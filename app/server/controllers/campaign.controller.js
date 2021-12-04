@@ -119,7 +119,7 @@ class CampaignController extends BaseController{
             res.status(401).json({ message: 'Unauthorized' });
             return;
         }
-        let whereCondition = { isVerified: {[Op.eq]: true} };
+        let whereCondition = {};
         if (id !== -1) {
             whereCondition.CampaignId = { [Op.eq]: id };
         } 

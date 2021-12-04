@@ -21,7 +21,7 @@ class InsightController extends BaseController{
     async generateToday(req, res) {
         const start = new Date();
         start.setHours(0,0,0,0);
-        logger.info(`Insight: generateToday: ${start.toLocaleDateString()}`);
+        logger.info(`Insight: generateToday: ${start.toLocaleDateString()} In progress...`);
 
         const end = new Date();
         end.setHours(23,59,59,999);
@@ -31,10 +31,10 @@ class InsightController extends BaseController{
                 { model: User },
                 { model: Campaign, where: { startDate: {[Op.lte]: start}, endDate: {[Op.gte]: start}}}
             ]});
+        // console.log(posts);
         try {
             for (let i = 0; i < posts.length; i++) {
                 const post = posts[i];
-                
                 if (post.DailyInsights.length === 0) {
                     logger.info("Generating for:");
                     logger.info(post.id);
@@ -66,8 +66,10 @@ class InsightController extends BaseController{
                     }
                 }
             }
+            logger.info(`Insight: generateToday: ${start.toLocaleDateString()} Success!`);
             res.send("Success");
         } catch (e) {
+            logger.error(e.message);
             res.status(400).send(e);
         }
     }
