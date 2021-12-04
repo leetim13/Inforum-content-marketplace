@@ -26,9 +26,6 @@ class FacebookWebScrapper extends BaseWebScrapper{
     constructor() {
         super("facebook");
         this.getPost = this.getPost.bind(this);
-        if (process.env.FACEBOOK_PASSWORD) {
-            this.password = process.env.FACEBOOK_PASSWORD;
-        }
         logger.info("FB Scrapper started.");
     }
 

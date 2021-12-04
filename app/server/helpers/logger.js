@@ -5,4 +5,12 @@ var options = {
     tags: ['logging', 'nodejs', 'logdna'] // Tags can also be provided in comma-separated string format: 'logging,nodejs,logdna'    
 };
 
-exports.logger = Logger.createLogger("d2cb803c286659fcd0027047019553ae", options);
+const logKey = process.env.LOGDNA_KEY || require('../config/localConfig.json').logDNA.key;
+const logger = Logger.createLogger(logKey, options);
+exports.info = (msg) => {
+    logger.info(msg);
+}
+
+exports.error = (msg) => {
+    logger.error(msg);
+}

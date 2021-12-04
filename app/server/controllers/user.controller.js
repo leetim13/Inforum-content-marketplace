@@ -7,14 +7,7 @@ const Bank = db['Bank'];
 const Post = db['Post'];
 const Campaign = db['Campaign'];
 const Insight = db['DailyInsight'];
-const Logger = require('../helpers');
-var options = {
-    app: "inforum-server",
-    env: process.env.SERVER_ENV,
-    tags: ['logging', 'nodejs', 'logdna'] // Tags can also be provided in comma-separated string format: 'logging,nodejs,logdna'    
-};
-
-const logger = Logger.createLogger("d2cb803c286659fcd0027047019553ae", options);
+const logger = require("../helpers/logger");
 
 /**
  * @class UserController

@@ -2,5 +2,11 @@
     "facebook": {
         "username": "inforumProd@gmail.com",
         "password": "inforumToTheMoon"
+    },
+    "logDNA": {
+        "key": "d2cb803c286659fcd0027047019553ae"
+    },
+    "Remarks": {
+        "message": "We will remove this file from repo and change our passwords after the semester."
     }
 }
