@@ -47,13 +47,13 @@ class InstructionsPage extends React.Component {
             <Container className="page">
                 
                 <Row xs={1} md={2} className="g-4">
-                {data.map((_) => (
+                {data.map((card) => (
                     <Col>
                     <Card style={{ textAlign: "left"}} >
                         <Card.Body>
-                        <Card.Title>{_.logo} {_.title}</Card.Title>
+                        <Card.Title>{card.logo} {card.title}</Card.Title>
                         <Card.Text>
-                            {_.text}
+                            {card.text}
                         </Card.Text>
                         </Card.Body>
                     </Card>
