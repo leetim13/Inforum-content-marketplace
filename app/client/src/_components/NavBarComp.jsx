@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Navbar, NavDropdown, Dropdown, FormControl, Button, Nav, Container } from 'react-bootstrap'
 import { connect } from 'react-redux';
-
+import { history } from '../_helpers'
 class NavBarComp extends Component {
     render() {
-      	const dropDown = this.props.user 
+      	const action = this.props.user 
 		? (<Nav style={{ paddingRight: "4em" }}>
 			<NavDropdown align="end"
 			// BUG: profile images not aligned with dropdown menu, using just text for now
@@ -36,7 +36,7 @@ class NavBarComp extends Component {
 				<Dropdown.Item href="/login">Logout</Dropdown.Item>
 			</NavDropdown>
 		</Nav>)
-		: null
+		: <Button variant="outline-secondary" style={{ marginRight: "4em" }} onClick={() => history.push("/login")}>Login</Button>
         return (
 		<Navbar bg="white" variant="light" sticky="top">
 			<Navbar.Brand href="/">
@@ -53,7 +53,7 @@ class NavBarComp extends Component {
 				<Nav.Link href="/instructions">Instructions</Nav.Link>
 			</Nav>
 			
-			{ dropDown }
+			{ action }
 		</Navbar>
         )
     }
