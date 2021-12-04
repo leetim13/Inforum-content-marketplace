@@ -8,7 +8,7 @@ class BaseWebScrapper{
             throw new Error("Abstract classes can't be instantiated.");
         }
         this.platform = platform;
-        this.timeout = 5000;
+        this.timeout = 8000;
         this.account = require("../config/localConfig.json")[this.platform];
         this.username = this.account.username;
         this.password = this.account.password;

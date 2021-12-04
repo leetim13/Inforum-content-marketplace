@@ -12,11 +12,8 @@ module.exports = app => {
 	// Create a new User
 	router.post("/", users.create);
 
-	// Retrieve all User
-	router.get("/", authorize([Role.User, Role.Admin]), users.findAll);
-
-	// // Retrieve a single User with id
-	// router.get("/:id", users.findOne);
+	// // Retrieve all User
+	// router.get("/", authorize([Role.User, Role.Admin]), users.findAll);
 
 	// Get user's profile picture
 	router.get("/:id/image", authorize([Role.User, Role.Admin]), users.getImage);
@@ -26,12 +23,6 @@ module.exports = app => {
 
 	// Retrive all insights under a user's posts
 	router.get("/:id/insights", authorize([Role.User, Role.Admin]), users.findAllInsights);
-
-	// // Update a User with id
-	// router.put("/:id", users.update);
-
-	// // Delete a User with id
-	// router.delete("/:id", users.delete);
 
 	// Delete all Users
 	router.delete("/", authorize([Role.User, Role.Bank, Role.Admin]), users.deleteAll);

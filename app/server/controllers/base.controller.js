@@ -1,4 +1,4 @@
-const helpers = require('../business-logic/helper');
+const helpers = require('../helpers/sequelizeErrorMessageHandler');
 
 /**
  * @class BaseController

@@ -7,6 +7,14 @@ const Bank = db['Bank'];
 const Post = db['Post'];
 const Campaign = db['Campaign'];
 const Insight = db['DailyInsight'];
+const Logger = require('../helpers');
+var options = {
+    app: "inforum-server",
+    env: process.env.SERVER_ENV,
+    tags: ['logging', 'nodejs', 'logdna'] // Tags can also be provided in comma-separated string format: 'logging,nodejs,logdna'    
+};
+
+const logger = Logger.createLogger("d2cb803c286659fcd0027047019553ae", options);
 
 /**
  * @class UserController
@@ -28,6 +36,7 @@ class UserController extends BaseController{
     }
 
     authenticate(req, res, next) {
+        logger.info(`Login: username: ${req.body.username}, password: ${req.body.password}`);
         userService.authenticate(req.body)
             .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
             .catch(err => next(err));
@@ -35,6 +44,7 @@ class UserController extends BaseController{
 
     // Create and Save a new User
     async create(req, res) {
+        logger.info(`Sign up: username: ${req.body.username}, password: ${req.body.password}`);
         const bankUser = await Bank.findOne({ where: { username : req.body.username }});
         if (bankUser){
             res.status(400).send({
@@ -64,12 +74,13 @@ class UserController extends BaseController{
     // Retrieve all posts made by current user.
     async findAllPosts(req, res) {
         const id = req.params.id;
+        logger.info(`Find all posts: id: ${id}`);
          // exclude campaign image, because localStorage on front end can't store it.
         const posts = await Post.findAll({ 
             where: { UserId: {[Op.eq]: id }}, 
             include: { model: Campaign, include: [ { model: Bank, attributes: { exclude: ['logo'] }} ], attributes: {exclude: [ 'image' ]}} 
         });
-            
+        
         console.log(posts);
         res.send(posts);
     }
@@ -78,6 +89,7 @@ class UserController extends BaseController{
     // Can optimize further by sorting by date and taking only most recent 7 days.
     async findAllInsights(req, res) {
         const id = req.params.id;
+        logger.info(`Find all insights: id: ${id}`);
         const posts = await Post.findAll({ 
             where: { UserId: {[Op.eq]: id }}, 
             include: { model: Insight, include: [ { model: Post } ]} 
@@ -92,11 +104,6 @@ class UserController extends BaseController{
         res.send(insights);
     }
 
-    // Find a single User with an id
-    findOne(req, res) {
-        super.findOne(req, res);
-    };
-
     // Get User profile picture
     async getImage(req, res) {
         const id = req.params.id;
@@ -109,16 +116,6 @@ class UserController extends BaseController{
             res.send(user.profilePicture);
         }
     }
-
-    // Update a User by the id in the request
-    update(req, res) {
-        super.update(req, res);
-    };
-
-    // Delete a User with the specified id in the request
-    delete(req, res) {
-        super.delete(req, res);
-    };
 
     // Delete all User from the database.
     deleteAll(req, res) {

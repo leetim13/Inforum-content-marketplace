@@ -1,5 +1,5 @@
 const BaseController = require("./base.controller");
-const webScrapperHelper = require("../business-logic/webScrapperHelper");
+const webScrapperHelper = require("../helpers/webScrapperHelper");
 const db = require('../models');
 const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
