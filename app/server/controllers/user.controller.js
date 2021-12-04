@@ -1,6 +1,7 @@
 const BaseController = require("./base.controller");
 const db = require('../models');
 const userService = require('../auth/auth_services');
+const Role = require('../auth/role');
 const Op = db.Sequelize.Op;
 const User = db['User'];
 const Bank = db['Bank'];
@@ -67,14 +68,20 @@ class UserController extends BaseController{
     // Retrieve all posts made by current user.
     async findAllPosts(req, res) {
         const id = req.params.id;
-        logger.info(`Find all posts: id: ${id}`);
+        logger.info(`Find all posts: id: ${id}, role: ${req.user.role}`);
+        const whereCondition = {};
+        if (req.user.role !== Role.Admin) {
+            whereCondition.UserId = {[Op.eq]: id};
+        }
          // exclude campaign image, because localStorage on front end can't store it.
         const posts = await Post.findAll({ 
-            where: { UserId: {[Op.eq]: id }}, 
-            include: { model: Campaign, include: [ { model: Bank, attributes: { exclude: ['logo'] }} ], attributes: {exclude: [ 'image' ]}} 
+            where: whereCondition, 
+            include: [{ model: Campaign, 
+                include: [ 
+                    { model: Bank, attributes: { exclude: ['logo'] }} ], attributes: {exclude: [ 'image' ]}},
+                    { model: User, attributes: { exclude: ['profilePicture']} } ]
         });
         
-        console.log(posts);
         res.send(posts);
     }
 
@@ -82,9 +89,13 @@ class UserController extends BaseController{
     // Can optimize further by sorting by date and taking only most recent 7 days.
     async findAllInsights(req, res) {
         const id = req.params.id;
-        logger.info(`Find all insights: id: ${id}`);
+        logger.info(`Find all insights: id: ${id}, role: ${req.user.role}`);
+        const whereCondition = {};
+        if (req.user.role !== Role.Admin) {
+            whereCondition.UserId = {[Op.eq]: id};
+        }
         const posts = await Post.findAll({ 
-            where: { UserId: {[Op.eq]: id }}, 
+            where: whereCondition, 
             include: { model: Insight, include: [ { model: Post } ]} 
         });
         const insights = [];

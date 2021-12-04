@@ -26,12 +26,17 @@ class NavBarComp extends Component {
 				</div>) 
 				: null }
 				{ this.props.user.role === 'Admin' ? <Dropdown.Divider/> : null}
-				{ this.props.user.role === 'Bank' || this.props.user.role === 'Admin' 
+				{ this.props.user.role === 'Bank' 
 				? (<div>
 					<Dropdown.Item href="/myCampaigns" >My Campaigns</Dropdown.Item>
 					<Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
 					{/* <Dropdown.Item href="/insights">Insights</Dropdown.Item> */}
 				</div>) 
+				: null }
+				{ this.props.user.role === 'Admin' 
+				? (<div>
+					<Dropdown.Item href="/insights/-1" >Site Insights</Dropdown.Item>
+				</div>)
 				: null }
 				<Dropdown.Item href="/login">Logout</Dropdown.Item>
 			</NavDropdown>

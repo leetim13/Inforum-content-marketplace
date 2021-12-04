@@ -30,14 +30,21 @@ class InsightsPage extends React.Component {
         }
     }
 
-    async componentDidMount() {		
-		const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
-		if (currentCampaign === []) {
-			this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`))
+    async componentDidMount() {
+		let campaignId;
+		if (this.props.user.role === "Admin") {
+			campaignId = -1;
 		} else {
-			this.setState({ campaign: currentCampaign[0] });
+			campaignId = this.props.match.params.id;
+			const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+			if (currentCampaign === []) {
+				this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`))
+			} else {
+				this.setState({ campaign: currentCampaign[0] });
+			}
 		}
-		await Http.get(`/campaigns/${this.props.match.params.id}/posts`)
+		
+		await Http.get(`/campaigns/${campaignId}/posts`)
 		.then(res => {
             this.setState({
                 posts: res.data
@@ -207,7 +214,7 @@ class InsightsPage extends React.Component {
 
         return (
           <Container className="page">
-            <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: {this.state.campaign.title}</h1>            
+            <h1 align="left" style={{padding: '10px'}} >{this.props.user.role === "Admin" ? "Site-wide Campaign Insights" : `Campaign Insights for: ${this.state.campaign.title}`}</h1>            
             <Row xs={2} md={2} lg={2}>
               <Card>
                 <h5>Campaign Shares by Gender</h5>
