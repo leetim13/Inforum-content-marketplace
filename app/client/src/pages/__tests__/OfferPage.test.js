@@ -11,16 +11,17 @@ const store = mockStore({
     authentication: {user: {}},
     campaigns: [{}, {}]
 });
+const match = { params : { baseId : 1 } }
 configure({ adapter: new Adapter() });
 
 describe("Test OfferPage", () => {
     it("should render Share this offer!", () => {
 
-        // const wrapper = shallow(
-        //     <OfferPage store={store} />
-        // ).dive().dive();
-        // // console.log(wrapper.debug());
-        // expect(wrapper.text().includes('Share this offer!')).toBe(true);
+        const wrapper = shallow(
+            <OfferPage store={store} match={match} />
+        ).dive().dive();
+        // console.log(wrapper.debug());
+        expect(wrapper.text().includes('Share this offer!')).toBe(true);
     });
 });
 

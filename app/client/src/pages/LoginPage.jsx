@@ -69,8 +69,10 @@ class LoginPage extends React.Component {
                                     <Button variant="secondary" type="submit" >Login</Button>   
                                 </Col>
                                 <Col>
+                                
                                     <div align="right">
                                         <i>Don't have an account yet?</i>
+                                        <br/>
                                         <a href={`/signup`}>Sign Up</a>
                                     </div>
                                 </Col>
@@ -98,4 +100,3 @@ function mapStateToProps(state) {
 
 const connectedLoginPage = connect(mapStateToProps)(LoginPage);
 export { connectedLoginPage as LoginPage }; 
-export { LoginPage as LoginPagePlain }; 

@@ -1,27 +1,28 @@
-import {MyRewardsPage} from '../MyRewardsPage.jsx';
+import NavBarFooterComp from '../NavBarFooterComp.jsx';
 import React from "react";
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from "redux-mock-store";
 import thunk from 'redux-thunk'
+import {render, fireEvent, cleanup} from '@testing-library/react';
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 const store = mockStore({
     authentication: {user: {}},
-    campaigns: [],
-    posts: { length: 0 }
+    campaigns: []
 });
 configure({ adapter: new Adapter() });
 
-describe("Test MyRewardsPage", () => {
-    it("should render with the text Welcome to My Rewards", () => {
+
+describe("Test NavBarFooterComp", () => {
+    it("should render text Powered by React.", () => {
 
         const wrapper = shallow(
-            <MyRewardsPage store={store} />
-        ).dive().dive();
+            <NavBarFooterComp/>
+        ).dive();
         // console.log(wrapper.debug());
-        expect(wrapper.text().includes('Welcome to My Rewards')).toBe(true);
+        expect(wrapper.text().includes('Powered by React.')).toBe(true);
     });
 });
 

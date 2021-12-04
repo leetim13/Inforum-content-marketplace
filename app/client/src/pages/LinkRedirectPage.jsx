@@ -21,7 +21,7 @@ class LinkRedirectPage extends React.Component {
     }
 
     render() { 
-        return <div className="page">Welcome to beatiful inforum.</div>;
+        return <div className="page">This is Inforum's redirect page.</div>;
     }
 }
 

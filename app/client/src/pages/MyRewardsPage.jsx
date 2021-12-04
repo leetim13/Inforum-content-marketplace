@@ -55,7 +55,7 @@ class MyRewardsPage extends React.Component {
             labels: labels,
             datasets: [
                 {
-                    label: 'Reward Points earned',
+                    label: '# of clicks gained',
                     data: Object.keys(dataObject).map(function(key) {
                         return dataObject[key];
                     }),
@@ -95,7 +95,7 @@ class MyRewardsPage extends React.Component {
                             <Card.Title><h1>{this.props.user.rewardPoint}</h1></Card.Title>
                             <Card.Text>
                                 <i>
-                                    These are all the reward points you have earned.
+                                    These are all the reward points you have earned.<sup>1</sup> 
                                 </i>
                             </Card.Text>
                             </Card.Body>
@@ -116,7 +116,7 @@ class MyRewardsPage extends React.Component {
                     <br/>
                     <Card>
                         <Card.Header>
-                            <Card.Title><h4>Reward Points earned in the past 7 days</h4>
+                            <Card.Title><h4>Total Clicks gained in the past 7 days</h4>
                             <p>as of {new Date().toLocaleString() + ""}</p>
                             </Card.Title>
                         </Card.Header>
@@ -124,6 +124,7 @@ class MyRewardsPage extends React.Component {
                             <Line options={options} data={dataset} />
                         </Card.Body>
                     </Card>
+                <p align="left"><i><sup>1</sup>Note that reward points will only be updated once a campaign has expired.</i></p>
 
 
                 </Container>
@@ -144,4 +145,3 @@ function mapStateToProps(state) {
 
 const connectedMyRewardsPage = connect(mapStateToProps)(MyRewardsPage);
 export { connectedMyRewardsPage as MyRewardsPage }; 
-export { MyRewardsPage as MyRewardsPagePlain }; 

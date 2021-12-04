@@ -119,4 +119,3 @@ function mapStateToProps(state) {
 
 const connectedOfferPage = connect(mapStateToProps)(OfferPage);
 export { connectedOfferPage as OfferPage }; 
-export { OfferPage as OfferPagePlain }; 
