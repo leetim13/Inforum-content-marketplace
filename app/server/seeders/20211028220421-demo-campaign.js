@@ -34,6 +34,7 @@ var TDotherImg = fs.readFileSync('./resources/TD-other.png', 'base64')
 var BMOarticleImg = fs.readFileSync('./resources/BMO-article.png', 'base64')
 var CIBCcharityImg = fs.readFileSync('./resources/CIBC-charity.png', 'base64')
 var ScotiaOtherImg = fs.readFileSync('./resources/scotia-other.png', 'base64')
+var RBCproduct2Img = fs.readFileSync('./resources/rbc-airpods-demo.png', 'base64')
 
 // use this for demo!
 // var BMOcharityDemoImg = fs.readFileSync('./resources/BMO-charity-demo.png', 'base64')
@@ -62,7 +63,7 @@ module.exports = {
     3, 'Article', BMOarticleImg), 
 
     campaignObject(4, 'First Up with RBCxMusic', 
-    "Provide artists with a platform for exposure, funding, and education.",
+    "RBC provides young artists with a platform for exposure, funding, & education.",
     "https://rbcxmusicfirstup.ca/",
     1, 'Charity', RBCcharityImg), 
 
@@ -106,6 +107,13 @@ module.exports = {
     // "Read more about BMO Financial Group's 2020 Sustainability Report.", 
     // "https://our-impact.bmo.com/wp-content/uploads/2021/03/BMO-2020-ESG-PAS-accessible-1-1.pdf",
     // 3, 'Other', BMOcharityDemoImg),
+
+    // use this for RBC demo!
+    // campaignObject(12, 'Get Free Airpods with RBC', 
+    // "Switch to RBC and get the latest Apple Airpods at not cost. Conditions Apply.", 
+    // "https://www.rbcroyalbank.com/rbcoffers/",
+    // 1, 'Product', RBCproduct2Img),
+
 
 
   
