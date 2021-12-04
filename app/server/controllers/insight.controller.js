@@ -6,7 +6,7 @@ const User = db['User'];
 const Campaign = db['Campaign'];
 const Post = db['Post'];
 const Insight = db['DailyInsight'];
-
+const logger = require("../helpers/logger");
 
 /**
  * @class InsightController
@@ -15,47 +15,34 @@ const Insight = db['DailyInsight'];
 class InsightController extends BaseController{
     constructor(){
         super(Insight);
-        this.create = this.create.bind(this);
         this.generateToday = this.generateToday.bind(this);
-        this.findAll = this.findAll.bind(this);
-        this.findOne = this.findOne.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-        this.deleteAll = this.deleteAll.bind(this);
     }
-
-    async create(req, res) {
-        super.create(req, res);
-    };
 
     async generateToday(req, res) {
         const start = new Date();
         start.setHours(0,0,0,0);
+        logger.info(`Insight: generateToday: ${start.toLocaleDateString()}`);
 
         const end = new Date();
         end.setHours(23,59,59,999);
-        console.log(start)
-        console.log(end);
         const posts = await Post.findAll({
             include: [ 
                 { model: Insight, required: false, where: { date: {[Op.between]: [start, end]} } },
                 { model: User },
                 { model: Campaign, where: { startDate: {[Op.lte]: start}, endDate: {[Op.gte]: start}}}
             ]});
-        console.log(posts);
         try {
             for (let i = 0; i < posts.length; i++) {
                 const post = posts[i];
                 
                 if (post.DailyInsights.length === 0) {
-                    console.log("Generating for:");
-                    console.log(post.id);
+                    logger.info("Generating for:");
+                    logger.info(post.id);
                     let postData;
                     try {
                         postData = await webScrapperHelper.getPostData(post.url, post.socialMedia);
                         
                     } catch (err) {
-                        console.log(err);
                         if (err.message === "Facebook cookies not found." || err.message === "Something went wrong with scraping.") {
                             res.status(500).send(err);
                         } else {
@@ -63,7 +50,6 @@ class InsightController extends BaseController{
                         }
                         return;
                     }
-                    console.log(postData);
                     if ( postData ) {
                         const insight = {
                             PostId: post.id,
@@ -82,30 +68,9 @@ class InsightController extends BaseController{
             }
             res.send("Success");
         } catch (e) {
-            console.log(e);
             res.status(400).send(e);
         }
     }
-
-    findAll(req, res) {
-        super.findAll(req, res, {});
-    };
-
-    findOne(req, res) {
-        super.findOne(req, res);
-    };
-
-    update(req, res) {
-        super.update(req, res);
-    };
-
-    delete(req, res) {
-        super.delete(req, res);
-    };
-
-    deleteAll(req, res) {
-        super.deleteAll(req, res);
-    };
 }
 
 module.exports = InsightController;

@@ -1,22 +1,22 @@
-const Sentry = require("@sentry/node");
-// or use es6 import statements
-// import * as Sentry from '@sentry/node';
-
-const Tracing = require("@sentry/tracing");
-// or use es6 import statements
-// import * as Tracing from '@sentry/tracing';
-const authErrorHandler = require('./auth/errorHandler');
-const express = require("express");
-var cors = require('cors')
+// Env variables
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 const PORT = process.env.PORT || 3001;
+
+// Sentry
+const Sentry = require("@sentry/node");
+const Tracing = require("@sentry/tracing");
+
+// Swagger
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerOptions = require('./swagger/swagger');
 
-const logger = require("./helpers/logger");
-logger.info("Server started.");
 
+// App related
+const logger = require("./helpers/logger");
+const authErrorHandler = require('./auth/errorHandler');
+const express = require("express");
+var cors = require('cors')
 const app = express();
 
 Sentry.init({
@@ -99,3 +99,5 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs, {explorer: tr
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
+
+logger.info("Server started successfully.");

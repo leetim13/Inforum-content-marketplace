@@ -52,8 +52,8 @@ module.exports = {
           }
         },
         example: {
-          username: "admin",
-          password: "admin",
+          username: "admin999",
+          password: "admin999",
           firstName: "admin",
           lastName: "admin",
           email: "inforumAdmin@gmail.com",

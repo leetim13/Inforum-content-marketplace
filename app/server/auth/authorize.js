@@ -1,9 +1,8 @@
 const jwt = require('express-jwt');
 const secret = require('../config/config.json')["jwt"];
+const logger = require("../helpers/logger");
 
-module.exports = authorize;
-
-function authorize(roles = []) {
+module.exports = authorize = (roles = []) => {
     // roles param can be a single role string (e.g. Role.User or 'User') 
     // or an array of roles (e.g. [Role.Admin, Role.User] or ['Admin', 'User'])
     if (typeof roles === 'string') {
@@ -18,6 +17,8 @@ function authorize(roles = []) {
         // authorize based on user role
         (req, res, next) => {
             if (roles.length && !roles.includes(req.user.role)) {
+                logger.info(`authorize: User authorization failed: userId:${req.user.id}, role:${req.user.role}`)
+
                 // user's role is not authorized
                 return res.status(401).json({ message: 'Unauthorized' });
             }

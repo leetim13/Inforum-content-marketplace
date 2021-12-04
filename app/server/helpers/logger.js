@@ -1,7 +1,7 @@
 const Logger = require('@logdna/logger');
 var options = {
     app: "inforum-server",
-    env: process.env.SERVER_ENV || "local",
+    env: process.env.SERVER_ENV || "development",
     tags: ['logging', 'nodejs', 'logdna'] // Tags can also be provided in comma-separated string format: 'logging,nodejs,logdna'    
 };
 

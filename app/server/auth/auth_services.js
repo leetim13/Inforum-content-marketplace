@@ -4,6 +4,7 @@ const Role = require('./role');
 const db = require('../models');
 const User = db["User"];
 const Bank = db["Bank"];
+const logger = require("../helpers/logger");
 
 module.exports = {
     authenticate
@@ -15,7 +16,6 @@ async function authenticate({ username, password }) {
     // search if user is a bank user.
     if (user) {
         token = jwt.sign({ sub: user.id, role: user.role }, secret);
-        console.log(token);
         const { password, ...userWithoutPassword } = user.dataValues;
         return {
             ...userWithoutPassword,
@@ -32,4 +32,5 @@ async function authenticate({ username, password }) {
             token
         };
     }
+    logger.info(`auth_services: User authenticate failed: username:${username}`)
 }

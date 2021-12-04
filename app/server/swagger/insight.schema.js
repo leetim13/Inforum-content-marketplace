@@ -28,13 +28,18 @@ module.exports = {
             type: "integer",
             description: "numComments"
           },
+          rewardPoints: {
+            type: "integer",
+            description: "rewardPoints"
+          }
         },
         example: {
           PostId: 1,
           date: "2021-08-11",
           numClicks: 51,
           numLikes: 123,
-          numComments: 42
+          numComments: 42,
+          rewardPoints: 30
         }
       }
 }

@@ -2,6 +2,8 @@ const BaseWebScrapper = require('./base.webscraper');
 const puppeteer = require('puppeteer');
 const redis = require("redis");
 const { promisify } = require('util');
+const logger = require("../helpers/logger");
+
 const client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL, {
     tls: {
         rejectUnauthorized: false
@@ -9,14 +11,7 @@ const client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL,
 }) : redis.createClient();
 const setAsync = promisify(client.set).bind(client);
 const getAsync = promisify(client.get).bind(client);
-const Logger = require('@logdna/logger');
-var options = {
-    app: "inforum-server",
-    env: process.env.SERVER_ENV,
-    tags: ['logging', 'nodejs', 'logdna'] // Tags can also be provided in comma-separated string format: 'logging,nodejs,logdna'    
-};
-
-const logger = Logger.createLogger("d2cb803c286659fcd0027047019553ae", options);
+logger.info(`Redis connected successfully at ${process.env.REDIS_URL || "local:6379"}`);
 
 /**
  * @class FacebookWebScrapper
@@ -53,6 +48,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
             const { requestId, request } = event;
             const cookieStrings = request.headers.Cookie.split('; ');
             if (cookieStrings.length === 0) {
+                logger.error("Facebook cookies not found.")
                 throw new Error("Facebook cookies not found.");
             }
             const FacebookCookies = [];
@@ -83,7 +79,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
         logger.info("Log in via credentials");
         await page.goto(url);
         await page.waitForSelector('#email')
-        .catch(err => console.log(err.message));
+        .catch(err => logger.error(err.message));
         await page.type('#email', this.username);
         await page.type('#pass', this.password);
         await page.click('#loginbutton');
@@ -101,12 +97,12 @@ class FacebookWebScrapper extends BaseWebScrapper{
         if (await page.$('#loginbutton') !== null) {
             await this.loginWithCredentials(page, url);
             if (await page.$('#loginbutton') !== null) {
+                logger.error("Log in failed.");
                 throw new Error("Log in failed.");
             }
         }
     }
 
-    // TODO: Post with no likes will error can't find like amount.
     async getPost(url) {
         console.log(url);
         const browser = await this.getBrowser(process.env.SERVER_ENV ? true : false);
@@ -120,16 +116,15 @@ class FacebookWebScrapper extends BaseWebScrapper{
         } else {
             await this.loginWithCookies(page, url, cookies);
         }
-        console.log("logged in.");
         logger.info("logged in.");
         // Waits for the comment bar to show up,
         // Use to indicate that the post has been loaded.
         await page.waitForSelector(postMessageDiv)
-        .catch(_=> {
+        .catch(e => {
+            logger.error(e.message);
             throw new Error("Post verification failed. Post not visible or link does not exist.");
         })
 
-        console.log("Message showed");
         logger.info("Message showed");
         // Gets the post text
         const messages = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);

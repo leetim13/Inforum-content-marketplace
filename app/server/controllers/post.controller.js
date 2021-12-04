@@ -1,11 +1,11 @@
 const BaseController = require("./base.controller");
 const webScrapperHelper = require("../helpers/webScrapperHelper");
 const db = require('../models');
-const userService = require('../auth/auth_services');
 const Op = db.Sequelize.Op;
 const User = db['User'];
 const Campaign = db['Campaign'];
 const Post = db['Post'];
+const logger = require("../helpers/logger");
 
 /**
  * @class PostController
@@ -16,14 +16,11 @@ class PostController extends BaseController{
         super(Post);
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
-        this.findOne = this.findOne.bind(this);
         this.numClicksPlusOne = this.numClicksPlusOne.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-        this.deleteAll = this.deleteAll.bind(this);
     }
 
     async create(req, res) {
+        logger.info(`Post: create: UserId:${req.body.UserId} CampaignId:${req.body.CampaignId}`);
         const user = await User.findByPk(req.body.UserId);
         if (!user){
             res.status(404).send({
@@ -52,7 +49,6 @@ class PostController extends BaseController{
             postData = await webScrapperHelper.getPostData(req.body.url, req.body.platform);
             
         } catch (err) {
-            console.log(err);
             if (err.message === "Facebook cookies not found." || err.message === "Something went wrong with scraping.") {
                 res.status(500).send(err);
             } else {
@@ -60,7 +56,6 @@ class PostController extends BaseController{
             }
             return;
         }
-        console.log(postData);
         
         if ( postData ) {
             const post = {
@@ -84,16 +79,13 @@ class PostController extends BaseController{
         let condition = socialMedia ? { socialMedia: { [Op.iLike]: `%${socialMedia}%` } } : {};
         condition = isVerified ? { ...condition, isVerified: { [Op.eq]: isVerified }} : condition;
         condition = campaignId ? { ...condition, campaignId: { [Op.eq]: campaignId }} : condition;
+        logger.info(`Post: findAll`);
 
         super.findAll(req, res, condition);
     };
 
-    findOne(req, res) {
-        super.findOne(req, res);
-    };
-
     async numClicksPlusOne(req, res) {
-        console.log(req.body);
+        logger.info(`Post: numClicksPlusOne: UserId:${req.body.userId}, CamapaignId:${req.body.campaignId}`);
         const post = await Post.findOne({ where: { UserId: { [Op.eq]: req.body.userId }, CampaignId: { [Op.eq]: req.body.campaignId }}, include: { model: Campaign } });
         if (post !== null) {
             post.numClicks += 1;
@@ -108,18 +100,6 @@ class PostController extends BaseController{
         }
         res.send(campaign.url);
     }
-
-    update(req, res) {
-        super.update(req, res);
-    };
-
-    delete(req, res) {
-        super.delete(req, res);
-    };
-
-    deleteAll(req, res) {
-        super.deleteAll(req, res);
-    };
 }
 
 module.exports = PostController;

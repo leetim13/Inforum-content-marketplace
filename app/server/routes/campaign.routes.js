@@ -11,29 +11,16 @@ module.exports = app => {
 	router.post("/", authorize([Role.Bank, Role.Admin]), campaigns.create);
 
 	// Retrieve all Campaign
-	// router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
 	router.get("/", campaigns.findAll);
 
 	// Close a campaign and distribute all reward points to user
 	router.patch("/:id/close", authorize([Role.Bank, Role.Admin]), campaigns.closeCampaign);
-
-	// // Retrieve a single Campaign with id
-	// router.get("/:id", campaigns.findOne);
 
 	// Get campaign's image
 	router.get("/:id/image", campaigns.getImage);
 
 	// Retrive all posts under this campaign id with insights and users.
 	router.get("/:id/posts", authorize([Role.Bank, Role.Admin]), campaigns.findAllPosts);
-
-	// // Update a Campaign with id
-	// router.put("/:id", campaigns.update);
-
-	// // Delete a Campaign with id
-	// router.delete("/:id", campaigns.delete);
-
-	// Delete all Campaigns
-	router.delete("/", authorize([Role.Bank, Role.Admin]), campaigns.deleteAll);
 
 	/**
 	 * @swagger
@@ -53,28 +40,6 @@ module.exports = app => {
 	 *           schema:
 	 *             required: true
 	 *             $ref: '#/components/schemas/Campaign'
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Campaigns
-	 *   delete:
-	 *     description: Delete all campaigns
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Campaigns
-     * 
-	 * /campaigns/{id}:
-	 *   get:
-	 *     description: Get a campaign by their id
-	 *     parameters:
-	 *       - in: path
-	 *         name: id
-	 *         schema:
-	 *           type: integer
-	 *           required: true
 	 *     responses:
 	 *       200:
 	 *         description: Success
