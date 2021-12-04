@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Navbar, NavDropdown, Dropdown, FormControl, Button, Nav, Container } from 'react-bootstrap'
 import { connect } from 'react-redux';
-
+import { history } from '../_helpers'
 class NavBarComp extends Component {
     render() {
-      	const dropDown = this.props.user 
+      	const action = this.props.user 
 		? (<Nav style={{ paddingRight: "4em" }}>
 			<NavDropdown align="end"
 			// BUG: profile images not aligned with dropdown menu, using just text for now
@@ -26,17 +26,22 @@ class NavBarComp extends Component {
 				</div>) 
 				: null }
 				{ this.props.user.role === 'Admin' ? <Dropdown.Divider/> : null}
-				{ this.props.user.role === 'Bank' || this.props.user.role === 'Admin' 
+				{ this.props.user.role === 'Bank' 
 				? (<div>
 					<Dropdown.Item href="/myCampaigns" >My Campaigns</Dropdown.Item>
 					<Dropdown.Item href="/createCampaign">Create Campaign</Dropdown.Item>
 					{/* <Dropdown.Item href="/insights">Insights</Dropdown.Item> */}
 				</div>) 
 				: null }
+				{ this.props.user.role === 'Admin' 
+				? (<div>
+					<Dropdown.Item href="/insights/-1" >Site Insights</Dropdown.Item>
+				</div>)
+				: null }
 				<Dropdown.Item href="/login">Logout</Dropdown.Item>
 			</NavDropdown>
 		</Nav>)
-		: null
+		: <Button variant="outline-secondary" style={{ marginRight: "4em" }} onClick={() => history.push("/login")}>Login</Button>
         return (
 		<Navbar bg="white" variant="light" sticky="top">
 			<Navbar.Brand href="/">
@@ -53,7 +58,7 @@ class NavBarComp extends Component {
 				<Nav.Link href="/instructions">Instructions</Nav.Link>
 			</Nav>
 			
-			{ dropDown }
+			{ action }
 		</Navbar>
         )
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Row, Col, FormControl, Card } from 'react-bootstrap';
+import {Row, Col, FormControl, Card, Table } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
@@ -30,14 +30,21 @@ class InsightsPage extends React.Component {
         }
     }
 
-    async componentDidMount() {		
-		const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
-		if (currentCampaign === []) {
-			this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`))
+    async componentDidMount() {
+		let campaignId;
+		if (this.props.user.role === "Admin") {
+			campaignId = -1;
 		} else {
-			this.setState({ campaign: currentCampaign[0] });
+			campaignId = this.props.match.params.id;
+			const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+			if (currentCampaign === []) {
+				this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`))
+			} else {
+				this.setState({ campaign: currentCampaign[0] });
+			}
 		}
-		await Http.get(`/campaigns/${this.props.match.params.id}/posts`)
+		
+		await Http.get(`/campaigns/${campaignId}/posts`)
 		.then(res => {
             this.setState({
                 posts: res.data
@@ -46,7 +53,7 @@ class InsightsPage extends React.Component {
 		.catch(err => this.props.dispatch(alertActions.error(`Cannot find user: ${err.message}`)));
 	}
 
-    render() {
+	aggregateLast7Days(posts) {
 		const today = new Date();
         const dateObject = {};
         const dateLabels = [-6, -5, -4, -3, -2, -1, 0].map((offset) => {
@@ -57,7 +64,7 @@ class InsightsPage extends React.Component {
 			dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numLikes = 0;
             return date.toLocaleDateString({ month: 'long', day: 'numeric' });
         });
-        const posts = this.state.posts;
+        
 		for (let i = 0; i < posts.length; i++) {
 			const insights = posts[i].DailyInsights;
 			for (let j = 0; j < insights.length; j++) {
@@ -68,7 +75,7 @@ class InsightsPage extends React.Component {
 				}
 			}
 		}
-        const clicksDataset = {
+		const clicksDataset = {
             labels: dateLabels,
             datasets: [
                 {
@@ -95,13 +102,17 @@ class InsightsPage extends React.Component {
                 }
             ]
         }
+		return { clicksDataset, likesDataset };
+	}
 
-		const genderLabels = ['Male', 'Female', 'Other'];
-		const genderObject = {'Male': 0, 'Female': 0, 'Other': 0};
+	aggregateAgeGender(posts) {
 		const agePartition = [0, 18, 28, 38, 48, 58];
 		const ageLabels = [];
 		const ageObject = {};
+		const genderLabels = ['Male', 'Female', 'Other'];
+		const genderObject = {'Male': 0, 'Female': 0, 'Other': 0};
 		let hasData = false;
+
 		for (let i = 0; i < agePartition.length; i++) {
 			let key = `${agePartition[i]}+`;
 			if (i !== agePartition.length - 1) {
@@ -110,6 +121,7 @@ class InsightsPage extends React.Component {
 			ageLabels.push(key);
 			ageObject[key] = 0;
 		}
+
 
 		for (let i = 0; i < posts.length; i++) {
 			const age = posts[i].User.age;
@@ -122,6 +134,7 @@ class InsightsPage extends React.Component {
 				}
 			}
 		}
+
 		const ageDataset = {
             labels: ageLabels,
             datasets: [
@@ -171,20 +184,48 @@ class InsightsPage extends React.Component {
 			  },
 			],
 		  };
+
+		return { ageDataset, genderDataset, hasData };
+	}
+
+    render() {
+		const posts = this.state.posts;
+		const last7DaysData = this.aggregateLast7Days(posts);
+		const ageGenderDataset = this.aggregateAgeGender(posts);
+		
+		const postsUnderCampaign = posts.map((p, i) => 
+            <tr key={i}>
+				<td>
+					{p.User.firstName + " " + p.User.lastName}
+				</td>
+				<td>
+					{p.User.age}
+				</td>
+				<td>
+					{p.User.gender}
+				</td>
+                <td>
+                    {new Date(p.createdAt).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </td>
+                <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td> 
+                <td><a href={p.url}>Link</a></td>
+            </tr>
+        )
+
         return (
           <Container className="page">
-            <h1 align="left" style={{padding: '10px'}} >Campaign Insights for: {this.state.campaign.title}</h1>            
+            <h1 align="left" style={{padding: '10px'}} >{this.props.user.role === "Admin" ? "Site-wide Campaign Insights" : `Campaign Insights for: ${this.state.campaign.title}`}</h1>            
             <Row xs={2} md={2} lg={2}>
               <Card>
                 <h5>Campaign Shares by Gender</h5>
                   <Card.Body style={{ height: '40vh' }}>
-					  {hasData ? <Pie data={genderDataset}/> : <div >Has no data</div>}
+					  {ageGenderDataset.hasData ? <Pie data={ageGenderDataset.genderDataset}/> : <div >Has no data</div>}
                   </Card.Body>
               </Card>
               <Card>
               <h5>Campaign Shares by Age Group</h5>
                   <Card.Body>
-                      {hasData ? <Doughnut data={ageDataset} /> : <div>Has no data</div>}
+                      {ageGenderDataset.hasData ? <Doughnut data={ageGenderDataset.ageDataset} /> : <div>Has no data</div>}
                   </Card.Body>
               </Card>
 
@@ -192,17 +233,32 @@ class InsightsPage extends React.Component {
             <Card>
 				<h5>Total Clicks in last 7 days</h5>
 				<Card.Body>
-					<Line data={clicksDataset} />
+					<Line data={last7DaysData.clicksDataset} />
 				</Card.Body>
 			</Card>
 			<Card>
 				<h5>Total likes in last 7 days</h5>
 				<Card.Body>
-					<Line data={likesDataset} />
+					<Line data={last7DaysData.likesDataset} />
 				</Card.Body>
 			</Card>
-            <br/><br/><br/>
-            </Container>
+			<Table striped bordered hover>
+				<thead>
+					<tr>
+						<th>Posted By</th>
+						<th>Age</th>
+						<th>Gender</th>
+						<th>Posted On</th>
+						<th>Status</th>
+						<th>Link to post</th>
+					</tr>
+				</thead>
+				<tbody>
+					{postsUnderCampaign.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: postsUnderCampaign}
+				</tbody>
+			</Table>
+			<br/><br/><br/>
+        </Container>
         );
     }
 }

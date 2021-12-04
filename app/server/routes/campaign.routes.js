@@ -12,7 +12,7 @@ module.exports = app => {
 
 	// Retrieve all Campaign
 	// router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
-	router.get("/", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.findAll);
+	router.get("/", campaigns.findAll);
 
 	// Close a campaign and distribute all reward points to user
 	router.patch("/:id/close", authorize([Role.Bank, Role.Admin]), campaigns.closeCampaign);
@@ -21,7 +21,7 @@ module.exports = app => {
 	// router.get("/:id", campaigns.findOne);
 
 	// Get campaign's image
-	router.get("/:id/image", authorize([Role.Bank, Role.User, Role.Admin]), campaigns.getImage);
+	router.get("/:id/image", campaigns.getImage);
 
 	// Retrive all posts under this campaign id with insights and users.
 	router.get("/:id/posts", authorize([Role.Bank, Role.Admin]), campaigns.findAllPosts);

@@ -48,7 +48,7 @@ class MyRewardsPage extends React.Component {
         for (let i = 0; i < insights.length; i++) {
             const curDate = new Date(insights[i].date).toLocaleDateString({ month: 'long', day: 'numeric' });
             if (curDate in dataObject) {
-                dataObject[curDate] += insights[i].rewardPoints;
+                dataObject[curDate] += insights[i].numClicks;
             }
         }
         const dataset = {

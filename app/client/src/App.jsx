@@ -86,6 +86,7 @@ class App extends React.Component {
                                     <Route path="/signup" component={SignUpPage} />
                                     <Route path="/linkRedirect/:userId/:campaignId" component={LinkRedirectPage} />
                                     <Route path="/unauthorized" component={UnauthorizedPage}/>
+                                    <Route exact path="/" component={LandingPage}/>
                                     <ProtectedRoute roles={['User', 'Admin']} path="/share/:id" component={ShareOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/verify/:id" component={VerifyOfferPage} />
                                     <ProtectedRoute roles={['User', 'Admin']} path="/myRewards" component={MyRewardsPage} />
@@ -94,7 +95,6 @@ class App extends React.Component {
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/createCampaign" component={CreateCampaignPage} />
                                     <ProtectedRoute roles={['Bank', 'Admin']} path="/myCampaigns" component={MyCampaignsPage} />
                                     <ProtectedRoute roles={['User', 'Bank', 'Admin']} path="/offer/:id" component={OfferPage} />
-                                    <ProtectedRoute roles={['User', 'Bank', 'Admin']} exact path="/" component={LandingPage}/>
                                 </Switch>
                             </Col>
                         </Container>

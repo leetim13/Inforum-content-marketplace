@@ -1,4 +1,4 @@
-const userBl = require("../../business-logic/user.bl");
+const userBl = require("../../helpers/user.bl");
 
 let mockUser;
 

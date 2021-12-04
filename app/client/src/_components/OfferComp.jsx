@@ -10,19 +10,18 @@ export default class OfferComp extends Component {
 			...props.data
 		}
 	}
-
-	componentWillReceiveProps(props) {
-		this.setState({
-			...props.data
-		})
+	
+	static getDerivedStateFromProps(props, state) {
+		return props.data;
 	}
 
     render() {
 		
         return (
           <Card style={{ width: '15rem' }} >
-			  {/* src="../assets/TD-credit-card.jpg" */}
-            <Card.Img variant="top" src={`data:image/png;base64,${this.state.image}`} className="rounded mx-auto d-block"/>
+            {this.state.image 
+			? <Card.Img variant="top" src={`data:image/png;base64,${this.state.image}`} className="rounded mx-auto d-block"/>
+			: <Card.Img variant="top" src="../assets/logo_cropped.jpg" className="rounded mx-auto d-block"/>}
             <Card.Body>
 				<Card.Title>{this.state.title}</Card.Title>
 				<Card.Text style={{textAlign: "left"}}>

@@ -14,6 +14,9 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerOptions = require('./swagger/swagger');
 
+const logger = require("./helpers/logger");
+logger.info("Server started.");
+
 const app = express();
 
 Sentry.init({
@@ -38,14 +41,17 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 // set up cors
-app.use(cors({ origin: CLIENT_URL, allowedHeaders: [
+app.use(cors({ 
+    origin: CLIENT_URL, 
+    allowedHeaders: [
     "Content-Type",
     "Authorization",
     "Access-Control-Allow-Methods",
-    "Access-Control-Request-Headers"
-  ],
-  credentials: true,
-  enablePreflight: true }));
+    "Access-Control-Request-Headers",
+    "sentry-trace"],
+    credentials: true,
+    enablePreflight: true 
+}));
 
 // parse requests of content-type - application/json
 app.use(express.json({limit: '25mb'}));

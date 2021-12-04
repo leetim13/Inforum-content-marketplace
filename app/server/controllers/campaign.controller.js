@@ -1,7 +1,8 @@
 const BaseController = require("./base.controller");
-const webScrapperHelper = require("../business-logic/webScrapperHelper");
+const webScrapperHelper = require("../helpers/webScrapperHelper");
 const db = require('../models');
 const userService = require('../auth/auth_services');
+const Role = require('../auth/role');
 const Op = db.Sequelize.Op;
 const Campaign = db['Campaign'];
 const Bank = db['Bank'];
@@ -113,11 +114,20 @@ class CampaignController extends BaseController{
 
     // Find all insights for this campaign's posts
     async findAllPosts(req, res) {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
+        if (id === -1 && req.user.role !== Role.Admin) {
+            res.status(401).json({ message: 'Unauthorized' });
+            return;
+        }
+        let whereCondition = { isVerified: {[Op.eq]: true} };
+        if (id !== -1) {
+            whereCondition.CampaignId = { [Op.eq]: id };
+        } 
         const posts = await Post.findAll({ 
-            where: { CampaignId: {[Op.eq]: id }}, 
+            where: whereCondition, 
             include: [
                 { model: Insight, required: false }, 
+                { model: Campaign, attributes: { exclude: ['image'] } },
                 { model: User, attributes: { exclude: [ 'profilePicture' ] } } 
             ]
         });

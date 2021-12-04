@@ -23,6 +23,7 @@ class MyPostsPage extends React.Component {
     render() { // TODO: More status logic
         const posts = this.props.posts.map((p, i) => 
             <tr key={i}>
+                {this.props.user.role === "Admin" ? <td>{p.User.firstName + " " + p.User.lastName}</td> : null}
                 <td><a href={"/offer/" + p.Campaign.id}>{p.Campaign.title}</a></td>
                 <td>{p.Campaign.type}</td>
                 <td>{p.Campaign.Bank.name}</td>
@@ -32,7 +33,7 @@ class MyPostsPage extends React.Component {
                 <td>
                     {new Date(p.Campaign.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                 </td>
-                <td style={{ color: 'green' }}>{new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed" }</td> 
+                <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td> 
                 <td><a href={p.url}>Link</a></td>
             </tr>
         )
@@ -43,6 +44,7 @@ class MyPostsPage extends React.Component {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
+                                {this.props.user.role === "Admin" ? <th>Posted by</th> : null}
                                 <th>Offer</th>
                                 <th>Offer Type</th>
                                 <th>Bank</th>
