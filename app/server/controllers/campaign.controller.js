@@ -115,9 +115,10 @@ class CampaignController extends BaseController{
     async findAllPosts(req, res) {
         const id = req.params.id;
         const posts = await Post.findAll({ 
-            where: { CampaignId: {[Op.eq]: id }}, 
+            where: { CampaignId: {[Op.eq]: id, isVerified: {[Op.eq]: true} }}, 
             include: [
                 { model: Insight, required: false }, 
+                { model: Campaign, attributes: { exclude: ['image'] } },
                 { model: User, attributes: { exclude: [ 'profilePicture' ] } } 
             ]
         });
