@@ -109,7 +109,7 @@ class FacebookWebScrapper extends BaseWebScrapper{
     // TODO: Post with no likes will error can't find like amount.
     async getPost(url) {
         console.log(url);
-        const browser = await this.getBrowser(true);
+        const browser = await this.getBrowser(process.env.SERVER_ENV ? true : false);
         const page = await this.getPage(browser);
 
         const cookies = await getAsync(`${this.platform}_cookies`);
