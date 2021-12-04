@@ -1,7 +1,5 @@
 const BaseController = require("./base.controller");
-const webScrapperHelper = require("../helpers/webScrapperHelper");
 const db = require('../models');
-const userService = require('../auth/auth_services');
 const Role = require('../auth/role');
 const Op = db.Sequelize.Op;
 const Campaign = db['Campaign'];
@@ -9,6 +7,7 @@ const Bank = db['Bank'];
 const Post = db['Post'];
 const Insight = db['DailyInsight'];
 const User = db['User'];
+const logger = require("../helpers/logger");
 
 /**
  * @class CampaignController
@@ -19,17 +18,15 @@ class CampaignController extends BaseController{
         super(Campaign);
         this.create = this.create.bind(this);
         this.findAll = this.findAll.bind(this);
-        this.findOne = this.findOne.bind(this);
         this.getImage = this.getImage.bind(this);
         this.closeCampaign = this.closeCampaign.bind(this);
         this.findAllPosts = this.findAllPosts.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-        this.deleteAll = this.deleteAll.bind(this);
     }
 
     // Create and Save a new User
     async create(req, res) {
+        logger.info(`Campaign: create: BankId:${req.body.BankId}`);
+
         const bank = await Bank.findOne({ where: { id : req.body.BankId }});
         if (!bank){
             res.status(400).send({
@@ -49,6 +46,8 @@ class CampaignController extends BaseController{
     findAll(req, res) {
         const type = req.query.type;
         const bankId = req.query.BankId;
+        logger.info(`Campaign: findAll: BankId:${bankId}, type:${type}`);
+
         let condition = type ? { type: { [Op.eq]: type } } : {};
         condition = bankId ? { ...condition, BankId: { [Op.eq]: bankId }} : condition;
 
@@ -64,13 +63,10 @@ class CampaignController extends BaseController{
             });
     };
 
-    // Find a single User with an id
-    findOne(req, res) {
-        super.findOne(req, res);
-    };
-
     async closeCampaign(req, res) {
         const id = req.params.id;
+        logger.info(`Campaign: closeCampaign: campaignId:${id}`);
+
         const campaign = await Campaign.findOne(
             { where: { id: { [Op.eq]: id}}, 
             include: [ { model: Post, required: false, where: { isVerified: { [Op.eq]: true }}, include: [ { model: User } ]} ]
@@ -102,6 +98,8 @@ class CampaignController extends BaseController{
     // Get Campaign image
     async getImage(req, res) {
         const id = req.params.id;
+        logger.info(`Campaign: getImage: campaignId:${id}`);
+
         const campaign = await Campaign.findByPk(id);
         if (campaign === null) {
             res.status(404).send({
@@ -115,11 +113,13 @@ class CampaignController extends BaseController{
     // Find all insights for this campaign's posts
     async findAllPosts(req, res) {
         const id = parseInt(req.params.id);
+        logger.info(`Campaign: findAllPosts: campaignId:${id}`);
+
         if (id === -1 && req.user.role !== Role.Admin) {
             res.status(401).json({ message: 'Unauthorized' });
             return;
         }
-        let whereCondition = { isVerified: {[Op.eq]: true} };
+        let whereCondition = {};
         if (id !== -1) {
             whereCondition.CampaignId = { [Op.eq]: id };
         } 
@@ -133,21 +133,6 @@ class CampaignController extends BaseController{
         });
         res.send(posts);
     }
-
-    // Update a User by the id in the request
-    update(req, res) {
-        super.update(req, res);
-    };
-
-    // Delete a User with the specified id in the request
-    delete(req, res) {
-        super.delete(req, res);
-    };
-
-    // Delete all User from the database.
-    deleteAll(req, res) {
-        super.deleteAll(req, res);
-    };
 }
 
 module.exports = CampaignController;

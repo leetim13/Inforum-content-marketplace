@@ -7,7 +7,7 @@ const postObject = (id, UserId, CampaignId) => {
     CampaignId: CampaignId + 1000000000,
     url: "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=100074732435890" + id,
     socialMedia: "facebook",
-    isVerified: true,
+    isVerified: false,
     createdAt: new Date(),
     updatedAt: new Date()
   }

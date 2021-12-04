@@ -9,8 +9,6 @@ class BaseWebScrapper{
         }
         this.platform = platform;
         this.timeout = 8000;
-        this.username = process.env.FACEBOOK_USERNAME || require("../config/localConfig.json")[this.platform].username;
-        this.password = process.env.FACEBOOK_PASSWORD || require("../config/localConfig.json")[this.platform].password;
     }
     async getBrowser(headless=true) {
         throw new Error("getBrowser function Not implemented.");

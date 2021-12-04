@@ -7,26 +7,19 @@ module.exports = app => {
 	
 	var router = require("express").Router();
 
-	// Create a new Insight
-	// router.post("/", insights.create);
-
 	// Generate insights if they do not already exist
 	router.post("/generate", authorize([Role.Admin, Role.Bank]), insights.generateToday);
-
-	// // Retrieve all Insight
-	// router.get("/", insights.findAll);
-
-	// // Retrieve a single Insight with id
-	// router.get("/:id", insights.findOne);
-
-	// // Update a Insight with id
-	// router.put("/:id", insights.update);
-
-	// // Delete a Insight with id
-	// router.delete("/:id", insights.delete);
-
-	// // Delete all Insights
-	// router.delete("/", insights.deleteAll);
-
+    
+	/**
+	 * @swagger
+	 * /insights:
+	 *   post:
+	 *     description: Generate daily insights for today by web scraping all posts that doesn't already have one today.
+	 *     responses:
+	 *       200:
+	 *         description: Success
+	 *     tags:
+	 *       - Insights
+	 */
 	app.use('/api/insights', router);
 };

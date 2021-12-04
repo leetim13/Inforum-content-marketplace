@@ -12,9 +12,6 @@ module.exports = app => {
 	// Create a new User
 	router.post("/", users.create);
 
-	// // Retrieve all User
-	// router.get("/", authorize([Role.User, Role.Admin]), users.findAll);
-
 	// Get user's profile picture
 	router.get("/:id/image", authorize([Role.User, Role.Admin]), users.getImage);
 
@@ -23,9 +20,6 @@ module.exports = app => {
 
 	// Retrive all insights under a user's posts
 	router.get("/:id/insights", authorize([Role.User, Role.Admin]), users.findAllInsights);
-
-	// Delete all Users
-	router.delete("/", authorize([Role.User, Role.Bank, Role.Admin]), users.deleteAll);
 
 	/**
 	 * @swagger
@@ -47,50 +41,6 @@ module.exports = app => {
 	 *             example:
 	 *               username: admin
 	 *               password: admin
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Users
-	 *     
-	 * /users:
-	 *   get:
-	 *     description: Get all users
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Users
-	 *   post:
-	 *     description: Create a new user
-	 *     requestBody:
-	 *       content:
-	 *         application/json:
-	 *           schema:
-	 *             required: true
-	 *             $ref: '#/components/schemas/User'
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Users
-	 *   delete:
-	 *     description: Delete all user
-	 *     responses:
-	 *       200:
-	 *         description: Success
-	 *     tags: 
-     *       - Users
-	 * 
-	 * /users/{id}:
-	 *   get:
-	 *     description: Get a user by their id
-	 *     parameters:
-	 *       - in: path
-	 *         name: id
-	 *         schema:
-	 *           type: integer
-	 *           required: true
 	 *     responses:
 	 *       200:
 	 *         description: Success

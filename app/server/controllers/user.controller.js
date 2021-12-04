@@ -19,18 +19,13 @@ class UserController extends BaseController{
         super(User);
         this.authenticate = this.authenticate.bind(this);
         this.create = this.create.bind(this);
-        this.findAll = this.findAll.bind(this);
         this.getImage = this.getImage.bind(this);
         this.findAllPosts = this.findAllPosts.bind(this);
         this.findAllInsights = this.findAllInsights.bind(this);
-        this.findOne = this.findOne.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-        this.deleteAll = this.deleteAll.bind(this);
     }
 
     authenticate(req, res, next) {
-        logger.info(`Login: username: ${req.body.username}, password: ${req.body.password}`);
+        logger.info(`User: authenticate: username: ${req.body.username}, password: ${req.body.password}`);
         userService.authenticate(req.body)
             .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
             .catch(err => next(err));
@@ -38,7 +33,7 @@ class UserController extends BaseController{
 
     // Create and Save a new User
     async create(req, res) {
-        logger.info(`Sign up: username: ${req.body.username}, password: ${req.body.password}`);
+        logger.info(`User: create: username: ${req.body.username}`);
         const bankUser = await Bank.findOne({ where: { username : req.body.username }});
         if (bankUser){
             res.status(400).send({
@@ -56,19 +51,10 @@ class UserController extends BaseController{
         super.create(req, res, user);
     };
 
-    // Retrieve all User from the database.
-    findAll(req, res) {
-        const firstName = req.query.firstName || "";
-        const lastName = req.query.lastName || "";
-        let condition = { firstName: { [Op.iLike]: `%${firstName}%` }, lastName: { [Op.iLike]: `%${lastName}%`} };
-
-        super.findAll(req, res, condition);
-    };
-
     // Retrieve all posts made by current user.
     async findAllPosts(req, res) {
         const id = req.params.id;
-        logger.info(`Find all posts: id: ${id}, role: ${req.user.role}`);
+        logger.info(`User: findAllPosts: id: ${id}, role: ${req.user.role}`);
         const whereCondition = {};
         if (req.user.role !== Role.Admin) {
             whereCondition.UserId = {[Op.eq]: id};
@@ -89,7 +75,7 @@ class UserController extends BaseController{
     // Can optimize further by sorting by date and taking only most recent 7 days.
     async findAllInsights(req, res) {
         const id = req.params.id;
-        logger.info(`Find all insights: id: ${id}, role: ${req.user.role}`);
+        logger.info(`User: findAllInsights: id: ${id}, role: ${req.user.role}`);
         const whereCondition = {};
         if (req.user.role !== Role.Admin) {
             whereCondition.UserId = {[Op.eq]: id};
@@ -111,6 +97,7 @@ class UserController extends BaseController{
     // Get User profile picture
     async getImage(req, res) {
         const id = req.params.id;
+        logger.info(`User: getImage: id: ${id}, role: ${req.user.role}`);
         const user = await User.findByPk(id);
         if (user === null) {
             res.status(404).send({
@@ -120,11 +107,6 @@ class UserController extends BaseController{
             res.send(user.profilePicture);
         }
     }
-
-    // Delete all User from the database.
-    deleteAll(req, res) {
-        super.deleteAll(req, res);
-    };
 }
 
 module.exports = UserController;
