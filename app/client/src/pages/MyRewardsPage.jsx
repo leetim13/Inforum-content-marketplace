@@ -145,4 +145,3 @@ function mapStateToProps(state) {
 
 const connectedMyRewardsPage = connect(mapStateToProps)(MyRewardsPage);
 export { connectedMyRewardsPage as MyRewardsPage }; 
-export { MyRewardsPage as MyRewardsPagePlain }; 
