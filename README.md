@@ -18,7 +18,6 @@ Table of Contents
 - [Diversity](./team/diversity.md)
 - [Product & Research](./product_research/)
     - [Use Cases](./product_research/use_cases.md)
-    - [Market](./product_research/market.md)
     - [Roadmap](./product_research/roadmap.md)
     - [Prototype (UI)](./product_research/prototype)
     - [User Research](./product_research/user_research)
@@ -86,9 +85,14 @@ We have decided to use `Github Actions` to set up our continuous integration wor
 We decided to use `Heroku` as our container-based cloud platform to deploy and manage our MVP mainly because it is free of charge and `Heroku` integrates with `Github` very well, so we could leverage that for continuous deployments.
 
 ### Example UI
-See more at [Prototype (UI)](./product_research/prototype)
-![image](https://user-images.githubusercontent.com/20623399/138982298-4bc32111-ffca-4b97-b632-7f34f1d0bffb.png)
-![image](https://user-images.githubusercontent.com/20623399/138982891-5ee8507a-5266-452f-af51-3bf395c9e0f2.png)
+See our initial Figma prototype at [Prototype (UI)](./product_research/prototype).
+
+### Final UI (selected pages)
+![image](https://user-images.githubusercontent.com/20623399/144733589-a2950ee9-28a7-4078-839b-11dd6802755e.png)
+![image](https://user-images.githubusercontent.com/20623399/144733613-f9bbe34f-9af6-4b71-9572-41d876ed8572.png)
+
+
+
 
 
 
