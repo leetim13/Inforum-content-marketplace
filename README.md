@@ -5,9 +5,10 @@
 <img src="./logo.png" alt="Company logo"/>
 
 ## About Us
-> *Connecting financial institutions to the generation of tomorrow*
+> *Harness the potential from the generation of tomorrow*
 
-Inforum is a web-based, Marketplace-like application, where users can share marketing campaigns posted by our corporate partners on their social media platforms. Based on the number of interactions (in the forms of likes/comments), the users will receive a certain number of reward points. Inforum will act as a bridge for corporations to connect with younger generations on the social media platform and provide an opportunity for corporations to introduce their relevant products and offerings in a more effective manner.
+Inforum is a promotional content marketplace that aims to market to hard-to-reach millenials/Gen-Z demographics by utilizing network effects on social media platforms such as Facebook, Twitter, and Instagram. On our platform, our users can share offers to their social media for personal monetary benefit, and the banks are able to use our users to promote their offerings to our users’ network via a trusted source, creating a win-win situation for both parties. 
+
 
 Table of Contents
 ---
@@ -18,10 +19,10 @@ Table of Contents
 - [Diversity](./team/diversity.md)
 - [Product & Research](./product_research/)
     - [Use Cases](./product_research/use_cases.md)
-    - [Market](./product_research/market.md)
     - [Roadmap](./product_research/roadmap.md)
     - [Prototype (UI)](./product_research/prototype)
     - [User Research](./product_research/user_research)
+    - [Demo](./product_research/demo.md)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
 - [Decision Logs](#Decision-Logs)
@@ -86,9 +87,14 @@ We have decided to use `Github Actions` to set up our continuous integration wor
 We decided to use `Heroku` as our container-based cloud platform to deploy and manage our MVP mainly because it is free of charge and `Heroku` integrates with `Github` very well, so we could leverage that for continuous deployments.
 
 ### Example UI
-See more at [Prototype (UI)](./product_research/prototype)
-![image](https://user-images.githubusercontent.com/20623399/138982298-4bc32111-ffca-4b97-b632-7f34f1d0bffb.png)
-![image](https://user-images.githubusercontent.com/20623399/138982891-5ee8507a-5266-452f-af51-3bf395c9e0f2.png)
+See our initial Figma prototype at [Prototype (UI)](./product_research/prototype).
+
+### Final UI (selected pages)
+![image](https://user-images.githubusercontent.com/20623399/144733589-a2950ee9-28a7-4078-839b-11dd6802755e.png)
+![image](https://user-images.githubusercontent.com/20623399/144733613-f9bbe34f-9af6-4b71-9572-41d876ed8572.png)
+
+
+
 
 
 
