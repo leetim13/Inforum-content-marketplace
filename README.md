@@ -21,6 +21,7 @@ Table of Contents
     - [Roadmap](./product_research/roadmap.md)
     - [Prototype (UI)](./product_research/prototype)
     - [User Research](./product_research/user_research)
+    - [Demo](./product_research/demo.md)
 - [Architecture Diagram](#Architecture-Diagram)
 - [Tech Stack](#Tech-Stack)
 - [Decision Logs](#Decision-Logs)
