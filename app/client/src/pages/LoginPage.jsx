@@ -38,8 +38,25 @@ class LoginPage extends React.Component {
     }
 
     render() {
+
         const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
+
+        const formData = [
+            {
+                type: username,
+                controlId: "formBasicEmail",
+                text: "username",
+                placeholder: "Enter your username"
+            },
+            {
+                type: password,
+                controlId: "formBasicPassword",
+                text: "password",
+                placeholder: "Enter your password"
+            }
+        ]
+
         return (
             <Container className="page">
                 <h1><i>Browse. Share. Earn Rewards.</i></h1>
@@ -47,23 +64,17 @@ class LoginPage extends React.Component {
                 <Col  md={{span: 6, offset: 3}}>
                     <div align="left"> 
 						<Form onSubmit={this.handleSubmit}>
-							<Form.Group className={submitted && !username ? ' has-error' : ''} className="mb-3" controlId="formBasicEmail">
-								<Form.Label htmlFor="username">Username</Form.Label>
-								<Form.Control type="text" name="username" value={username} 
-									onChange={this.handleChange} placeholder="Enter your username" />
-								{submitted && !username &&
-									<div className="help-block">Username is required</div>
-								}
-							</Form.Group>
-							<Form.Group className={submitted && !password ? ' has-error' : ''} className="mb-3" controlId="formBasicPassword">
-								<Form.Label htmlFor="password">Password</Form.Label>
-								<Form.Control type="password" name="password" value={password}
-									onChange={this.handleChange} placeholder="Enter your password" />
-								{submitted && !password &&
-									<div className="help-block">Password is required</div>
-								}
-							</Form.Group>
-                            
+                            {formData.map((formType) => (
+                                <Form.Group key={formType} className={submitted && !formType.type ? ' has-error' : ''} className="mb-3" controlId={formType.controlId} >
+                                <Form.Label htmlFor={formType.text}>{formType.text} </Form.Label>
+                                <Form.Control type="text" name={formType.text} value={formType.type} 
+                                    onChange={this.handleChange} placeholder={formType.placeholder} />
+                                {submitted && !formType.type &&
+                                    <div className="help-block">{formType.text} is required</div>
+                                }
+                                </Form.Group>
+                            ))}
+
                             <Row>
                                 <Col>
                                     <Button variant="secondary" type="submit" >Login</Button>   
