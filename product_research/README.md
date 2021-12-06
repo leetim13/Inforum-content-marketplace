@@ -9,3 +9,4 @@ Table of Contents
 - [Roadmap](./roadmap.md)
 - [Prototype](./prototype)
 - [User Research](./user_research)
+- [Demo](./demo)
