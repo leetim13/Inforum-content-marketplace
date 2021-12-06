@@ -45,14 +45,14 @@ class LoginPage extends React.Component {
         const formData = [
             {
                 type: username,
-                controlId: "formBasicEmail",
-                text: "username",
+                name: "username",
+                text: "Username",
                 placeholder: "Enter your username"
             },
             {
                 type: password,
-                controlId: "formBasicPassword",
-                text: "password",
+                name: "password",
+                text: "Password",
                 placeholder: "Enter your password"
             }
         ]
@@ -65,9 +65,9 @@ class LoginPage extends React.Component {
                     <div align="left"> 
 						<Form onSubmit={this.handleSubmit}>
                             {formData.map((formType) => (
-                                <Form.Group key={formType} className={submitted && !formType.type ? ' has-error' : ''} className="mb-3" controlId={formType.controlId} >
-                                <Form.Label htmlFor={formType.text}>{formType.text} </Form.Label>
-                                <Form.Control type="text" name={formType.text} value={formType.type} 
+                                <Form.Group key={formType} className={submitted && !formType.type ? ' has-error' : ''} className="mb-3" controlId={formType.name} >
+                                <Form.Label htmlFor={formType.name}>{formType.text} </Form.Label>
+                                <Form.Control type="text" name={formType.name} 
                                     onChange={this.handleChange} placeholder={formType.placeholder} />
                                 {submitted && !formType.type &&
                                     <div className="help-block">{formType.text} is required</div>
