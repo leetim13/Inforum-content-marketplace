@@ -1,5 +1,5 @@
 ## Demo Video for CSC 491
-- ```491_demo_user_bank_admin_final.mp4```
+- `CSC491_demo.mp4`
 - https://drive.google.com/drive/folders/18w_t76I2msYCDTKeIOL9MqZMQX1-I8Zq
 
 ## Demo Writeup
