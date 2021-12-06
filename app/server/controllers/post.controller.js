@@ -65,7 +65,7 @@ class PostController extends BaseController{
                 socialMedia: req.body.platform
             };
 
-            super.create(req, res, post);
+            await super.create(req, res, post);
         } else {
             res.status(400).send({ message: "Post not visible." });
         }

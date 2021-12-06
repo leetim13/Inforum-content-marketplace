@@ -12,8 +12,8 @@ class BaseController{
         this.model = model;
     }
 
-    create(req, res, object) {
-        this.model.create(object)
+    async create(req, res, object) {
+        await this.model.create(object)
             .then(data => {
                 res.status(201).send(data);
             })
@@ -25,8 +25,8 @@ class BaseController{
             });
     }
 
-    findAll(req, res, condition) {
-        this.model.findAll({ where: condition })
+    async findAll(req, res, condition) {
+        await this.model.findAll({ where: condition })
             .then(data => {
                 res.send(data);
             })
@@ -38,9 +38,9 @@ class BaseController{
             });
     }
 
-    findOne(req, res) {
+    async findOne(req, res) {
         const id = req.params.id;
-        this.model.findByPk(id)
+        await this.model.findByPk(id)
             .then(data => {
                 if (data) {
                     res.send(data);
@@ -57,10 +57,10 @@ class BaseController{
             });
     }
 
-    update(req, res) {
+    async update(req, res) {
         const id = req.params.id;
 
-        this.model.update(req.body, { where: { id: id } })
+        await this.model.update(req.body, { where: { id: id } })
             .then(num => {
                 if (num === 1) {
                     res.send({
@@ -79,10 +79,10 @@ class BaseController{
             });
     }
 
-    delete(req, res) {
+    async delete(req, res) {
         const id = req.params.id;
 
-        this.model.destroy({ where: { id: id } })
+        await this.model.destroy({ where: { id: id } })
             .then(num => {
                 if (num === 1) {
                     res.send({
@@ -101,8 +101,8 @@ class BaseController{
             });
         }
 
-    deleteAll(req, res) {
-        this.model.destroy({where: {}, truncate: false})
+    async deleteAll(req, res) {
+        await this.model.destroy({where: {}, truncate: false})
             .then(nums => {
                 res.send({ message: `${nums} ${this.model.name} were deleted successfully!` });
             })

@@ -39,7 +39,7 @@ class CampaignController extends BaseController{
             ...req.body
         };
 
-        super.create(req, res, campaign);
+        await super.create(req, res, campaign);
     };
 
     // Retrieve all User from the database.
