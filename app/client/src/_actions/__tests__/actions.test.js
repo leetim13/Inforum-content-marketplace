@@ -1,22 +1,51 @@
-import { alertActions, campaignActions, postActions} from '..';
-
-// test("test postActions", () => {
-//     expect(postActions.updatePosts()).toEqual(expect.any(Function))
-// });
-
+import { alertActions, campaignActions, postActions, userActions } from '..';
 const dispatch = jest.fn();
 
 test('alertActions', () => {
-  const props = alertActions.success(dispatch);
-  expect(props).toEqual({"message": expect.any(Function), "type": "ALERT_SUCCESS"})
-})
+  const successProps = alertActions.success(dispatch);
+  expect(successProps).toEqual({"message": expect.any(Function), "type": "ALERT_SUCCESS"})
 
-test('postActions', () => {
-  const props = postActions.getAll(dispatch);
-  expect(props).toEqual(expect.any(Function))
+  const errorProps = alertActions.error(dispatch);
+  expect(errorProps).toEqual({"message": expect.any(Function), "type": "ALERT_ERROR"})
+
+  const clearProps = alertActions.clear(dispatch);
+  expect(clearProps).toEqual({"type": "ALERT_CLEAR"})
 })
 
 test('campaignActions', () => {
-  const props = campaignActions.updateCampaigns(dispatch);
-  expect(props).toEqual(expect.any(Function))
+  const getAllProps = campaignActions.getAll(dispatch);
+  expect(getAllProps).toEqual(expect.any(Function))
+
+  const updateCampaignsProps = campaignActions.updateCampaigns(dispatch);
+  expect(updateCampaignsProps).toEqual(expect.any(Function))
+
+  const getAllByBankProps = campaignActions.getAllByBank(dispatch);
+  expect(getAllByBankProps).toEqual(expect.any(Function))
+
 })
+
+test('postActions', () => {
+  const getAllProps = postActions.getAll(dispatch);
+  expect(getAllProps).toEqual(expect.any(Function))
+
+  const updatePostsProps = postActions.updatePosts(dispatch);
+  expect(updatePostsProps).toEqual(expect.any(Function))
+})
+
+test('userActions', () => {
+
+  const loginProps = userActions.login(dispatch);
+  expect(loginProps).toEqual(expect.any(Function))
+
+  const logoutProps = userActions.logout(dispatch);
+  expect(logoutProps).toEqual({"type": "USERS_LOGOUT"})
+
+  const getAllProps = userActions.getAll(dispatch);
+  expect(getAllProps).toEqual(expect.any(Function))
+
+  const updateUsersProps = userActions.updateUsers(dispatch);
+  expect(updateUsersProps).toEqual(expect.any(Function))
+
+})
+
+
