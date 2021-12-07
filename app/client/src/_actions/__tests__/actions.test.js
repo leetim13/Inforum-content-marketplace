@@ -42,7 +42,7 @@ test('userActions', () => {
 
   const getAllProps = userActions.getAll(dispatch);
   expect(getAllProps).toEqual(expect.any(Function))
-
+  
   const updateUsersProps = userActions.updateUsers(dispatch);
   expect(updateUsersProps).toEqual(expect.any(Function))
 
