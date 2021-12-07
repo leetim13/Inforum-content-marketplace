@@ -5,6 +5,7 @@
     "database": "Development_inforum",
     "host": "localhost",
     "dialect":"postgres",
+    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,
@@ -21,6 +22,7 @@
       "acquire": 30000,
       "idle": 10000
     },
+    "logging": false,
     "dialectOptions": {
         "ssl": {
             "require": true,
@@ -37,6 +39,7 @@
       "acquire": 30000,
       "idle": 10000
     },
+    "logging": false,
     "dialectOptions": {
         "ssl": {
             "require": true,

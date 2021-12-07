@@ -2,13 +2,14 @@ const BaseController = require("./base.controller");
 const db = require('../models');
 const userService = require('../auth/auth_services');
 const Role = require('../auth/role');
+const logger = require("../helpers/logger");
+
 const Op = db.Sequelize.Op;
 const User = db['User'];
 const Bank = db['Bank'];
 const Post = db['Post'];
 const Campaign = db['Campaign'];
 const Insight = db['DailyInsight'];
-const logger = require("../helpers/logger");
 
 /**
  * @class UserController
@@ -24,10 +25,10 @@ class UserController extends BaseController{
         this.findAllInsights = this.findAllInsights.bind(this);
     }
 
-    authenticate(req, res, next) {
+    async authenticate(req, res, next) {
         logger.info(`User: authenticate: username: ${req.body.username}, password: ${req.body.password}`);
-        userService.authenticate(req.body)
-            .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
+        await userService.authenticate(req.body)
+            .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect'}))
             .catch(err => next(err));
     }
 
@@ -48,7 +49,7 @@ class UserController extends BaseController{
             connectionDemographic: {}
         };
 
-        super.create(req, res, user);
+        await super.create(req, res, user);
     };
 
     // Retrieve all posts made by current user.

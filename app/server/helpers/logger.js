@@ -6,7 +6,6 @@ var options = {
 };
 
 const logKey = process.env.LOGDNA_KEY ? JSON.parse(process.env.LOGDNA_KEY)[0] : require('../config/localConfig.json').logDNA.key;
-// console.log(JSON.parse(process.env.LOGDNA_KEY)[0])
 const logger = Logger.createLogger(logKey, options);
 exports.info = (msg) => {
     logger.info(msg);
