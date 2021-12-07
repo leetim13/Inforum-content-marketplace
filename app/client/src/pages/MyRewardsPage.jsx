@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import { Http } from '../_helpers';
 import { Line } from 'react-chartjs-2';
 import { alertActions, postActions } from '../_actions';
+import { renderWelcomeMsg } from '../_helpers';
 
 export const options = {
     responsive: true,
@@ -21,6 +22,7 @@ class MyRewardsPage extends React.Component {
         this.state = {
             insights: []
         }
+        this.renderWelcomeMsg = renderWelcomeMsg.bind(this);
     }
 
     async componentDidMount() {
@@ -75,7 +77,8 @@ class MyRewardsPage extends React.Component {
 
         return (
             <Container className="page">
-                <h1 align="left" style={{padding: '10px'}} >Welcome to My Rewards, {this.props.user.firstName}!</h1> 
+                {this.renderWelcomeMsg("Welcome to My Rewards, ", this.props)}
+                {/* <h1 align="left" style={{padding: '10px'}} >Welcome to My Rewards, {this.props.user.firstName}!</h1>  */}
                     <Row xs={3} md={3} lg={3}>
                         <Card border="light" >
                             <Card.Header>Total Posts</Card.Header>

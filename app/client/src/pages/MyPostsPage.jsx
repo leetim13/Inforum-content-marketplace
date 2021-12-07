@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import { postActions, alertActions } from '../_actions';
-import { Http, renderNoData, renderDate } from '../_helpers';
+import { Http, renderNoData, renderDate, renderStatus, renderWelcomeMsg } from '../_helpers';
 
 class MyPostsPage extends React.Component {
     constructor(props){
         super(props);
         this.renderNoData = renderNoData.bind(this);
         this.renderDate = renderDate.bind(this);
+        this.renderStatus = renderStatus.bind(this);
+        this.renderWelcomeMsg = renderWelcomeMsg.bind(this);
     }
 
     componentDidMount() {
@@ -31,19 +33,15 @@ class MyPostsPage extends React.Component {
                 <td>{p.Campaign.Bank.name}</td>
                 {this.renderDate(p.createdAt)}
                 {this.renderDate(p.Campaign.endDate)}
-                {/* <td>
-                    {new Date(p.createdAt).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </td> */}
-                {/* <td>
-                    {new Date(p.Campaign.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </td> */}
-                <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td> 
+                {this.renderStatus(p)}
+                {/* <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td>  */}
                 <td><a href={p.url}>Link</a></td>
             </tr>
         )
         return (
             <div className="page">
-                <h1 align="left" style={{padding: '10px'}} >Welcome to My Posts, {this.props.user.firstName}!</h1>
+                {this.renderWelcomeMsg("Welcome to My Posts, ", this.props)}
+                {/* <h1 align="left" style={{padding: '10px'}} >Welcome to My Posts, {this.props.user.firstName}!</h1> */}
                 <Container>
                     <Table striped bordered hover>
                         <thead>
