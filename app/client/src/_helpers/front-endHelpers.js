@@ -6,3 +6,15 @@ export function renderRanOutOfCampaigns(campaignCards) {
             </Row>
             </div>)
 }
+
+export function renderNoData(postsUnderCampaign) {
+    return (<tbody>
+            {postsUnderCampaign.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: postsUnderCampaign}
+            </tbody>)
+}
+
+export function renderDate(date) {
+    return (<td>
+            {new Date(date).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            </td>)
+}

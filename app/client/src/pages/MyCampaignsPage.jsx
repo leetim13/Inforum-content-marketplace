@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import { campaignActions, alertActions } from '../_actions';
-import { Http } from '../_helpers';
+import { Http, renderNoData, renderDate } from '../_helpers';
 
 class MyCampaignsPage extends React.Component {
     constructor(props){
         super(props);
+        this.renderNoData = renderNoData.bind(this);
+        this.renderDate = renderDate.bind(this);
     }
 
     componentDidMount() {
@@ -34,12 +36,15 @@ class MyCampaignsPage extends React.Component {
             <tr key={i}>
                 <td><a href={"/offer/" + c.id}>{c.title}</a></td>
                 <td>{c.type}</td>
-                <td>
+
+                {this.renderDate(c.startDate)}
+                {this.renderDate(c.endDate)}
+                {/* <td>
                     {new Date(c.startDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                 </td>
                 <td>
                     {new Date(c.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </td>
+                </td> */}
                 <td style={{ color: 'green' }}>{new Date(c.endDate) >= new Date() ? "Ongoing" : "Ended" }</td>
                 <td><a href={"/insights/" + c.id}>Link</a></td>
                 <td><Button variant="secondary" disabled={new Date(c.endDate) >= new Date() ? true : false } onClick={async () => await this.closeCampaign(c.id)}>Close</Button></td>
@@ -62,9 +67,7 @@ class MyCampaignsPage extends React.Component {
                                 <th>Close Campaign</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {campaigns.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: campaigns}
-                        </tbody>
+                        {this.renderNoData(campaigns)}
                     </Table>
                     <Button variant="secondary" onClick={async () => await this.generateInsights()}>Generate Insights</Button>
                 </Container>

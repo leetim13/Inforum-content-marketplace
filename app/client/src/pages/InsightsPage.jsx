@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
 import { alertActions, postActions } from '../_actions';
-import { Http } from '../_helpers';
+import { Http, renderNoData, renderDate} from '../_helpers';
 
 import Chart from 'chart.js/auto'
 import { Pie, Line, Doughnut } from 'react-chartjs-2';
@@ -28,6 +28,8 @@ class InsightsPage extends React.Component {
 			  title: ""
 		  }
         }
+		this.renderNoData = renderNoData.bind(this);
+		this.renderDate = renderDate.bind(this);
     }
 
     async componentDidMount() {
@@ -196,9 +198,10 @@ class InsightsPage extends React.Component {
 				<td>
 					{p.User.gender}
 				</td>
-                <td>
+                {/* <td>
                     {new Date(p.createdAt).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </td>
+                </td> */}
+				{this.renderDate(p.createdAt)}
                 <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td> 
                 <td><a href={p.url}>Link</a></td>
             </tr>
@@ -227,7 +230,7 @@ class InsightsPage extends React.Component {
 				chartType: Line
 			},
 			{
-				title: "Total Likes in last 7 days",
+				title: "Total Clicks in last 7 days",
 				data: last7DaysLikesData,
 				dataset: last7DaysLikesData.metricsDataset,
 				chartType: Line
@@ -270,9 +273,7 @@ class InsightsPage extends React.Component {
 						<th>Link to post</th>
 					</tr>
 				</thead>
-				<tbody>
-					{postsUnderCampaign.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: postsUnderCampaign}
-				</tbody>
+				{this.renderNoData(postsUnderCampaign)}
 			</Table>
 			<br/><br/><br/>
         </Container>
