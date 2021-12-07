@@ -5,7 +5,7 @@ import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
 import { alertActions, campaignActions } from '../_actions';
 import { history } from '../_helpers';
-import { Http } from '../_helpers';
+import { Http, renderRanOutOfCampaigns } from '../_helpers';
 
 class OfferPage extends React.Component {
     constructor(props){
@@ -17,6 +17,7 @@ class OfferPage extends React.Component {
 			description: "",
             endDate: ""
 		} // Change this after verifying redux campaigns are set up.
+        this.renderRanOutOfCampaigns = renderRanOutOfCampaigns.bind(this);
     }
 
     async componentDidMount() {
@@ -98,9 +99,8 @@ class OfferPage extends React.Component {
                 <br/>    
                 <br/>    
 
-                <Row xs={3} md={3} lg={3}> 
-                    {campaignCards.length === 0 ? <Col>Ran out of campaigns</Col>: campaignCards}
-                </Row>
+                {this.renderRanOutOfCampaigns(campaignCards)}
+                
                 <br/>    
                 <br/>    
                 </Container>
