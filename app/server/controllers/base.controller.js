@@ -1,4 +1,6 @@
 const helpers = require('../helpers/sequelizeErrorMessageHandler');
+const db = require('../models');
+const Op = db.Sequelize.Op;
 
 /**
  * @class BaseController
@@ -82,7 +84,7 @@ class BaseController{
     async delete(req, res) {
         const id = req.params.id;
 
-        await this.model.destroy({ where: { id: id } })
+        await this.model.destroy({ where: { id: { [Op.eq]: id } } })
             .then(num => {
                 if (num === 1) {
                     res.send({
