@@ -53,15 +53,15 @@ class InsightsPage extends React.Component {
 		.catch(err => this.props.dispatch(alertActions.error(`Cannot find user: ${err.message}`)));
 	}
 
-	aggregateLast7Days(posts) {
+	aggregateLast7Days(posts, metric) {
 		const today = new Date();
         const dateObject = {};
         const dateLabels = [-6, -5, -4, -3, -2, -1, 0].map((offset) => {
             const date = new Date();
             date.setDate(today.getDate() + offset);
 			dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })] = {};
-            dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numClicks = 0;
-			dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numLikes = 0;
+            dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numMetrics = 0;
+			// dateObject[date.toLocaleDateString({ month: 'long', day: 'numeric' })].numLikes = 0;
             return date.toLocaleDateString({ month: 'long', day: 'numeric' });
         });
         
@@ -70,18 +70,22 @@ class InsightsPage extends React.Component {
 			for (let j = 0; j < insights.length; j++) {
 				const curDate = new Date(insights[j].date).toLocaleDateString({ month: 'long', day: 'numeric' });
 				if (curDate in dateObject) {
-					dateObject[curDate].numClicks += insights[j].numClicks;
-					dateObject[curDate].numLikes += insights[j].numLikes;
+					if (metric == "clicks"){
+						dateObject[curDate].numMetrics += insights[j].numClicks;
+					}else{
+						dateObject[curDate].numMetrics += insights[j].numLikes;
+					}
 				}
 			}
 		}
-		const clicksDataset = {
+
+		const metricsDataset = {
             labels: dateLabels,
             datasets: [
                 {
-                    label: '# of clicks',
+                    label: '# of ' + metric,
                     data: Object.keys(dateObject).map(function(key) {
-                        return dateObject[key].numClicks;
+                        return dateObject[key].numMetrics;
                     }),
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -89,20 +93,7 @@ class InsightsPage extends React.Component {
             ]
         }
 
-		const likesDataset = {
-            labels: dateLabels,
-            datasets: [
-                {
-                    label: '# of likes',
-                    data: Object.keys(dateObject).map(function(key) {
-                        return dateObject[key].numLikes;
-                    }),
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                }
-            ]
-        }
-		return { clicksDataset, likesDataset };
+		return { metricsDataset };
 	}
 
 	aggregateAgeGender(posts) {
@@ -190,7 +181,8 @@ class InsightsPage extends React.Component {
 
     render() {
 		const posts = this.state.posts;
-		const last7DaysData = this.aggregateLast7Days(posts);
+		const last7DaysClicksData = this.aggregateLast7Days(posts, "clicks");
+		const last7DaysLikesData = this.aggregateLast7Days(posts, "likes");
 		const ageGenderDataset = this.aggregateAgeGender(posts);
 		
 		const postsUnderCampaign = posts.map((p, i) => 
@@ -212,36 +204,61 @@ class InsightsPage extends React.Component {
             </tr>
         )
 
+		const cardDataCombined = [
+			{
+				title: "Campaign Shares by Gender",
+				data: ageGenderDataset,
+				dataset: ageGenderDataset.genderDataset,
+				chartType: Pie
+			},
+			{
+				title: "Campaign Shares by Age Group",
+				data: ageGenderDataset,
+				dataset: ageGenderDataset.ageDataset,
+				chartType: Doughnut
+			},
+		]
+
+		const cardDataSeparate = [
+			{
+				title: "Total Clicks in last 7 days",
+				data: last7DaysClicksData,
+				dataset: last7DaysClicksData.metricsDataset,
+				chartType: Line
+			},
+			{
+				title: "Total Likes in last 7 days",
+				data: last7DaysLikesData,
+				dataset: last7DaysLikesData.metricsDataset,
+				chartType: Line
+			},
+		]
+
         return (
           <Container className="page">
             <h1 align="left" style={{padding: '10px'}} >{this.props.user.role === "Admin" ? "Site-wide Campaign Insights" : `Campaign Insights for: ${this.state.campaign.title}`}</h1>            
-            <Row xs={2} md={2} lg={2}>
-              <Card>
-                <h5>Campaign Shares by Gender</h5>
-                  <Card.Body style={{ height: '40vh' }}>
-					  {ageGenderDataset.hasData ? <Pie data={ageGenderDataset.genderDataset}/> : <div >Has no data</div>}
-                  </Card.Body>
-              </Card>
-              <Card>
-              <h5>Campaign Shares by Age Group</h5>
-                  <Card.Body>
-                      {ageGenderDataset.hasData ? <Doughnut data={ageGenderDataset.ageDataset} /> : <div>Has no data</div>}
-                  </Card.Body>
-              </Card>
+            
+			<Row xs={2} md={2} lg={2}>
+				{cardDataCombined.map((cardType) => (
+					<Card>
+						<h5>{cardType.title}</h5>
+						<Card.Body style={{ height: '40vh' }}>
+							{cardType.data.hasData ? <cardType.chartType data={cardType.dataset}/> : <div >Has no data</div>}
+						</Card.Body>
+					</Card>
+				))}
+			</Row>
 
-            </Row>
-            <Card>
-				<h5>Total Clicks in last 7 days</h5>
-				<Card.Body>
-					<Line data={last7DaysData.clicksDataset} />
-				</Card.Body>
-			</Card>
-			<Card>
-				<h5>Total likes in last 7 days</h5>
-				<Card.Body>
-					<Line data={last7DaysData.likesDataset} />
-				</Card.Body>
-			</Card>
+			{cardDataSeparate.map((cardType) => (
+					<Card>
+						<h5>{cardType.title}</h5>
+						<Card.Body>
+							<cardType.chartType data={cardType.dataset}/> 
+						</Card.Body>
+					</Card>
+			))}
+
+
 			<Table striped bordered hover>
 				<thead>
 					<tr>
