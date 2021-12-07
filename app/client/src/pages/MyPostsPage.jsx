@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import { postActions, alertActions } from '../_actions';
-import { Http } from '../_helpers';
+import { Http, renderNoData, renderDate } from '../_helpers';
 
 class MyPostsPage extends React.Component {
     constructor(props){
         super(props);
+        this.renderNoData = renderNoData.bind(this);
+        this.renderDate = renderDate.bind(this);
     }
 
     componentDidMount() {
@@ -27,12 +29,14 @@ class MyPostsPage extends React.Component {
                 <td><a href={"/offer/" + p.Campaign.id}>{p.Campaign.title}</a></td>
                 <td>{p.Campaign.type}</td>
                 <td>{p.Campaign.Bank.name}</td>
-                <td>
+                {this.renderDate(p.createdAt)}
+                {this.renderDate(p.Campaign.endDate)}
+                {/* <td>
                     {new Date(p.createdAt).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </td>
-                <td>
+                </td> */}
+                {/* <td>
                     {new Date(p.Campaign.endDate).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </td>
+                </td> */}
                 <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td> 
                 <td><a href={p.url}>Link</a></td>
             </tr>
@@ -54,9 +58,7 @@ class MyPostsPage extends React.Component {
                                 <th>Link to post</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {posts.length === 0 ? <tr><td className="text-center" colSpan={7}>No data</td></tr>: posts}
-                        </tbody>
+                        {this.renderNoData(posts)}
                     </Table>
                 </Container>
                 {this.props.user.role === "Admin" 
