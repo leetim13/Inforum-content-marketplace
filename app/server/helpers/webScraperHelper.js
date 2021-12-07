@@ -1,8 +1,8 @@
-const BaseWebScrapper = require('../web-scraper/base.webscraper');
-const FacebookWebScrapper = require('../web-scraper/facebook.webscraper');
-const logger = require("../helpers/logger");
+const BaseWebScraper = require('../web-scraper/base.webscraper');
+const FacebookWebScraper = require('../web-scraper/facebook.webscraper');
+const logger = require("./logger");
 
-exports.getPostData = async (url, platform, testUrl) => {
+exports.getPostData = async (url, platform) => {
     let webScraper;
     let postUrlRegex;
     switch(platform) {
@@ -10,16 +10,18 @@ exports.getPostData = async (url, platform, testUrl) => {
             postUrlRegex = new RegExp(
                 '^https:\/\/www.facebook.com\/.*$'
              );
-            webScraper = new FacebookWebScrapper();
+            webScraper = new FacebookWebScraper();
             break;
         default:
             logger.error("Platform does not exist.");
+            console.log("entered")
             postUrlRegex = new RegExp('a^'); // Match nothing
             // Should not end up here.
-            webScraper = new BaseWebScrapper("base");
+            webScraper = new BaseWebScraper("base");
     }
     if ( !postUrlRegex.test(url) ) {
         logger.error("Url does not match the format.");
+        console.log("entered2")
         throw new Error("Url does not match the format.");
     }
     let postData;

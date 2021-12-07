@@ -4,7 +4,6 @@ const PostController =  require("../controllers/post.controller");
 
 module.exports = app => {
 	const posts = new PostController();
-	// const webScraper = new FacebookWebScrapper();
 	
 	var router = require("express").Router();
 

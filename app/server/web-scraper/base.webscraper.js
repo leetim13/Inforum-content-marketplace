@@ -1,10 +1,10 @@
 /**
- * @class BaseWebScrapper
+ * @class BaseWebScraper
  * @abstract
  */
-class BaseWebScrapper{
+class BaseWebScraper{
     constructor(platform) {
-        if (this.constructor === BaseWebScrapper) {
+        if (this.constructor === BaseWebScraper) {
             throw new Error("Abstract classes can't be instantiated.");
         }
         this.platform = platform;
@@ -31,4 +31,4 @@ class BaseWebScrapper{
     }
 }
 
-module.exports = BaseWebScrapper;
+module.exports = BaseWebScraper;

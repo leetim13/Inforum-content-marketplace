@@ -1,8 +1,7 @@
 const mocks = require('@jest-mock/express');
 
 const PostController = require("../../controllers/post.controller");
-const { getPostData } = require("../../helpers/webScrapperHelper");
-const { ValidationError } = require("sequelize");
+const { getPostData } = require("../../helpers/webScraperHelper");
 const db = require("../../models");
 const Post = db['Post'];
 const Campaign = db['Campaign'];
@@ -17,7 +16,7 @@ jest.mock("../../helpers/logger", () => {
     }
 })
 
-jest.mock('../../helpers/webScrapperHelper', () => ({
+jest.mock('../../helpers/webScraperHelper', () => ({
     getPostData: jest.fn()
 }));
 
@@ -46,7 +45,7 @@ describe('PostController Test', function(){
             const post = {
                 "UserId": 1000000001,
                 "CampaignId": 1000000002,
-                "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589011",
+                "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589013",
                 "platform": "facebook"
             };
             getPostData.mockReturnValueOnce({ message: "testPostController", likes: 10 });
@@ -60,7 +59,7 @@ describe('PostController Test', function(){
                 expect.objectContaining({
                     "UserId": 1000000001,
                     "CampaignId": 1000000002,
-                    "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589011",
+                    "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589013",
                     "isVerified": true,
                     "socialMedia": "facebook"
                 }),

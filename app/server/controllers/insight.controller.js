@@ -1,5 +1,5 @@
 const BaseController = require("./base.controller");
-const webScrapperHelper = require("../helpers/webScrapperHelper");
+const webScraperHelper = require("../helpers/webScraperHelper");
 const db = require('../models');
 const Op = db.Sequelize.Op;
 const User = db['User'];
@@ -40,7 +40,7 @@ class InsightController extends BaseController{
                     logger.info(post.id);
                     let postData;
                     try {
-                        postData = await webScrapperHelper.getPostData(post.url, post.socialMedia);
+                        postData = await webScraperHelper.getPostData(post.url, post.socialMedia);
                         
                     } catch (err) {
                         if (err.message === "Facebook cookies not found." || err.message === "Something went wrong with scraping.") {
