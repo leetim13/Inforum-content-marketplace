@@ -4,7 +4,7 @@ import { Col, Row, Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from '
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { campaignActions, alertActions } from '../_actions';
-import { Http } from '../_helpers';
+import { Http, renderRanOutOfCampaigns } from '../_helpers';
 
 class LandingPage extends React.Component {
 
@@ -22,6 +22,7 @@ class LandingPage extends React.Component {
         };
         this.handleOfferChange = this.handleOfferChange.bind(this);
         this.handleBankChange = this.handleBankChange.bind(this);
+        this.renderRanOutOfCampaigns = renderRanOutOfCampaigns.bind(this);
     }
 
     async componentDidMount() {
@@ -80,12 +81,9 @@ class LandingPage extends React.Component {
                     </ToggleButtonGroup>
                 </div>
                 
-                <div>
-                    <Row xs={3} md={3} lg={3} >
-                        {campaignCards.length === 0 ? <Col>Ran out of campaigns</Col>: campaignCards}
-                    </Row>
-                </div>
+                {this.renderRanOutOfCampaigns(campaignCards)}
             </Container>
+            
         );
     }
 }

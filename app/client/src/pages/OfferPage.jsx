@@ -4,8 +4,7 @@ import { Image, Row, Col, Container, Card, Button} from 'react-bootstrap'
 import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
 import { alertActions, campaignActions } from '../_actions';
-import { history } from '../_helpers';
-import { Http } from '../_helpers';
+import { history, Http, renderRanOutOfCampaigns, filterCampaigns } from '../_helpers';
 
 class OfferPage extends React.Component {
     constructor(props){
@@ -17,10 +16,13 @@ class OfferPage extends React.Component {
 			description: "",
             endDate: ""
 		} // Change this after verifying redux campaigns are set up.
+        this.renderRanOutOfCampaigns = renderRanOutOfCampaigns.bind(this);
+        this.filterCampaigns = filterCampaigns.bind(this);
     }
 
     async componentDidMount() {
-        const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+        // const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+        const result = this.filterCampaigns(this.props);
         if (!Array.isArray(result) || result.length === 0) {
             // Could reload redux campaign object to check for updates
             this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`));
@@ -98,9 +100,8 @@ class OfferPage extends React.Component {
                 <br/>    
                 <br/>    
 
-                <Row xs={3} md={3} lg={3}> 
-                    {campaignCards.length === 0 ? <Col>Ran out of campaigns</Col>: campaignCards}
-                </Row>
+                {this.renderRanOutOfCampaigns(campaignCards)}
+                
                 <br/>    
                 <br/>    
                 </Container>

@@ -19,6 +19,7 @@ class CreateCampaignPage extends React.Component {
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.fileUploadInputChange = this.fileUploadInputChange.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount(){
@@ -77,34 +78,46 @@ class CreateCampaignPage extends React.Component {
 		.catch(err => this.props.dispatch(alertActions.error(err.response.data.message)))
     };
 
+	handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
     render() {
+		const formData = [
+			{
+				name: "title",             
+				text: "Campaign Title",
+                html_type: "text"
+			},
+			{
+				name: "url",             
+				text: "Campaign URL",
+                html_type: "text"
+			},
+			{
+				name: "startDate",             
+				text: "Campaign Start Date",
+                html_type: "date"
+			},
+			{
+				name: "endDate",             
+				text: "Campaign End Date",
+                html_type: "date"
+			},
+			{
+				name: "allocatedCash",             
+				text: "Maximum Campaign Budget (in $CAD)",
+                html_type: "number"
+			},
+		]
         return (
             <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >Create a Campaign</h1>
                 <Container>
                     <div align="left">
 						<Form onSubmit={this.handleSubmit}>
-							<Form.Group as={Row} className="mb-3" controlId="title">
-								<Form.Label column sm={2}>
-									Campaign Title
-								</Form.Label>
-								<Col sm={10}>
-									<Form.Control type="text" onChange={e => this.setState({ title: e.target.value })} required/>
-								</Col>
-							</Form.Group>
 
-							<Form.Group as={Row} className="mb-3" controlId="url">
-								<Form.Label column sm={2}>
-									Campaign URL
-								</Form.Label>
-								<Col sm={10}>
-									<Form.Control type="url" placeholder="Campaign URL"  onChange={e => this.setState({ url: e.target.value })} required/>
-								{/* <Form.Control.Feedback type="invalid">
-									Please provide a valid campaign URL (e.g., https://www.YourCampaignURL.com).
-								</Form.Control.Feedback> */}
-								</Col>
-							</Form.Group>
-					
 							<Form.Group as={Row} className="mb-3" controlId="type">
 								<Form.Label as="legend" column sm={2}>
 									Camapign Type
@@ -141,15 +154,7 @@ class CreateCampaignPage extends React.Component {
 									/>
 								</Col>
 							</Form.Group>
-							
-							<Form.Group className="mb-3" controlId="description">
-								<Form.Label>Campaign Description</Form.Label>
-								<Form.Control as="textarea" rows={3} onChange={e => this.setState({ description: e.target.value })} required/>
-								{/* <Form.Control.Feedback type="invalid">
-									Please provide a valid campaign description.
-								</Form.Control.Feedback> */}
-							</Form.Group>
-					
+											
 							<Form.Group controlId="image" className="mb-3">
 								<Form.Label>Campaign Image</Form.Label>
 								<br></br>
@@ -164,33 +169,32 @@ class CreateCampaignPage extends React.Component {
 									</Col>
 								</Row>}
 							</Form.Group>
-							
-							<Form.Group className="mb-3" controlId="startDate">
-								<Form.Label>Campaign Start Date</Form.Label>
-								<Form.Control type="date" placeholder="campaign start date" onChange={e => this.setState({ startDate: e.target.value })} required/>
-								{/* <Form.Control.Feedback type="invalid">
-									Please provide a valid campaign start date.
-								</Form.Control.Feedback> */}
+
+							<Form.Group className="mb-3" controlId="description">
+								<Form.Label>Campaign Description</Form.Label>
+								<Form.Control as="textarea" rows={3} onChange={e => this.setState({ description: e.target.value })} required/>
 							</Form.Group>
-					
-							<Form.Group className="mb-3" controlId="endDate">
-								<Form.Label>Campaign End Date</Form.Label>
-								<Form.Control type="date" placeholder="campaign end date" onChange={e => this.setState({ endDate: e.target.value })} required/>
-								{/* <Form.Control.Feedback type="invalid">
-									Please provide a valid campaign end date.
-								</Form.Control.Feedback> */}
-							</Form.Group>
-					
-							<Form.Group className="mb-3" controlId="allocatedCash">
-								<Form.Label>Maximum Campaign Budget (in $CAD)</Form.Label>
-								<Form.Control type="number" placeholder="Campaign Budget (in $CAD)" onChange={e => this.setState({ allocatedCash: e.target.value })} required/>
-								{/* <Form.Control.Feedback type="invalid">
-									Please provide a valid Campaign Budget (in $CAD).
-								</Form.Control.Feedback> */}
+
+							{formData.map((formType) => (
+								<Form.Group key={formType} as={Row} className="mb-3" controlId={formType.name} >
+									<Form.Label as={Col} md="2">{formType.text}</Form.Label>
+									<Col sm={10}>
+									<Form.Control
+										required
+										name={formType.name} 
+										type={formType.html_type}
+										placeholder={formType.text}
+										onChange={this.handleChange}
+									/>
+									</Col>
+								</Form.Group>
+							))}
+
+							<p>
 								<i>*Maximum Campaign Budget refers to the maximum budget allocated for this specific campaign.
-									If the # of clicks (converted to $) surpassed this budget, we will close this campaign for you automatically!
+										If the # of clicks (converted to $) surpassed this budget, we will close this campaign for you automatically!
 								</i>
-							</Form.Group>
+							</p>
 							
 							<Button type="submit" variant="secondary">Create Campaign</Button>
 						</Form>
