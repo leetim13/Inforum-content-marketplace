@@ -15,8 +15,10 @@ class ShareOfferPage extends React.Component {
             postUrl: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-
         this.baseClientUrl = process.env.REACT_APP_SERVER_URL ? "https://inforum-client.herokuapp.com" : "localhost:3000";
+        this.handleCopy = this.handleCopy.bind(this);
+        this.handlePaste = this.handlePaste.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -63,51 +65,77 @@ class ShareOfferPage extends React.Component {
             .catch(err => this.props.dispatch(alertActions.error(err.response.data.message)))
     }
 
+    handleCopy(){
+        navigator.clipboard.writeText(`${this.baseClientUrl}/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`)
+    }
+
+    handlePaste(){
+        navigator.clipboard.readText().then(data => this.setState({ postUrl: data }))
+    }
+
+    handleChange(e){
+        this.setState({ postUrl: e.target.value })
+    }
+
     render() {
+        const formData = [
+            {
+                name: "formCampaignUrl",
+                description: "Copy this auto-generated link from our partner below and make sure to include " + 
+                "this link in your social media post.",
+                text: "Offer URL",
+                readOnly: true,
+                button_text: "Copy",
+                defaultValue: `${this.baseClientUrl}/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`,
+                onClickAction: this.handleCopy,
+            },
+            {
+                name: "formPostUrl",
+                description: "Feel free to add anything else you would like your friends to know! " +
+                "Once you are done, paste back your post URL below.",
+                text: "Post URL",
+                readOnly: false,
+                placeholder: "i.e., https://facebook.com/username/posts/abc123...",
+                button_text: "Paste",
+                onClickAction: this.handlePaste,
+                value: this.state.postUrl,
+                onChangeAction: this.handleChange
+            }
+        ]
+
         return (
             <div className="page">
                 <h1 align="left" style={{padding: '10px'}} >One last step, you are almost there!</h1>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="formCampaignUrl">
-                        <Form.Label>
-                            <h5 align="left" style={{padding: '10px'}}>Copy this auto-generated link from our partner below and make sure to include
-                            this link in your social media post. </h5>
-                        </Form.Label>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text id="inputGroup-sizing-sm">Offer URL</InputGroup.Text>
-                            {/* <FormControl placeholder={this.campaignUrl} readOnly /> */}
-                            <Form.Control readOnly defaultValue={`${this.baseClientUrl}/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`} />
-                            <Button variant="outline-secondary" id="button-addon2" 
-                            onClick={() => navigator.clipboard.writeText(`${this.baseClientUrl}/linkRedirect/${this.props.user.id}/${this.props.match.params.id}`)}>
-                                Copy
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
-                    <Form.Group controlId="formPostUrl">
-                        <Form.Label>
-                            <h5 align="left" style={{padding: '10px'}}>Feel free to add anything else you would like your friends to know!
-                            Once you are done, paste back your post URL below.</h5>
-                        </Form.Label>
-                        <InputGroup className="mb-3" hasValidation>
-                            <InputGroup.Text id="inputGroup-sizing-sm">Post URL</InputGroup.Text>
-                            <Form.Control type="text" value={this.state.postUrl} onChange={e => this.setState({ postUrl: e.target.value })} 
-                            placeholder="i.e., https://facebook.com/username/posts/abc123..."/>
-                            <Button variant="outline-secondary" id="button-addon2" 
-                            onClick={() => navigator.clipboard.readText().then(data => this.setState({ postUrl: data }))}>
-                                Paste
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
+
+                    {formData.map((formType) => (
+                        <Form.Group key={formType} controlId={formType.name} >
+                            <Form.Label>
+                                <h5 align="left" style={{padding: '10px'}}>
+                                    {formType.description}
+                                </h5>
+                            </Form.Label>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text id="inputGroup-sizing-sm">{formType.text}</InputGroup.Text>
+                                <Form.Control readOnly={formType.readOnly} defaultValue={formType.defaultValue} 
+                                placeholder={formType.placeholder} onChange={formType.onChangeAction}
+                                value={formType.value}/>
+                                <Button variant="outline-secondary" id="button-addon2" onClick={formType.onClickAction}>
+                                    {formType.button_text}
+                                </Button>
+                            </InputGroup>
+                        </Form.Group>
+                    ))}
 
                     <Form.Group> 
                         <Form.Label>
                             <h5 align="left" style={{padding: '10px'}}>Once we have verified your post, check back later to see how 
                             much Rewards you have gained!</h5>
                         </Form.Label>
-                        <div style={{ display: "flex" }}>
-                            <Button variant="outline-secondary" style={{ marginRight: "auto" }} type="submit">Verify Post!</Button>
-                        </div>
                     </Form.Group>
+                    <div style={{ display: "flex" }}>
+                            <Button variant="outline-secondary" style={{ marginRight: "auto" }} type="submit">Verify Post!</Button>
+                    </div>
                 </Form>
                 <p><i><u>Terms and Conditions apply.</u></i></p>
             </div>
