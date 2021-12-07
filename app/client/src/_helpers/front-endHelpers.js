@@ -18,3 +18,9 @@ export function renderDate(date) {
             {new Date(date).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </td>)
 }
+
+export function filterCampaigns(this_props){
+    return (
+        this_props.campaigns.filter(c => parseInt(c.id) === parseInt(this_props.match.params.id))
+    )
+}

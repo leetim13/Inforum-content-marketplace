@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { Form, FormGroup, InputGroup, Button, FormControl } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
-import { Http } from '../_helpers'
+import { history, Http, filterCampaigns } from '../_helpers'
 import { postActions, alertActions } from '../_actions';
-import { history } from '../_helpers';
 
 class ShareOfferPage extends React.Component {
     constructor(props){
@@ -19,10 +18,12 @@ class ShareOfferPage extends React.Component {
         this.handleCopy = this.handleCopy.bind(this);
         this.handlePaste = this.handlePaste.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.filterCampaigns = filterCampaigns.bind(this);
     }
 
     componentDidMount() {
-        const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+        // const result = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+        const result = this.filterCampaigns(this.props);
         if (!Array.isArray(result) || result.length === 0) {
             // Could reload redux campaign object to check for updates
             this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`));

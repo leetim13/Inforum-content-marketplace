@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
 import { alertActions, postActions } from '../_actions';
-import { Http, renderNoData, renderDate} from '../_helpers';
+import { Http, renderNoData, renderDate, filterCampaigns} from '../_helpers';
 
 import Chart from 'chart.js/auto'
 import { Pie, Line, Doughnut } from 'react-chartjs-2';
@@ -30,6 +30,7 @@ class InsightsPage extends React.Component {
         }
 		this.renderNoData = renderNoData.bind(this);
 		this.renderDate = renderDate.bind(this);
+		this.filterCampaigns = filterCampaigns.bind(this);
     }
 
     async componentDidMount() {
@@ -38,7 +39,8 @@ class InsightsPage extends React.Component {
 			campaignId = -1;
 		} else {
 			campaignId = this.props.match.params.id;
-			const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
+			const currentCampaign = this.filterCampaigns(this.props);
+			// const currentCampaign = this.props.campaigns.filter(c => parseInt(c.id) === parseInt(this.props.match.params.id));
 			if (currentCampaign === []) {
 				this.props.dispatch(alertActions.error(`Cannot find campaign with id: ${this.props.match.params.id}`))
 			} else {
