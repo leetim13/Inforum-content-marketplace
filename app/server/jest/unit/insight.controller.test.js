@@ -44,7 +44,7 @@ describe('InsightController Test', function(){
             await Post.create({
                 "id": 1000000011,
                 "UserId": 1000000001,
-                "CampaignId": 1000000002,
+                "CampaignId": 1000000003,
                 "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589011",
                 "socialMedia": "facebook",
                 "isVerified": true,
@@ -54,7 +54,7 @@ describe('InsightController Test', function(){
 
         afterEach(async () => {
             // Remove post after. (newly created insight will be cascade deleted)
-            await Post.destroy({ where: { UserId: { [Op.eq]: 1000000001 }, CampaignId: { [Op.eq]: 1000000002 }}});
+            await Post.destroy({ where: { UserId: { [Op.eq]: 1000000001 }, CampaignId: { [Op.eq]: 1000000003 }}});
         })
 
         test("insights are generated successfully", async () => {

@@ -45,7 +45,7 @@ describe('PostController Test', function(){
             const post = {
                 "UserId": 1000000001,
                 "CampaignId": 1000000002,
-                "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589011",
+                "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589013",
                 "platform": "facebook"
             };
             getPostData.mockReturnValueOnce({ message: "testPostController", likes: 10 });
@@ -59,7 +59,7 @@ describe('PostController Test', function(){
                 expect.objectContaining({
                     "UserId": 1000000001,
                     "CampaignId": 1000000002,
-                    "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589011",
+                    "url": "https://www.facebook.com/permalink.php?story_fbid=118546253979789&id=10007473243589013",
                     "isVerified": true,
                     "socialMedia": "facebook"
                 }),
