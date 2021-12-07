@@ -4,6 +4,12 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from "redux-mock-store";
 import thunk from 'redux-thunk'
+import {
+    screen,
+    render,
+    fireEvent,
+    waitForElementToBeRemoved
+} from "@testing-library/react";
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -22,6 +28,7 @@ describe("Test SignUpPage Page", () => {
         ).dive().dive();
         // console.log(wrapper.debug());
         expect(wrapper.text().includes("Username")).toBe(true);
+        // const emailInput = screen.getByTitle('email')
     });
 });
 

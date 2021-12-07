@@ -245,7 +245,7 @@ class InsightsPage extends React.Component {
             
 			<Row xs={2} md={2} lg={2}>
 				{cardDataCombined.map((cardType) => (
-					<Card>
+					<Card key={cardType}>
 						<h5>{cardType.title}</h5>
 						<Card.Body style={{ height: '40vh' }}>
 							{cardType.data.hasData ? <cardType.chartType data={cardType.dataset}/> : <div >Has no data</div>}
@@ -255,7 +255,7 @@ class InsightsPage extends React.Component {
 			</Row>
 
 			{cardDataSeparate.map((cardType) => (
-					<Card>
+					<Card key={cardType}>
 						<h5>{cardType.title}</h5>
 						<Card.Body>
 							<cardType.chartType data={cardType.dataset}/> 
