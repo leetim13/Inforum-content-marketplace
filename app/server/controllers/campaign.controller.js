@@ -43,7 +43,7 @@ class CampaignController extends BaseController{
     };
 
     // Retrieve all User from the database.
-    findAll(req, res) {
+    async findAll(req, res) {
         const type = req.query.type;
         const bankId = req.query.BankId;
         logger.info(`Campaign: findAll: BankId:${bankId}, type:${type}`);
@@ -51,16 +51,8 @@ class CampaignController extends BaseController{
         let condition = type ? { type: { [Op.eq]: type } } : {};
         condition = bankId ? { ...condition, BankId: { [Op.eq]: bankId }} : condition;
 
-        Campaign.findAll({ attributes: { exclude: ["image"] }, where: condition })
-            .then(data => {
-                res.send(data);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message:
-                        helpers.sequelizeErrorMessageHandler(err) || `Some error occurred while retrieving ${this.model.name}s.`
-                });
-            });
+        const campaigns = await Campaign.findAll({ attributes: { exclude: ["image"] }, where: condition });
+        res.send(campaigns);
     };
 
     async closeCampaign(req, res) {
@@ -71,7 +63,6 @@ class CampaignController extends BaseController{
             { where: { id: { [Op.eq]: id}}, 
             include: [ { model: Post, required: false, where: { isVerified: { [Op.eq]: true }}, include: [ { model: User } ]} ]
         });
-        console.log(campaign);
         if (campaign === null) {
             res.status(404).send({
                 message: "Campaign not found."
