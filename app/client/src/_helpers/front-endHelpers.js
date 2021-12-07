@@ -24,3 +24,13 @@ export function filterCampaigns(this_props){
         this_props.campaigns.filter(c => parseInt(c.id) === parseInt(this_props.match.params.id))
     )
 }
+
+export function renderStatus(p) {
+    return (<td style={{ color: p.isVerified ? 'green' : 'red' }}>
+        {p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }
+        </td> )
+}
+
+export function renderWelcomeMsg(msg, this_props) {
+    return (<h1 align="left" style={{padding: '10px'}} >{msg}{this_props.user.firstName}!</h1>)
+}

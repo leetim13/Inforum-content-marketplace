@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
 import { alertActions, postActions } from '../_actions';
-import { Http, renderNoData, renderDate, filterCampaigns} from '../_helpers';
+import { Http, renderNoData, renderDate, filterCampaigns, renderStatus} from '../_helpers';
 
 import Chart from 'chart.js/auto'
 import { Pie, Line, Doughnut } from 'react-chartjs-2';
@@ -31,6 +31,7 @@ class InsightsPage extends React.Component {
 		this.renderNoData = renderNoData.bind(this);
 		this.renderDate = renderDate.bind(this);
 		this.filterCampaigns = filterCampaigns.bind(this);
+		this.renderStatus = renderStatus.bind(this);
     }
 
     async componentDidMount() {
@@ -204,7 +205,8 @@ class InsightsPage extends React.Component {
                     {new Date(p.createdAt).toLocaleDateString({ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                 </td> */}
 				{this.renderDate(p.createdAt)}
-                <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td> 
+				{this.renderStatus(p)}
+                {/* <td style={{ color: p.isVerified ? 'green' : 'red' }}>{p.isVerified ? (new Date(p.Campaign.endDate) >= new Date() ? "Ongoing" : "Completed") : "Not verified" }</td>  */}
                 <td><a href={p.url}>Link</a></td>
             </tr>
         )
