@@ -55,7 +55,6 @@ class PostController extends BaseController{
             }
             return;
         }
-        
         if ( postData ) {
             const post = {
                 UserId: user.id,
