@@ -76,7 +76,7 @@ class OfferPage extends React.Component {
                             <div className="img-square-wrapper">
                                 <a alt="" href="" className="offer-bg">
                                 <Image src="../assets/offer_bg.png"  />
-                                <Image className="offer-image" src={`data:image/png;base64,${this.state.image}`} alt={""} />
+                                <Image className="offer-image" src={`data:image/png;base64,${this.state.image}`} alt={this.state.title} />
                                 </a>
                             </div>
                             <div className="card-body" >
