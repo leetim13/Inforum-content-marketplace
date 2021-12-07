@@ -6,7 +6,7 @@ This folder contains content and research about our product, including market re
 Table of Contents
 ---
 - [Use Cases](./use_cases.md)
-- [Market](./market.md)
 - [Roadmap](./roadmap.md)
-- [Prototype](https://github.com/dcsil/Inforum/tree/ui-and-user-research/product_research/prototype)
-- [User Research](https://github.com/dcsil/Inforum/tree/ui-and-user-research/product_research/user_research)
+- [Prototype](./prototype)
+- [User Research](./user_research)
+- [Demo](./demo)
