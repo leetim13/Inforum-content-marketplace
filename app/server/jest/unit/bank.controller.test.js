@@ -1,10 +1,7 @@
 const mocks = require('@jest-mock/express');
 
 const BankController = require("../../controllers/bank.controller");
-const { ValidationError } = require("sequelize");
 const db = require("../../models");
-const Bank = db['Bank'];
-const Op = db.Sequelize.Op;
 const oldServerEnv = process.env.SERVER_ENV;
 
 // mocking Logging

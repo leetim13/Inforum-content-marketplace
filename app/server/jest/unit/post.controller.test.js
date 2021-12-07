@@ -1,8 +1,7 @@
 const mocks = require('@jest-mock/express');
 
 const PostController = require("../../controllers/post.controller");
-const { getPostData } = require("../../helpers/webScrapperHelper");
-const { ValidationError } = require("sequelize");
+const { getPostData } = require("../../helpers/webScraperHelper");
 const db = require("../../models");
 const Post = db['Post'];
 const Campaign = db['Campaign'];
@@ -17,7 +16,7 @@ jest.mock("../../helpers/logger", () => {
     }
 })
 
-jest.mock('../../helpers/webScrapperHelper', () => ({
+jest.mock('../../helpers/webScraperHelper', () => ({
     getPostData: jest.fn()
 }));
 

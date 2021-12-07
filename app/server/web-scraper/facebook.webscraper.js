@@ -1,4 +1,4 @@
-const BaseWebScrapper = require('./base.webscraper');
+const BaseWebScraper = require('./base.webscraper');
 const puppeteer = require('puppeteer');
 const redis = require("redis");
 const { promisify } = require('util');
@@ -14,15 +14,15 @@ const getAsync = promisify(client.get).bind(client);
 logger.info(`Redis connected successfully at ${process.env.REDIS_URL || "local:6379"}`);
 
 /**
- * @class FacebookWebScrapper
- * @extends {BaseWebScrapper}
+ * @class FacebookWebScraper
+ * @extends {BaseWebScraper}
  */
-class FacebookWebScrapper extends BaseWebScrapper{
+class FacebookWebScraper extends BaseWebScraper{
     constructor() {
         super("facebook");
         this.getPost = this.getPost.bind(this);
-        this.username = process.env.SERVER_URL || require("../config/localConfig.json")[this.platform].username;
-        this.password = process.env.SERVER_URL || require("../config/localConfig.json")[this.platform].password;
+        this.username = process.env.FACEBOOK_USERNAME || require("../config/localConfig.json")[this.platform].username;
+        this.password = process.env.FACEBOOK_PASSWORD || require("../config/localConfig.json")[this.platform].password;
         logger.info("FB Scrapper started.");
     }
 
@@ -109,7 +109,9 @@ class FacebookWebScrapper extends BaseWebScrapper{
         logger.info(`Scraping ${url}... In progress`);
         const browser = await this.getBrowser(process.env.SERVER_ENV ? true : false);
         const page = await this.getPage(browser);
-
+        
+        console.log("reached 1");
+        
         const cookies = await getAsync(`${this.platform}_cookies`);
         let postMessageDiv = 'div.cxmmr5t8.oygrvhab.hcukyx3x.c1et5uql.ii04i59q';
         let likesDiv = 'span.gpro0wi8.pcp91wgn'
@@ -118,6 +120,8 @@ class FacebookWebScrapper extends BaseWebScrapper{
         } else {
             await this.loginWithCookies(page, url, cookies);
         }
+
+        console.log("reached 2");
         logger.info("logged in.");
         // Waits for the comment bar to show up,
         // Use to indicate that the post has been loaded.
@@ -127,15 +131,19 @@ class FacebookWebScrapper extends BaseWebScrapper{
             throw new Error("Post verification failed. Post not visible or link does not exist.");
         })
 
+        console.log("reached 3");
         logger.info("Message showed");
         // Gets the post text
         const messages = await page.$$eval(postMessageDiv, (nodes) => nodes.map((n) => n.innerText), postMessageDiv);
         const likes = await page.$$eval(likesDiv, (nodes) => nodes.map((n) => n.innerText), likesDiv);
         const message = messages.join(" ");
+        
+        console.log("reached 4");
+
         logger.info(`Scraping ${url}... Completed`);
         logger.info({ message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) });
         return { message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) };
     }
 }
 
-module.exports = FacebookWebScrapper;
+module.exports = FacebookWebScraper;
