@@ -7,19 +7,19 @@ module.exports = app => {
 
 	var router = require("express").Router();
 
-	router.post('/authenticate', users.authenticate); 
+	router.post('/authenticate', (req, res) => users.authenticate(req, res)); 
 
 	// Create a new User
-	router.post("/", users.create);
+	router.post("/", (req, res) => users.create(req, res));
 
 	// Get user's profile picture
-	router.get("/:id/image", authorize([Role.User, Role.Admin]), users.getImage);
+	router.get("/:id/image", authorize([Role.User, Role.Admin]), (req, res) => users.getImage(req, res));
 
 	// Retrieve all post made by user with id
-	router.get("/:id/posts", authorize([Role.User, Role.Admin]), users.findAllPosts);
+	router.get("/:id/posts", authorize([Role.User, Role.Admin]), (req, res) => users.findAllPosts(req, res));
 
 	// Retrive all insights under a user's posts
-	router.get("/:id/insights", authorize([Role.User, Role.Admin]), users.findAllInsights);
+	router.get("/:id/insights", authorize([Role.User, Role.Admin]), (req, res) => users.findAllInsights(req, res));
 
 	/**
 	 * @swagger

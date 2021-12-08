@@ -8,7 +8,7 @@ module.exports = app => {
 	var router = require("express").Router();
 
 	// Generate insights if they do not already exist
-	router.post("/generate", authorize([Role.Admin, Role.Bank]), insights.generateToday);
+	router.post("/generate", authorize([Role.Admin, Role.Bank]), (req, res) => insights.generateToday(req, res));
     
 	/**
 	 * @swagger

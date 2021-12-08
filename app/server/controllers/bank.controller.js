@@ -13,8 +13,6 @@ const logger = require("../helpers/logger");
 class BankController extends BaseController{
     constructor(){
         super(Bank);
-        this.getImage = this.getImage.bind(this);
-        this.findAllCampaigns = this.findAllCampaigns.bind(this);
     }
 
     // Retrieve all campaigns under this bank id.
