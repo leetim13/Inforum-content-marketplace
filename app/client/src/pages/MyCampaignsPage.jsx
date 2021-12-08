@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'

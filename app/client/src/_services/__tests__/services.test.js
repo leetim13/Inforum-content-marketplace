@@ -1,10 +1,5 @@
-import { bankService, campaignService, postService, userService} from '..';
+import { campaignService, postService, userService} from '..';
 const dispatch = jest.fn();
-
-test('bankService', () => {
-  const getAllProps = bankService.getAll(dispatch);
-  expect(getAllProps).toEqual(expect.any(Promise))
-})
 
 test('campaignService', () => {
   const getAllProps = campaignService.getAll(dispatch);
@@ -23,9 +18,6 @@ test('postService', () => {
 })
 
 test('userService', () => {
-  const getAllProps = userService.getAll(dispatch);
-  expect(getAllProps).toEqual(expect.any(Promise))
-
   const loginProps = userService.login(dispatch);
   expect(loginProps).toEqual(expect.any(Promise))
 

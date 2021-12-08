@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
-import {Row, Col, FormControl, Card } from 'react-bootstrap';
+import {Row, Card } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import { Http } from '../_helpers';
 import { Line } from 'react-chartjs-2';

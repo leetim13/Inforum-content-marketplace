@@ -56,10 +56,8 @@ class App extends React.Component {
                 </Alert>);
             } else if (typeof alert.message === 'object') {
                 const messages = [];
-                let i = 1;
                 for (const key in alert.message) {
                     messages.push(<li>{alert.message[key]}</li>)
-                    i += 1;
                 }
                 alertElement = 
                 (<Alert variant={alert.type} style={{ textAlign: "left" }}>

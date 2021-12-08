@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Card, Button } from 'react-bootstrap'
-import { Http } from '../_helpers';
-import { alertActions } from '../_actions';
 
 export default class OfferComp extends Component {
 	constructor(props) {

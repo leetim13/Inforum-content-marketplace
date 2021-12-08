@@ -1,5 +1,5 @@
 import { Http } from '../_helpers';
-import { history } from '../_helpers';
+import { handleError } from './errorHandler';
 
 export const postService = {
     getAll
@@ -12,11 +12,4 @@ async function getAll(userId) {
         return res.data;
     })
     .catch(handleError);
-}
-
-function handleError(err) {
-    if (err.response.status === 401) {
-        history.push("/unauthorized");
-    }
-    return Promise.reject(err.response.data.message)
 }

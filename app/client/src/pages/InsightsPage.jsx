@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import {Row, Col, FormControl, Card, Table } from 'react-bootstrap';
+import React from "react";
+import {Row, Card, Table } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
-import OfferComp from '../_components/OfferComp';
 import { connect } from 'react-redux';
-import { alertActions, postActions } from '../_actions';
+import { alertActions } from '../_actions';
 import { Http, renderNoData, renderDate, filterCampaigns, renderStatus} from '../_helpers';
 
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto'; // This has to stay even though it is marked as unused.
 import { Pie, Line, Doughnut } from 'react-chartjs-2';
 
 //line chart for total clicks per day
@@ -75,7 +74,7 @@ class InsightsPage extends React.Component {
 			for (let j = 0; j < insights.length; j++) {
 				const curDate = new Date(insights[j].date).toLocaleDateString({ month: 'long', day: 'numeric' });
 				if (curDate in dateObject) {
-					if (metric == "clicks"){
+					if (metric === "clicks"){
 						dateObject[curDate].numMetrics += insights[j].numClicks;
 					}else{
 						dateObject[curDate].numMetrics += insights[j].numLikes;

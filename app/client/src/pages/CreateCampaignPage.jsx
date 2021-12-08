@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form, Button, Image, Container, InputGroup, Modal} from 'react-bootstrap';
+import { Row, Col, Form, Button, Image, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { campaignActions, alertActions } from '../_actions';
 import { Http, fileParser } from '../_helpers'

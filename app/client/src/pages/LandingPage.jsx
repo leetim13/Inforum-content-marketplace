@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
-import { Col, Row, Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { campaignActions, alertActions } from '../_actions';
-import { Http, renderRanOutOfCampaigns } from '../_helpers';
+import { renderRanOutOfCampaigns } from '../_helpers';
 import { campaignService } from '../_services';
 
 class LandingPage extends React.Component {
