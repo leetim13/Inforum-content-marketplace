@@ -8,10 +8,10 @@ module.exports = app => {
 	var router = require("express").Router();
 
 	// Get bank's image
-	router.get("/:id/image", authorize([Role.User, Role.Bank, Role.Admin]), banks.getImage);
+	router.get("/:id/image", authorize([Role.User, Role.Bank, Role.Admin]), (req, res) => banks.getImage(req, res));
 
 	// Retrieve all campaign under bank id
-	router.get("/:id/campaigns", authorize([Role.Bank, Role.Admin]), banks.findAllCampaigns);
+	router.get("/:id/campaigns", authorize([Role.Bank, Role.Admin]), (req, res) => banks.findAllCampaigns(req, res));
 
 	app.use('/api/banks', router);
 };

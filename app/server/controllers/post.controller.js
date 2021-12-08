@@ -14,8 +14,6 @@ const logger = require("../helpers/logger");
 class PostController extends BaseController{
     constructor(){
         super(Post);
-        this.create = this.create.bind(this);
-        this.numClicksPlusOne = this.numClicksPlusOne.bind(this);
     }
 
     async create(req, res) {

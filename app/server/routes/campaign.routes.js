@@ -8,19 +8,19 @@ module.exports = app => {
 	var router = require("express").Router();
 
 	// Create a new Campaign
-	router.post("/", authorize([Role.Bank, Role.Admin]), campaigns.create);
+	router.post("/", authorize([Role.Bank, Role.Admin]), (req, res) => campaigns.create(req, res));
 
 	// Retrieve all Campaign
-	router.get("/", campaigns.findAll);
+	router.get("/", (req, res) => campaigns.findAll(req, res));
 
 	// Close a campaign and distribute all reward points to user
-	router.patch("/:id/close", authorize([Role.Bank, Role.Admin]), campaigns.closeCampaign);
+	router.patch("/:id/close", authorize([Role.Bank, Role.Admin]), (req, res) => campaigns.closeCampaign(req, res));
 
 	// Get campaign's image
 	router.get("/:id/image", campaigns.getImage);
 
 	// Retrive all posts under this campaign id with insights and users.
-	router.get("/:id/posts", authorize([Role.Bank, Role.Admin]), campaigns.findAllPosts);
+	router.get("/:id/posts", authorize([Role.Bank, Role.Admin]), (req, res) => campaigns.findAllPosts(req, res));
 
 	/**
 	 * @swagger

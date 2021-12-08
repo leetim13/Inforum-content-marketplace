@@ -16,11 +16,6 @@ const logger = require("../helpers/logger");
 class CampaignController extends BaseController{
     constructor(){
         super(Campaign);
-        this.create = this.create.bind(this);
-        this.findAll = this.findAll.bind(this);
-        this.getImage = this.getImage.bind(this);
-        this.closeCampaign = this.closeCampaign.bind(this);
-        this.findAllPosts = this.findAllPosts.bind(this);
     }
 
     // Create and Save a new User

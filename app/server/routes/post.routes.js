@@ -8,10 +8,10 @@ module.exports = app => {
 	var router = require("express").Router();
 
 	// Create a new Post
-	router.post("/", authorize([Role.User, Role.Admin]), posts.create);
+	router.post("/", authorize([Role.User, Role.Admin]), (req, res) => posts.create(req, res));
 
 	// Linked clicked on post with this id, increase numClicks by 1, return url.
-	router.patch("/", posts.numClicksPlusOne);
+	router.patch("/", (req, res) => posts.numClicksPlusOne(req, res));
 
 	/**
 	 * @swagger

@@ -18,11 +18,6 @@ const Insight = db['DailyInsight'];
 class UserController extends BaseController{
     constructor(){
         super(User);
-        this.authenticate = this.authenticate.bind(this);
-        this.create = this.create.bind(this);
-        this.getImage = this.getImage.bind(this);
-        this.findAllPosts = this.findAllPosts.bind(this);
-        this.findAllInsights = this.findAllInsights.bind(this);
     }
 
     async authenticate(req, res, next) {

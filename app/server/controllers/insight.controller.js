@@ -15,7 +15,6 @@ const logger = require("../helpers/logger");
 class InsightController extends BaseController{
     constructor(){
         super(Insight);
-        this.generateToday = this.generateToday.bind(this);
     }
 
     async generateToday(req, res) {
