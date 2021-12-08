@@ -4,14 +4,9 @@ import { history } from '../_helpers';
 export const campaignService = {
     getCampaignImage,
     getAll,
-    getAllByBank
+    getAllByBank,
+    getAllCampaignWithImages
 };
-
-function logout() {
-    // remove user from local storage to log user out
-    // localStorage.removeItem('user');
-    localStorage.clear();
-}
 
 async function getCampaignImage(id) {
     return await Http.get(`/campaigns/${id}/image`)
@@ -40,9 +35,22 @@ async function getAllByBank(bankId) {
     .catch(handleError);
 }
 
+async function getAllCampaignWithImages(campaigns) {
+    const promises = [];
+    const tmpCampaigns = [];
+    for (let i = 0; i < campaigns.length; i++) {
+        promises.push(Http.get(`/campaigns/${campaigns[i].id}/image`)
+        .then(res => { 
+            tmpCampaigns.push({ ...campaigns[i], image: res.data })
+        })
+        .catch(handleError));
+    }
+    await Promise.all(promises);
+    return tmpCampaigns;
+}
+
 function handleError(err) {
     if (err.response.status === 401) {
-        // auto logout if 401 response returned from api
         history.push("/unauthorized");
     }
     return Promise.reject(err.response.data.message)

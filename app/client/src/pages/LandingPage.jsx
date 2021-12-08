@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import OfferComp from '../_components/OfferComp';
 import { campaignActions, alertActions } from '../_actions';
 import { Http, renderRanOutOfCampaigns } from '../_helpers';
+import { campaignService } from '../_services';
 
 class LandingPage extends React.Component {
 
@@ -27,16 +28,8 @@ class LandingPage extends React.Component {
 
     async componentDidMount() {
         this.props.dispatch(campaignActions.getAll());
-        const promises = [];
-        const tmpCampaigns = [];
-        for (let i = 0; i < this.props.campaigns.length; i++) {
-            promises.push(Http.get(`/campaigns/${this.props.campaigns[i].id}/image`)
-            .then(res => { 
-                tmpCampaigns.push({ ...this.props.campaigns[i], image: res.data })
-            })
-            .catch(err => this.props.dispatch(alertActions.error(err.message))));
-        }
-        await Promise.all(promises);
+        const tmpCampaigns = await campaignService.getAllCampaignWithImages(this.props.campaigns)
+        .catch(err => this.props.dispatch(alertActions.error(err.message)));
         this.props.dispatch(campaignActions.updateCampaigns(tmpCampaigns));
     }
 

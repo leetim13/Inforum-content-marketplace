@@ -249,7 +249,7 @@ class InsightsPage extends React.Component {
 				{cardDataCombined.map((cardType) => (
 					<Card key={cardType}>
 						<h5>{cardType.title}</h5>
-						<Card.Body style={{ height: '40vh' }}>
+						<Card.Body style={{ minHeight: '40vh' }}>
 							{cardType.data.hasData ? <cardType.chartType data={cardType.dataset}/> : <div >Has no data</div>}
 						</Card.Body>
 					</Card>

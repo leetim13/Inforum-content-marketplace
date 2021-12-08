@@ -5,12 +5,6 @@ export const bankService = {
     getAll
 };
 
-function logout() {
-    // remove user from local storage to log user out
-    // localStorage.removeItem('user');
-    localStorage.clear();
-}
-
 async function getAll() {
     return await Http.get(`/banks`)
     .then(res => {
@@ -22,7 +16,6 @@ async function getAll() {
 
 function handleError(err) {
     if (err.response.status === 401) {
-        // auto logout if 401 response returned from api
         history.push("/unauthorized");
     }
     return Promise.reject(err.response.data.message)
