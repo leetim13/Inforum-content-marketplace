@@ -5,6 +5,7 @@ import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
 import { alertActions, campaignActions } from '../_actions';
 import { history, Http, renderRanOutOfCampaigns, filterCampaigns } from '../_helpers';
+import { campaignService } from '../_services';
 
 class OfferPage extends React.Component {
     constructor(props){
@@ -36,17 +37,8 @@ class OfferPage extends React.Component {
                 });
             })
             .catch(err => this.props.dispatch(alertActions.error(`get Campaign image failed: ${err}`)));
-
-            const promises = [];
-            const tmpCampaigns = [];
-            for (let i = 0; i < this.props.campaigns.length; i++) {
-                promises.push(Http.get(`/campaigns/${this.props.campaigns[i].id}/image`)
-                .then(res => { 
-                    tmpCampaigns.push({ ...this.props.campaigns[i], image: res.data })
-                })
-                .catch(err => this.props.dispatch(alertActions.error(err.message))));
-            }
-            await Promise.all(promises);
+            const tmpCampaigns = await campaignService.getAllCampaignWithImages(this.props.campaigns)
+            .catch(err => this.props.dispatch(alertActions.error(err.message)));
             this.props.dispatch(campaignActions.updateCampaigns(tmpCampaigns));
         }
     }
