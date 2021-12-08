@@ -1,10 +1,9 @@
 import { Http } from '../_helpers';
-import { history } from '../_helpers';
+import { handleError } from './errorHandler';
 
 export const userService = {
     login,
-    logout,
-    getAll
+    logout
 };
 
 async function login(username, password) {
@@ -26,19 +25,3 @@ function logout() {
     localStorage.clear();
 }
 
-async function getAll() {
-    return await Http.get(`/users`)
-    .then(res => {
-        localStorage.setItem('users', JSON.stringify(res.data));
-        return res.data;
-    })
-    .catch(handleError);
-}
-
-function handleError(err) {
-    if (err.response.status === 401) {
-        // auto logout if 401 response returned from api
-        history.push("/unauthorized");
-    }
-    return Promise.reject(err.response.data.message)
-}

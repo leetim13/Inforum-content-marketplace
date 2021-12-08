@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Image, Row, Col, Container, Card, Button} from 'react-bootstrap'
+import { Image, Row, Col, Container, Button} from 'react-bootstrap'
 import OfferComp from '../_components/OfferComp';
 import '../css/OfferPage.css';
 import { alertActions, campaignActions } from '../_actions';

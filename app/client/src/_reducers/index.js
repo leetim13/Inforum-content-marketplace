@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 import { authentication } from './authentication.reducer';
-import { banks } from './bank.reducer';
 import { campaigns } from './campaign.reducer';
 import { posts } from './post.reducer';
 import { users } from './user.reducer';
@@ -12,7 +11,6 @@ const appReducer = combineReducers({
   authentication,
   users,
   campaigns,
-  banks,
   posts,
   alert
 });

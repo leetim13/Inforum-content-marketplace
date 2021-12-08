@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, NavDropdown, Dropdown, FormControl, Button, Nav, Container } from 'react-bootstrap'
+import { Navbar, NavDropdown, Dropdown, Button, Nav } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { history } from '../_helpers'
 class NavBarComp extends Component {

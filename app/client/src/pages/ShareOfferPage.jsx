@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
-import { Form, FormGroup, InputGroup, Button, FormControl } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container'
-import OfferComp from '../_components/OfferComp';
+import { Form, InputGroup, Button } from 'react-bootstrap';
 import { history, Http, filterCampaigns } from '../_helpers'
 import { postActions, alertActions } from '../_actions';
 
