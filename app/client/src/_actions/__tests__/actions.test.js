@@ -39,13 +39,6 @@ test('userActions', () => {
 
   const logoutProps = userActions.logout(dispatch);
   expect(logoutProps).toEqual({"type": "USERS_LOGOUT"})
-
-  const getAllProps = userActions.getAll(dispatch);
-  expect(getAllProps).toEqual(expect.any(Function))
-  
-  const updateUsersProps = userActions.updateUsers(dispatch);
-  expect(updateUsersProps).toEqual(expect.any(Function))
-
 })
 
 
