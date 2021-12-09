@@ -9,6 +9,49 @@ on:
       - master
 
 jobs:
+  server-db-migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20 
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: | 
+          app/server/package-lock.json 
+
+    - name: Install server dependencies
+      working-directory: 'app/server'
+      run: npm install
+    
+    - name: Run migration
+      working-directory: 'app/server'
+      run: npx sequelize db:migrate --env=production
+      env:
+          SERVER_ENV: 'production'
+          DATABASE_URL: ${{ secrets.HEROKU_PROD_DB_URL }}
+
+    - name: Clear db
+      working-directory: 'app/server'
+      run: npx sequelize db:seed:undo:all --env=production
+      env:
+          SERVER_ENV: 'production'
+          DATABASE_URL: ${{ secrets.HEROKU_PROD_DB_URL }}
+
+    - name: Seed db # Seed to set up initial credentials for grading purposes
+      working-directory: 'app/server'
+      run: npx sequelize db:seed:all --env=production
+      env:
+          SERVER_ENV: 'production'
+          DATABASE_URL: ${{ secrets.HEROKU_PROD_DB_URL }}
+
   server-build-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 20 
@@ -20,6 +63,8 @@ jobs:
           heroku_app_name: "inforum-server" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "app/server" # <- This will point to the server folder in your project
+
+
       # - name: Update server deployment status (success)
       #   if: success()
       #   uses: chrnorm/deployment-status@releases/v1
@@ -66,3 +111,5 @@ jobs:
       #     target_url: https://inforum-client.herokuapp.com/
       #     state: "failure"
       #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+  
+  
