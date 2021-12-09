@@ -1,7 +1,6 @@
 ## Demo Video for CSC 491
 The demo video is splitted into three parts representing the different role types: users (ie., the“promoters”), banks, and admin. This also corresponds to our four [use cases](https://github.com/dcsil/Inforum/blob/master/product_research/use_cases.md) (Bank user has two use cases).
-- `CSC491_demo.mp4`
-- https://drive.google.com/drive/folders/18w_t76I2msYCDTKeIOL9MqZMQX1-I8Zq
+- [CSC491_demo.mp4](https://drive.google.com/file/d/1PJIiylXd2JDWF3O5YDPvfhbGYb_3E5Gq/view?usp=sharing)
 
 ## Demo Writeup and Access Credentials
 ### Intro
