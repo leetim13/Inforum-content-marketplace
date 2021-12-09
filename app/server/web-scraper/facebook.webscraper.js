@@ -52,7 +52,9 @@ class FacebookWebScraper extends BaseWebScraper{
             const { requestId, request } = event;
             const cookieStrings = request.headers.Cookie.split('; ');
             if (cookieStrings.length === 0) {
-                logger.error("Facebook cookies not found.")
+                logger.error("Facebook cookies not found.");
+                this.redis.quit();
+                logger.info(`Redis client disconnected.`);
                 throw new Error("Facebook cookies not found.");
             }
             const FacebookCookies = [];
@@ -102,6 +104,8 @@ class FacebookWebScraper extends BaseWebScraper{
             await this.loginWithCredentials(page, url);
             if (await page.$('#loginbutton') !== null) {
                 logger.error("Log in failed.");
+                this.redis.quit();
+                logger.info(`Redis client disconnected.`);
                 throw new Error("Log in failed.");
             }
         }
@@ -120,6 +124,8 @@ class FacebookWebScraper extends BaseWebScraper{
         } else {
             await this.loginWithCookies(page, url, cookies);
         }
+        this.redis.quit();
+        logger.info(`Redis client disconnected.`);
         logger.info("logged in.");
         // Waits for the comment bar to show up,
         // Use to indicate that the post has been loaded.
@@ -136,6 +142,7 @@ class FacebookWebScraper extends BaseWebScraper{
         
         logger.info(`Scraping ${url}... Completed`);
         logger.info({ message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) });
+        
         return { message: message, likes: (isNaN(parseInt(likes[0])) ? 0 : parseInt(likes[0])) };
     }
 }
