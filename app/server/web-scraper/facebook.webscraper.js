@@ -4,14 +4,6 @@ const redis = require("redis");
 const { promisify } = require('util');
 const logger = require("../helpers/logger");
 
-const client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL, {
-    tls: {
-        rejectUnauthorized: false
-    }
-}) : redis.createClient();
-const setAsync = promisify(client.set).bind(client);
-const getAsync = promisify(client.get).bind(client);
-logger.info(`Redis connected successfully at ${process.env.REDIS_URL || "local:6379"}`);
 
 /**
  * @class FacebookWebScraper
@@ -24,6 +16,16 @@ class FacebookWebScraper extends BaseWebScraper{
         this.username = process.env.FACEBOOK_USERNAME || require("../config/localConfig.json")[this.platform].username;
         this.password = process.env.FACEBOOK_PASSWORD || require("../config/localConfig.json")[this.platform].password;
         logger.info("FB Scrapper started.");
+
+        
+        this.redis = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL, {
+            tls: {
+                rejectUnauthorized: false
+            }
+        }) : redis.createClient();
+        this.setAsync = promisify(this.redis.set).bind(this.redis);
+        this.getAsync = promisify(this.redis.get).bind(this.redis);
+        logger.info(`Redis connected successfully at ${process.env.REDIS_URL || "local:6379"}`);
     }
 
     async getBrowser(headless=true) {
@@ -70,7 +72,7 @@ class FacebookWebScraper extends BaseWebScraper{
                     sourcePort: 443
                 });
             })
-            await setAsync(`${this.platform}_cookies`, JSON.stringify(FacebookCookies, null, 2));
+            await this.setAsync(`${this.platform}_cookies`, JSON.stringify(FacebookCookies, null, 2));
             await client.send("Fetch.continueRequest", { requestId });
         });
         return page;
@@ -110,7 +112,7 @@ class FacebookWebScraper extends BaseWebScraper{
         const browser = await this.getBrowser(process.env.SERVER_ENV ? true : false);
         const page = await this.getPage(browser);
         
-        const cookies = await getAsync(`${this.platform}_cookies`);
+        const cookies = await this.getAsync(`${this.platform}_cookies`);
         let postMessageDiv = 'div.cxmmr5t8.oygrvhab.hcukyx3x.c1et5uql.ii04i59q';
         let likesDiv = 'span.gpro0wi8.pcp91wgn'
         if (!cookies) {
