@@ -10,7 +10,7 @@ class CreateCampaignPage extends React.Component {
 		this.state = {
 			title: "",
 			url: "",
-			type: "",
+			type: "Product",
 			description: "",
 			image: null,
 			startDate: "",
