@@ -1,5 +1,5 @@
 ## Demo Video for CSC 491
-The demo video is splitted into three parts representing the different role types: users (ie., the“promoters”), banks, and admin. This also corresponds to our three [use cases](https://github.com/dcsil/Inforum/blob/master/product_research/use_cases.md).
+The demo video is splitted into three parts representing the different role types: users (ie., the“promoters”), banks, and admin. This also corresponds to our four [use cases](https://github.com/dcsil/Inforum/blob/master/product_research/use_cases.md) (Bank user has two use cases).
 - `CSC491_demo.mp4`
 - https://drive.google.com/drive/folders/18w_t76I2msYCDTKeIOL9MqZMQX1-I8Zq
 
@@ -22,7 +22,7 @@ Users also have a “My Posts” and “My Rewards” page to see the posts they
 `username`: user1, `password`: user1
 
 ### Banks
-Our banking partners will have the ability to create a campaign, which will then show up on the users’ end as well. They also have an “insights page” for each of their campaigns that will display the total # of likes/clicks the campaign has earned in the past 7 days along with interactive dashboards of the breakdown of the promoters’ gender and age group. Note that overlays and interactive elements were added for all plots for accessiblity reasons. For our MVP, the banks have to manually click on the “generate insights” button for the insights to be collected (via web scraping), but we plan to create a daily or even hourly task for this in the future. Note that the “generate insights” button might not work on the heroku app (since we relied on manually spawning a Selenium web browser), however it does work on the local version. We plan to migrate to Facebook's `Graph API` in the future to solve this problem. 
+Our banking partners will have the ability to create a campaign, which will then show up on the users’ end as well. They also have an “insights page” for each of their campaigns that will display the total # of likes/clicks the campaign has earned in the past 7 days along with interactive dashboards of the breakdown of the promoters’ gender and age group. Note that overlays and interactive elements were added for all plots for accessiblity reasons. For our MVP, the banks have to manually click on the “generate insights” button for the insights to be collected (via web scraping), but we plan to create a daily or even hourly task for this in the future. Note that the “generate insights” button might not work on the heroku app (since we relied on manually spawning a Puppeteer web browser, and Facebook might have blocked any access coming from Heroku servers.), however it does work on the local version. We plan to migrate to Facebook's `Graph API` in the future to solve this problem. 
 
 #### Example Bank Credentials
 `username`: rbc, `password`: rbc
