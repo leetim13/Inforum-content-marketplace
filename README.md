@@ -23,10 +23,10 @@ Table of Contents
     - [Prototype (UI)](./product_research/prototype)
     - [User Research](./product_research/user_research)
     - [Demo](./product_research/demo.md)
-- [Architecture Diagram](#Architecture-Diagram)
-- [Tech Stack](#Tech-Stack)
-- [Decision Logs](#Decision-Logs)
-- [Example UI](#Example-UI)
+- [Architecture Diagram](#architecture-diagram)
+- [Tech Stack](#tech-stack)
+- [Decision Logs](#decision-logs)
+- [Example UI](#example-ui)
 
 ## Architecture Diagram
 <img src="./architecture.jpg" alt="Architecture Diagram"/>
