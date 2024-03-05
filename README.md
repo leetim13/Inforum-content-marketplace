@@ -9,29 +9,42 @@
 
 Inforum is a promotional content marketplace that aims to market to hard-to-reach millenials/Gen-Z demographics by utilizing network effects on social media platforms such as Facebook, Twitter, and Instagram. On our platform, our users can share offers to their social media for personal monetary benefit, and the banks are able to use our users to promote their offerings to our users’ network via a trusted source, creating a win-win situation for both parties. 
 
+Create campaigns | Browse campaigns | Share campaigns | Track campaigns
+:-------------------------:|:-------------------------: | :-------------------------: | :-------------------------:  
+![image](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/e2763b36-21d4-4895-9e1e-152cd1ffcac0) | ![image](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/c452d9ca-2d60-4f33-ae5f-cc07a1f06516) | ![image](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/a95be615-62ed-4463-9732-a60a798ba3a0) | ![image](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/aee7af4d-522d-4d9b-9c35-d2e58ba8e91a)
+
+
 
 Table of Contents
 ---
 - [inforum App](./app/)
-- [People](./team/)
-    - [Leader Selection](./team/leader_selection.md)
-    - [Team Principles](./team/team_principles.md)
-- [Diversity](./team/diversity.md)
+- [Architecture Diagram](#architecture-diagram)
+- [Demo](./product_research/demo.md)
 - [Product & Research](./product_research/)
     - [Use Cases](./product_research/use_cases.md)
     - [Roadmap](./product_research/roadmap.md)
     - [Prototype (UI)](./product_research/prototype)
     - [User Research](./product_research/user_research)
-    - [Demo](./product_research/demo.md)
-- [Architecture Diagram](#architecture-diagram)
 - [Tech Stack](#tech-stack)
 - [Decision Logs](#decision-logs)
-- [Example UI](#example-ui)
-
+- [People](./team/)
+    - [Leader Selection](./team/leader_selection.md)
+    - [Team Principles](./team/team_principles.md)
+    - [Diversity](./team/diversity.md)
+ 
+## App
+Download our app locally at [inforum App](./app/)
+      
 ## Architecture Diagram
 <img src="./architecture.jpg" alt="Architecture Diagram"/>
 
+## Demo 
+https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/266aea0c-fbb9-47e1-b9ee-ae3efbe568bb
+- Learn more at [Demo](./product_research/demo.md)
 
+## Design Process
+- Learn more about our entire design process, including our product roadmap, use cases, user research, and UI/UX at [Product & Research](./product_research/).
+  
 ## Tech Stack 
 **Languages:** \
 Javascript, SQL 
@@ -86,25 +99,8 @@ We have decided to use `Github Actions` to set up our continuous integration wor
 
 We decided to use `Heroku` as our container-based cloud platform to deploy and manage our MVP mainly because it is free of charge and `Heroku` integrates with `Github` very well, so we could leverage that for continuous deployments.
 
-### Example UI
-See more at [Prototype (UI)](./product_research/prototype).
-
-### Final UI (selected pages)
-The interactive Figma mock-up (with animation for all frames) can be found [here](https://www.figma.com/proto/KZ4avWSGrSjMb497R75QIR/inforum-marketplace?node-id=140%3A163&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=10%3A1&show-proto-sidebar=1&hide-ui=1).
-
-Some samples of Figma frames can be found below:
-![image](https://user-images.githubusercontent.com/20623399/138981820-06040282-770b-4ad6-a44f-28b98c6db33e.png)
-![image](https://user-images.githubusercontent.com/20623399/138981948-a6e761b4-ad3d-43f7-a96c-6f23cc715cfc.png)
-![image](https://user-images.githubusercontent.com/20623399/138981839-00f36476-a4a2-46fb-be3a-90bee4cfbb52.png)
-![image](https://user-images.githubusercontent.com/20623399/138981848-28e0d9b6-1ce0-4c88-8444-cb411de00437.png)
-![image](https://user-images.githubusercontent.com/20623399/138981858-a8f2a1ce-3e44-473e-8d13-0b8240a959a6.png)
-![image](https://user-images.githubusercontent.com/20623399/138981864-d980603e-c8cf-425f-9ba4-f75496b3d89f.png)
-![image](https://user-images.githubusercontent.com/20623399/138981877-5cc0493a-1ad6-491b-a747-4795242e7502.png)
-![image](https://user-images.githubusercontent.com/20623399/138982021-ecf90d2a-e2e0-4c56-9647-07967f74d354.png)
-![image](https://user-images.githubusercontent.com/20623399/138982040-a4a8bb11-a892-4b27-9e7b-2b2b02ad77e3.png)
-
-
-
+## Team
+Learn more about our team at [People](./team/)
 
 
 
