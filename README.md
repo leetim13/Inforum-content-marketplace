@@ -38,8 +38,8 @@ Download our app locally at [inforum App](./app/)
 ## Architecture Diagram
 <img src="./architecture.jpg" alt="Architecture Diagram"/>
 
-## Demo 
-https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/266aea0c-fbb9-47e1-b9ee-ae3efbe568bb
+## Demo (without audio)
+https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/ab045489-06d2-4793-ade3-6ed0f2959ce4
 - Learn more at [Demo](./product_research/demo.md)
 
 ## Design Process
