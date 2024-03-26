@@ -20,7 +20,7 @@ Table of Contents
 - [Inforum App](#app)
 - [Architecture Diagram](#architecture-diagram)
 - [Demo](#demo)
-- [Product & Research](./product_research/)
+- [Product & Research](#product)
     - [Use Cases](./product_research/use_cases.md)
     - [Roadmap](./product_research/roadmap.md)
     - [Prototype (UI)](./product_research/prototype)
@@ -42,7 +42,12 @@ Download our app locally at [Inforum App](./app/)
 https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/ab045489-06d2-4793-ade3-6ed0f2959ce4
 - Learn more at [Demo](./product_research/demo.md)
 
-## Design Process
+## Product
+
+Product roadmap | Product decisions | User research/interviews
+:-------------------------:|:-------------------------: | :-------------------------: 
+![roadmap](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/f2ba6752-92cc-45b7-8d87-1f5228edb8b2) | ![issues](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/d88771fa-dd1d-4286-9fe6-0fba20a281c9) | ![user research](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/5c5f1eba-2c44-48b3-aa34-1dddab00a001) 
+
 - Learn more about our entire design process, including our product roadmap, use cases, user research, and UI/UX at [Product & Research](./product_research/).
   
 ## Tech Stack 
