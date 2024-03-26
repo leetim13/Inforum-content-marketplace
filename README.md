@@ -17,9 +17,9 @@ Create campaigns | Browse campaigns | Share campaigns | Track campaigns
 
 Table of Contents
 ---
-- [inforum App](./app/)
+- [Inforum App](#app)
 - [Architecture Diagram](#architecture-diagram)
-- [Demo](./product_research/demo.md)
+- [Demo](#demo)
 - [Product & Research](./product_research/)
     - [Use Cases](./product_research/use_cases.md)
     - [Roadmap](./product_research/roadmap.md)
@@ -27,18 +27,18 @@ Table of Contents
     - [User Research](./product_research/user_research)
 - [Tech Stack](#tech-stack)
 - [Decision Logs](#decision-logs)
-- [People](./team/)
+- [Team](#team)
     - [Leader Selection](./team/leader_selection.md)
     - [Team Principles](./team/team_principles.md)
     - [Diversity](./team/diversity.md)
  
 ## App
-Download our app locally at [inforum App](./app/)
+Download our app locally at [Inforum App](./app/)
       
 ## Architecture Diagram
 <img src="./architecture.jpg" alt="Architecture Diagram"/>
 
-## Demo (without audio)
+## Demo 
 https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/ab045489-06d2-4793-ade3-6ed0f2959ce4
 - Learn more at [Demo](./product_research/demo.md)
 
@@ -100,7 +100,7 @@ We have decided to use `Github Actions` to set up our continuous integration wor
 We decided to use `Heroku` as our container-based cloud platform to deploy and manage our MVP mainly because it is free of charge and `Heroku` integrates with `Github` very well, so we could leverage that for continuous deployments.
 
 ## Team
-Learn more about our team at [People](./team/)
+Learn more about our team, including leader selection, team principles, and our values at [team](./team/).
 
 
 
