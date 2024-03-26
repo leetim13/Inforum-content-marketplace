@@ -17,6 +17,7 @@ Create campaigns | Browse campaigns | Share campaigns | Track campaigns
 
 Table of Contents
 ---
+- [Business Pitch](#business-pitch)
 - [Inforum App](#app)
 - [Architecture Diagram](#architecture-diagram)
 - [Demo](#demo)
@@ -31,7 +32,16 @@ Table of Contents
     - [Leader Selection](./team/leader_selection.md)
     - [Team Principles](./team/team_principles.md)
     - [Diversity](./team/diversity.md)
- 
+
+## Business Pitch
+The problem | Market analysis | Financials | Business plan
+:-------------------------:|:-------------------------: | :-------------------------: | :-------------------------:  
+![Screenshot 2024-03-26 at 11 23 46 PM](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/e3796572-a310-4a44-8c9b-cdeaf23bb5c7) | ![Screenshot 2024-03-26 at 11 24 05 PM](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/1734745a-5608-49c4-a416-962c826af8d6) | ![Screenshot 2024-03-26 at 11 25 40 PM](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/e745bed5-a36b-4faa-a83f-e66ed0ba744e) | ![Screenshot 2024-03-26 at 11 26 42 PM](https://github.com/leetim13/Inforum-content-marketplace/assets/20623399/dba1763c-0c6d-41bb-be17-c5445e2896ae)
+
+- Learn more about our pitch, market analysis, competitive landscape, customer value propositions, and financial modeling at [business plan](./business/).
+
+
+
 ## App
 Download our app locally at [Inforum App](./app/)
       
